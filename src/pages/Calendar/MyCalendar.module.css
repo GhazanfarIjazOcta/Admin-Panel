@@ -1,0 +1,12 @@
+MyCalendar.module.css
+.rbc-time-gutter {
+    display: none;
+  }
+  /* MyCalendar.module.css */
+.rbc-day-header {
+    font-size: 16px; /* Adjust the font size as needed */
+    font-family: "Inter, sans-serif"; /* Optional: Customize the font family */
+    font-weight: 600; /* Optional: Customize the font weight */
+    color: #333; /* Optional: Customize the color */
+  }
+  
