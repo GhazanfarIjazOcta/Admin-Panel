@@ -168,7 +168,7 @@ function Login() {
                             backgroundColor: "#212122",
                         },
                     }}
-                    onClick={() => navigate("/dashboard")}
+                    onClick={() => navigate("/dashboard/dashboardmain")}
                 >
                     Login
                 </Button>
