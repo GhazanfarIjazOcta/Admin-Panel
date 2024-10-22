@@ -5,12 +5,25 @@ import { settingStyles } from "../../UI/styles/Main";
 function PrivacyPolicy() {
   return (
     <Paper sx={settingStyles.policyPaper}>
-      <Box sx={settingStyles.policyBox} pl={8}>
+      
+      <Box 
+      
+
+      sx={{
+        ...settingStyles.policyBox,
+        paddingLeft: {
+            xs: '15px', // Padding for extra-small devices
+            lg: '40px', // Padding for large devices
+        },
+    }}
+      
+      >
         <Box>
           <Box sx={settingStyles.policyEdit} pr={8}>
             <img src={editIcon} width={"21px"} height={"21px"} />
           </Box>
           <Box>
+            
             <Typography
               //   variant="subtitle1"
               mt={4}

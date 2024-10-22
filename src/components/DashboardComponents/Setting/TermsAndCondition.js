@@ -6,7 +6,15 @@ import { settingStyles } from "../../UI/styles/Main";
 function TermsAndCondition() {
   return (
     <Paper sx={settingStyles.termsPaper}>
-      <Box sx={settingStyles.termsBox} pl={8}>
+      <Box  sx={{
+                ...settingStyles.termsBox,
+                paddingLeft: {
+                    xs: '15px', // Padding for extra-small devices
+                    lg: '40px', // Padding for large devices
+                },
+            }}
+      
+      >
         <Box>
           <Box sx={settingStyles.policyEdit} pr={8}>
             <img src={editIcon} width={"21px"} height={"21px"} />

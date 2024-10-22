@@ -77,7 +77,7 @@ const dummyMessages = [
 
 const ChatView = ({
   currentUser  = { id: 2 },
-  chatUser,
+  chatUser = {firstName: "Alice" , lastName: "bowam" },
   messages = [], // Default to empty array
   isLoadingChat,
   message,
@@ -91,9 +91,11 @@ const ChatView = ({
   projectName,
 }) => {
   const headerStyle = {
-    padding: "10px",
+    padding: {lg:"10px", xs:"auto"},
     display: "flex",
-    alignItems: "center",
+    alignItems: "center",   
+    height: {xs:"10px" , lg:"auto"},
+    mb:{xs:2.5 , lg:0 }
   };
 
   // Use dummy messages if messages prop is empty
@@ -102,7 +104,7 @@ const ChatView = ({
 
 
   return (
-    <Stack direction={"column"} justifyContent={"flex-start"} height={"90%"}>
+    <Stack direction={"column"} justifyContent={"flex-start"} height={{lg:"80%" , xs:"78%"}}  position={{lg:"relative" , xs:"fixed"}}>
       <Stack justifyContent={"space-between"} direction={"row"}>
         <Box sx={{ ...headerStyle }}>
           <Avatar
@@ -116,7 +118,8 @@ const ChatView = ({
               fontWeight: 600,
             }}
           >
-            {projectName || `${chatUser?.firstName} ${chatUser?.lastName}`}
+            {/* {projectName ||  `${chatUser?.firstName} ${chatUser?.lastName}`} */}
+            {projectName ||  ` ${"Alice"} `}
           </Typography>
           <IconButton>
             <FiberManualRecordIcon sx={{ fontSize: 15, color: "#3B9434" }} />
