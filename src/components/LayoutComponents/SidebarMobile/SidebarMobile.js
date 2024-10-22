@@ -12,12 +12,14 @@ import MaintenanceLogo from "../../../assets/Layout/pajamas_issue-type-maintenan
 import FuelLogo from "../../../assets/Layout/lucide_fuel.png";
 import SettingLogo from "../../../assets/Layout/settings.png";
 import LogoutLogo from "../../../assets/Layout/Left_icon.png";
-import { useNavigate, useLocation } from "react-router-dom"; // Import useLocation
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Sidebar2({ onClose }) {
   const navigate = useNavigate();
-  const location = useLocation(); // Get the current route
-  const [selectedItem, setSelectedItem] = useState(0);
+  const location = useLocation();
+
+  // Initialize selectedItem from local storage
+  const [selectedItem, setSelectedItem] = useState();
 
   const listItems = [
     { text: "Dashboard", icon: DashboardLogo, route: "dashboardmain" },
@@ -31,16 +33,20 @@ function Sidebar2({ onClose }) {
     { text: "Setting", icon: SettingLogo, route: "setting" },
   ];
 
-  // Synchronize the selected item with the current route
+  // Update selectedItem based on the current route
   useEffect(() => {
-    const currentItemIndex = listItems.findIndex(item => item.route === location.pathname);
+    const currentItemIndex = listItems.findIndex(item => item.route === location.pathname.split('/').pop());
     if (currentItemIndex !== -1) {
       setSelectedItem(currentItemIndex);
+      localStorage.setItem('myValue', currentItemIndex); // Store the selected index in local storage
+    } else {
+      setSelectedItem(null); // Reset if not found
     }
   }, [location.pathname]); // Run when location changes
 
   const handleListItemClick = (index, route) => {
-    setSelectedItem(index);
+    setSelectedItem(index); // Update the selected item
+    localStorage.setItem('myValue', index); // Store the selected index in local storage
     navigate(route);
     onClose(); // Close the sidebar when an item is clicked
   };
@@ -50,7 +56,6 @@ function Sidebar2({ onClose }) {
       sx={{
         width: { xs: '70vw', sm: '40vw', md: '40vw' },
         height: { xs: '96%', sm: '96%', md: '96%' },
-        // maxHeight: '100vh',
         position: 'fixed',
         top: 0,
         left: 0,
@@ -82,7 +87,7 @@ function Sidebar2({ onClose }) {
             key={item.text}
             onClick={() => handleListItemClick(index, item.route)}
             sx={{
-              backgroundColor: selectedItem === index ? "#F38712" : "transparent",
+              backgroundColor: selectedItem === index ? "#F38712" : "transparent", // Use selectedItem for highlighting
               "&:hover": { backgroundColor: "#F38712" },
               fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)',
               padding: 'clamp(0.4rem, 0.8vw, 0.8rem)',
