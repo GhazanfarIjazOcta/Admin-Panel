@@ -17,8 +17,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 function Sidebar2({ onClose }) {
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Initialize selectedItem from local storage
   const [selectedItem, setSelectedItem] = useState();
 
   const listItems = [
@@ -33,36 +31,28 @@ function Sidebar2({ onClose }) {
     { text: "Setting", icon: SettingLogo, route: "setting" },
   ];
 
-  // Update selectedItem based on the current route
   useEffect(() => {
     const currentItemIndex = listItems.findIndex(item => item.route === location.pathname.split('/').pop());
-    if (currentItemIndex !== -1) {
-      setSelectedItem(currentItemIndex);
-      localStorage.setItem('myValue', currentItemIndex); // Store the selected index in local storage
-    } else {
-      setSelectedItem(null); // Reset if not found
-    }
-  }, [location.pathname]); // Run when location changes
+    setSelectedItem(currentItemIndex !== -1 ? currentItemIndex : null);
+  }, [location.pathname]);
 
   const handleListItemClick = (index, route) => {
-    setSelectedItem(index); // Update the selected item
-    localStorage.setItem('myValue', index); // Store the selected index in local storage
+    setSelectedItem(index);
     navigate(route);
-    onClose(); // Close the sidebar when an item is clicked
+    onClose();
   };
 
   return (
     <Box
       sx={{
         width: { xs: '70vw', sm: '40vw', md: '40vw' },
-        height: { xs: '96%', sm: '96%', md: '96%' },
+        height: { xs: '97%', sm: '97%', md: '97%' },
         position: 'fixed',
         top: 0,
         left: 0,
         backgroundColor: "#15294E",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
         padding: 'clamp(0.5rem, 1vw, 1rem)',
         boxShadow: "2px 0 5px rgba(0,0,0,0.5)",
         overflowY: 'auto',
@@ -71,7 +61,7 @@ function Sidebar2({ onClose }) {
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" justifyContent="center" mb={0}>
-          <img src={Ukeylogo} alt="logo" style={{ width: '100%', maxWidth: '120px' }} />
+          <img src={Ukeylogo} alt="logo" style={{ width: '100%', maxWidth: '120px', marginBottom: "2px" }} />
         </Box>
         <IconButton onClick={onClose} sx={{ color: 'white' }}>
           <CloseIcon />
@@ -80,14 +70,14 @@ function Sidebar2({ onClose }) {
 
       <Divider sx={{ backgroundColor: "#F38712" }} />
 
-      <List>
+      <List sx={{ flexGrow: 1 }}>
         {listItems.map((item, index) => (
           <ListItem
             button
             key={item.text}
             onClick={() => handleListItemClick(index, item.route)}
             sx={{
-              backgroundColor: selectedItem === index ? "#F38712" : "transparent", // Use selectedItem for highlighting
+              backgroundColor: selectedItem === index ? "#F38712" : "transparent",
               "&:hover": { backgroundColor: "#F38712" },
               fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)',
               padding: 'clamp(0.4rem, 0.8vw, 0.8rem)',
@@ -101,7 +91,7 @@ function Sidebar2({ onClose }) {
         ))}
       </List>
 
-      <Stack spacing={1}>
+      <Stack spacing={1} mt={2}>
         <Divider sx={{ backgroundColor: "#F38712" }} />
         <Button
           variant="contained"
