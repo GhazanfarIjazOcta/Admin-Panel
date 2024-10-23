@@ -18,7 +18,24 @@ export default function SettingTabs({ handleChange, value }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
-    <Box p={3} overflow={isMobile ? "auto" : "visible"} whiteSpace={isMobile ? "nowrap" : "normal"}>
+    <Box
+      p={3}
+      overflow={isMobile ? "auto" : "visible"}
+      whiteSpace={isMobile ? "nowrap" : "normal"}
+      position="relative" // Added for absolute positioning of indicators
+    >
+      {/* Optional: Scroll indicators */}
+      {isMobile && (
+        <>
+          <div style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
+            <span style={{ cursor: "pointer", color: "#F38712", fontSize: "24px" }}>❮</span>
+          </div>
+          <div style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
+            <span style={{ cursor: "pointer", color: "#F38712", fontSize: "24px" }}>❯</span>
+          </div>
+        </>
+      )}
+
       <Tabs
         value={value}
         onChange={handleChange}
@@ -54,13 +71,11 @@ export default function SettingTabs({ handleChange, value }) {
               fontSize: isMobile ? "8px" : "16px",
               fontWeight: 500,
             },
-            fontSize: isMobile ? "8px" : "16px",
             fontWeight: 500,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
-          
         />
 
         {/* Change Password Tab */}
@@ -69,19 +84,17 @@ export default function SettingTabs({ handleChange, value }) {
           label={!isMobile ? "Change Password" : null}
           icon={isMobile ? <LockIcon fontSize="small" /> : null} // Use small icon on mobile
           sx={{
-            fontSize: isMobile ? "10px" : "16px", // Adjust font size for mobile
-            padding: isMobile ? "2px" : "8px", // Smaller padding for mobile
+            fontSize: isMobile ? "10px" : "16px",
+            padding: isMobile ? "2px" : "8px",
             "&.Mui-selected": {
               color: "#F38712",
               fontSize: isMobile ? "8px" : "16px",
               fontWeight: 500,
             },
-            fontSize: isMobile ? "8px" : "16px",
             fontWeight: 500,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            
           }}
         />
 
@@ -89,16 +102,15 @@ export default function SettingTabs({ handleChange, value }) {
         <Tab
           value="Contact"
           label={!isMobile ? "Contact Us" : null}
-          icon={isMobile ? <ContactMailIcon fontSize="small" /> : null} // Use small icon on mobile
+          icon={isMobile ? <ContactMailIcon fontSize="small" /> : null}
           sx={{
-            fontSize: isMobile ? "10px" : "16px", // Adjust font size for mobile
-            padding: isMobile ? "2px" : "8px", // Smaller padding for mobile
+            fontSize: isMobile ? "10px" : "16px",
+            padding: isMobile ? "2px" : "8px",
             "&.Mui-selected": {
               color: "#F38712",
               fontSize: isMobile ? "8px" : "16px",
               fontWeight: 500,
             },
-            fontSize: isMobile ? "8px" : "16px",
             fontWeight: 500,
             display: "flex",
             flexDirection: "column",
@@ -110,16 +122,15 @@ export default function SettingTabs({ handleChange, value }) {
         <Tab
           value="Policy"
           label={!isMobile ? "Privacy Policy" : null}
-          icon={isMobile ? <PrivacyTipIcon fontSize="small" /> : null} // Use small icon on mobile
+          icon={isMobile ? <PrivacyTipIcon fontSize="small" /> : null}
           sx={{
-            fontSize: isMobile ? "10px" : "16px", // Adjust font size for mobile
-            padding: isMobile ? "2px" : "8px", // Smaller padding for mobile
+            fontSize: isMobile ? "10px" : "16px",
+            padding: isMobile ? "2px" : "8px",
             "&.Mui-selected": {
               color: "#F38712",
               fontSize: isMobile ? "8px" : "16px",
               fontWeight: 500,
             },
-            fontSize: isMobile ? "8px" : "16px",
             fontWeight: 500,
             display: "flex",
             flexDirection: "column",
@@ -131,16 +142,15 @@ export default function SettingTabs({ handleChange, value }) {
         <Tab
           value="Terms"
           label={!isMobile ? "Terms and Condition" : null}
-          icon={isMobile ? <GavelIcon fontSize="small" /> : null} // Use small icon on mobile
+          icon={isMobile ? <GavelIcon fontSize="small" /> : null}
           sx={{
-            fontSize: isMobile ? "10px" : "16px", // Adjust font size for mobile
-            padding: isMobile ? "2px" : "8px", // Smaller padding for mobile
+            fontSize: isMobile ? "10px" : "16px",
+            padding: isMobile ? "2px" : "8px",
             "&.Mui-selected": {
               color: "#F38712",
               fontSize: isMobile ? "8px" : "16px",
               fontWeight: 500,
             },
-            fontSize: isMobile ? "8px" : "16px",
             fontWeight: 500,
             display: "flex",
             flexDirection: "column",
@@ -149,25 +159,24 @@ export default function SettingTabs({ handleChange, value }) {
         />
 
         {/* Sound Settings Tab */}
-        <Tab
+        {/* <Tab
           value="Sound"
           label={!isMobile ? "Sound Settings" : null}
-          icon={isMobile ? <SettingsIcon fontSize="small" /> : null} // Use small icon on mobile
+          icon={isMobile ? <SettingsIcon fontSize="small" /> : null}
           sx={{
-            fontSize: isMobile ? "10px" : "16px", // Adjust font size for mobile
-            padding: isMobile ? "2px" : "8px", // Smaller padding for mobile
+            fontSize: isMobile ? "10px" : "16px",
+            padding: isMobile ? "2px" : "8px",
             "&.Mui-selected": {
               color: "#F38712",
               fontSize: isMobile ? "8px" : "16px",
               fontWeight: 500,
             },
-            fontSize: isMobile ? "8px" : "16px",
             fontWeight: 500,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
-        />
+        /> */}
       </Tabs>
     </Box>
   );

@@ -414,34 +414,41 @@ export const fuelManagmentStyles = {
 };
 export const settingStyles = {
   mainContainer: {
-   // boxShadow: "none",
-   height: "84%",
-   marginTop: "6rem",
-   flexGrow: 1, position: 'absolute',
-   // mt: { xs: 6, sm: 6, md: 6, lg: 6 },
-   overflowY: "none",
-   // height: "85vh",
-   // background: "#F4F7F7",
-   // gap: "0.5rem",
-   width: { lg: "82%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    // boxShadow: "none",
+    height: "84%",
+    marginTop: "6rem",
+    flexGrow: 1, position: 'absolute',
+    // mt: { xs: 6, sm: 6, md: 6, lg: 6 },
+    overflowY: "none",
+    // height: "85vh",
+    // background: "#F4F7F7",
+    // gap: "0.5rem",
+    width: { lg: "82%", xs: "100%" },// Prevent overflowing horizontally and vertically
+
   },
   header: { height: "100%", width: "100%" ,  overflowY: "auto", },
+  
   profilePaper: {
     boxShadow: "none",
     height: "88%",
     width: { lg: "100%", xs: "100%" },// Prevent overflowing horizontally and vertically
     overflowY: "auto",
+    mb: 2
   },
   profileContainer: {
+
     height: "95%",
     width: "95%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    
     width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    
+    
   },
-  profileTextField: { width: "35%", marginLeft: "5px" },
-  profileLabel: { fontWeight: 500 },
+  profileTextField: { width: {lg:"35%" , xs:"80%"} , marginLeft: "5px" },
+  profileLabel: { fontWeight: {lg:500 , xs:200} },
   addPhoto: {
     width: "110px",
     height: "44px",
@@ -456,6 +463,13 @@ export const settingStyles = {
     flexDirection: "row",
     justifyContent: "flex-end",
     gap: "24px",
+   
+          
+      paddingLeft:  {
+        xs: '40px', // Padding for extra-small devices
+        lg: '40px', // Padding for large devices
+       }
+  
   },
   resetButtomn: {
     marginRight: "opx",
@@ -494,7 +508,10 @@ export const settingStyles = {
   changePasswordPaper: {
     boxShadow: "none",
     height: "88%",
-    width: "100%",
+    width: { lg: "100%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    overflowY: "auto",
+    mb: 2
+    
   },
   changePasswordContainer: {
     height: "95%",
@@ -502,11 +519,13 @@ export const settingStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    
+    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
   },
-  textFieldBox: { width: "35%" },
+  textFieldBox: { width: {lg:"35%" , xs:"80%"} },
   contactUsPaper: {
     boxShadow: "none",
-    height: "88%",
+    height: "100%",
     width: "100%",
   },
   contactUsBox: {
@@ -517,7 +536,7 @@ export const settingStyles = {
     justifyContent: "space-between",
   },
   contactUsContainer: { width: "100%", height: "90%", display: "flex" },
-  contactUsBoxWidth: { width: "50%" },
+  contactUsBoxWidth: { width: "50%" , direction: "column"},
   conatactUsLeftLabel: {
     fontSize: "36px",
     color: "#383C3E",
@@ -538,7 +557,7 @@ export const settingStyles = {
     marginTop: "4px",
   },
   contactUsContactBox: {
-    width: "196px",
+    width: {lg:"196px" , xs: "260px"},
     height: "126px",
     display: "flex",
     flexDirection: "column",
@@ -561,12 +580,13 @@ export const settingStyles = {
   contactUsButtonContainer: {
     // display: "flex",
     // flexDirection: "row",
-    // justifyContent: "flex-end",
-    // gap: "24px",
-    ml: {lg:120 , xs:2},
-    mb:{lg:2 , xs:2}
+    // justifyContent: "flex-start",
+   
+    ml: {lg:120 , xs:2}
   },
   contactUsButton: {
+    // marginRight: "opx",
+    // marginLeft: "0px",
     marginBottom: "20px",
     width: "247px",
     height: "53px",
@@ -585,7 +605,10 @@ export const settingStyles = {
   policyPaper: {
     boxShadow: "none",
     height: "88%",
-    width: "100%",
+    width: { lg: "100%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    overflowY: "auto",
+    mb: 2
+  
   },
   policyBox: {
     height: "95%",
@@ -593,6 +616,11 @@ export const settingStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+    
+    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
+
+ 
+  
   },
   policyEdit: { display: "flex", justifyContent: "flex-end" },
   policyButtonContainer: {
@@ -600,6 +628,10 @@ export const settingStyles = {
     flexDirection: "row",
     justifyContent: "flex-end",
     gap: "24px",
+    paddingLeft:  {
+      xs: '40px', // Padding for extra-small devices
+      lg: '40px', // Padding for large devices
+     }
   },
   policyDisagree: {
     marginRight: "opx",

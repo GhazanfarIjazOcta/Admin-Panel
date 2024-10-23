@@ -22,13 +22,19 @@ function Profile() {
       sx={{
         ...settingStyles.profileContainer,
         paddingLeft: {
-            xs: '20px', // Padding for extra-small devices
+            xs: '0px', // Padding for extra-small devices
             lg: '40px', // Padding for large devices
         },
       }} 
       
       >
-        <Box>
+        <Box sx={{ 
+          
+          paddingLeft:  {
+            xs: '40px', // Padding for extra-small devices
+            lg: '40px', // Padding for large devices
+           }}
+        }>
           <Box sx={loginLeftContentContainerItemWidth}>
             <Typography
               variant="subtitle1"

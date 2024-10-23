@@ -7,8 +7,14 @@ import { settingStyles } from "../../UI/styles/Main";
 function ChangePassword() {
   return (
     <Paper sx={settingStyles.changePasswordPaper}>
-      <Box sx={settingStyles.changePasswordContainer} pl={8}>
-        <Box>
+      <Box sx={settingStyles.changePasswordContainer} >
+        <Box
+        sx={{ 
+          
+          paddingLeft:  {
+            xs: '40px', // Padding for extra-small devices
+            lg: '40px', // Padding for large devices
+           }}}>
           <Box sx={loginLeftContentContainerItemWidth}>
             <Typography
               variant="subtitle1"
@@ -49,14 +55,21 @@ function ChangePassword() {
             </Box>
           </Box>
         </Box>
+
         <Stack
           sx={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "flex-end",
             gap: "24px",
+            paddingLeft:  {
+              xs: '40px', // Padding for extra-small devices
+              lg: '40px', // Padding for large devices
+             }
+            
           }}
-          mr={5}
+          mr={{lg:5 , xs:9}}
+          mt={{lg:0 , xs:2}}
         >
           <Button
             variant="outlined"

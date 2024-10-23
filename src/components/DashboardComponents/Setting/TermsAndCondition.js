@@ -8,14 +8,24 @@ function TermsAndCondition() {
     <Paper sx={settingStyles.termsPaper}>
       <Box  sx={{
                 ...settingStyles.termsBox,
-                paddingLeft: {
-                    xs: '15px', // Padding for extra-small devices
-                    lg: '40px', // Padding for large devices
-                },
+               
             }}
       
       >
-        <Box>
+        <Box
+         sx={{ 
+          
+          paddingLeft:  {
+            xs: '30px', // Padding for extra-small devices
+            lg: '40px', // Padding for large devices
+           },
+           paddingRight:  {
+            xs: '30px', // Padding for extra-small devices
+            lg: '0px', // Padding for large devices
+           }}
+        }
+        
+        >
           <Box sx={settingStyles.policyEdit} pr={8}>
             <img src={editIcon} width={"21px"} height={"21px"} />
           </Box>
