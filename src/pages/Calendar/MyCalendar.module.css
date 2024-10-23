@@ -1,12 +1,48 @@
-MyCalendar.module.css
-.rbc-time-gutter {
-    display: none;
+/* MyCalendar.module.css */
+.header {
+  background-color: #f5f5f5; /* Light background color */
+  padding: 15px; /* Spacing around header */
+  text-align: center; /* Centered text */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional shadow effect */
+}
+
+.calendarContainer {
+  width: 100%;
+  height: 100%;
+}
+
+/* Styles for desktop view */
+@media (min-width: 601px) {
+  .calendarContainer {
+    height: calc(100vh - 60px); /* Full height for desktop, accounting for header */
   }
-  /* MyCalendar.module.css */
-.rbc-day-header {
-    font-size: 16px; /* Adjust the font size as needed */
-    font-family: "Inter, sans-serif"; /* Optional: Customize the font family */
-    font-weight: 600; /* Optional: Customize the font weight */
-    color: #333; /* Optional: Customize the color */
+
+  .rbc-toolbar {
+    /* Desktop toolbar styles */
+    justify-content: space-between;
+    padding: 20px;
   }
-  
+
+  .rbc-event {
+    height: 50px; /* Adjust event height for desktop */
+    font-size: 14px; /* Font size for desktop */
+  }
+}
+
+/* Styles for mobile view */
+@media (max-width: 600px) {
+  .calendarContainer {
+    height: calc(80vh - 60px); /* Adjust height for mobile view */
+  }
+
+  .rbc-toolbar {
+    /* Mobile toolbar styles */
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .rbc-event {
+    height: 40px; /* Adjust event height for mobile */
+    font-size: 12px; /* Font size for mobile */
+  }
+}

@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
-import styles from "./MyCalendar.module.css";
-import "react-big-calendar/lib/css/react-big-calendar.css"; // Import the calendar styles
+import styles from "./MyCalendar.module.css"; // Ensure the styles are being imported
+import "react-big-calendar/lib/css/react-big-calendar.css";
 import {
   Box,
   IconButton,
@@ -10,28 +10,26 @@ import {
   Stack,
   TextField,
   Typography,
+  Modal,
+  PopoverPaper,
 } from "@mui/material";
 import Right from "../../assets/calander/right.png";
 import Left from "../../assets/calander/left.png";
-import { textFieldContainerStyle } from "../../components/UI/styles/Layout";
 import SearchIcon from "@mui/icons-material/Search";
-import blueEventIcon from "../../assets/calander/blueEventIcon.png";
-import greenEventIcon from "../../assets/calander/greenEventIcon.png";
-import orangeEvantIcon from "../../assets/calander/orangeEvantIcon.png";
-import purpleEventIcon from "../../assets/calander/purpleEventIcon.png";
-import redEventIcon from "../../assets/calander/redEventIcon.png";
+import { ChevronRight, FormatListBulleted } from "@mui/icons-material";
+
 const localizer = momentLocalizer(moment);
-// const EmptyGutter = () => <div style={{ display: "none" }} />;
+
 function CustomToolbar(props) {
-  const [selectedView, setSelectedView] = useState("week"); // Initialize state
+  const [selectedView, setSelectedView] = useState("week");
 
   const handleViewChange = (view) => {
     setSelectedView(view);
-    props.onView(view); // Notify parent of view change
+    props.onView(view);
   };
 
   const getButtonStyles = (view) => ({
-    width: "58px",
+    width: "70px",
     height: "28px",
     backgroundColor: selectedView === view ? "#F38712" : "#F4F4F5",
     display: "flex",
@@ -39,6 +37,7 @@ function CustomToolbar(props) {
     justifyContent: "center",
     cursor: "pointer",
     borderRadius: "10px",
+    margin: "0 2px",
   });
 
   const getTextStyles = (view) => ({
@@ -47,27 +46,28 @@ function CustomToolbar(props) {
     color: selectedView === view ? "#FFFFFF" : "#71717A",
     fontFamily: "Inter",
   });
+
   return (
     <Box
       sx={{
         display: "flex",
+        flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         borderRadius: "20px",
-        
+        p: 2,
+        flexWrap: "wrap",
       }}
-      p={4}
     >
       {/* Left Side: Today, Back, and Next buttons */}
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
-          width: "125px",
-          height: "28px",
-          backgroundColor: "#F4F4F5",
           justifyContent: "space-between",
-          borderRadius: "20px",
+          width: "100%",
+          maxWidth: {lg:"250px" , xs:"300px"},
+          marginBottom: { xs: 2, sm: 0 },
         }}
       >
         <img
@@ -96,30 +96,38 @@ function CustomToolbar(props) {
       </Box>
 
       {/* Center: View buttons */}
-
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box
-          sx={getButtonStyles("day")}
-          onClick={() => handleViewChange("day")}
-        >
-          <Typography sx={getTextStyles("day")}>Day</Typography>
-        </Box>
-        <Box
-          sx={getButtonStyles("week")}
-          onClick={() => handleViewChange("week")}
-        >
-          <Typography sx={getTextStyles("week")}>Week</Typography>
-        </Box>
-        <Box
-          sx={getButtonStyles("month")}
-          onClick={() => handleViewChange("month")}
-        >
-          <Typography sx={getTextStyles("month")}>Month</Typography>
-        </Box>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          width: { xs: "100%", sm: "auto" },
+          flexWrap: "wrap",
+        }}
+      >
+        {["day", "week", "month"].map((view) => (
+          <Box
+            key={view}
+            sx={getButtonStyles(view)}
+            onClick={() => handleViewChange(view)}
+          >
+            <Typography sx={getTextStyles(view)}>
+              {view.charAt(0).toUpperCase() + view.slice(1)}
+            </Typography>
+          </Box>
+        ))}
       </Box>
+
       {/* Right Side: Search field */}
-      <div>
-        <Box sx={textFieldContainerStyle}>
+     
+        <Box sx={{ marginLeft: '10px' ,
+  display: "flex",
+  justifyContent: "center",
+  width: { xs: "100%", sm: "auto" },
+  flexWrap: "wrap",
+
+  mt:{xs:2 , lg:0}
+
+        }}>
           <TextField
             placeholder="Search"
             variant="outlined"
@@ -135,13 +143,16 @@ function CustomToolbar(props) {
             }}
             sx={{
               "& .MuiInputBase-root": {
-                height: "44px", // Adjust the height as needed
-                width: { xs: "100%", sm: "296px" }, // Responsive width
+                height: "44px",
+                width: { xs: "100%", sm: "200px" },
+                justifyContent: "center"
               },
             }}
           />
         </Box>
-      </div>
+ 
+
+
     </Box>
   );
 }
@@ -149,58 +160,84 @@ function CustomToolbar(props) {
 function MyCalendar() {
   const myEventsList = [
     {
-      start: moment().day(1).startOf("day").add(8, "hours").toDate(), // Monday 8 AM
-      end: moment().day(1).startOf("day").add(9, "hours").toDate(), // Assuming 1 hour duration
+      start: moment().day(1).startOf("day").add(8, "hours").toDate(),
+      end: moment().day(1).startOf("day").add(9, "hours").toDate(),
       title: "Oil Change",
-      eventType: "scheduled",
-      icon: blueEventIcon, // Optional: You can use an icon if needed
-      backgroundColor: "#E7F6FD", // Custom background color
-      mainColor: "#0369A1",
+      eventType: "Scheduled",
+      backgroundColor: "#FFB6C1", // Light pink
+      mainColor: "#D5006D", // Dark pink
     },
     {
-      start: moment().day(3).startOf("day").add(8, "hours").toDate(), // Wednesday 8 AM
-      end: moment().day(3).startOf("day").add(9, "hours").toDate(), // Assuming 1 hour duration
-      title: "Tire Rotation",
-      eventType: "completed",
-      icon: greenEventIcon, // Optional: You can use an icon if needed
-      backgroundColor: "#E8F8F3", // Custom background color
-      mainColor: "#047857",
+      start: moment().day(2).startOf("day").add(10, "hours").toDate(),
+      end: moment().day(2).startOf("day").add(11, "hours").toDate(),
+      title: "Team Meeting",
+      eventType: "Meeting",
+      backgroundColor: "#ADD8E6", // Light blue
+      mainColor: "#0000FF", // Blue
     },
     {
-      start: moment().day(2).startOf("day").add(11, "hours").toDate(), // Tuesday 11 AM
-      end: moment().day(2).startOf("day").add(12, "hours").toDate(), // Assuming 1 hour duration
-      title: "Engine Repair",
-      eventType: "urgent Maintenance",
-      icon: redEventIcon, // Optional: You can use an icon if needed
-      backgroundColor: "#FFE4E6", // Custom background color
-      mainColor: "#BE123C",
+      start: moment().day(3).startOf("day").add(12, "hours").toDate(),
+      end: moment().day(3).startOf("day").add(13, "hours").toDate(),
+      title: "Project Deadline",
+      eventType: "Deadline",
+      backgroundColor: "#90EE90", // Light green
+      mainColor: "#006400", // Dark green
     },
     {
-      start: moment().day(5).startOf("day").add(10, "hours").toDate(), // Friday 10 AM
-      end: moment().day(5).startOf("day").add(11, "hours").toDate(), // Assuming 1 hour duration
-      title: "Brake Replacement",
-      eventType: "Routine Inspection",
-      icon: purpleEventIcon, // Optional: You can use an icon if needed
-      backgroundColor: "#F4EFFF", // Custom background color
-      mainColor: "#6D28D9",
+      start: moment().day(4).startOf("day").add(14, "hours").toDate(),
+      end: moment().day(4).startOf("day").add(15, "hours").toDate(),
+      title: "Lunch with Client",
+      eventType: "Meeting",
+      backgroundColor: "#FFFFE0", // Light yellow
+      mainColor: "#FFD700", // Gold
     },
     {
-      start: moment().day(1).startOf("day").add(14, "hours").toDate(), // Monday 2 PM
-      end: moment().day(1).startOf("day").add(15, "hours").toDate(), // Assuming 1 hour duration
-      title: "Safety Inspection",
-      eventType: "pending Approval",
-      icon: orangeEvantIcon, // Optional: You can use an icon if needed
-      backgroundColor: "#FEF6E7", // Custom background color
-      mainColor: "#D0905C",
+      start: moment().day(5).startOf("day").add(16, "hours").toDate(),
+      end: moment().day(5).startOf("day").add(17, "hours").toDate(),
+      title: "Conference Call",
+      eventType: "Call",
+      backgroundColor: "#E6E6FA", // Lavender
+      mainColor: "#6A5ACD", // Slate blue
+    },
+    {
+      start: moment().day(6).startOf("day").add(9, "hours").toDate(),
+      end: moment().day(6).startOf("day").add(10, "hours").toDate(),
+      title: "Website Launch",
+      eventType: "Launch",
+      backgroundColor: "#FFE4E1", // Misty rose
+      mainColor: "#FF69B4", // Hot pink
+    },
+    {
+      start: moment().day(7).startOf("day").add(11, "hours").toDate(),
+      end: moment().day(7).startOf("day").add(12, "hours").toDate(),
+      title: "Team Outing",
+      eventType: "Event",
+      backgroundColor: "#FFDAB9", // Peach puff
+      mainColor: "#FF4500", // Orange red
     },
   ];
 
-  function eventStyleGetter(event) {
-    let backgroundColor = event.backgroundColor || "#D9EAD3"; // Default color if not specified
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 600); // Adjust breakpoint as needed
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // Initial check
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  function eventStyleGetter(event) {
     return {
       style: {
-        backgroundColor: backgroundColor,
+        backgroundColor: event.backgroundColor || "#D9EAD3",
         borderRadius: "5px",
         color: "#fff",
         display: "flex",
@@ -208,174 +245,134 @@ function MyCalendar() {
         padding: "5px",
         border: "none",
         marginLeft: "5px",
-        width: "90px", // Adjust the width as needed
-        whiteSpace: "nowrap", // Prevent text from wrapping
+        height: "40px",
+        cursor: "pointer",
       },
+      
     };
   }
 
   function EventComponent({ event }) {
-    const { start, icon } = event;
-
-    // Format the start time as needed
-    const startTime = moment(start).format("HH:mm");
-
     return (
-      <>
-        <Box
+      <div
+        onClick={() => {
+          setSelectedEvent(event);
+          setOpenModal(true);
+        }}
+        style={{
+          backgroundColor: event.backgroundColor,
+          borderRadius: "5px",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          padding: "5px",
+          cursor: "pointer", // Make boxes clickable
+          color: event.mainColor,
+          fontSize: "14px"
+
+        }}
+      >  <spam display={{xs:"none"}} >{event.title} </spam>
+        {/* Text is removed for mobile view */}
+        <Typography
           sx={{
-            position: "absolute",
-            top: "0px",
-            right: "0px",
-            marginBottom: "2px",
-            backgroundColor: event.backgroundColor,
-            height: "100%",
-            width: "100%",
-          }}
-        ></Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "start",
-            flexDirection: "column",
-            gap: "0px",
-            // color: "#fff",
-            //   padding: "5px",
-            border: "none", // Ensure no border is applied
-            fontSize: "12px", // Adjust font size if needed
-            position: "absolute",
-            top: "2px",
-            left: "12px",
-            marginBottom: "2px",
+            display:{xs:"none"} // Hide text for calendar view in mobile
           }}
         >
-          <span style={{ display: "flex", flexDirection: "row", gap: "5px" }}>
-            <span
-              style={{
-                fontSize: "16px",
-                color: event.mainColor,
-                fontWeight: 600,
-                fontFamily: "Inter, sans-serif",
-                margin: "none",
-                padding: "none",
-              }}
-            >
-              {startTime}
-            </span>
-            <span
-              style={{
-                fontSize: "16px",
-                color: event.mainColor,
-                fontWeight: 600,
-                fontFamily: "Inter, sans-serif",
-                margin: "none",
-                padding: "none",
-                // marginLeft: "5px",
-              }}
-            >
-              AM
-            </span>
-            <span>
-              <img src={event.icon} height={"12px"} width={"12px"} />
-            </span>
-          </span>
-          <Typography
-            sx={{
-              fontSize: "1.2em",
-              color: event.mainColor,
-              fontWeight: 600,
-              fontFamily: "Inter, sans-serif",
-              style: "italic",
-            }}
-          >
-            {event.eventType}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: "1.3em",
-              color: event.mainColor,
-              fontWeight: 600,
-              fontFamily: "Inter, sans-serif",
-            }}
-          >
-            {event.title}
-          </Typography>
-        </Box>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "2px",
-            left: "0px",
-            marginBottom: "2px",
-            backgroundColor: event.mainColor,
-            height: "100%",
-            width: "4px",
-          }}
-        ></Box>
-        {/* <Box
-          sx={{
-            position: "absolute",
-            top: "0px",
-            right: "0px",
-            marginBottom: "2px",
-            backgroundColor: "white",
-            height: "100%",
-            width: "50px",
-            borderBottom: "1px solid #E0E0E0",
-          }}
-        ></Box> */}
-      </>
+          {event.title}
+        </Typography>
+      </div>
     );
   }
 
+  const handleClose = () => {
+    setOpenModal(false);
+    setSelectedEvent(null);
+  };
+
   return (
-    <div style={{ width: "100%", height: "850px", overflow: "hidden" }}>
+    <div className={styles.calendarContainer} >
       <Calendar
         localizer={localizer}
         events={myEventsList}
         startAccessor="start"
         endAccessor="end"
+        defaultView={Views.WEEK} // Set default view to week
         style={{
-          width: "100%",
-          height: "100%",
-          border: "none", // Remove the border around the calendar
+          height: isMobile ? "50vh" : "100vh",
+          minHeight: "400px", // Ensure minimum height
+       
         }}
-        defaultView={Views.WEEK}
-        views={["week", "day", "month"]}
-        step={30}
-        timeslots={2}
-        min={new Date(2024, 7, 12, 7, 0)} // Start time at 7 AM
-        max={new Date(2024, 7, 12, 17, 0)} // End time at 5 PM
         components={{
-          toolbar: CustomToolbar, // Use the custom toolbar
-          event: EventComponent, // Use custom event component
-          // timeGutterHeader: EmptyGutter, // Hide time gutter header
-          // timeGutter: EmptyGutter, // Hide time gutter
+          toolbar: CustomToolbar,
+          event: EventComponent,
         }}
-        eventPropGetter={eventStyleGetter} // Apply custom styles
-        dayPropGetter={(date) => ({
-          style: {
-            backgroundcolor:
-              date.getDay() === 0 || date.getDay() === 6
-                ? "#F7F7F7"
-                : "white" && date.getDay() === 4
-                ? "#FFF2E3"
-                : "white", // Example: Different background color for Sundays
-            borderBottom: "none", // Remove bottom border
-            borderLeft: "none", // Remove left border
-            borderTop: "none", // Remove top border
-          },
-        })}
-        timeSlotWrapper={({ children }) =>
-          React.cloneElement(children, {
-            style: {
-              borderTop: "none", // Remove top border
-              borderLeft: "none", // Remove left border
-              borderBottom: "none", // Remove bottom border
-            },
-          })
-        }
+
+        onSelectEvent={ (event) =>{
+      setSelectedEvent(event);
+      setOpenModal(true);
+
+        }}
+        eventPropGetter={eventStyleGetter}
+     
       />
+
+      {/* List of Events */}
+      {isMobile && (
+        <Box sx={{ padding: 2, display: "flex", flexDirection: "column" }}>
+          {myEventsList.map((event, index) => (
+            <Box
+              key={index}
+              sx={{
+                backgroundColor: event.backgroundColor,
+                borderRadius: "5px",
+                marginBottom: 1,
+                padding: 2,
+                color: event.mainColor,
+                cursor: "pointer",
+                fontWeight: 600,
+                fontSize: "14px",
+              }}
+              onClick={() => {
+                setSelectedEvent(event);
+                setOpenModal(true);
+              }}
+            >
+              {event.title}
+            </Box>
+          ))}
+        </Box>
+      )}
+
+      {openModal && (
+        <Modal open={openModal} onClose={handleClose}>
+          <Box
+            sx={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: {lg:300, xs:230},
+              bgcolor: "background.paper",
+              borderRadius: 2,
+              boxShadow: 24,
+              p: 4,
+            }}
+          >
+            <Typography variant="h6" component="h2">
+              {selectedEvent?.title}
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              Event Type: {selectedEvent?.eventType}
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              Start: {moment(selectedEvent?.start).format("MMMM Do YYYY, h:mm a")}
+            </Typography>
+            <Typography sx={{ mt: 2 }}>
+              End: {moment(selectedEvent?.end).format("MMMM Do YYYY, h:mm a")}
+            </Typography>
+          </Box>
+        </Modal>
+      )}
     </div>
   );
 }
