@@ -8,7 +8,7 @@ import MalfunctioningLogo from "../../../assets/Card/MalfunctioningLogo.png";
 import TripLogo from "../../../assets/Card/TripLogo.png";
 import TableHeader from "../../../pages/TableHeader/TableHeader";
 import TripManagmentTableContent from "../../../pages/Table/TripManagmentTableContent";
-import TablePagination from "../../../pages/Pagination/TablePagination";
+import TablePagination from "../Pagination/TablePagination";
 export default function TripManagment() {
   return (
     <Box 
