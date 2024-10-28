@@ -68,6 +68,7 @@ export default function DashboardLocationCard() {
                 >
                   <img src={maintenanceLogo} height={"100%"} width={"100%"} />
                 </Box>
+                
               </Box>
 
             </Stack>
@@ -82,6 +83,7 @@ export default function DashboardLocationCard() {
                     lg: "15px", // Large screens
                     xl: "15px",
                   },
+                  mt:1,
                   color: "#3D4149",
                   fontWeight: 400,
                   fontFamily: "Inter, sans-serif",
@@ -183,7 +185,7 @@ export default function DashboardLocationCard() {
                 </Stack>
               </Stack> */}
             </Stack>
-            <Stack
+            {/* <Stack
               width={"20%"}
               // height={"100%"}
               direction={"row"}
@@ -229,7 +231,7 @@ export default function DashboardLocationCard() {
               >
                 <img src={ArrowDown} height={"100%"} width={"100%"} />
               </Box>
-            </Stack>
+            </Stack> */}
           </Stack>
 
 
