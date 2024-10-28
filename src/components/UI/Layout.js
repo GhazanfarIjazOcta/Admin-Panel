@@ -31,13 +31,13 @@ export const listStyle = {
 export const listItemStyles = {
   color: "white",
   padding: "8px",
-  marginBottom: "10px",
+  marginBottom: "4px",
   cursor: "pointer"
 };
-export const listItemIconStyle = { color: "white", minWidth: "35px" };
+export const listItemIconStyle = { color: "white", minWidth: "30px" };
 export const logoutButtonContainer = {
   width: "100%",
-  marginBottom: "50px",
+  // marginBottom: "5px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -47,7 +47,7 @@ export const lineStyle = {
   height: "2px",
   backgroundColor: "#3D4149",
   color: "#3D4149",
-  marginBottom: "2em", // Space between the line and the button
+  marginBottom: "0.4em", // Space between the line and the button
 };
 export const logoutButtonStyle = {
   width: "80%",

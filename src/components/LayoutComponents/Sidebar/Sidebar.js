@@ -122,7 +122,7 @@ function Sidebar() {
           <Box sx={listStyle} mt={"0.2em"}>
           <img src={Ukeylogo} alt="logo" 
           style={{
-            width: "100%",        // The image will scale to 100% of the container's width
+            width: {xl:"100%" , lg:"80%" , md:"70%"},        // The image will scale to 100% of the container's width
             height: "auto",       // The image will scale to 100% of the container's height
             maxWidth: "100%",     // Prevent overflow beyond the box
             maxHeight: "100%",    // Prevent overflow beyond the box
@@ -146,19 +146,21 @@ function Sidebar() {
                     },
                   }}
                 >
-                  <ListItemIcon sx={listItemIconStyle}>
-                    <img
-                      src={item.icon}
-                      alt={item.text}
-                      width="20px"
-                      height="22px"
-                    />
-                  </ListItemIcon>
+                 <ListItemIcon sx={listItemIconStyle}>
+  <img
+    src={item.icon}
+    alt={item.text}
+    style={{
+      width: "15px",  // Set a smaller width for large screens
+      height: "15px", // Set a smaller height for large screens
+    }}
+  />
+</ListItemIcon>
                   <ListItemText
                     primary={item.text}
                     primaryTypographyProps={{
                       fontWeight: 500,
-                      fontSize: "0.9rem",
+                      fontSize: {xl:"0.9rem", lg:"0.6rem" , md:"0.5rem" },
                       fontFamily: "Poppins",
                       display: { xs: "block", lg: "block" },
                       noWrap: false,
@@ -179,15 +181,15 @@ function Sidebar() {
                   src={LogoutLogo}
                   alt="dashboard"
                   width="15px"
-                  height={"15px"}
+                  height={"auto"}
                 />
               }
               sx={{
                 width: "80%",
-                height: "3rem",
+                height: {xl:"3rem" , lg:"2.3rem" },
                 fontSize: "1rem",
                 backgroundColor: "white",
-                marginBottom: "1.5rem",
+                marginBottom: "2rem",
                 color: "black",
                 "&:hover": {
                   backgroundColor: "lightgray",
