@@ -15,6 +15,7 @@ import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
+
 // Dummy chat messages for testing
 const dummyMessages = [
     {
@@ -22,7 +23,7 @@ const dummyMessages = [
       content: "Hello! How are you?",
       User: {
         id: 1, // This could be your user ID
-        image: "https://example.com/user1.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
     {
@@ -30,7 +31,7 @@ const dummyMessages = [
       content: "I'm good, thanks! How about you?",
       User: {
         id: 2, // This is the other user's ID
-        image: "https://example.com/user2.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
     {
@@ -38,7 +39,7 @@ const dummyMessages = [
       content: "Have you completed the project we discussed?",
       User: {
         id: 1, // This is your message
-        image: "https://example.com/user1.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
     {
@@ -46,7 +47,7 @@ const dummyMessages = [
       content: "Yes, I just finished it yesterday. I will send it over.",
       User: {
         id: 2, // This is the other user's message
-        image: "https://example.com/user2.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
     {
@@ -54,7 +55,7 @@ const dummyMessages = [
       content: "Great! Looking forward to seeing it.",
       User: {
         id: 1, // This is another message from you
-        image: "https://example.com/user1.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
     {
@@ -62,7 +63,7 @@ const dummyMessages = [
       content: "Let me know if you need anything else.",
       User: {
         id: 2, // Another message from the other user
-        image: "https://example.com/user2.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
     {
@@ -70,14 +71,23 @@ const dummyMessages = [
       content: "Thanks for your help!",
       User: {
         id: 1, // Another message from you
-        image: "https://example.com/user1.jpg",
+        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
       },
     },
   ];
 
 const ChatView = ({
-  currentUser  = { id: 2 },
-  chatUser = {firstName: "Alice" , lastName: "bowam" },
+  currentUser  = { 
+    id: 2 , 
+    image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104832/adminlogo2_ghz4jq.webp"
+    
+  },
+  chatUser = {
+    firstName: "Alice", 
+    lastName: "Bowam", 
+    image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+  },
+  
   messages = [], // Default to empty array
   isLoadingChat,
   message,
@@ -86,9 +96,9 @@ const ChatView = ({
   handleImageUpload,
   handleCloseModal,
   openModal,
-  image,
+  image ,
   loading,
-  projectName,
+  projectName ="Alicee",
 }) => {
   const headerStyle = {
     padding: {lg:"10px", xs:"auto"},
@@ -100,17 +110,20 @@ const ChatView = ({
 
   // Use dummy messages if messages prop is empty
   const chatMessages = messages.length > 0 ? messages : dummyMessages;
+  const chatuserImage = chatUser?.image || "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg" ;
 
 
 
   return (
-    <Stack direction={"column"} justifyContent={"flex-start"} height={{lg:"80%" , xs:"78%"}}  position={{lg:"relative" , xs:"fixed"}}>
+    <Stack direction={"column"} justifyContent={"flex-start"} height={{lg:"85%" , xs:"82%"}}  position={{lg:"relative" , xs:"fixed"}}>
       <Stack justifyContent={"space-between"} direction={"row"}>
         <Box sx={{ ...headerStyle }}>
           <Avatar
-            src={currentUser?.image || chatUser?.image}
+            src={chatuserImage   }
             sx={{ marginRight: "1rem" }}
+            
           />
+          {console.log("here is the chat user ",chatuserImage )}
           <Typography
             sx={{
               fontFamily: "var(--main-font-family)",
@@ -191,7 +204,7 @@ const ChatView = ({
                         bgcolor: isSender ? "#15294E  " : "#F2F2F2",
                         color: isSender ? "#FFFFFF" : "#000000",
                         borderRadius: isSender ? "10px 10px 0 10px" : "10px 10px 10px 0",
-                        py: 2,
+                        py: 1.5,
                         px: 3,
                         // color: "black",
                         maxWidth: "35%",
@@ -228,9 +241,11 @@ const ChatView = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          mb: 1,
+          mb: {lg:0 , xs:1},
           ml: 2,
           mr: 2,
+          mt: 1,
+          
         }}
       >
         <label htmlFor="file-input">

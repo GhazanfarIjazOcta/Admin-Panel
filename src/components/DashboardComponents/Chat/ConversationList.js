@@ -36,7 +36,7 @@ import {
       userId: "1",
       firstName: "Alice",
       lastName: "Smith",
-      image: "https://via.placeholder.com/25",
+      image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
     },
     {
       userId: "2",
@@ -57,7 +57,7 @@ import {
       ChatConversation: { id: "1" },
       firstName: "Alice",
       lastMessage: { content: "Hello, how are you?" },
-      image: "https://via.placeholder.com/50",
+      image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
     },
     {
       ChatConversation: { id: "2" },

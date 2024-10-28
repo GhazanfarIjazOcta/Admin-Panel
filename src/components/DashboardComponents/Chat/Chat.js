@@ -21,7 +21,7 @@ const Chat = () => {
   const matchesMdDown = useMediaQuery(theme.breakpoints.down("lg"));
 
   // State and hooks
-  const [conversationId, setConversationId] = useState();
+  const [conversationId, setConversationId] = useState(8);
   const [chatUser, setChatUser] = useState(null);
   const { id } = useParams(); // Get conversation ID from URL
   const [value, setValue] = useState(id);
@@ -81,16 +81,22 @@ const Chat = () => {
     >
       <Grid container>
         {matchesMdDown && (
-          <Grid item xs={1}>
-            <IconButton
-              sx={{ ml: 33 }}
-              color="inherit"
-              aria-label={drawerOpen ? "close drawer" : "open drawer"}
-              onClick={handleToggleDrawer}
-            >
-              {drawerOpen ? <ChevronLeftIcon /> : <MenuIcon />}
-            </IconButton>
-          </Grid>
+           <Grid item xs={1}>
+           <IconButton
+             sx={{
+               ml: {
+                 xs: 33,  // For mobile width around 320px
+                 sm: 44,  // For mobile width around 375px
+                 md: 46   // For mobile width around 425px and larger
+               }
+             }}
+             color="inherit"
+             aria-label={drawerOpen ? "close drawer" : "open drawer"}
+             onClick={handleToggleDrawer}
+           >
+             {drawerOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+           </IconButton>
+         </Grid>
         )}
 
         {/* Drawer for conversation list */}
