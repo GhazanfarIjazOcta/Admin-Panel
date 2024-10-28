@@ -52,7 +52,7 @@ export default function TableHeader({
             direction={"row"}
             justifyContent={"space-between"}
             spacing={2}
-            display={{ xs: "none", sm: "flex" }}
+            display={{ xs: "none", sm: "none" , md:"none" , lg:"none" , xl:"flex" }}
           >
             <Stack
               direction={"row"}
@@ -300,14 +300,47 @@ export default function TableHeader({
           </Stack>
 
           {/* Mobile Layout */}
-          <Accordion sx={{ display: { xs: "block", sm: "none" } }}>
+          <Accordion sx={{ display: { xs: "block", sm: "block" , md:"block" ,lg:"block" , xl:"none" } }}>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Stack
+              direction={"row"}
+              alignItems={"center"}
+              gap={2}
+              display={{ xs: "none", sm: "flex" }}
+            >
+              <Box
+                sx={{
+                  width: { lg: "70%", xs: "70%" },
+                  height: { lg: "90%", xs: "70%" },
+                  backgroundColor: "#FFF4F2",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: "2px",
+                }}
+              >
+                <img src={icon ? icon : User} height={"20px"} width={"20px"} />
+              </Box>
+
+              {/* <Typography
+                sx={{
+                  fontSize: { lg: "14px", xs: "10px" },
+                  color: "#5A607F",
+                  fontWeight: 400,
+                  fontFamily: "Inter, sans-serif",
+                }}
+              >
+                {text}
+              </Typography> */}
+            </Stack>
               <Typography
                 sx={{
                   fontSize: "14px",
                   color: "#5A607F",
                   fontWeight: 400,
                   fontFamily: "Inter, sans-serif",
+                  mt:0,
+                  ml:1.5
                 }}
               >
                 {text}
