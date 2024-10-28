@@ -15,7 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function SettingTabs({ handleChange, value }) {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box

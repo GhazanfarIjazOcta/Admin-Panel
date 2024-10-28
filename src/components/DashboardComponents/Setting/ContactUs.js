@@ -14,18 +14,26 @@ import { settingStyles } from "../../UI/styles/Main";
 function ContactUs() {
   return (
     <Paper sx={settingStyles.contactUsPaper}>
-      <Box  
-            sx={{
-              ...settingStyles.contactUsBox,
-              paddingLeft: {
-                  xs: '20px', // Padding for extra-small devices
-                  lg: '40px', // Padding for large devices
-              },
-            }} 
-      
+      <Box
+        sx={{
+          ...settingStyles.contactUsBox,
+         
+        }}
       >
-        <Box sx={settingStyles.contactUsContainer} mt={4}>
-          <Box sx={settingStyles.contactUsBoxWidth}>
+        <Box sx={{...settingStyles.contactUsContainer,
+
+
+
+        }} mt={4}>
+
+          <Box sx={{...settingStyles.contactUsBoxWidth,
+
+paddingLeft: {
+  xs: "50px", // Padding for extra-small devices
+  lg: "40px", // Padding for large devices
+},
+
+          }}>
             <Typography sx={settingStyles.conatactUsLeftLabel}>
               Get in touch
             </Typography>
@@ -75,9 +83,9 @@ function ContactUs() {
               </Box>
             </Box>
             <Stack
-              direction={{lg:"row" , xs:"column"}}
+              direction={{ lg: "row", xs: "column" }}
               justifyContent={"space-around"}
-              width={{lg:"65%" , xs:"20%"}}
+              width={{ lg: "65%", xs: "30%" }}
               mt={5}
             >
               <Box>
@@ -104,30 +112,38 @@ function ContactUs() {
               </Box>
             </Stack>
 
-            <Stack sx={settingStyles.contactUsButtonContainer} mr={1} mt={{lg:0 , xs:3}}  >
-          <Button variant="contained" sx={settingStyles.contactUsButton}>
-            Send
-          </Button>
-        </Stack>
+            <Stack
+              direction={{ lg: "row", xs: "column" }}
+              justifyContent={"space-around"}
+              width={{ lg: "65%", xs: "20%" }}
+              mt={5}
+            >
+              <Button variant="contained" sx={settingStyles.contactUsButton}>
+                Send
+              </Button>
+            </Stack>
           </Box>
 
-          <Box sx={settingStyles.contactUsBoxWidth} pr={5}>
+          {/* Google Map iframe Box - Now below in mobile view */}
+          <Box sx={{...settingStyles.contactUsBoxWidth,
+paddingLeft: {
+  xs: "40px", // Padding for extra-small devices
+  lg: "40px", // Padding for large devices
+},
+
+          }} pr={{lg:5 , xs:0} }>
             <iframe
               width={"100%"}
               height={"585px"}
               borderRadius="0px"
               frameBorder="0"
               style={{ border: 0, borderRadius: "0px" }}
-              // src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d33.6074086!2d73.100091!3dYOUR_ZOOM_LEVEL!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfeb96a77dbcff%3A0x936bce527a1d6838!2sOctathorn+Technologies!5e0!3m2!1sen!2sus!4vYOUR_EMBED_API_KEY"
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d330400.5089714776!2d-118.243683!3d34.052235!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2c5d4b2f1f7db%3A0x8c4f2ef328e24f6c!2sLos+Angeles%2C+CA!5e0!3m2!1sen!2sus!4vYOUR_EMBED_API_KEY"
               allowFullScreen
               title="Google Map"
             ></iframe>
           </Box>
-         
-
         </Box>
-       
       </Box>
     </Paper>
   );

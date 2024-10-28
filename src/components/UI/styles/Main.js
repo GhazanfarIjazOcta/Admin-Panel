@@ -447,7 +447,7 @@ export const settingStyles = {
     
     
   },
-  profileTextField: { width: {lg:"35%" , xs:"80%"} , marginLeft: "5px" },
+  profileTextField: { width: {lg:"35%" , xs:"100%"} , marginLeft: "5px" },
   profileLabel: { fontWeight: {lg:500 , xs:200} },
   addPhoto: {
     width: "110px",
@@ -522,11 +522,16 @@ export const settingStyles = {
     
     width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
   },
-  textFieldBox: { width: {lg:"35%" , xs:"80%"} },
+  textFieldBox: { width: {lg:"35%" , xs:"100%"} },
   contactUsPaper: {
     boxShadow: "none",
     height: "100%",
     width: "100%",
+
+ 
+    height: "88%",
+   
+    mb: 2
   },
   contactUsBox: {
     height: "95%",
@@ -534,9 +539,31 @@ export const settingStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
+
+ 
+    
+    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
   },
-  contactUsContainer: { width: "100%", height: "90%", display: "flex" },
-  contactUsBoxWidth: { width: "50%" , direction: "column"},
+  contactUsContainer: { 
+    width: "100%", 
+    height: "90%", 
+    display: "flex",
+    flexDirection: {
+      xs: "column", // Stack vertically for mobile view
+      lg: "row", // Side by side for large screens
+    }, 
+    gap: { xs: 0, lg: 0 } // Add spacing between elements in mobile view
+  },
+  contactUsBoxWidth: { 
+    width: { 
+      xs: "70%", // Full width in mobile view
+      lg: "50%" // Half width in large screens
+    },
+
+    
+    
+    direction: "row"
+  },
   conatactUsLeftLabel: {
     fontSize: "36px",
     color: "#383C3E",
@@ -549,15 +576,18 @@ export const settingStyles = {
     fontWeight: 400,
     fontFamily: "Inter, sans-serif",
   },
-  conatactUsTextField: { width: "80%", marginLeft: "5px", marginTop: "4px" },
+  conatactUsTextField: {
+    width: {lg:"80%" , xs:"120%"},
+     marginLeft: "5px", 
+     marginTop: "4px" },
   conatactUsTextFieldMessage: {
-    width: "80%",
+    width: {lg:"80%" , xs:"120%"},
     marginLeft: "5px",
     height: "100%",
     marginTop: "4px",
   },
   contactUsContactBox: {
-    width: {lg:"196px" , xs: "260px"},
+    width: {lg:"196px" , xs: "320%"},
     height: "126px",
     display: "flex",
     flexDirection: "column",
@@ -586,9 +616,10 @@ export const settingStyles = {
   },
   contactUsButton: {
     // marginRight: "opx",
-    // marginLeft: "0px",
+    // marginLeft: "70%",
+    // paddingleft: "200px",
     marginBottom: "20px",
-    width: "247px",
+    width: {lg:"247px", xs:"500%"},
     height: "53px",
     backgroundColor: "#F38712",
     color: "white",
@@ -680,3 +711,4 @@ export const settingStyles = {
     justifyContent: "space-between",
   },
 };
+
