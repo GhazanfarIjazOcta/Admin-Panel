@@ -228,7 +228,7 @@ const ChatView = ({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          mb: 2,
+          mb: 1,
           ml: 2,
           mr: 2,
         }}

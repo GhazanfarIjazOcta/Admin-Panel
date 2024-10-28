@@ -63,7 +63,7 @@ export default function TablePagination({ count, currentPageResults }) {
           shape="rounded"
           sx={{
             marginTop: { xs: 1, sm: 0 },
-            width: { xs: "110%", sm: "auto" }, // Ensure buttons fit in one line
+            width: { xs: "90%", sm: "auto" }, // Ensure buttons fit in one line
           }}
         />
       </Stack>
