@@ -25,7 +25,7 @@ export default function TablePagination({ count, currentPageResults }) {
   return (
     <Paper
       sx={{
-        padding: 1,
+        padding: 2,
         borderRadius: 0,
         elevation: 0,
         borderTop: "1px solid #EAECF0",

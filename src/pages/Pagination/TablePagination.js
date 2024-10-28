@@ -44,7 +44,7 @@ export default function TablePagination({ count, currentPageResults }) {
         height="100%"
       >
         <Typography
-          ml={2}
+          ml={1}
           fontWeight={400}
           color="#374151"
           fontFamily="inter"
@@ -63,7 +63,7 @@ export default function TablePagination({ count, currentPageResults }) {
           shape="rounded"
           sx={{
             marginTop: { xs: 1, sm: 0 },
-            width: { xs: "90%", sm: "auto" }, // Ensure buttons fit in one line
+            width: { xs: "100%", sm: "auto" }, // Ensure buttons fit in one line
           }}
         />
       </Stack>
