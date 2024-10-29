@@ -4,7 +4,7 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Ukeylogo from "../../../assets/Layout/Ukeylogo-removebg-preview.png";
 import DashboardLogo from "../../../assets/Layout/post.png";
-import AutoAwesomeMosaicOutlinedIcon from '@mui/icons-material/AutoAwesomeMosaicOutlined';
+import AutoAwesomeMosaicOutlinedIcon from "@mui/icons-material/AutoAwesomeMosaicOutlined";
 import UserLogo from "../../../assets/Layout/user.png";
 import VehicleLogo from "../../../assets/Layout/fluent_vehicle-truck-cube-24-regular.png";
 import DeviceLogo from "../../../assets/Layout/ion_hardware-chip-outline.png";
@@ -23,7 +23,7 @@ import {
   listStyle,
   logoStyle,
   logoutButtonContainer,
-  logoutButtonStyle,
+  logoutButtonStyle
 } from "../../UI/Layout";
 import { useNavigate } from "react-router-dom";
 
@@ -47,31 +47,31 @@ function Sidebar() {
     {
       text: "Vehicle Management",
       icon: VehicleLogo,
-      route: "vehicle-management",
+      route: "vehicle-management"
     },
     {
       text: "Device Management",
       icon: DeviceLogo,
-      route: "device-management",
+      route: "device-management"
     },
     {
       text: "Driver Management",
       icon: DriverLogo,
-      route: "driver-management",
+      route: "driver-management"
     },
     { text: "Trip Management", icon: TripLogo, route: "trip-management" },
     {
       text: "Maintenance Scheduling",
       icon: MaintenanceLogo,
-      route: "maintenance-scheduling",
+      route: "maintenance-scheduling"
     },
     { text: "Fuel Management", icon: FuelLogo, route: "fuel-management" },
-    { text: "Setting", icon: SettingLogo, route: "setting" },
+    { text: "Setting", icon: SettingLogo, route: "setting" }
   ];
   return (
     <Box
       flex={2}
-        // sx={{ backgroundColor: "red" }}
+      // sx={{ backgroundColor: "red" }}
       display={{ xs: "none", lg: "flex" }}
       height={"100vh"}
       flexDirection={"column"}
@@ -89,7 +89,7 @@ function Sidebar() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          alignItems: "center",
+          alignItems: "center"
         }}
       >
         {/* <Box
@@ -114,22 +114,23 @@ function Sidebar() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: "center"
           }}
           mt={2}
         >
-          
           <Box sx={listStyle} mt={"0.2em"}>
-          <img src={Ukeylogo} alt="logo" 
-          style={{
-            width: {xl:"100%" , lg:"80%" , md:"70%"},        // The image will scale to 100% of the container's width
-            height: "auto",       // The image will scale to 100% of the container's height
-            maxWidth: "100%",     // Prevent overflow beyond the box
-            maxHeight: "100%",    // Prevent overflow beyond the box
-            objectFit: "contain"  // Maintain aspect ratio and prevent distortion
-
-          }}    />
-          <Divider sx={{ backgroundColor: "#F38712" }} />
+            <img
+              src={Ukeylogo}
+              alt="logo"
+              style={{
+                width: { xl: "100%", lg: "80%", md: "70%" }, // The image will scale to 100% of the container's width
+                height: "auto", // The image will scale to 100% of the container's height
+                maxWidth: "100%", // Prevent overflow beyond the box
+                maxHeight: "100%", // Prevent overflow beyond the box
+                objectFit: "contain" // Maintain aspect ratio and prevent distortion
+              }}
+            />
+            <Divider sx={{ backgroundColor: "#F38712" }} />
             <List>
               {listItems.map((item, index) => (
                 <ListItem
@@ -142,28 +143,28 @@ function Sidebar() {
                       selectedItem === index ? "#F38712" : "transparent",
                     "&:hover": {
                       backgroundColor:
-                        selectedItem === index ? "#F38712" : "#3D4149",
-                    },
+                        selectedItem === index ? "#F38712" : "#3D4149"
+                    }
                   }}
                 >
-                 <ListItemIcon sx={listItemIconStyle}>
-  <img
-    src={item.icon}
-    alt={item.text}
-    style={{
-      width: "15px",  // Set a smaller width for large screens
-      height: "15px", // Set a smaller height for large screens
-    }}
-  />
-</ListItemIcon>
+                  <ListItemIcon sx={listItemIconStyle}>
+                    <img
+                      src={item.icon}
+                      alt={item.text}
+                      style={{
+                        width: "15px", // Set a smaller width for large screens
+                        height: "15px" // Set a smaller height for large screens
+                      }}
+                    />
+                  </ListItemIcon>
                   <ListItemText
                     primary={item.text}
                     primaryTypographyProps={{
                       fontWeight: 500,
-                      fontSize: {xl:"0.9rem", lg:"0.6rem" , md:"0.5rem" },
+                      fontSize: { xl: "0.9rem", lg: "0.6rem", md: "0.5rem" },
                       fontFamily: "Poppins",
                       display: { xs: "block", lg: "block" },
-                      noWrap: false,
+                      noWrap: false
                     }}
                   />
                 </ListItem>
@@ -186,14 +187,14 @@ function Sidebar() {
               }
               sx={{
                 width: "80%",
-                height: {xl:"3rem" , lg:"2.3rem" },
+                height: { xl: "3rem", lg: "2.3rem" },
                 fontSize: "1rem",
                 backgroundColor: "white",
                 marginBottom: "2rem",
                 color: "black",
                 "&:hover": {
-                  backgroundColor: "lightgray",
-                },
+                  backgroundColor: "lightgray"
+                }
               }}
               onClick={() => navigate("/login")}
             >
@@ -201,7 +202,6 @@ function Sidebar() {
             </Button>
           </Stack>
         </Box>
-
       </Box>
     </Box>
   );

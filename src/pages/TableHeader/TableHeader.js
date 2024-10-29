@@ -339,7 +339,7 @@ export default function TableHeader({
                   color: "#5A607F",
                   fontWeight: 400,
                   fontFamily: "Inter, sans-serif",
-                  mt:0,
+                  mt:0.6,
                   ml:1.5
                 }}
               >

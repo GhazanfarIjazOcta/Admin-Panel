@@ -3,6 +3,7 @@ import { Calendar, momentLocalizer, Views } from "react-big-calendar";
 import moment from "moment";
 import styles from "./MyCalendar.module.css"; // Ensure the styles are being imported
 import "react-big-calendar/lib/css/react-big-calendar.css";
+
 import {
   Box,
   IconButton,
@@ -239,9 +240,9 @@ function MyCalendar() {
         backgroundColor: event.backgroundColor || "#D9EAD3",
         borderRadius: "5px",
         color: "black",
-        
         display: "flex",
         alignItems: "center",
+        justifyContent: "center", // Center content horizontally
         padding: "5px",
         border: "none",
         marginLeft: "5px",
@@ -250,40 +251,56 @@ function MyCalendar() {
       }
     };
   }
-
-  function EventComponent({ event }) {
-    return (
-      <div
-        onClick={() => {
-          setSelectedEvent(event);
-          setOpenModal(true);
-        }}
+  
+ function EventComponent({ event }) {
+  return (
+    <div
+      onClick={() => {
+        setSelectedEvent(event);
+        setOpenModal(true);
+      }}
+      style={{
+        backgroundColor: event.backgroundColor,
+        borderRadius: "5px",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center", // Center the content
+        padding: "5px",
+        marginLeft: "30px",
+        cursor: "pointer",
+        color: event.mainColor,
+        fontSize: "14px",
+        position: "relative" // Added for positioning the logo/icon
+      }}
+    >
+      <i
+        className="fas fa-clock" // Font Awesome clock icon
         style={{
-          backgroundColor: event.backgroundColor,
-          borderRadius: "5px",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          padding: "5px",
-          marginLeft:"30px",
-          cursor: "pointer", // Make boxes clickable
-          color: event.mainColor,
-          fontSize: "14px"
+          fontSize: "20px", // Size of the icon
+          position: "absolute",
+          left: "5px", // Position the icon
+          top: "50%",
+          transform: "translateY(-50%)", // Center the icon vertically
+          color: event.mainColor // Use the event's main color for the icon
+        }}
+      />
+      <Typography
+        sx={{
+          display: { xs: "block", sm: "none" }, // Show title only for mobile view
+          textAlign: "center" // Center text
         }}
       >
-        {" "}
-        <spam display={{ xs: "none" }}>{event.title} </spam>
-        {/* Text is removed for mobile view */}
-        <Typography
-          sx={{
-            display: { xs: "none" } // Hide text for calendar view in mobile
-          }}
-        >
-          {event.title}
-        </Typography>
-      </div>
-    );
-  }
+        {event.title}
+      </Typography>
+    </div>
+  );
+}
+
+
+
+  
+  
 
   const handleClose = () => {
     setOpenModal(false);

@@ -23,37 +23,68 @@ import { historyStyles, maintenanceSchedulingStyles } from "../../UI/styles/Main
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 
-
 function History() {
-
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-
+  // Dummy data for history boxes
+  const dummyData = [
+    {
+      time: "11:00 AM",
+      icon: purpleEventIcon,
+      date: "DD/MM/YY",
+      inspection: "Routine Inspection",
+      task: "Brake Replacement",
+      driverName: "Joe Ben",
+      vehicle: "Toyota X"
+    },
+    {
+      time: "02:00 PM",
+      icon: greenEventIcon,
+      date: "DD/MM/YY",
+      inspection: "Oil Change",
+      task: "Engine Oil Replacement",
+      driverName: "Sam Woods",
+      vehicle: "Ford F-150"
+    },
+    {
+      time: "11:00 AM",
+      icon: purpleEventIcon,
+      date: "DD/MM/YY",
+      inspection: "Routine Inspection",
+      task: "Brake Replacement",
+      driverName: "Joe Ben",
+      vehicle: "Toyota X"
+    },
+    {
+      time: "11:00 AM",
+      icon: purpleEventIcon,
+      date: "DD/MM/YY",
+      inspection: "Routine Inspection",
+      task: "Brake Replacement",
+      driverName: "Joe Ben",
+      vehicle: "Toyota X"
+    },
+   
+    
+    // Add more entries as needed
+  ];
 
   return (
     <Box mt={12} 
-    
-    sx={{
-      
-      ...historyStyles.mainContainer,
-
-      position: "absolute",
-      mt: { xs: 13, sm:12 , md: 12 , lg: 12 },
-      // Adjust padding based on the screen size
-      px: { xs: 2, sm:  2 ,md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
-      ml: { xs: 0, sm: 0 ,md: 0 , lg: 0 , xl: 0 }, // Leave space for the sidebar on larger screens
-      overflow: "none", // Prevent overflowing horizontally and vertically
-      width: {lg:"82%" , xs:"90%"}, // Ensure it takes full width
-      // maxWidth: "1200px", // Set a max width as needed
-    
-    
-   }}   
-     >
-
+      sx={{
+        ...historyStyles.mainContainer,
+        position: "absolute",
+        mt: { xs: 13, sm:12, md: 12, lg: 12 },
+        px: { xs: 2, sm: 2, md: 2, lg: 0 },
+        ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 },
+        overflow: "none",
+        width: { lg: "82%", xs: "90%" },
+      }}
+    >
       <Paper sx={maintenanceSchedulingStyles.headerMainContainer}>
       <Stack p={3} mr={2} direction={"row"} height={"auto"} flexWrap="wrap">
       {/* Collapse Card for mobile view */}
@@ -209,103 +240,73 @@ function History() {
 
       </Paper>
 
-      
       <Box mt={2} sx={historyStyles.mainContainer}>
-  <Paper sx={historyStyles.paperContainer}>
-    <Stack p={{lg:4 , xs:0}}  direction={{ xs: "column", md: "row" }} gap={2}>
-      {/* First Box */}
-      <Box sx={historyStyles.boxContainer} pl={2} pr={2} pt={1} pb={1}>
-        <Stack direction={"row"} justifyContent={"space-between"}>
-          <Stack direction={"row"} alignItems={"center"} gap={1}>
-            <Typography variant="subtitle1" style={historyStyles.time}>
-              11:00 AM
-            </Typography>
-            <img src={purpleEventIcon} width={"12px"} height={"12px"} />
-          </Stack>
-          <Typography variant="subtitle1" style={historyStyles.date}>
-            DD/MM/YY
-          </Typography>
-        </Stack>
-        <Stack direction={"column"}>
-          <Typography variant="subtitle1" style={historyStyles.middleText}>
-            Routine Inspection
-          </Typography>
-          <Typography variant="subtitle1" style={historyStyles.date}>
-            Brake Replacement
-          </Typography>
-        </Stack>
-        <Stack direction={"row"} justifyContent={"space-between"}>
-          <Stack direction={"column"}>
-            <Typography variant="subtitle1" style={historyStyles.driverText}>
-              Driver's Name
-            </Typography>
-            <Typography variant="subtitle1" style={historyStyles.time}>
-              Joe Ben
-            </Typography>
-          </Stack>
-          <Stack direction={"column"}>
-            <Typography variant="subtitle1" style={historyStyles.driverText}>
-              Vehicle
-            </Typography>
-            <Typography variant="subtitle1" style={historyStyles.time}>
-              Toyota x
-            </Typography>
-          </Stack>
-        </Stack>
-      </Box>
-
-      {/* Second Box */}
-      <Box sx={historyStyles.secondBox} pl={2} pr={0} pt={1} pb={1}>
-        <Stack direction={"row"} justifyContent={"space-between"}>
-          <Stack direction={"row"} alignItems={"center"} gap={1}>
-            <Typography variant="subtitle1" style={historyStyles.secondTime}>
-              11:00 AM
-            </Typography>
-            <img src={greenEventIcon} width={"12px"} height={"12px"} />
-          </Stack>
-          <Typography variant="subtitle1" style={historyStyles.secondDate}>
-            DD/MM/YY
-          </Typography>
-        </Stack>
-        <Stack direction={"column"}>
-          <Typography
-            variant="subtitle1"
-            style={historyStyles.secondMiddleText}
+        <Paper sx={historyStyles.paperContainer}>
+          <Stack
+            p={{ lg: 4, xs: 0 }}
+            direction={{ xs: "column", md: "row" }}
+            gap={2}
+            flexWrap="wrap"
           >
-            Routine Inspection
-          </Typography>
-          <Typography variant="subtitle1" style={historyStyles.secondDate}>
-            Brake Replacement
-          </Typography>
-        </Stack>
-        <Stack direction={"row"} justifyContent={"space-between"}>
-          <Stack direction={"column"}>
-            <Typography variant="subtitle1" style={historyStyles.secondDriver}>
-              Driver's Name
-            </Typography>
-            <Typography variant="subtitle1" style={historyStyles.endText}>
-              Joe Ben
-            </Typography>
+            {dummyData.map((item, index) => (
+            <Box
+            key={index}
+            sx={{
+              ...historyStyles.boxContainer,
+              minWidth: "250px",
+              maxWidth: "300px",
+              flex: "1 1 250px",
+              mb: 2,
+              backgroundColor: index % 2 === 0 ? "#D4F2E8" : "#F3E6FF", // Alternate colors
+            }}
+            pl={2}
+            pr={2}
+            pt={1}
+            pb={1}
+          >
+            <Stack direction={"row"} justifyContent={"space-between"}>
+              <Stack direction={"row"} alignItems={"center"} gap={1}>
+                <Typography variant="subtitle1" style={historyStyles.time}>
+                  {item.time}
+                </Typography>
+                <img src={item.icon} width={"12px"} height={"12px"} />
+              </Stack>
+              <Typography variant="subtitle1" style={historyStyles.date}>
+                {item.date}
+              </Typography>
+            </Stack>
+            <Stack direction={"column"}>
+              <Typography variant="subtitle1" style={historyStyles.middleText}>
+                {item.inspection}
+              </Typography>
+              <Typography variant="subtitle1" style={historyStyles.date}>
+                {item.task}
+              </Typography>
+            </Stack>
+            <Stack direction={"row"} justifyContent={"space-between"}>
+              <Stack direction={"column"}>
+                <Typography variant="subtitle1" style={historyStyles.driverText}>
+                  Driver's Name
+                </Typography>
+                <Typography variant="subtitle1" style={historyStyles.time}>
+                  {item.driverName}
+                </Typography>
+              </Stack>
+              <Stack direction={"column"}>
+                <Typography variant="subtitle1" style={historyStyles.driverText}>
+                  Vehicle
+                </Typography>
+                <Typography variant="subtitle1" style={historyStyles.time}>
+                  {item.vehicle}
+                </Typography>
+              </Stack>
+            </Stack>
+          </Box>
+          
+            ))}
           </Stack>
-          <Stack direction={"column"}>
-            <Typography variant="subtitle1" style={historyStyles.endright}>
-              Vehicle
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              style={historyStyles.endRightBottom}
-            >
-              Toyota x
-            </Typography>
-          </Stack>
-        </Stack>
+        </Paper>
       </Box>
-    </Stack>
-  </Paper>
-</Box>
-
-
-      
     </Box>
   );
 }

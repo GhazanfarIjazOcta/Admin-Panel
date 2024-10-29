@@ -1,4 +1,14 @@
-import { Box, Button, Divider, Stack, List, ListItem, ListItemIcon, ListItemText, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  Stack,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  IconButton
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import React, { useState, useEffect } from "react";
 import Ukeylogo from "../../../assets/Layout/Ukeylogo-removebg-preview.png";
@@ -22,17 +32,27 @@ function Sidebar2({ onClose }) {
   const listItems = [
     { text: "Dashboard", icon: DashboardLogo, route: "dashboardmain" },
     { text: "User Management", icon: UserLogo, route: "user-management" },
-    { text: "Vehicle Management", icon: VehicleLogo, route: "vehicle-management" },
+    {
+      text: "Vehicle Management",
+      icon: VehicleLogo,
+      route: "vehicle-management"
+    },
     { text: "Device Management", icon: DeviceLogo, route: "device-management" },
     { text: "Driver Management", icon: DriverLogo, route: "driver-management" },
     { text: "Trip Management", icon: TripLogo, route: "trip-management" },
-    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
+    {
+      text: "Maintenance Scheduling",
+      icon: MaintenanceLogo,
+      route: "maintenance-scheduling"
+    },
     { text: "Fuel Management", icon: FuelLogo, route: "fuel-management" },
-    { text: "Setting", icon: SettingLogo, route: "setting" },
+    { text: "Setting", icon: SettingLogo, route: "setting" }
   ];
 
   useEffect(() => {
-    const currentItemIndex = listItems.findIndex(item => item.route === location.pathname.split('/').pop());
+    const currentItemIndex = listItems.findIndex(
+      (item) => item.route === location.pathname.split("/").pop()
+    );
     setSelectedItem(currentItemIndex !== -1 ? currentItemIndex : null);
   }, [location.pathname]);
 
@@ -45,25 +65,29 @@ function Sidebar2({ onClose }) {
   return (
     <Box
       sx={{
-        width: { xs: '70vw', sm: '40vw', md: '40vw' },
-        height: { xs: '97%', sm: '97%', md: '97%' },
-        position: 'fixed',
+        width: { xs: "70vw", sm: "40vw", md: "40vw" },
+        height: { xs: "97%", sm: "97%", md: "97%" },
+        position: "fixed",
         top: 0,
         left: 0,
         backgroundColor: "#15294E",
         display: "flex",
         flexDirection: "column",
-        padding: 'clamp(0.5rem, 1vw, 1rem)',
+        padding: "clamp(0.5rem, 1vw, 1rem)",
         boxShadow: "2px 0 5px rgba(0,0,0,0.5)",
-        overflowY: 'auto',
-        overflowX: 'hidden',
+        overflowY: "auto",
+        overflowX: "hidden"
       }}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box display="flex" justifyContent="center" mb={0}>
-          <img src={Ukeylogo} alt="logo" style={{ width: '100%', maxWidth: '120px', marginBottom: "2px" }} />
+          <img
+            src={Ukeylogo}
+            alt="logo"
+            style={{ width: "100%", maxWidth: "120px", marginBottom: "2px" }}
+          />
         </Box>
-        <IconButton onClick={onClose} sx={{ color: 'white' }}>
+        <IconButton onClick={onClose} sx={{ color: "white" }}>
           <CloseIcon />
         </IconButton>
       </Box>
@@ -77,16 +101,24 @@ function Sidebar2({ onClose }) {
             key={item.text}
             onClick={() => handleListItemClick(index, item.route)}
             sx={{
-              backgroundColor: selectedItem === index ? "#F38712" : "transparent",
+              backgroundColor:
+                selectedItem === index ? "#F38712" : "transparent",
               "&:hover": { backgroundColor: "#F38712" },
-              fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)',
-              padding: 'clamp(0.4rem, 0.8vw, 0.8rem)',
+              fontSize: "clamp(0.7rem, 1.2vw, 0.9rem)",
+              padding: "clamp(0.4rem, 0.8vw, 0.8rem)"
             }}
           >
             <ListItemIcon>
-              <img src={item.icon} alt={item.text} style={{ width: 'clamp(14px, 3vw, 22px)', height: 'clamp(14px, 3vw, 22px)' }} />
+              <img
+                src={item.icon}
+                alt={item.text}
+                style={{
+                  width: "clamp(14px, 3vw, 22px)",
+                  height: "clamp(14px, 3vw, 22px)"
+                }}
+              />
             </ListItemIcon>
-            <ListItemText primary={item.text} sx={{ color: 'white' }} />
+            <ListItemText primary={item.text} sx={{ color: "white" }} />
           </ListItem>
         ))}
       </List>
@@ -96,14 +128,23 @@ function Sidebar2({ onClose }) {
         <Button
           variant="contained"
           fullWidth
-          startIcon={<img src={LogoutLogo} alt="logout" style={{ width: 'clamp(10px, 1.5vw, 14px)', height: 'clamp(10px, 1.5vw, 14px)' }} />}
+          startIcon={
+            <img
+              src={LogoutLogo}
+              alt="logout"
+              style={{
+                width: "clamp(10px, 1.5vw, 14px)",
+                height: "clamp(10px, 1.5vw, 14px)"
+              }}
+            />
+          }
           onClick={() => navigate("/login")}
           sx={{
             backgroundColor: "white",
             color: "black",
             "&:hover": { backgroundColor: "lightgray" },
-            fontSize: 'clamp(0.7rem, 1.2vw, 0.9rem)',
-            padding: 'clamp(0.4rem, 0.8vw, 0.8rem)',
+            fontSize: "clamp(0.7rem, 1.2vw, 0.9rem)",
+            padding: "clamp(0.4rem, 0.8vw, 0.8rem)"
           }}
         >
           Logout
