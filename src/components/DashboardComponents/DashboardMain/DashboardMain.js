@@ -13,6 +13,7 @@ import DashboardBarChart from "../../../pages/Chart/DashboardBarChart";
 import TripManagmentTableContent from "../../../pages/Table/TripManagmentTableContent";
 
 import DashboardTableHeader from "../TableHeader/DashboardTableHeader";
+// import DashboardTableHeader from "../../../pages/TableHeader/DashboardTableHeader";
 import TripLogo from "../../../assets/Card/TripLogo.png";
 
 export default function DashboardMain() {
@@ -97,7 +98,19 @@ export default function DashboardMain() {
         <Grid item xs={11} sm={9} xmd={9} margin={{lg:0, sm:0, xs:1.3}} >
           <DashboardBarChart />
           <Box mt={2} overflow={"hidden"} sx={{border: "1px ", boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)"}}>
-            <DashboardTableHeader text={"Trip Management"} searchText={"Vehicle name"} icon={TripLogo} />
+            <DashboardTableHeader 
+            text={"Trip Management"} 
+            searchText={"Vehicle name"} 
+            icon={TripLogo} 
+            buttonText={"Export"}
+        //     text={"Trip Management"}
+        // searchText={"Vehicle name"}
+        // buttonText={"Add Trip"}
+        // trip={true}
+        // icon={TripLogo}
+        // route={"add-trip"}
+            />
+           
             <TripManagmentTableContent />
           </Box>
         </Grid>
