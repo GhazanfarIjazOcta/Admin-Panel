@@ -5,7 +5,7 @@ import {
   Drawer,
   IconButton,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import React, { useState } from "react";
@@ -14,14 +14,127 @@ import ConversationList from "./ConversationList";
 import { useParams } from "react-router-dom";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { ChatStyles } from "./ChatStyles";
+
+const dummyMessages1 = [
+  {
+    id: 1,
+    content: "Hello! How are you?",
+    User: {
+      id: 1, // This could be your user ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 2,
+    content: "I'm good, thanks! How about you?",
+    User: {
+      id: 2, // This is the other user's ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 3,
+    content: "Have you completed the project we discussed?",
+    User: {
+      id: 1, // This is your message
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 4,
+    content: "Yes, I just finished it yesterday. I will send it over.",
+    User: {
+      id: 2, // This is the other user's message
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 5,
+    content: "Great! Looking forward to seeing it.",
+    User: {
+      id: 1, // This is another message from you
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 6,
+    content: "Let me know if you need anything else.",
+    User: {
+      id: 2, // Another message from the other user
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 7,
+    content: "Thanks for your help!",
+    User: {
+      id: 1, // Another message from you
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 1
+  },
+  {
+    id: 1,
+    content: "Hello! How are you?",
+    User: {
+      id: 1, // This could be your user ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 2
+  },
+  {
+    id: 2,
+    content: "I'm good, thanks! How about you?",
+    User: {
+      id: 2, // This is the other user's ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+    },
+    chatid: 2
+  }
+];
+
+const dummyConversations = [
+  {
+    ChatConversation: { id: "1" },
+    firstName: "Alice",
+    lastMessage: { content: "Hello, how are you?" },
+    image:
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+  },
+  {
+    ChatConversation: { id: "2" },
+    firstName: "Bob",
+    lastMessage: { content: "Are we still on for the meeting?" },
+    image:
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
+  }
+];
 
 const Chat = () => {
+  const [chatId, setChatId] = useState();
+
   // Hook for theme and responsive checks
   const theme = useTheme();
   const matchesMdDown = useMediaQuery(theme.breakpoints.down("lg"));
 
   // State and hooks
-  const [conversationId, setConversationId] = useState(8);
+  const [conversationId, setConversationId] = useState(null);
   const [chatUser, setChatUser] = useState(null);
   const { id } = useParams(); // Get conversation ID from URL
   const [value, setValue] = useState(id);
@@ -55,48 +168,28 @@ const Chat = () => {
   const handleChatUserChange = (user) => {
     setChatUser(user);
   };
+  const handleSelectedConversation = (id) => {
+    console.log("Selected Conversation ID in Parent:", id);
+    // Additional functionality when a conversation is clicked can go here
+    setSelectedConversationId(id);
+  };
+
+  const [selectedConversationId, setSelectedConversationId] = useState(1);
 
   return (
-    <Box
-      sx={{
-        height: { lg: "83%", xs: "90%" },
-        borderRadius: "4px",
-
-        position: "fixed",
-        mt: { xs: 11, sm: 12, md: 12, lg: 12 },
-        // Adjust padding based on the screen size
-        px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
-        ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
-        overflow: "none", // Prevent overflowing horizontally and vertically
-        width: "99%", // Ensure it takes full width
-        width: { lg: "81.5%", xs: "90%" }, // Ensure it takes full width
-        // maxWidth: "1200px", // Set a max width as needed>
-        //             background: "#F8DE7E",
-        //   background: "#F8F8FF",
-        background: "#ffffff",
-        overflow: "none",
-
-        boxShadow: 2,
-      }}
-    >
+    <Box sx={ChatStyles.mainChatStyles}>
       <Grid container>
         {matchesMdDown && (
-           <Grid item xs={1}>
-           <IconButton
-             sx={{
-               ml: {
-                 xs: 33,  // For mobile width around 320px
-                 sm: 44,  // For mobile width around 375px
-                 md: 46   // For mobile width around 425px and larger
-               }
-             }}
-             color="inherit"
-             aria-label={drawerOpen ? "close drawer" : "open drawer"}
-             onClick={handleToggleDrawer}
-           >
-             {drawerOpen ? <ChevronLeftIcon /> : <MenuIcon />}
-           </IconButton>
-         </Grid>
+          <Grid item xs={1}>
+            <IconButton
+              sx={ChatStyles.iconbox}
+              color="inherit"
+              aria-label={drawerOpen ? "close drawer" : "open drawer"}
+              onClick={handleToggleDrawer}
+            >
+              {drawerOpen ? <ChevronLeftIcon /> : <MenuIcon />}
+            </IconButton>
+          </Grid>
         )}
 
         {/* Drawer for conversation list */}
@@ -106,13 +199,12 @@ const Chat = () => {
           open={drawerOpen}
           onClose={handleToggleDrawer}
           ModalProps={{
-            keepMounted: true,
+            keepMounted: true
           }}
           sx={{
             width: "300px",
             flexShrink: 0,
-            display: { xs: matchesMdDown ? "block" : "none", sm: "block" },
-            
+            display: { xs: matchesMdDown ? "block" : "none", sm: "block" }
           }}
           PaperProps={{
             style: {
@@ -120,11 +212,13 @@ const Chat = () => {
               height: "calc(100% - 150px)",
               borderTopRightRadius: "16px",
               width: "84%",
-              overflow: "auto",
-            },
+              overflow: "auto"
+            }
           }}
         >
           <ConversationList
+            setChatId={setChatId}
+            chatId={chatId}
             conversationId={conversationId}
             handleSetConversationId={handleSetConversationId}
             setConversationId={setConversationId}
@@ -136,12 +230,15 @@ const Chat = () => {
             data={[]} // Replace this with your static data
             handleChatUserChange={handleChatUserChange}
             setIsLoading={setIsLoading}
+            onConversationSelect={handleSelectedConversation}
           />
         </Drawer>
 
         {!matchesMdDown && (
           <Grid item xl={2.995} lg={2.995} xs={3}>
             <ConversationList
+              setChatId={setChatId}
+              chatId={chatId}
               conversationId={conversationId}
               handleSetConversationId={handleSetConversationId}
               setConversationId={setConversationId}
@@ -153,6 +250,7 @@ const Chat = () => {
               data={[]} // Replace this with your static data
               handleChatUserChange={handleChatUserChange}
               setIsLoading={setIsLoading}
+              onConversationSelect={handleSelectedConversation}
             />
           </Grid>
         )}
@@ -165,6 +263,8 @@ const Chat = () => {
 
         <Grid item xl={8.995} lg={8.995} xs={!matchesMdDown ? 8 : 12}>
           <ChatView
+            setChatId={setChatId}
+            chatId={chatId}
             conversationId={conversationId}
             chatUser={chatUser}
             handleChatUserChange={handleChatUserChange}
@@ -175,6 +275,7 @@ const Chat = () => {
             id={id}
             isLoadingChat={isLoading}
             setIsLoadingChat={setIsLoading}
+            selectedConversationId={selectedConversationId}
           />
         </Grid>
       </Grid>

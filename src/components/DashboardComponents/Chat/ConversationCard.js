@@ -8,12 +8,19 @@ import {
   } from "@mui/material";
   import React from "react";
   
-  const ConversationCard = ({ conversation }) => {
+  const ConversationCard = ({ conversation , onConversationClick  ,chatId ,setChatId}) => {
     const lastMessageContent = conversation?.lastMessage?.content || "No messages yet";
+    console.log("chat id |||||||||| = ", chatId )
+    const handleClick = () => {
+      if (onConversationClick) {
+        setChatId(conversation.ChatConversation.id);
+      }
+    };
   
     return (
       <React.Fragment key={conversation.ChatConversation.id}>
         <ListItem
+         onClick={handleClick}
           alignItems="flex-start"
           style={{
             fontFamily: "var(--main-font-family)",
@@ -22,6 +29,7 @@ import {
             transition: "background-color 0.1s ease",
             paddingTop: 0,
           }}
+          
         >
           <ListItemAvatar>
             <Avatar alt={conversation.firstName} src={conversation.image} />
