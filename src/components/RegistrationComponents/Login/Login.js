@@ -15,11 +15,16 @@ import { RegistrationStyles } from "../../UI/Styles";
 import "../../UI/Styles.css";
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import { useAuth } from "../../Authentication/AuthContext";
 
 function Login() {
     const navigate = useNavigate();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [slideRight, setSlideRight] = useState(false);
+    const { isAuthenticated, login } = useAuth();
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const togglePasswordVisibility = () => {
         setPasswordVisible(!passwordVisible);
@@ -30,6 +35,20 @@ function Login() {
         setTimeout(() => {
             navigate("/signup");
         }, 500);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const storedEmail = "John@gmail.com";
+        const storedPassword = "1234";
+
+        if (email === storedEmail && password === storedPassword) {
+            login();
+            navigate("/dashboard/dashboardmain");
+            console.log("Login successful");
+        } else {
+            alert("Invalid username or password");
+        }
     };
 
     return (
@@ -73,14 +92,8 @@ function Login() {
                             component="img"
                             src={Ukeylogo}
                             sx={{
-                                height: { xl: "90px", lg: "50px", md: "30px", sm: "40px", xs: "30px" }, // Adjusted for md
-                                width: {
-                                    xl: "200px",
-                                    lg: "150px",
-                                    md: "100px", // Adjusted for md
-                                    sm: "100px",
-                                    xs: "80px"
-                                }
+                                height: { xl: "90px", lg: "50px", md: "30px", sm: "40px", xs: "30px" },
+                                width: { xl: "200px", lg: "150px", md: "100px", sm: "100px", xs: "80px" }
                             }}
                             alt="Logo"
                         />
@@ -91,7 +104,7 @@ function Login() {
                         mt={{ xl: "1em", lg: "0rem", md: "0.2rem", sm: "0.1rem", xs: "0.2rem" }}
                         sx={{
                             fontWeight: 600,
-                            fontSize: { xl: "2rem", lg: "1.6rem", md: "1.2rem", sm: "1.5rem", xs: "1.25rem" }, // Adjusted for md
+                            fontSize: { xl: "2rem", lg: "1.6rem", md: "1.2rem", sm: "1.5rem", xs: "1.25rem" },
                             fontFamily: "Inter",
                             color: "#14181F",
                         }}
@@ -99,8 +112,7 @@ function Login() {
                         Login
                     </Typography>
 
-                    <Typography
-                        mt="1.6em" sx={{ fontSize: "0.6rem", fontFamily: "Inter", color: "#14181F", textAlign: "center" }} >
+                    <Typography mt="1.6em" sx={{ fontSize: "0.6rem", fontFamily: "Inter", color: "#14181F", textAlign: "center" }}>
                         If you don't have an account register
                     </Typography>
                     <Stack direction={"row"} gap={2}>
@@ -114,20 +126,12 @@ function Login() {
                             }}
                             onClick={signupNavigation}
                         >
-                            Register here !
+                            Register here!
                         </Typography>
                     </Stack>
 
                     <Box sx={{ width: { xs: "80%", sm: "60%" }, maxWidth: "370px", pt: "1.5rem" }}>
-                        <Typography
-                            variant="subtitle1"
-                            sx={{
-                                fontWeight: 500,
-                                fontSize: "0.8rem",
-                                fontFamily: "Inter",
-                                color: "#14181F",
-                            }}
-                        >
+                        <Typography variant="subtitle1" sx={{ fontWeight: 500, fontSize: "0.8rem", fontFamily: "Inter", color: "#14181F" }}>
                             E-mail/Phone Number
                         </Typography>
                         <TextField
@@ -135,37 +139,27 @@ function Login() {
                             fullWidth
                             size="small"
                             placeholder="Enter your email or phone number"
-                            InputProps={{
-                                style: { fontSize: '0.8rem' } // Adjust font size for the text field
-                            }}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            InputProps={{ style: { fontSize: '0.8rem' } }}
                         />
                     </Box>
 
                     <Box sx={{ width: { xs: "80%", sm: "60%" }, maxWidth: "370px", position: "relative" }}>
-                        <Typography
-                            variant="subtitle1"
-                            sx={{
-                                fontWeight: 500, fontSize: "0.8rem",
-                                fontFamily: "Inter",
-                                color: "#14181F",
-                            }}
-                        >
+                        <Typography variant="subtitle1" sx={{ fontWeight: 500, fontSize: "0.8rem", fontFamily: "Inter", color: "#14181F" }}>
                             Password
                         </Typography>
-                        <TextField 
-                            sx={RegistrationStyles.textField} 
-                            fullWidth 
-                            size="small" 
-                            placeholder="Enter your password" 
-                            type={passwordVisible ? 'text' : 'password'} 
-                            InputProps={{
-                                style: { fontSize: '0.8rem' } // Adjust font size for the text field
-                            }}
+                        <TextField
+                            sx={RegistrationStyles.textField}
+                            fullWidth
+                            size="small"
+                            placeholder="Enter your password"
+                            type={passwordVisible ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            InputProps={{ style: { fontSize: '0.8rem' } }}
                         />
-                        <Box
-                            sx={RegistrationStyles.passwordEyeBox}
-                            onClick={togglePasswordVisibility}
-                        >
+                        <Box sx={RegistrationStyles.passwordEyeBox} onClick={togglePasswordVisibility}>
                             {passwordVisible ? <VisibilityOffOutlinedIcon /> : <VisibilityOutlinedIcon />}
                         </Box>
                     </Box>
@@ -181,26 +175,12 @@ function Login() {
                     >
                         <Stack direction={"row"} alignItems={"center"}>
                             <Checkbox size="small" />
-                            <Typography
-                                color={"#14181F"}
-                                style={{
-                                    fontWeight: 300,
-                                    fontFamily: "Poppins",
-                                    fontSize: "0.75rem",
-                                }}
-                            >
+                            <Typography color={"#14181F"} style={{ fontWeight: 300, fontFamily: "Poppins", fontSize: "0.75rem" }}>
                                 Remember me
                             </Typography>
                         </Stack>
-                        <Typography
-                            color={"#6F7C8E"}
-                            style={{
-                                fontWeight: 300,
-                                fontFamily: "Poppins",
-                                fontSize: "0.75rem",
-                            }}
-                        >
-                            Forgot Password ?
+                        <Typography color={"#6F7C8E"} style={{ fontWeight: 300, fontFamily: "Poppins", fontSize: "0.75rem" }}>
+                            Forgot Password?
                         </Typography>
                     </Box>
 
@@ -209,7 +189,7 @@ function Login() {
                         sx={{
                             width: { xs: "80%", sm: "60%" },
                             maxWidth: "370px",
-                            height: "3rem", // Adjusted height for button
+                            height: "3rem",
                             backgroundColor: "#212122",
                             color: "white",
                             marginTop: "1.8em",
@@ -217,31 +197,19 @@ function Login() {
                             "&:hover": {
                                 backgroundColor: "#212122",
                             },
-                            fontSize: { md: '0.9rem' }, // Adjusted font size for the button
+                            fontSize: { md: '0.9rem' },
                         }}
-                        onClick={() => navigate("/dashboard/dashboardmain")}
+                        onClick={handleSubmit}
                     >
                         Login
                     </Button>
 
-                    <Typography
-                        variant="body1"
-                        mt={2}
-                        mb={1}
-                        color={"#6F7C8E"}
-                        style={{
-                            fontWeight: 500,
-                            fontSize: "0.9rem", // Adjusted font size
-                            fontFamily: "Poppins",
-                            cursor: "pointer",
-                            marginTop: "2rem"
-                        }}
-                    >
+                    <Typography variant="body1" mt={2} mb={1} color={"#6F7C8E"} style={{ fontWeight: 500, fontSize: "0.9rem", fontFamily: "Poppins", cursor: "pointer", marginTop: "2rem" }}>
                         or continue with
                     </Typography>
 
                     <Stack mt={1} mb={5}>
-                        <img src={GoogleLogo} style={{ height: '30px', width: '30px' }} /> {/* Adjusted logo size */}
+                        <img src={GoogleLogo} style={{ height: '30px', width: '30px' }} alt="Google Login" />
                     </Stack>
                 </Box>
             </Box>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Stack,
   Box,
@@ -8,214 +8,123 @@ import {
   IconButton,
   CircularProgress,
   TextField,
-  Modal,
+  Modal
 } from "@mui/material";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { headerStyle } from "./ChatStyles";
-
-// Dummy chat messages for testing
-const dummyMessages = [
-    {
-      id: 1,
-      content: "Hello! How are you?",
-      User: {
-        id: 1, // This could be your user ID
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 2,
-      content: "I'm good, thanks! How about you?",
-      User: {
-        id: 2, // This is the other user's ID
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 3,
-      content: "Have you completed the project we discussed?",
-      User: {
-        id: 1, // This is your message
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 4,
-      content: "Yes, I just finished it yesterday. I will send it over.",
-      User: {
-        id: 2, // This is the other user's message
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 5,
-      content: "Great! Looking forward to seeing it.",
-      User: {
-        id: 1, // This is another message from you
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 6,
-      content: "Let me know if you need anything else.",
-      User: {
-        id: 2, // Another message from the other user
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 7,
-      content: "Thanks for your help!",
-      User: {
-        id: 1, // Another message from you
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 1
-    },
-    {
-      id: 1,
-      content: "Hello! How are you?",
-      User: {
-        id: 1, // This could be your user ID
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 2
-    },
-    {
-      id: 2,
-      content: "I'm good, thanks! How about you?",
-      User: {
-        id: 2, // This is the other user's ID
-        image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-      },
-      chatid: 2
-    },
-  ];
+import { format } from 'date-fns'; // Ensure you have date-fns installed for formatting
 
 const ChatView = ({
-  currentUser  = { 
-    id: 2 , 
-    image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104832/adminlogo2_ghz4jq.webp"
-    
+  currentUser = {
+    id: 2,
+    image:
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104832/adminlogo2_ghz4jq.webp"
   },
-  chatUser = {
-    id: 1,
-    firstName: "Alice", 
-    lastName: "Bowam", 
-    image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
-  },
-  
-  // messages = [], // Default to empty array
   isLoadingChat,
-  message,
-  setMessage,
-  handleSend,
   handleImageUpload,
   handleCloseModal,
   openModal,
-  image ,
+  image,
   loading,
-  projectName ="Alicee",
-  selectedConversationId,
-  chatId, setChatId
-  
+  chatId,
+  setChatId,
+  message,
+  setMessage,
+  chatlist,
+  setchatlist
 }) => {
+  const [messages, setMessages] = useState([]);
+  const [text, settext] = useState();
+  const messageBoxRef = useRef(null); // Create a ref for the message box
+
+  useEffect(() => {
+    if (chatId) {
+      const filteredMessages = message.filter((msg) => msg.chatid == chatId);
+      setMessages(filteredMessages);
+      console.log("Filtered Messages:", filteredMessages);
+    } else {
+      console.log("No valid chat selected");
+      setMessages([]);
+    }
+  }, [chatId]);
 
 
+  useEffect(() => {
+    // Scroll to the bottom whenever messages change
+    if (messageBoxRef.current) {
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+    }
+  }, [messages]); // Trigger on messages change
 
-  
+  const userdetails = chatId
+    ? chatlist.filter((chat) => chat.ChatConversation.id === chatId)
+    : [];
 
+  const userimage = userdetails?.[0]?.image || "defaultImagePath"; // Fallback image path
+  const userName = userdetails?.[0]?.firstName || "No Name Available"; // Fallback name
+  const onlineStatus = userdetails?.[0]?.onlineStatus || false;
 
+  console.log("User Details: ||||||||||||||", onlineStatus);
 
-  // const [messages, setMessages1] = useState(dummyMessages);
+  const handleMessageSent = (messageContent) => {
+    if (!messageContent.trim()) return; // Prevent sending empty messages
+    const getCurrentTimestamp = () => new Date().toISOString();
+    const newMessage = {
+      id: messages.length + 1, // Unique ID for the message
+      content: messageContent,
+      User: {
+        id: currentUser.id,
+        image: currentUser.image
+      },
+      chatid: chatId,
+      timestamp: getCurrentTimestamp()
 
-  // Use dummy messages if messages prop is empty
-  // const chatMessages = messages.length > 0 ? messages : dummyMessages;
-  // const chatMessages = messages.filter(msg => msg.chatid === selectedConversationId);
-  const chatuserImage =  "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg" ;
-// const selectedChatId = dummyMessages[0].chatid;
+    };
 
-// const [selectedChatId, setSelectedChatId] = useState(chatId);
-const [messages, setMessages] = useState([]);
-
-// Update selectedChatId when selectedConversationId changes
-// useEffect(() => {
-//   setSelectedChatId(chatId);
-// }, [chatId]);
-
-
-// Filter messages based on the current selectedChatId
-useEffect(() => {
-  if (chatId) {
-    const filteredMessages = dummyMessages.filter((msg) => msg.chatid == chatId);
-    setMessages(filteredMessages);
-    console.log("Filtered Messages:", filteredMessages);
-  } else {
-    console.log("No valid chat selected");
-    setMessages([]);
-  }
-}, [chatId]);
-
-
-// useEffect(() => {
-//   const filteredMessages = dummyMessages.filter(
-//     (msg) => msg.chatid === selectedChatId
-//   );
-//   setMessages(filteredMessages);
-// }, [selectedChatId]);
-
-// Second useEffect - Runs only after messages are updated by the first useEffect
-// useEffect(() => {
-//   if (messages.length > 0) {
-//     console.log("Second useEffect triggered after messages update:", messages);
-//     // Additional code to run after the first useEffect finishes
-//   }
-// }, [messages]);
-
-
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
+  };
 
   return (
-    <Stack direction={"column"} justifyContent={"flex-start"} height={{lg:"85%" , xs:"82%"}}  position={{lg:"relative" , xs:"fixed"}}>
+    <Stack
+      direction={"column"}
+      justifyContent={"flex-start"}
+      height={{ lg: "85%", xs: "82%" }}
+      position={{ lg: "relative", xs: "fixed" }}
+    >
       <Stack justifyContent={"space-between"} direction={"row"}>
-        <Box sx={headerStyle.head }>
-          <Avatar
-            src={chatuserImage   }
-            sx={{ marginRight: "1rem" }}
-            
-          />
-          {console.log("here is the chat user ",messages )}
+        <Box sx={headerStyle.head}>
+          <Avatar src={userimage} sx={{ marginRight: "1rem" }} />
+          {console.log("here is the chat user ", messages)}
           <Typography
             sx={{
               fontFamily: "var(--main-font-family)",
               fontSize: { xl: "15px", lg: "12px", md: "15px", xs: "15px" },
-              fontWeight: 600,
+              fontWeight: 600
             }}
           >
             {/* {projectName ||  `${chatUser?.firstName} ${chatUser?.lastName}`} */}
-            {projectName ||  ` ${"Alice"} `}
+            {userName || ` ${"Alice"} `}
           </Typography>
+
           <IconButton>
-            <FiberManualRecordIcon sx={{ fontSize: 15, color: "#3B9434" }} />
+            <FiberManualRecordIcon
+              sx={{ fontSize: 15, color: onlineStatus ? "#3B9434" : "#FF0000" }} // Green if online, red if offline
+            />
           </IconButton>
         </Box>
       </Stack>
       <Divider sx={{ marginBottom: "1px" }} />
       <Box
+      ref={messageBoxRef} // Attach the ref here
         sx={{
           height: "calc(72vh)",
           overflowY: "scroll",
           padding: 2,
           bgcolor: "#FAFAFA",
-          borderRadius: "8px",
+          borderRadius: "8px"
         }}
       >
         {isLoadingChat ? (
@@ -232,7 +141,7 @@ useEffect(() => {
               padding: 2,
               display: "flex",
               justifyContent: "center",
-              alignItems: "center",
+              alignItems: "center"
             }}
           >
             <IconButton onClick={handleCloseModal}>
@@ -246,133 +155,105 @@ useEffect(() => {
                 height: "400px",
                 objectFit: "contain",
                 boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
-                filter: loading ? "blur(5px)" : "",
+                filter: loading ? "blur(5px)" : ""
               }}
             />
           </Box>
         ) : (
+<Box>
+  {messages.length > 0 ? (
+    messages.map((msg) => {
+      const isSender = msg?.User?.id === currentUser?.id;
 
+      // Format the timestamp
+      const messageTime = new Date(msg.timestamp);
+      const formattedTime = format(messageTime, 'hh:mm a'); // You can change this format as needed
 
-
-          <Box>
-          {messages.length > 0 ? (
-            messages.map((msg) => {
-              const isSender = msg?.User?.id === currentUser?.id;
-              return (
-                <Box
-                  key={msg?.id}
-                  sx={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    justifyContent: isSender ? "flex-end" : "flex-start",
-                    marginBottom: 2,
-                  }}
-                >
-                  {!isSender && (
-                    <Avatar src={msg?.User?.image} sx={{ width: 25, height: 25, marginRight: 1 }} />
-                  )}
-                  <Box
-                    sx={{
-                      bgcolor: isSender ? "#15294E" : "#F2F2F2",
-                      color: isSender ? "#FFFFFF" : "#000000",
-                      borderRadius: isSender ? "10px 10px 0 10px" : "10px 10px 10px 0",
-                      py: 1.5,
-                      px: 3,
-                      maxWidth: "35%",
-                      wordWrap: "break-word",
-                    }}
-                  >
-                    {msg.content}
-                  </Box>
-                  {isSender && (
-                    <Avatar src={currentUser?.image} sx={{ width: 25, height: 25, marginLeft: 1 }} />
-                  )}
-                </Box>
-              );
-            })
-          ) : (
-            <Typography sx={{
-              fontFamily: "var(--main-font-family)",
-              marginLeft: "1rem",
-              justifyContent: "center",
-              display: "flex",
-            }}>
-              No chat available...
+      return (
+        <Box
+          key={msg?.id}
+          sx={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: isSender ? "flex-end" : "flex-start",
+            marginBottom: 2
+          }}
+        >
+          {!isSender && (
+            <Avatar
+              src={msg?.User?.image}
+              sx={{ width: 25, height: 25, marginRight: 1 }}
+            />
+          )}
+          <Box
+            sx={{
+              bgcolor: isSender ? "#15294E" : "#F2F2F2",
+              color: isSender ? "#FFFFFF" : "#000000",
+              borderRadius: isSender
+                ? "10px 10px 0 10px"
+                : "10px 10px 10px 0",
+              py: 1.5,
+              px: 3,
+              maxWidth: "35%",
+              wordWrap: "break-word",
+              display: 'flex',
+              flexDirection: 'column' // Stack message content and time
+            }}
+          >
+            <Typography sx={{ marginBottom: 0.5 }}>
+              {msg.content}
             </Typography>
+            <Typography
+              sx={{
+                fontSize: '0.8rem', // Adjust font size as needed
+                color: isSender ? "#FFFFFF" : "#000000",
+                marginTop: '0.5rem', // Add some space above the time
+                
+                alignItems: "flex-end",
+              }}
+            >
+              {formattedTime}
+            </Typography>
+          </Box>
+          {isSender && (
+            <Avatar
+              src={currentUser?.image}
+              sx={{ width: 25, height: 25, marginLeft: 1 }}
+            />
           )}
         </Box>
-        
-
-//           <Box>
-//             {selectedChatId}
-//   {chatMessages.length ? (
-//     chatMessages
-//     .filter((msg) => msg.chatid === selectedChatId)
-//     // Filter messages by selected chatId
-//       .map((msg) => {
-//         const isSender = msg?.User?.id === currentUser?.id;
-//         return (
-//           <Box
-//             key={msg?.id}
-//             sx={{
-//               display: "flex",
-//               alignItems: "flex-end",
-//               justifyContent: isSender ? "flex-end" : "flex-start",
-//               marginBottom: 2,
-//             }}
-//           >
-//             {!isSender && (
-//               <Avatar src={msg?.User?.image} sx={{ width: 25, height: 25, marginRight: 1 }} />
-//             )}
-//             <Box
-//               sx={{
-//                 bgcolor: isSender ? "#15294E" : "#F2F2F2",
-//                 color: isSender ? "#FFFFFF" : "#000000",
-//                 borderRadius: isSender ? "10px 10px 0 10px" : "10px 10px 10px 0",
-//                 py: 1.5,
-//                 px: 3,
-//                 maxWidth: "35%",
-//                 wordWrap: "break-word",
-//               }}
-//             >
-//               {msg.content}
-//             </Box>
-//             {isSender && (
-//               <Avatar src={currentUser?.image} sx={{ width: 25, height: 25, marginLeft: 1 }} />
-//             )}
-//           </Box>
-//         );
-//       })
-//   ) : (
-//     <Typography
-//       sx={{
-//         fontFamily: "var(--main-font-family)",
-//         marginLeft: "1rem",
-//         justifyContent: "center",
-//         display: "flex",
-//       }}
-//     >
-//       No chat available...
-//     </Typography>
-//   )}
-// </Box>
-
-
-
+      );
+    })
+  ) : (
+    <Typography
+      sx={{
+        fontFamily: "var(--main-font-family)",
+        marginLeft: "1rem",
+        justifyContent: "center",
+        display: "flex"
+      }}
+    >
+      No chat available...
+    </Typography>
+  )}
+</Box>
         )}
       </Box>
       <Box
         component={"form"}
-        onSubmit={handleSend}
+        onSubmit={(e) => {
+          e.preventDefault(); // Prevent default form submission
+          handleMessageSent(text); // Call the message sent handler with the current message state
+          settext(""); // Optionally clear the message input after sending
+        }}
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          mb: {lg:0 , xs:1},
+          mb: { lg: 0, xs: 1 },
           ml: 2,
           mr: 2,
-          mt: 1,
-          
+          mt: 1
         }}
       >
         <label htmlFor="file-input">
@@ -387,12 +268,12 @@ useEffect(() => {
         <TextField
           name="message"
           placeholder="Please enter message"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
+          value={text}
+          onChange={(e) => settext(e.target.value)} // Update the message state
           sx={{ flexGrow: 1, marginRight: 1 }}
         />
         <IconButton color="primary" aria-label="send" type="submit">
-          <SendIcon sx={{ transform: "rotate(45deg)" }} />
+          <SendIcon sx={{ transform: "rotate(90deg)" }} />
         </IconButton>
       </Box>
     </Stack>

@@ -26,10 +26,13 @@ import AddDriver from "./components/DashboardComponents/DriverManagment/AddDrive
 import AddTrip from "./components/DashboardComponents/Trip Managment/AddTrip";
 
 import Chat from "./components/DashboardComponents/Chat/Chat";
+import { AuthProvider } from "./components/Authentication/AuthContext";
+import ProtectedRoute from "./components/Authentication/ProtectedRoutes";
 
 function App() {
 
   return (
+    <AuthProvider>
     <BrowserRouter>
     {/* <Navbar/> */}
       <Routes>
@@ -38,7 +41,8 @@ function App() {
         <Route path="/login" element={<Login />} />
          <Route path="*" element={<Loader />} /> 
 
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>}>
+
           <Route path="dashboard" element={<Dashboard />} /> 
           <Route path="dashboardmain" element={<DashboardMain />} />
            <Route path="user-management" element={<UserManagment />} />
@@ -85,6 +89,7 @@ function App() {
 
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -25,7 +25,8 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     id: 2,
@@ -35,7 +36,8 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     id: 3,
@@ -45,7 +47,8 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     id: 4,
@@ -55,7 +58,8 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     id: 5,
@@ -65,7 +69,8 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     id: 6,
@@ -75,7 +80,8 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     id: 7,
@@ -85,27 +91,74 @@ const dummyMessages1 = [
       image:
         "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
     },
-    chatid: 1
+    chatid: 1,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
-    id: 1,
+    id: 8,
     content: "Hello! How are you?",
     User: {
       id: 1, // This could be your user ID
       image:
-        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
     },
-    chatid: 2
+    chatid: 2,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
-    id: 2,
+    id: 9,
     content: "I'm good, thanks! How about you?",
     User: {
       id: 2, // This is the other user's ID
       image:
-        "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
     },
-    chatid: 2
+    chatid: 2,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
+  },
+  {
+    id: 10,
+    content: "I'm good, thanks! How about you?",
+    User: {
+      id: 1, // This is the other user's ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
+    },
+    chatid: 3,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
+  },
+  {
+    id: 11,
+    content: "I'm good, thanks! How about you?",
+    User: {
+      id: 2, // This is the other user's ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
+    },
+    chatid: 3,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
+  },
+  {
+    id: 12,
+    content: "I'm good, thanks! How about you?",
+    User: {
+      id: 1, // This is the other user's ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
+    },
+    chatid: 3,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
+  },
+  {
+    id: 15,
+    content: "Why are you not Replying?",
+    User: {
+      id: 1, // This is the other user's ID
+      image:
+        "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
+    },
+    chatid: 3,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   }
 ];
 
@@ -115,19 +168,40 @@ const dummyConversations = [
     firstName: "Alice",
     lastMessage: { content: "Hello, how are you?" },
     image:
-      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg"
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
+    messageStatus: true  ,
+    onlineStatus : false ,
+    timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   },
   {
     ChatConversation: { id: "2" },
     firstName: "Bob",
     lastMessage: { content: "Are we still on for the meeting?" },
     image:
-      "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg"
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg",
+      messageStatus: false, 
+      onlineStatus : true,
+      timestamp: "2024-11-01T10:00:00Z" // Example timestamp
+  },
+  {
+    ChatConversation: { id: "3" },
+    firstName: "Sophia",
+    lastMessage: { content: "Why are you not Replying?" },
+    image:
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730801766/R_1_vaefke.jpg",
+      messageStatus: false, 
+      onlineStatus : true,
+      timestamp: "2024-11-01T10:00:00Z" // Example timestamp
   }
 ];
 
 const Chat = () => {
   const [chatId, setChatId] = useState();
+  const [message , setmessage] = useState(dummyMessages1);
+  const [chatlist , setchatlist] = useState(dummyConversations)
+
+  // console.log("message is here " , message)
+  console.log("chatlist is here " , chatlist)
 
   // Hook for theme and responsive checks
   const theme = useTheme();
@@ -219,6 +293,9 @@ const Chat = () => {
           <ConversationList
             setChatId={setChatId}
             chatId={chatId}
+            chatlist = {chatlist}
+            setchatlist = {setchatlist}
+          
             conversationId={conversationId}
             handleSetConversationId={handleSetConversationId}
             setConversationId={setConversationId}
@@ -239,6 +316,8 @@ const Chat = () => {
             <ConversationList
               setChatId={setChatId}
               chatId={chatId}
+              chatlist = {chatlist}
+              setchatlist = {setchatlist}
               conversationId={conversationId}
               handleSetConversationId={handleSetConversationId}
               setConversationId={setConversationId}
@@ -265,6 +344,11 @@ const Chat = () => {
           <ChatView
             setChatId={setChatId}
             chatId={chatId}
+            chatlist = {chatlist}
+              setchatlist = {setchatlist}
+            
+            message = {message}
+            setmessage = {setmessage}
             conversationId={conversationId}
             chatUser={chatUser}
             handleChatUserChange={handleChatUserChange}

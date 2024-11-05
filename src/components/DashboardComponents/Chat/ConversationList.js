@@ -33,22 +33,10 @@ import {
   
 
   
-  const dummyConversations = [
-    {
-      ChatConversation: { id: "1" },
-      firstName: "Alice",
-      lastMessage: { content: "Hello, how are you?" },
-      image: "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730103376/R_kol7ep.jpg",
-    },
-    {
-      ChatConversation: { id: "2" },
-      firstName: "Bob",
-      lastMessage: { content: "Are we still on for the meeting?" },
-      image: "https://res.cloudinary.com/dnfc9g33c/image/upload/v1730443621/bob_m1bra7.jpg",
-    },
-  ];
+ 
   
-  const ConversationList = ({onConversationSelect , chatId, setChatId}) => {
+  const ConversationList = ({onConversationSelect , chatId, setChatId , chatlist , setchatlist }) => {
+    
     const [tabValue, setTabValue] = useState();
     const handleTabChange = (event, newValue) => {
       setTabValue(newValue);
@@ -188,8 +176,8 @@ import {
           </TabPanel> */}
           <TabPanel style={{ padding: 0 }} >
             <List sx={{ fontFamily: "var(--main-font-family)", width: "100%", maxWidth: { xl: 360 }, bgcolor: "background.paper" }}>
-              {dummyConversations.map((conversation) => (
-                <ConversationCard key={conversation.ChatConversation.id} conversation={conversation} onConversationClick={handleConversationClick} chatId={chatId} setChatId={setChatId} />
+              {chatlist.map((conversation) => (
+                <ConversationCard key={conversation.ChatConversation.id} conversation={conversation} onConversationClick={handleConversationClick} chatId={chatId} setChatId={setChatId} chatlist={chatlist} setchatlist={setchatlist} />
               ))}
             </List>
           </TabPanel>
