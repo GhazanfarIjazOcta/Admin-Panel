@@ -20,7 +20,7 @@ function createData(
   Signal_Strength,
   Location,
   Last_Active,
-  Status
+  Status,
 ) {
   return {
     Device_Id,
@@ -46,7 +46,7 @@ const rows = [
     "Good",
     "New York, NY",
     "2024-07-22 10:00",
-    "Active"
+    "Active",
   ),
   createData(
     "002",
@@ -58,7 +58,7 @@ const rows = [
     "Good",
     "Los Angeles, CA",
     "2024-07-22 10:00",
-    "Active"
+    "Active",
   ),
   createData(
     "003",
@@ -70,7 +70,7 @@ const rows = [
     "Poor",
     "Chicago, IL",
     "2024-07-22 10:00",
-    "Inactive"
+    "Inactive",
   ),
 ];
 
@@ -340,8 +340,8 @@ export default function DeviceManagmentTableContent() {
                         row.Signal_Strength == "Good"
                           ? "#28A745"
                           : row.Signal_Strength == "Poor"
-                          ? "#D12E34"
-                          : "black",
+                            ? "#D12E34"
+                            : "black",
                     }}
                     fontFamily={"Inter"}
                   >

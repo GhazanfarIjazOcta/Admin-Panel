@@ -14,7 +14,9 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  useMediaQuery
+  useMediaQuery,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import User from "../../../assets/Card/user.png";
@@ -25,15 +27,45 @@ import CrossIcon from "../../../assets/Table/CrossIcon.png";
 import cloudLogo from "../../../assets/Table/cloudLogo.png";
 import { useNavigate } from "react-router-dom";
 
+import { useGetTripManagementDashboardQuery } from "../../../Api/apiSlice";
+
 export default function DashboardTableHeader({
   text,
   searchText,
   buttonText,
   trip,
   exportIcon,
-  icon
+  icon,
+  setSearch,
+  search,
+  // serRole,
+  // role,
+  status,
+  setStatus
 }) {
+
+  
   const isMobile = useMediaQuery("(max-width:600px)");
+
+
+  const { data, error, isLoading } = useGetTripManagementDashboardQuery();
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value); // Update the search state
+  };
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value); // Update the status state
+  };
+
+
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
+
+  const { trips, activeTrips, delayedTrips, upcomingTrips } = data || {};
+  console.log("here is the trip data " , data)
+
+
 
   return (
     <Box height={"100%"} width={"100%"}>
@@ -46,7 +78,7 @@ export default function DashboardTableHeader({
           // backgroundColor: "red",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-evenly"
+          justifyContent: "space-evenly",
           // paddingTop: "8px",
         }}
       >
@@ -66,7 +98,7 @@ export default function DashboardTableHeader({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    borderRadius: "2px"
+                    borderRadius: "2px",
                   }}
                 >
                   <img
@@ -83,11 +115,11 @@ export default function DashboardTableHeader({
                       lg: "14px",
                       md: "12px",
                       sm: "12px",
-                      xs: "14px"
+                      xs: "14px",
                     },
                     color: "#5A607F",
                     fontWeight: 400,
-                    fontFamily: "Inter, sans-serif"
+                    fontFamily: "Inter, sans-serif",
                   }}
                 >
                   {text}
@@ -104,7 +136,7 @@ export default function DashboardTableHeader({
                         width: 317,
                         height: 46,
                         boxShadow: "none",
-                        border: "1px solid #E0E0E0"
+                        border: "1px solid #E0E0E0",
                       }}
                     >
                       <Stack
@@ -118,7 +150,7 @@ export default function DashboardTableHeader({
                             fontSize: "16px",
                             color: "#5A607F",
                             fontWeight: 500,
-                            fontFamily: "Inter, sans-serif"
+                            fontFamily: "Inter, sans-serif",
                           }}
                         >
                           Total Trips
@@ -128,10 +160,10 @@ export default function DashboardTableHeader({
                             fontSize: "24px",
                             color: "#14181F",
                             fontWeight: 500,
-                            fontFamily: "Poppins, sans-serif"
+                            fontFamily: "Poppins, sans-serif",
                           }}
                         >
-                          212
+                          {trips.count}
                         </Typography>
                       </Stack>
 
@@ -150,7 +182,7 @@ export default function DashboardTableHeader({
                             fontSize: "16px",
                             color: "#5A607F",
                             fontWeight: 500,
-                            fontFamily: "Inter, sans-serif"
+                            fontFamily: "Inter, sans-serif",
                           }}
                         >
                           Active
@@ -160,10 +192,10 @@ export default function DashboardTableHeader({
                             fontSize: "24px",
                             color: "#14181F",
                             fontWeight: 500,
-                            fontFamily: "Poppins, sans-serif"
+                            fontFamily: "Poppins, sans-serif",
                           }}
                         >
-                          210
+                          {activeTrips.count}
                         </Typography>
                       </Stack>
                     </Paper>
@@ -181,6 +213,8 @@ export default function DashboardTableHeader({
                     placeholder={`Search ${searchText} ,ID`}
                     variant="outlined"
                     size="small"
+                    value={search} // Bind value to state
+                    onChange={handleSearchChange} // Update state on change
                     InputProps={{
                       startAdornment: (
                         <InputAdornment
@@ -191,7 +225,7 @@ export default function DashboardTableHeader({
                             <SearchIcon fontSize="small" />
                           </IconButton>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                     sx={{
                       "& .MuiInputBase-root": {
@@ -200,25 +234,27 @@ export default function DashboardTableHeader({
                           sm: "38px",
                           md: "32px",
                           lg: "32px",
-                          xl: "38px"
+                          xl: "38px",
                         }, // Adjust the height as needed
                         fontSize: "12px",
                         width: {
                           lg: "200px",
                           md: "180px",
-                          xs: "180px"
+                          xs: "180px",
                         }, // Responsive width
-                        border: "1px solid #E2E8F0"
-                      }
+                        border: "1px solid #E2E8F0",
+                      },
                     }}
                   />
                 </Box>
 
-                <Box>
+                {/* <Box>
                   <TextField
                     placeholder="Status"
                     variant="outlined"
                     size="small"
+                    value={status}
+                    onChange={handleStatusChange} // Update state on change
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position="end" sx={{ marginRight: 0 }}>
@@ -238,7 +274,7 @@ export default function DashboardTableHeader({
                             }
                           </IconButton>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                     sx={{
                       "& .MuiInputBase-root": {
@@ -247,21 +283,69 @@ export default function DashboardTableHeader({
                           sm: "38px",
                           md: "32px",
                           lg: "32px",
-                          xl: "38px"
+                          xl: "38px",
                         }, // Adjust the height as needed
                         fontSize: "12px",
                         width: {
                           md: "80px",
                           md: "100px",
-                          xs: "120px"
+                          xs: "120px",
                         }, // Responsive width
                         fontSize: "12px",
-                        boxShadow: "none"
+                        boxShadow: "none",
                         // Responsive width
-                      }
+                      },
                     }}
                   />
-                </Box>
+                </Box> */}
+             
+
+<Box>
+  <Select
+    displayEmpty
+    variant="outlined"
+    size="small"
+    value={status}
+    onChange={handleStatusChange}  // Update state on change
+    renderValue={(selected) => selected || "Status"} // Placeholder text
+    sx={{
+      "& .MuiInputBase-root": {
+        height: {
+          xs: "38px",
+          sm: "38px",
+          md: "32px",
+          lg: "32px",
+          xl: "38px",
+        },
+        fontSize: "12px",
+        width: {
+          md: "100px",
+          xs: "120px",
+        },
+        boxShadow: "none",
+      },
+    }}
+    // endAdornment={
+    //   <InputAdornment position="end" sx={{ marginRight: 0 }}>
+    //     <IconButton sx={{ padding: 0 }}>
+    //       <Box
+    //         height="14px"
+    //         width="20px"
+    //         sx={{ display: "flex", alignItems: "center" }}
+    //       >
+    //         <img src={Arrowdown} width="100%" height="100%" />
+    //       </Box>
+    //     </IconButton>
+    //   </InputAdornment>
+    // }
+  >
+    <MenuItem value="active">Active</MenuItem>
+    <MenuItem value="delayed">Delayed</MenuItem>
+    <MenuItem value="upcoming">Upcoming</MenuItem>
+    <MenuItem value="">All Trips</MenuItem>
+  </Select>
+</Box>
+
                 <Box>
                   <TextField
                     placeholder="7/6/2024 - 5/8-2024"
@@ -286,7 +370,7 @@ export default function DashboardTableHeader({
                             }
                           </IconButton>
                         </InputAdornment>
-                      )
+                      ),
                     }}
                     sx={{
                       "& .MuiInputBase-root": {
@@ -295,17 +379,17 @@ export default function DashboardTableHeader({
                           sm: "38px",
                           md: "32px",
                           lg: "32px",
-                          xl: "38px"
+                          xl: "38px",
                         }, // Adjust the height as needed
                         fontSize: "12px",
                         width: {
                           md: "130px",
                           md: "150px",
-                          xs: "180px"
+                          xs: "180px",
                         }, // Responsive width
                         fontSize: "12px",
-                        boxShadow: "none"
-                      }
+                        boxShadow: "none",
+                      },
                     }}
                   />
                 </Box>
@@ -363,16 +447,16 @@ export default function DashboardTableHeader({
                         sm: "400px",
                         md: "400px",
                         lg: "420px",
-                        xl: "420px"
+                        xl: "420px",
                       },
                       height: {
                         sm: "42px",
                         md: "30px",
                         lg: "35px",
-                        xl: "42px"
+                        xl: "42px",
                       },
                       boxShadow: "none",
-                      border: "1px solid #E0E0E0"
+                      border: "1px solid #E0E0E0",
                     }}
                   >
                     <Stack
@@ -387,7 +471,7 @@ export default function DashboardTableHeader({
                           fontSize: "16px",
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif"
+                          fontFamily: "Inter, sans-serif",
                         }}
                       >
                         Total Trips
@@ -398,14 +482,14 @@ export default function DashboardTableHeader({
                             sm: "20px",
                             md: "18px",
                             lg: "21px",
-                            xl: "24px"
+                            xl: "24px",
                           },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif"
+                          fontFamily: "Poppins, sans-serif",
                         }}
                       >
-                        212
+                        {trips.count}
                       </Typography>
                     </Stack>
 
@@ -425,7 +509,7 @@ export default function DashboardTableHeader({
                           fontSize: "16px",
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif"
+                          fontFamily: "Inter, sans-serif",
                         }}
                       >
                         Active
@@ -436,14 +520,14 @@ export default function DashboardTableHeader({
                             sm: "20px",
                             md: "18px",
                             lg: "21px",
-                            xl: "24px"
+                            xl: "24px",
                           },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif"
+                          fontFamily: "Poppins, sans-serif",
                         }}
                       >
-                        210
+                       {activeTrips.count}
                       </Typography>
                     </Stack>
                     <Divider
@@ -461,10 +545,10 @@ export default function DashboardTableHeader({
                           fontSize: "16px",
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif"
+                          fontFamily: "Inter, sans-serif",
                         }}
                       >
-                        --
+                        Upcoming
                       </Box>
                       <Typography
                         sx={{
@@ -473,14 +557,14 @@ export default function DashboardTableHeader({
                             sm: "10px", // Small screens
                             md: "16px", // Medium screens
                             lg: "20px", // Large screens
-                            xl: "24px" // Extra large screens
+                            xl: "24px", // Extra large screens
                           },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif"
+                          fontFamily: "Poppins, sans-serif",
                         }}
                       >
-                        --
+                        {upcomingTrips.count}
                       </Typography>
                     </Stack>
                   </Paper>
@@ -496,7 +580,7 @@ export default function DashboardTableHeader({
                     sm: "42px",
                     md: "30px",
                     lg: "35px",
-                    xl: "42px"
+                    xl: "42px",
                   },
                   backgroundColor: "white",
                   color: "#344054",
@@ -509,8 +593,8 @@ export default function DashboardTableHeader({
                   border: "1px solid #D0D5DD",
                   gap: "8px", // spacing between icon and text
                   "&:hover": {
-                    backgroundColor: "white"
-                  }
+                    backgroundColor: "white",
+                  },
                 }}
               >
                 <img src={cloudLogo} width={"20px"} height={"20px"} />
@@ -531,35 +615,39 @@ export default function DashboardTableHeader({
                   fontSize: "14px",
                   color: "#5A607F",
                   fontWeight: 400,
-                  fontFamily: "Inter, sans-serif"
+                  fontFamily: "Inter, sans-serif",
                 }}
               >
-                 <Stack direction={"row"} alignItems={"center"} gap={2}>
-                <Box
-                  sx={{
-                    width: "44%",
-                    height: "40px",
-                    backgroundColor: "#FFF4F2",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: "2px",
-                  }}
-                >
-                  <img src={icon ? icon : User} height={"13px"} width={"20px"} />
-                </Box>
+                <Stack direction={"row"} alignItems={"center"} gap={2}>
+                  <Box
+                    sx={{
+                      width: "44%",
+                      height: "40px",
+                      backgroundColor: "#FFF4F2",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: "2px",
+                    }}
+                  >
+                    <img
+                      src={icon ? icon : User}
+                      height={"13px"}
+                      width={"20px"}
+                    />
+                  </Box>
 
-                <Typography
-                  sx={{
-                    fontSize: "14px",
-                    color: "#5A607F",
-                    fontWeight: 400,
-                    fontFamily: "Inter, sans-serif",
-                  }}
-                >
-                  {text}
-                </Typography>
-              </Stack>
+                  <Typography
+                    sx={{
+                      fontSize: "14px",
+                      color: "#5A607F",
+                      fontWeight: 400,
+                      fontFamily: "Inter, sans-serif",
+                    }}
+                  >
+                    {text}
+                  </Typography>
+                </Stack>
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
@@ -578,10 +666,10 @@ export default function DashboardTableHeader({
                             display: "flex",
                             alignItems: "center",
                             width: { xs: "100%", sm: "317px" }, // Full width on mobile, fixed width on larger screens
-                            height: 76,
+                            height: 96,
                             boxShadow: "none",
                             border: "1px solid #E0E0E0",
-                            overflow: "hidden" // Prevent overflow
+                            overflow: "hidden", // Prevent overflow
                           }}
                         >
                           <Stack
@@ -596,7 +684,7 @@ export default function DashboardTableHeader({
                                 fontSize: { xs: "14px", sm: "16px" }, // Adjust font size for mobile
                                 color: "#5A607F",
                                 fontWeight: 500,
-                                fontFamily: "Inter, sans-serif"
+                                fontFamily: "Inter, sans-serif",
                               }}
                             >
                               Total Trips
@@ -606,10 +694,10 @@ export default function DashboardTableHeader({
                                 fontSize: { xs: "20px", sm: "24px" }, // Adjust font size for mobile
                                 color: "#14181F",
                                 fontWeight: 500,
-                                fontFamily: "Poppins, sans-serif"
+                                fontFamily: "Poppins, sans-serif",
                               }}
                             >
-                              212
+                               {trips.count}
                             </Typography>
                           </Stack>
 
@@ -629,20 +717,52 @@ export default function DashboardTableHeader({
                                 fontSize: { xs: "14px", sm: "16px" }, // Adjust font size for mobile
                                 color: "#5A607F",
                                 fontWeight: 500,
-                                fontFamily: "Inter, sans-serif"
+                                fontFamily: "Inter, sans-serif",
                               }}
                             >
-                              Active
+                              Total Actives
                             </Box>
                             <Typography
                               sx={{
                                 fontSize: { xs: "20px", sm: "24px" }, // Adjust font size for mobile
                                 color: "#14181F",
                                 fontWeight: 500,
-                                fontFamily: "Poppins, sans-serif"
+                                fontFamily: "Poppins, sans-serif",
                               }}
                             >
-                              210
+                              {activeTrips.count}
+                            </Typography>
+                          </Stack>
+                          <Divider
+                            sx={{ height: 58, m: 0.9 }}
+                            orientation="vertical"
+                          />
+                          <Stack
+                            direction={"row"}
+                            p={2}
+                            gap={2}
+                            alignItems={"center"}
+                            sx={{ flexWrap: "wrap" }}
+                          >
+                            <Box
+                              sx={{
+                                fontSize: { xs: "14px", sm: "16px" }, // Adjust font size for mobile
+                                color: "#5A607F",
+                                fontWeight: 500,
+                                fontFamily: "Inter, sans-serif",
+                              }}
+                            >
+                              Upcoming Trips
+                            </Box>
+                            <Typography
+                              sx={{
+                                fontSize: { xs: "20px", sm: "24px" }, // Adjust font size for mobile
+                                color: "#14181F",
+                                fontWeight: 500,
+                                fontFamily: "Poppins, sans-serif",
+                              }}
+                            >
+                              {upcomingTrips.count}
                             </Typography>
                           </Stack>
                         </Paper>
@@ -654,12 +774,16 @@ export default function DashboardTableHeader({
                   placeholder={`Search ${searchText} ,ID`}
                   variant="outlined"
                   size="small"
+                  value={search} // Bind value to state
+                  onChange={handleSearchChange} // Update state on change
                 />
                 {/* <TextField placeholder="Role" variant="outlined" size="small" /> */}
                 <TextField
                   placeholder="Status"
                   variant="outlined"
                   size="small"
+                  value={status}
+                  onChange={handleStatusChange} // Update state on change
                 />
                 <TextField
                   placeholder="7/6/2024 - 5/8/2024"

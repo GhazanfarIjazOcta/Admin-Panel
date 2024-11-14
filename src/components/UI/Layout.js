@@ -1,7 +1,9 @@
+import { Box, Typography, Badge, styled } from '@mui/material';
+
 export const firstContainer = {
   display: { xmd: "flex", xs: "none" },
   flexDirection: "column",
-  alignItems: "center"
+  alignItems: "center",
   // minWidth: "200px",
 };
 
@@ -10,7 +12,7 @@ export const logoStyle = {
   height: "12vh",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 };
 export const listContainer = {
   // marginTop: "7%",
@@ -22,16 +24,16 @@ export const listContainer = {
   flexDirection: "column",
   justifyContent: "space-between",
   alignItems: "center",
-  minWidth: "180px"
+  minWidth: "180px",
 };
 export const listStyle = {
-  width: "90%"
+  width: "90%",
 };
 export const listItemStyles = {
   color: "white",
   padding: "8px",
   marginBottom: "4px",
-  cursor: "pointer"
+  cursor: "pointer",
 };
 export const listItemIconStyle = { color: "white", minWidth: "30px" };
 export const logoutButtonContainer = {
@@ -39,14 +41,14 @@ export const logoutButtonContainer = {
   // marginBottom: "5px",
   display: "flex",
   alignItems: "center",
-  justifyContent: "center"
+  justifyContent: "center",
 };
 export const lineStyle = {
   width: "80%",
   height: "2px",
   backgroundColor: "#3D4149",
   color: "#3D4149",
-  marginBottom: "0.4em" // Space between the line and the button
+  marginBottom: "0.4em", // Space between the line and the button
 };
 export const logoutButtonStyle = {
   width: "80%",
@@ -54,8 +56,8 @@ export const logoutButtonStyle = {
   backgroundColor: "white",
   color: "black",
   "&:hover": {
-    backgroundColor: "lightgray"
-  }
+    backgroundColor: "lightgray",
+  },
 };
 
 export const navbarContainerStyle = {
@@ -66,24 +68,24 @@ export const navbarContainerStyle = {
   backgroundColor: "white",
   padding: { xs: "16px 16px", sm: "24px" }, // Responsive padding
   flexDirection: { xs: "column", sm: "row" }, // Column direction on small screens
-  gap: 2
+  gap: 2,
 };
 
 export const leftContentStyle = {
   display: "flex",
   gap: { xs: "16px", sm: "30px" },
   flexDirection: { xs: "column", sm: "row" },
-  alignItems: { xs: "flex-start", sm: "center" }
+  alignItems: { xs: "flex-start", sm: "center" },
 };
 
 export const textFieldContainerStyle = {
-  backgroundColor: "white"
+  backgroundColor: "white",
 };
 export const rightContentStyle = {
   display: "flex",
   gap: { xs: "10px", sm: "20px" },
   flexDirection: { xs: "column", sm: "row" },
-  alignItems: { xs: "flex-start", sm: "center" }
+  alignItems: { xs: "flex-start", sm: "center" },
 };
 
 export const messageBoxStyle = {
@@ -93,13 +95,18 @@ export const messageBoxStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "0.7em"
+  gap: "0.7em",
 };
 
 export const userInfoStyle = {
   display: "flex",
   width: "10rem",
   height: "2.5em",
-  gap: "0.9rem"
+  gap: "0.9rem",
 };
 export const userNameStyle = { display: "flex", flexDirection: "column" };
+
+// display: 'flex',
+//   alignItems: 'center',
+//   gap: '0.5rem',
+

@@ -48,29 +48,31 @@ export const addUserStyles = {
     // height: "86%",
     // width: "100%",
     // marginTop: "1%",
-    flexGrow: 1 , position: 'absolute',
-      width: "82%", 
-      mt: { xs: 13, sm:12 , md: 12 , lg: 12 },
-      // Adjust padding based on the screen size
-      px: { xs: 2, sm:  2 ,md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
-      ml: { xs: 0, sm: 0 ,md: 0 , lg: 0 , xl: 0 }, // Leave space for the sidebar on larger screens
-      overflow: "none", // Prevent overflowing horizontally and vertically
+    flexGrow: 1,
+    position: "absolute",
+    width: "82%",
+    mt: { xs: 13, sm: 12, md: 12, lg: 12 },
+    // Adjust padding based on the screen size
+    px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
+    ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
+    overflow: "none", // Prevent overflowing horizontally and vertically
 
-      position: "absolute",
-      mt: { xs: 13, sm: 12, md: 12, lg: 12 },
-      // Adjust padding based on the screen size
-      px: { xs: 0, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
-      ml: { xs: 2, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
-      overflow: "none", // Prevent overflowing horizontally and vertically
-      width: {lg:"82%" , xs:"80%"}, // Ensure it takes full width
-      // maxWidth: "1200px", // Set a max width as needed
+    position: "absolute",
+    mt: { xs: 13, sm: 12, md: 12, lg: 12 },
+    // Adjust padding based on the screen size
+    px: { xs: 0, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
+    ml: { xs: 2, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
+    overflow: "none", // Prevent overflowing horizontally and vertically
+    width: { lg: "82%", xs: "80%" }, // Ensure it takes full width
+    // maxWidth: "1200px", // Set a max width as needed
+    py: 1,
   },
   container: {
     height: "95%",
     width: "90%",
-    padding: "2"
+    padding: "2",
   },
-  textFieldStyles: { width: {lg:"36%" ,  xs:"90%"}, marginLeft: "5px" },
+  textFieldStyles: { width: { lg: "100%", xs: "90%" }, marginLeft: "5px" },
   buttonStyles: {
     marginRight: "opx",
     marginLeft: "0px",
@@ -102,7 +104,7 @@ export const addVehicleStyles = {
     px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: {lg:"82%" , xs:"79%"}, // Ensure it takes full width
+    width: { lg: "82%", xs: "79%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {
@@ -164,7 +166,7 @@ export const addDeviceStyles = {
     px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: {lg:"82%" , xs:"79%"}, // Ensure it takes full width
+    width: { lg: "82%", xs: "79%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {
@@ -172,7 +174,7 @@ export const addDeviceStyles = {
     width: "95%",
   },
   label: { fontWeight: 500 },
-  textField: { width: {lg:"36%" ,  xs:"90%"}, marginLeft: "5px" },
+  textField: { width: { lg: "36%", xs: "90%" }, marginLeft: "5px" },
   button: {
     marginRight: "opx",
     marginLeft: "0px",
@@ -204,7 +206,7 @@ export const addDriverStyles = {
     px: { xs: 1, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 1, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: {lg:"82%" , xs:"79%"}, // Ensure it takes full width
+    width: { lg: "82%", xs: "79%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {
@@ -212,7 +214,7 @@ export const addDriverStyles = {
     width: "95%",
   },
   label: { fontWeight: 500 },
-  textField: { width: {lg:"36%" ,  xs:"90%"}, marginLeft: "5px" },
+  textField: { width: { lg: "36%", xs: "90%" }, marginLeft: "5px" },
   button: {
     marginRight: "opx",
     marginLeft: "0px",
@@ -244,7 +246,7 @@ export const addTripStyles = {
     px: { xs: 1, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 1, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: {lg:"82%" , xs:"79%"}, // Ensure it takes full width
+    width: { lg: "82%", xs: "79%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {
@@ -252,7 +254,7 @@ export const addTripStyles = {
     width: "95%",
   },
   label: { fontWeight: 500 },
-  textField: { width: {lg:"36%" ,  xs:"90%"}, marginLeft: "5px" },
+  textField: { width: { lg: "36%", xs: "90%" }, marginLeft: "5px" },
   button: {
     marginRight: "opx",
     marginLeft: "0px",
@@ -282,7 +284,6 @@ export const maintenanceSchedulingStyles = {
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "2px",
-    
   },
   mainenanceText: {
     fontSize: "16px",
@@ -312,11 +313,11 @@ export const maintenanceSchedulingStyles = {
 };
 
 export const historyStyles = {
-  mainContainer: { height: "77%" ,  width: {lg:"100%" , xs:"auto"} },
+  mainContainer: { height: "77%", width: { lg: "100%", xs: "auto" } },
   container: { width: "100%", height: "100%" },
   paperContainer: { boxShadow: "none", width: "100%", height: "100%" },
   boxContainer: {
-    width: {lg:"310px" , xs:"auto"},
+    width: { lg: "310px", xs: "auto" },
     height: "128px",
     backgroundColor: "#F4EFFF",
     display: "flex",
@@ -339,7 +340,7 @@ export const historyStyles = {
     fontSize: "10px",
   },
   secondBox: {
-    width: {lg:"310px" , xs:"auto"},
+    width: { lg: "310px", xs: "auto" },
     height: "128px",
     backgroundColor: "#D4F2E8",
     display: "flex",
@@ -417,38 +418,35 @@ export const settingStyles = {
     // boxShadow: "none",
     height: "84%",
     marginTop: "6rem",
-    flexGrow: 1, position: 'absolute',
+    flexGrow: 1,
+    position: "absolute",
     // mt: { xs: 6, sm: 6, md: 6, lg: 6 },
     overflowY: "none",
     // height: "85vh",
     // background: "#F4F7F7",
     // gap: "0.5rem",
-    width: { lg: "82%", xs: "100%" },// Prevent overflowing horizontally and vertically
-
+    width: { lg: "82%", xs: "100%" }, // Prevent overflowing horizontally and vertically
   },
-  header: { height: "100%", width: "100%" ,  overflowY: "auto", },
-  
+  header: { height: "100%", width: "100%", overflowY: "auto" },
+
   profilePaper: {
     boxShadow: "none",
     height: "88%",
-    width: { lg: "100%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    width: { lg: "100%", xs: "100%" }, // Prevent overflowing horizontally and vertically
     overflowY: "auto",
-    mb: 2
+    mb: 2,
   },
   profileContainer: {
-
     height: "95%",
     width: "95%",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    
-    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
-    
-    
+
+    width: { lg: "95%", xs: "100%" }, // Prevent overflowing horizontally and vertically
   },
-  profileTextField: { width: {lg:"35%" , xs:"100%"} , marginLeft: "5px" },
-  profileLabel: { fontWeight: {lg:500 , xs:200} },
+  profileTextField: { width: { lg: "35%", xs: "100%" }, marginLeft: "5px" },
+  profileLabel: { fontWeight: { lg: 500, xs: 200 } },
   addPhoto: {
     width: "110px",
     height: "44px",
@@ -463,13 +461,11 @@ export const settingStyles = {
     flexDirection: "row",
     justifyContent: "flex-end",
     gap: "24px",
-   
-          
-      paddingLeft:  {
-        xs: '40px', // Padding for extra-small devices
-        lg: '40px', // Padding for large devices
-       }
-  
+
+    paddingLeft: {
+      xs: "40px", // Padding for extra-small devices
+      lg: "40px", // Padding for large devices
+    },
   },
   resetButtomn: {
     marginRight: "opx",
@@ -508,10 +504,9 @@ export const settingStyles = {
   changePasswordPaper: {
     boxShadow: "none",
     height: "88%",
-    width: { lg: "100%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    width: { lg: "100%", xs: "100%" }, // Prevent overflowing horizontally and vertically
     overflowY: "auto",
-    mb: 2
-    
+    mb: 2,
   },
   changePasswordContainer: {
     height: "95%",
@@ -519,19 +514,18 @@ export const settingStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    
-    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
+
+    width: { lg: "95%", xs: "100%" }, // Prevent overflowing horizontally and vertically
   },
-  textFieldBox: { width: {lg:"35%" , xs:"100%"} },
+  textFieldBox: { width: { lg: "35%", xs: "100%" } },
   contactUsPaper: {
     boxShadow: "none",
     height: "100%",
     width: "100%",
 
- 
     height: "88%",
-   
-    mb: 2
+
+    mb: 2,
   },
   contactUsBox: {
     height: "95%",
@@ -540,29 +534,25 @@ export const settingStyles = {
     flexDirection: "column",
     justifyContent: "space-between",
 
- 
-    
-    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    width: { lg: "95%", xs: "100%" }, // Prevent overflowing horizontally and vertically
   },
-  contactUsContainer: { 
-    width: "100%", 
-    height: "90%", 
+  contactUsContainer: {
+    width: "100%",
+    height: "90%",
     display: "flex",
     flexDirection: {
       xs: "column", // Stack vertically for mobile view
       lg: "row", // Side by side for large screens
-    }, 
-    gap: { xs: 0, lg: 0 } // Add spacing between elements in mobile view
+    },
+    gap: { xs: 0, lg: 0 }, // Add spacing between elements in mobile view
   },
-  contactUsBoxWidth: { 
-    width: { 
+  contactUsBoxWidth: {
+    width: {
       xs: "70%", // Full width in mobile view
-      lg: "50%" // Half width in large screens
+      lg: "50%", // Half width in large screens
     },
 
-    
-    
-    direction: "row"
+    direction: "row",
   },
   conatactUsLeftLabel: {
     fontSize: "36px",
@@ -577,17 +567,18 @@ export const settingStyles = {
     fontFamily: "Inter, sans-serif",
   },
   conatactUsTextField: {
-    width: {lg:"80%" , xs:"120%"},
-     marginLeft: "5px", 
-     marginTop: "4px" },
+    width: { lg: "80%", xs: "120%" },
+    marginLeft: "5px",
+    marginTop: "4px",
+  },
   conatactUsTextFieldMessage: {
-    width: {lg:"80%" , xs:"120%"},
+    width: { lg: "80%", xs: "120%" },
     marginLeft: "5px",
     height: "100%",
     marginTop: "4px",
   },
   contactUsContactBox: {
-    width: {lg:"196px" , xs: "320%"},
+    width: { lg: "196px", xs: "320%" },
     height: "126px",
     display: "flex",
     flexDirection: "column",
@@ -611,15 +602,15 @@ export const settingStyles = {
     // display: "flex",
     // flexDirection: "row",
     // justifyContent: "flex-start",
-   
-    ml: {lg:120 , xs:2}
+
+    ml: { lg: 120, xs: 2 },
   },
   contactUsButton: {
     // marginRight: "opx",
     // marginLeft: "70%",
     // paddingleft: "200px",
     marginBottom: "20px",
-    width: {lg:"247px", xs:"500%"},
+    width: { lg: "247px", xs: "500%" },
     height: "53px",
     backgroundColor: "#F38712",
     color: "white",
@@ -636,10 +627,9 @@ export const settingStyles = {
   policyPaper: {
     boxShadow: "none",
     height: "88%",
-    width: { lg: "100%", xs: "100%" },// Prevent overflowing horizontally and vertically
+    width: { lg: "100%", xs: "100%" }, // Prevent overflowing horizontally and vertically
     overflowY: "auto",
-    mb: 2
-  
+    mb: 2,
   },
   policyBox: {
     height: "95%",
@@ -647,11 +637,8 @@ export const settingStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    
-    width: { lg: "95%", xs: "100%" },// Prevent overflowing horizontally and vertically
 
- 
-  
+    width: { lg: "95%", xs: "100%" }, // Prevent overflowing horizontally and vertically
   },
   policyEdit: { display: "flex", justifyContent: "flex-end" },
   policyButtonContainer: {
@@ -659,10 +646,10 @@ export const settingStyles = {
     flexDirection: "row",
     justifyContent: "flex-end",
     gap: "24px",
-    paddingLeft:  {
-      xs: '40px', // Padding for extra-small devices
-      lg: '40px', // Padding for large devices
-     }
+    paddingLeft: {
+      xs: "40px", // Padding for extra-small devices
+      lg: "40px", // Padding for large devices
+    },
   },
   policyDisagree: {
     marginRight: "opx",
@@ -711,4 +698,5 @@ export const settingStyles = {
     justifyContent: "space-between",
   },
 };
+
 

@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import ArrowDown from "../../../assets/Table/arrow-down.png";
 import { Box, Stack, Typography } from "@mui/material";
 
-
 function createData(
   Vehicle,
   Driver_Name,
@@ -21,7 +20,7 @@ function createData(
   Trip_Duration,
   Distance,
   Cost,
-  Status
+  Status,
 ) {
   return {
     Vehicle,
@@ -50,7 +49,7 @@ const rows = [
     "0:04:55",
     "120",
     "$4554",
-    "Active"
+    "Active",
   ),
   createData(
     "Vehicale Name B",
@@ -63,7 +62,7 @@ const rows = [
     "0:04:55",
     "34",
     "$4554",
-    "Inactive"
+    "Inactive",
   ),
   createData(
     "Vehicale Name C",
@@ -76,7 +75,7 @@ const rows = [
     "0:04:55",
     "233",
     "$4554",
-    "Active"
+    "Active",
   ),
 ];
 
@@ -91,7 +90,7 @@ export default function FuelManagmentTableContent() {
         height: "52%",
         border: "1px ",
         boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-        mb:1
+        mb: 1,
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

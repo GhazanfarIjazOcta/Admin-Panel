@@ -1,7 +1,6 @@
 import { Box, Button, Divider, Stack } from "@mui/material";
 import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
-
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Ukeylogo from "../../../assets/Layout/Ukeylogo-removebg-preview.png";
 import DashboardLogo from "../../../assets/Layout/post.png";
 import AutoAwesomeMosaicOutlinedIcon from "@mui/icons-material/AutoAwesomeMosaicOutlined";
@@ -14,6 +13,7 @@ import MaintenanceLogo from "../../../assets/Layout/pajamas_issue-type-maintenan
 import FuelLogo from "../../../assets/Layout/lucide_fuel.png";
 import SettingLogo from "../../../assets/Layout/settings.png";
 import LogoutLogo from "../../../assets/Layout/Left_icon.png";
+import { useAuth } from "../../../Authentication/AuthContext";
 import {
   firstContainer,
   lineStyle,
@@ -23,11 +23,14 @@ import {
   listStyle,
   logoStyle,
   logoutButtonContainer,
-  logoutButtonStyle
+  logoutButtonStyle,
 } from "../../UI/Layout";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
+  const { userRole } = useAuth();
+  console.log("user role is actually on sidebar ", userRole);
+
   const navigate = useNavigate();
   const [selectedItem, setSelectedItem] = useState(0);
 
@@ -35,43 +38,32 @@ function Sidebar() {
     setSelectedItem(index);
     navigate(route);
   };
-  // useEffect(() => {
-  //   setSelectedItem(0);
-  //   navigate("dashboard");
-  // }, []);
-  // console.log("selected items", selectedItem);
 
   const listItems = [
     { text: "Dashboard", icon: DashboardLogo, route: "dashboardmain" },
     { text: "User Management", icon: UserLogo, route: "user-management" },
-    {
-      text: "Vehicle Management",
-      icon: VehicleLogo,
-      route: "vehicle-management"
-    },
-    {
-      text: "Device Management",
-      icon: DeviceLogo,
-      route: "device-management"
-    },
-    {
-      text: "Driver Management",
-      icon: DriverLogo,
-      route: "driver-management"
-    },
+    { text: "Vehicle Management", icon: VehicleLogo, route: "vehicle-management" },
+    { text: "Device Management", icon: DeviceLogo, route: "device-management" },
+    { text: "Driver Management", icon: DriverLogo, route: "driver-management" },
     { text: "Trip Management", icon: TripLogo, route: "trip-management" },
-    {
-      text: "Maintenance Scheduling",
-      icon: MaintenanceLogo,
-      route: "maintenance-scheduling"
-    },
+    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
     { text: "Fuel Management", icon: FuelLogo, route: "fuel-management" },
-    { text: "Setting", icon: SettingLogo, route: "setting" }
+    { text: "Setting", icon: SettingLogo, route: "setting" },
   ];
+
+  const customerlistitems = [
+    { text: "Dashboard", icon: DashboardLogo, route: "customerdashboardmain" },
+    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
+    { text: "Fuel Management", icon: FuelLogo, route: "customer-fuel-management" },
+    { text: "Setting", icon: SettingLogo, route: "customer-setting" }
+  ];
+
+  // Conditionally set the list items based on the userRole
+  const listToRender = userRole === "admin" ? listItems : customerlistitems;
+
   return (
     <Box
       flex={2}
-      // sx={{ backgroundColor: "red" }}
       display={{ xs: "none", lg: "flex" }}
       height={"100vh"}
       flexDirection={"column"}
@@ -81,28 +73,16 @@ function Sidebar() {
       <Box
         sx={{
           width: "16.5vw",
-          //   backgroundColor: "red",
-          position: "fixed", // Make the sidebar fixed
-          top: 0, // Align to the top of the viewport
-          left: 0, // Align to the left of the viewport
-          zIndex: 1000, // Ensure it stays above other elements
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 1000,
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          alignItems: "center"
+          alignItems: "center",
         }}
       >
-        {/* <Box
-          height={"10vh"}
-          minHeight={"70px"}
-          maxWidth={"197px"}
-          overflow={"hidden"}
-          maxHeight={"289px"}
-          display={"flex"}
-          justifyContent={"center"}
-        >
-          <img src={Ukeylogo} alt="logo" width="85%" height={"100%"} />
-        </Box> */}
         <Box
           sx={{
             width: "96%",
@@ -114,7 +94,7 @@ function Sidebar() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            alignItems: "center"
+            alignItems: "center",
           }}
           mt={2}
         >
@@ -123,16 +103,16 @@ function Sidebar() {
               src={Ukeylogo}
               alt="logo"
               style={{
-                width: { xl: "100%", lg: "80%", md: "70%" }, // The image will scale to 100% of the container's width
-                height: "auto", // The image will scale to 100% of the container's height
-                maxWidth: "100%", // Prevent overflow beyond the box
-                maxHeight: "100%", // Prevent overflow beyond the box
-                objectFit: "contain" // Maintain aspect ratio and prevent distortion
+                width: { xl: "100%", lg: "80%", md: "70%" },
+                height: "auto",
+                maxWidth: "100%",
+                maxHeight: "100%",
+                objectFit: "contain",
               }}
             />
             <Divider sx={{ backgroundColor: "#F38712" }} />
             <List>
-              {listItems.map((item, index) => (
+              {listToRender.map((item, index) => (
                 <ListItem
                   button
                   key={item.text}
@@ -143,8 +123,8 @@ function Sidebar() {
                       selectedItem === index ? "#F38712" : "transparent",
                     "&:hover": {
                       backgroundColor:
-                        selectedItem === index ? "#F38712" : "#3D4149"
-                    }
+                        selectedItem === index ? "#F38712" : "#3D4149",
+                    },
                   }}
                 >
                   <ListItemIcon sx={listItemIconStyle}>
@@ -152,8 +132,8 @@ function Sidebar() {
                       src={item.icon}
                       alt={item.text}
                       style={{
-                        width: "15px", // Set a smaller width for large screens
-                        height: "15px" // Set a smaller height for large screens
+                        width: "15px",
+                        height: "15px",
                       }}
                     />
                   </ListItemIcon>
@@ -164,7 +144,7 @@ function Sidebar() {
                       fontSize: { xl: "0.9rem", lg: "0.6rem", md: "0.5rem" },
                       fontFamily: "Poppins",
                       display: { xs: "block", lg: "block" },
-                      noWrap: false
+                      noWrap: false,
                     }}
                   />
                 </ListItem>
@@ -193,8 +173,8 @@ function Sidebar() {
                 marginBottom: "2rem",
                 color: "black",
                 "&:hover": {
-                  backgroundColor: "lightgray"
-                }
+                  backgroundColor: "lightgray",
+                },
               }}
               onClick={() => navigate("/login")}
             >

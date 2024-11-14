@@ -6,91 +6,84 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import ArrowDown from "../../assets/Table/arrow-down.png";
 import { Box, Stack, Typography } from "@mui/material";
-import Edit from "../../assets/Table/Edit.png";
-import Delete from "../../assets/Table/Delete.png";
-
+import Edit from "../../../assets/Table/Edit.png";
+import Delete from "../../../assets/Table/Delete.png";
 function createData(
-  TripID,
-  Vehicle,
-  Driver_Name,
-  Starting_Location,
-  Ending_Location,
-  Duration,
-  Distance,
-  Fuel_Consumption,
-  Cost,
-  Status
+  Device_Id,
+  DeviceName_Model,
+  Passcode,
+  Battery_Level,
+  Assaigned_vehicle,
+  Signal_Strength,
+  Location,
+  Last_Active,
+  Status,
 ) {
   return {
-    TripID,
-    Vehicle,
-    Driver_Name,
-    Starting_Location,
-    Ending_Location,
-    Duration,
-    Distance,
-    Fuel_Consumption,
-    Cost,
+    Device_Id,
+    DeviceName_Model,
+    Passcode,
+    Battery_Level,
+    Assaigned_vehicle,
+    Signal_Strength,
+    Location,
+    Last_Active,
     Status,
   };
 }
 
 const rows = [
   createData(
-    "T001",
-    "V001",
-    "Mike Johnson",
-    "A",
-    "B",
-    "0:04:55",
-    "120",
-    "4",
-    "$4554",
-    "Active"
+    "001",
+    "GPS Tracker A",
+    "1234Abcd@",
+    "85%",
+
+    "Vehicle 101",
+    "Good",
+    "New York, NY",
+    "2024-07-22 10:00",
+    "Active",
   ),
   createData(
-    "T002",
-    "V002",
-    "jhon Doe",
-    "C",
-    "D",
-    "0:04:55",
-    "34",
-    "3",
-    "$4554",
-    "Inactive"
+    "002",
+    "GPS Tracker B",
+    "1234Abcd@",
+    "60%",
+
+    "Vehicle 102",
+    "Good",
+    "Los Angeles, CA",
+    "2024-07-22 10:00",
+    "Active",
   ),
   createData(
-    "T003",
-    "V003",
-    "Sarah Brown",
-    "E",
-    "F",
-    "0:04:55",
-    "233",
-    "5",
-    "$4554",
-    "Active"
+    "003",
+    "GPS Tracker C",
+    "1234Abcd@",
+    "30%",
+
+    "Vehicle 103",
+    "Poor",
+    "Chicago, IL",
+    "2024-07-22 10:00",
+    "Inactive",
   ),
 ];
 
-export default function TripManagmentTableContent() {
+export default function DeviceManagmentTableContent() {
   return (
     <TableContainer
       component={Paper}
-      
       sx={{
         borderRadius: 0,
         elevation: 0,
         borderTop: "1px solid #EAECF0",
         height: "60%",
-        
       }}
-    
     >
-      <Table   sx={{ minWidth: 640 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead sx={{ backgroundColor: "#FCFCFD" }}>
           <TableRow>
             <TableCell align="right">
@@ -105,7 +98,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#667085" }}
                   fontFamily={"Inter"}
                 >
-                  Trip ID
+                  Device ID
                 </Typography>
               </Stack>
             </TableCell>
@@ -121,7 +114,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#667085" }}
                   fontFamily={"Inter"}
                 >
-                  Vehicle
+                  Device Name/Model
                 </Typography>
               </Stack>
             </TableCell>
@@ -137,7 +130,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#667085" }}
                   fontFamily={"Inter"}
                 >
-                  Driver Name
+                  Passcode
                 </Typography>
               </Stack>
             </TableCell>
@@ -153,7 +146,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#667085" }}
                   fontFamily={"Inter"}
                 >
-                  Starting Location
+                  Battery Level
                 </Typography>
               </Stack>
             </TableCell>
@@ -169,73 +162,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#667085" }}
                   fontFamily={"Inter"}
                 >
-                  Ending Location
-                </Typography>
-              </Stack>
-            </TableCell>
-            <TableCell align="start">
-              <Stack
-                direction={"row"}
-                gap={1}
-                sx={{ width: "100%", justifyContent: "start" }}
-              >
-                <Typography
-                  fontWeight={500}
-                  fontSize={"12px"}
-                  sx={{ color: "#667085" }}
-                  fontFamily={"Inter"}
-                >
-                  Duration
-                </Typography>
-                <img src={ArrowDown} height={"16px"} width={"16px"} />
-              </Stack>
-            </TableCell>
-            <TableCell align="start">
-              <Stack
-                direction={"row"}
-                gap={1}
-                sx={{ width: "100%", justifyContent: "start" }}
-              >
-                <Typography
-                  fontWeight={500}
-                  fontSize={"12px"}
-                  sx={{ color: "#667085" }}
-                  fontFamily={"Inter"}
-                >
-                  Distance (km)
-                </Typography>
-              </Stack>
-            </TableCell>
-            <TableCell align="start">
-              <Stack
-                direction={"row"}
-                gap={1}
-                sx={{ width: "100%", justifyContent: "start" }}
-              >
-                <Typography
-                  fontWeight={500}
-                  fontSize={"12px"}
-                  sx={{ color: "#667085" }}
-                  fontFamily={"Inter"}
-                >
-                  Fuel Consumption (L)
-                </Typography>
-              </Stack>
-            </TableCell>
-
-            <TableCell align="start">
-              <Stack
-                direction={"row"}
-                gap={1}
-                sx={{ width: "100%", justifyContent: "start" }}
-              >
-                <Typography
-                  fontWeight={500}
-                  fontSize={"12px"}
-                  sx={{ color: "#667085" }}
-                  fontFamily={"Inter"}
-                >
-                  Cost
+                  Assigned Vehicle
                 </Typography>
               </Stack>
             </TableCell>
@@ -251,9 +178,57 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#667085" }}
                   fontFamily={"Inter"}
                 >
+                  Signal Strength
+                </Typography>
+              </Stack>
+            </TableCell>
+            <TableCell align="center">
+              <Stack
+                direction={"row"}
+                gap={1}
+                sx={{ width: "100%", justifyContent: "center" }}
+              >
+                <Typography
+                  fontWeight={500}
+                  fontSize={"12px"}
+                  sx={{ color: "#667085" }}
+                  fontFamily={"Inter"}
+                >
+                  Location
+                </Typography>
+              </Stack>
+            </TableCell>
+            <TableCell align="start">
+              <Stack
+                direction={"row"}
+                gap={1}
+                sx={{ width: "100%", justifyContent: "start" }}
+              >
+                <Typography
+                  fontWeight={500}
+                  fontSize={"12px"}
+                  sx={{ color: "#667085" }}
+                  fontFamily={"Inter"}
+                >
+                  Last Active
+                </Typography>
+              </Stack>
+            </TableCell>
+
+            <TableCell align="center">
+              <Stack
+                direction={"row"}
+                gap={1}
+                sx={{ width: "100%", justifyContent: "center" }}
+              >
+                <Typography
+                  fontWeight={500}
+                  fontSize={"12px"}
+                  sx={{ color: "#667085" }}
+                  fontFamily={"Inter"}
+                >
                   Status
                 </Typography>
-                <img src={ArrowDown} height={"16px"} width={"16px"} />
               </Stack>
             </TableCell>
             <TableCell align="center">
@@ -277,7 +252,7 @@ export default function TripManagmentTableContent() {
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.TripID}
+              key={row.Device_Id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell
@@ -292,7 +267,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#3D4149" }}
                   fontFamily={"Inter"}
                 >
-                  {row.TripID}
+                  {row.Device_Id}
                 </Typography>
               </TableCell>
               <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
@@ -302,7 +277,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#3D4149" }}
                   fontFamily={"Inter"}
                 >
-                  {row.Vehicle}
+                  {row.DeviceName_Model}
                 </Typography>
               </TableCell>
               <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
@@ -312,7 +287,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#3D4149" }}
                   fontFamily={"Inter"}
                 >
-                  {row.Driver_Name}
+                  {row.Passcode}
                 </Typography>
               </TableCell>
               <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
@@ -322,7 +297,7 @@ export default function TripManagmentTableContent() {
                   sx={{ color: "#3D4149" }}
                   fontFamily={"Inter"}
                 >
-                  {row.Starting_Location}
+                  {row.Battery_Level}
                 </Typography>
               </TableCell>
               <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
@@ -341,17 +316,17 @@ export default function TripManagmentTableContent() {
                     sx={{ color: "#3D4149" }}
                     fontFamily={"Inter"}
                   >
-                    {row.Ending_Location}
+                    {row.Assaigned_vehicle}
                   </Typography>
                 </Stack>
               </TableCell>
-              <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
+              <TableCell align="center" sx={{ margin: "0px", padding: "15px" }}>
                 <Stack
                   direction={"row"}
                   gap={1}
                   sx={{
                     width: "100%",
-                    justifyContent: "start",
+                    justifyContent: "center",
                     alignItems: "center",
                   }}
                 >
@@ -363,12 +338,32 @@ export default function TripManagmentTableContent() {
                         row.Signal_Strength == "Good"
                           ? "#28A745"
                           : row.Signal_Strength == "Poor"
-                          ? "#D12E34"
-                          : "black",
+                            ? "#D12E34"
+                            : "black",
                     }}
                     fontFamily={"Inter"}
                   >
-                    {row.Duration}
+                    {row.Signal_Strength}
+                  </Typography>
+                </Stack>
+              </TableCell>
+              <TableCell align="center" sx={{ margin: "0px", padding: "15px" }}>
+                <Stack
+                  direction={"row"}
+                  gap={1}
+                  sx={{
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography
+                    fontWeight={400}
+                    fontSize={"14px"}
+                    sx={{ color: "#3D4149" }}
+                    fontFamily={"Inter"}
+                  >
+                    {row.Location}
                   </Typography>
                 </Stack>
               </TableCell>
@@ -388,47 +383,7 @@ export default function TripManagmentTableContent() {
                     sx={{ color: "#3D4149" }}
                     fontFamily={"Inter"}
                   >
-                    {row.Distance}
-                  </Typography>
-                </Stack>
-              </TableCell>
-              <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
-                <Stack
-                  direction={"row"}
-                  gap={1}
-                  sx={{
-                    width: "100%",
-                    justifyContent: "start",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    fontWeight={400}
-                    fontSize={"14px"}
-                    sx={{ color: "#3D4149" }}
-                    fontFamily={"Inter"}
-                  >
-                    {row.Fuel_Consumption}
-                  </Typography>
-                </Stack>
-              </TableCell>
-              <TableCell align="start" sx={{ margin: "0px", padding: "15px" }}>
-                <Stack
-                  direction={"row"}
-                  gap={1}
-                  sx={{
-                    width: "100%",
-                    justifyContent: "start",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    fontWeight={400}
-                    fontSize={"14px"}
-                    sx={{ color: "#3D4149" }}
-                    fontFamily={"Inter"}
-                  >
-                    {row.Cost}
+                    {row.Last_Active}
                   </Typography>
                 </Stack>
               </TableCell>

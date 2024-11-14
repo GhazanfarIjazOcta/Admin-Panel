@@ -9,26 +9,31 @@ import TripLogo from "../../../assets/Card/TripLogo.png";
 import BarChartCom from "../Chart/BarChart";
 import ArrowDown from "../../../assets/Card/fi_chevron-down.png";
 import { fuelManagmentStyles } from "../../UI/Main";
+import { useState } from "react";
 
 export default function FuelManagment() {
-  return (
-    <Box sx={{
-      position: "absolute",
-      mt: { xs: 1, sm: 1, md: 1, lg: 0 },
-      // Adjust padding based on the screen size
-      px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
-      ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
-      overflow: "none", // Prevent overflowing horizontally and vertically
-      width: "82%", // Ensure it takes full width
-      // maxWidth: "1200px", // Set a max width as needed>
-      // background: "#F4F7F7",
-      
-     
-    }}>
-      <Box sx={fuelManagmentStyles.mainContainer} mt={12}>
-        
-        <Box sx={fuelManagmentStyles.topContainer}>
 
+  const [search, setSearch] = useState(''); 
+  const [status, setStatus] = useState('');  // State for storing the selected status
+
+  console.log("search data [][][][][][][ in ysermanagement" , search)
+
+  return (
+    <Box
+      sx={{
+        position: "absolute",
+        mt: { xs: 1, sm: 1, md: 1, lg: 0 },
+        // Adjust padding based on the screen size
+        px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
+        ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
+        overflow: "none", // Prevent overflowing horizontally and vertically
+        width: "82%", // Ensure it takes full width
+        // maxWidth: "1200px", // Set a max width as needed>
+        // background: "#F4F7F7",
+      }}
+    >
+      <Box sx={fuelManagmentStyles.mainContainer} mt={12}>
+        <Box sx={fuelManagmentStyles.topContainer}>
           <Box sx={fuelManagmentStyles.leftContainer}>
             <Box>
               <OutlinedCard
@@ -61,14 +66,12 @@ export default function FuelManagment() {
                 </Typography>
                 <img src={ArrowDown} height={"21px"} width={"21px"} />
               </Stack>
-              <Stack height={"43vh"}  >
+              <Stack height={"43vh"}>
                 <BarChartCom />
               </Stack>
             </Paper>
           </Box>
         </Box>
-
-
 
         <TableHeader
           text={"Fuel Consumption"}
@@ -76,6 +79,10 @@ export default function FuelManagment() {
           buttonText={"Add Driver"}
           exportIcon={true}
           icon={fuelConsumptionLogo}
+          setSearch = {setSearch}
+          search = {search}
+         status = {status}
+         setStatus = {setStatus}
         />
 
         <FuelManagmentTableContent />

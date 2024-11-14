@@ -16,14 +16,15 @@ import Arrowdown from "../../../assets/Card/fi_chevron-down.png";
 import CrossIcon from "../../../assets/Table/CrossIcon.png";
 import { useNavigate } from "react-router-dom";
 import { maintenanceSchedulingStyles } from "../..//UI/Main";
-import { historyStyles  } from "../../UI/Main";
+import { historyStyles } from "../../UI/Main";
 import greenEventIcon from "../../../assets/calander/greenEventIcon.png";
 import purpleEventIcon from "../../../assets/calander/purpleEventIcon.png";
 
 function MaintenanceScheduling() {
   const navigate = useNavigate();
   return (
-    <Box mt={12}
+    <Box
+      mt={12}
       sx={{
         position: "absolute",
         mt: { xs: 13, sm: 12, md: 12, lg: 12 },
@@ -35,8 +36,8 @@ function MaintenanceScheduling() {
         // maxWidth: "1200px", // Set a max width as needed
       }}
     >
-      <Paper sx={maintenanceSchedulingStyles.headerMainContainer} >
-        <Stack p={3} mr={2} direction={"row"} height={"40px"} >
+      <Paper sx={maintenanceSchedulingStyles.headerMainContainer}>
+        <Stack p={3} mr={2} direction={"row"} height={"40px"}>
           <Stack
             width={"30%"}
             direction={"row"}
@@ -142,9 +143,8 @@ function MaintenanceScheduling() {
         </Stack>
       </Paper>
 
-
       <Box mt={2} sx={historyStyles.mainContainer}>
-      <Paper sx={historyStyles.paperContainer}>
+        <Paper sx={historyStyles.paperContainer}>
           <Stack p={4} direction={"row"} gap={2}>
             <Box sx={historyStyles.boxContainer} pl={2} pr={2} pt={1} pb={1}>
               <Stack direction={"row"} justifyContent={"space-between"}>

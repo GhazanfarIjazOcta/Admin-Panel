@@ -27,11 +27,35 @@ export default function SettingTabs({ handleChange, value }) {
       {/* Optional: Scroll indicators */}
       {isMobile && (
         <>
-          <div style={{ position: "absolute", left: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
-            <span style={{ cursor: "pointer", color: "#F38712", fontSize: "24px" }}>❮</span>
+          <div
+            style={{
+              position: "absolute",
+              left: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 1,
+            }}
+          >
+            <span
+              style={{ cursor: "pointer", color: "#F38712", fontSize: "24px" }}
+            >
+              ❮
+            </span>
           </div>
-          <div style={{ position: "absolute", right: 0, top: "50%", transform: "translateY(-50%)", zIndex: 1 }}>
-            <span style={{ cursor: "pointer", color: "#F38712", fontSize: "24px" }}>❯</span>
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 1,
+            }}
+          >
+            <span
+              style={{ cursor: "pointer", color: "#F38712", fontSize: "24px" }}
+            >
+              ❯
+            </span>
           </div>
         </>
       )}

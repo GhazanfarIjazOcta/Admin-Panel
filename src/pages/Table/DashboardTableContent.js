@@ -21,7 +21,7 @@ function createData(
   Distance,
   Fuel_Consumption,
   DateAndTime,
-  Status
+  Status,
 ) {
   return {
     TripID,
@@ -48,7 +48,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Active"
+    "Active",
   ),
   createData(
     "02",
@@ -60,7 +60,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Inactive"
+    "Inactive",
   ),
   createData(
     "03",
@@ -72,7 +72,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Upcomming"
+    "Upcomming",
   ),
   createData(
     "04",
@@ -84,7 +84,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Delayed"
+    "Delayed",
   ),
 ];
 
@@ -358,12 +358,12 @@ export default function DashboardTableContent() {
                         row.Status == "Active"
                           ? "#ECFDF3"
                           : row.Status == "Inactive"
-                          ? "#F2F4F7"
-                          : row.Status == "Upcomming"
-                          ? "#EBF3FB"
-                          : row.Status == "Delayed"
-                          ? "#FEF6EC"
-                          : "#F38712",
+                            ? "#F2F4F7"
+                            : row.Status == "Upcomming"
+                              ? "#EBF3FB"
+                              : row.Status == "Delayed"
+                                ? "#FEF6EC"
+                                : "#F38712",
                       borderRadius: "40%",
                       display: "flex",
                       alignItems: "center",
@@ -381,12 +381,12 @@ export default function DashboardTableContent() {
                           row.Status == "Active"
                             ? "#037847"
                             : row.Status == "Inactive"
-                            ? "#364254"
-                            : row.Status == "Upcomming"
-                            ? "#007BFF"
-                            : row.Status == "Delayed"
-                            ? "#F38712"
-                            : "#F38712",
+                              ? "#364254"
+                              : row.Status == "Upcomming"
+                                ? "#007BFF"
+                                : row.Status == "Delayed"
+                                  ? "#F38712"
+                                  : "#F38712",
                       }}
                     />
                     <Typography
@@ -402,12 +402,12 @@ export default function DashboardTableContent() {
                           row.Status == "Active"
                             ? "#037847"
                             : row.Status == "Inactive"
-                            ? "#364254"
-                            : row.Status == "Upcomming"
-                            ? "#007BFF"
-                            : row.Status == "Delayed"
-                            ? "#F38712"
-                            : "#F38712",
+                              ? "#364254"
+                              : row.Status == "Upcomming"
+                                ? "#007BFF"
+                                : row.Status == "Delayed"
+                                  ? "#F38712"
+                                  : "#F38712",
                       }}
                       fontFamily={"Inter"}
                     >

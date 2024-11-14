@@ -4,7 +4,7 @@ import Card from "@mui/material/Card";
 import { Stack, Typography } from "@mui/material";
 import maintenanceLogo from "../../../assets/Card/maintenanceLogo.png";
 import urgentLogo from "../../../assets/Card/urgentLogo.png";
-export default function DashboardMaintenanceCard({ }) {
+export default function DashboardMaintenanceCard({}) {
   return (
     <Box sx={{ height: "auto" }}>
       <Card

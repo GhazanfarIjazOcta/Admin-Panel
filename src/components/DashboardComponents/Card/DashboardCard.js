@@ -63,7 +63,7 @@ export default function DashboardCard({
             mx: "0.2em",
           }}
         >
-          {secText ? secText : "09"}
+          {secText ? secText : "0"}
         </Typography>
         <Stack direction={"row"} gap="0.3em">
           <Typography

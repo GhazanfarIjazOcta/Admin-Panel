@@ -8,8 +8,16 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 
-const ConversationCard = ({ conversation, onConversationClick, chatId, setChatId, chatlist, setchatlist }) => {
-  const lastMessageContent = conversation?.lastMessage?.content || "No messages yet";
+const ConversationCard = ({
+  conversation,
+  onConversationClick,
+  chatId,
+  setChatId,
+  chatlist,
+  setchatlist,
+}) => {
+  const lastMessageContent =
+    conversation?.lastMessage?.content || "No messages yet";
 
   const handleClick = () => {
     if (onConversationClick) {
@@ -17,8 +25,6 @@ const ConversationCard = ({ conversation, onConversationClick, chatId, setChatId
       setClickedChatId(conversation.ChatConversation.id); // Update the clicked chat ID
     }
   };
-
-  
 
   const [isHovered, setIsHovered] = useState(false);
   const [clickedChatId, setClickedChatId] = useState(null); // Store the ID of the clicked conversation
@@ -34,7 +40,10 @@ const ConversationCard = ({ conversation, onConversationClick, chatId, setChatId
           marginBottom: "1px",
           transition: "background-color 0.1s ease",
           paddingTop: 0,
-          backgroundColor: isHovered || chatId  === conversation.ChatConversation.id ? "rgba(0, 0, 139, 0.2)" : "transparent", // Change color if hovered or clicked
+          backgroundColor:
+            isHovered || chatId === conversation.ChatConversation.id
+              ? "rgba(0, 0, 139, 0.2)"
+              : "transparent", // Change color if hovered or clicked
         }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

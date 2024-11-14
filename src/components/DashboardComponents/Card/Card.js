@@ -13,13 +13,15 @@ export default function OutlinedCard({
   costColor,
 }) {
   return (
-    <Paper sx={{
-      height: "100%",
-      // border: "1px ",  // Simple border
-      // boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",  // Light shadow
-      // borderBottom: "2px solid rgba(0, 0, 0, 0.3)",  // Slightly darker bottom border
-      // borderRadius: "4px",  // Optional: small rounding of corners
-    }}>
+    <Paper
+      sx={{
+        height: "100%",
+        // border: "1px ",  // Simple border
+        // boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",  // Light shadow
+        // borderBottom: "2px solid rgba(0, 0, 0, 0.3)",  // Slightly darker bottom border
+        // borderRadius: "4px",  // Optional: small rounding of corners
+      }}
+    >
       <Card
         variant="outlined"
         sx={{
@@ -104,7 +106,7 @@ export default function OutlinedCard({
                   fontFamily: "Poppins, sans-serif",
                 }}
               >
-                {secText ? secText : "09"}
+                {secText ? secText : "0"}
               </Typography>
             </Stack>
           </Stack>

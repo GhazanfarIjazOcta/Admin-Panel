@@ -14,7 +14,9 @@
 /* Styles for desktop view */
 @media (min-width: 601px) {
   .calendarContainer {
-    height: calc(100vh - 60px); /* Full height for desktop, accounting for header */
+    height: calc(
+      100vh - 60px
+    ); /* Full height for desktop, accounting for header */
   }
 
   .rbc-toolbar {
@@ -49,12 +51,12 @@
 
 @media (max-width: 600px) {
   .calendarContainer {
-    padding: 10px; 
+    padding: 10px;
   }
 }
 
 @media (max-width: 600px) {
   .time {
-      display: none; /* Hide time on mobile */
+    display: none; /* Hide time on mobile */
   }
 }

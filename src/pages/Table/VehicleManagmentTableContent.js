@@ -23,7 +23,7 @@ function createData(
   PM_Reference,
   Last_Location,
   Status,
-  Action
+  Action,
 ) {
   return {
     Type,
@@ -53,7 +53,7 @@ const rows = [
     "--",
     "--",
     "--",
-    "Active"
+    "Active",
   ),
   createData(
     "--",
@@ -66,7 +66,7 @@ const rows = [
     "--",
     "--",
     "--",
-    "Inactive"
+    "Inactive",
   ),
 ];
 

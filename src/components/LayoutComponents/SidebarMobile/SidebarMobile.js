@@ -7,7 +7,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  IconButton
+  IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import React, { useState, useEffect } from "react";
@@ -23,8 +23,9 @@ import FuelLogo from "../../../assets/Layout/lucide_fuel.png";
 import SettingLogo from "../../../assets/Layout/settings.png";
 import LogoutLogo from "../../../assets/Layout/Left_icon.png";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useAuth } from "../../../Authentication/AuthContext";
 
-function Sidebar2({ onClose }) {
+function Sidebar2({ onClose }) {  // Add userRole as a prop
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedItem, setSelectedItem] = useState();
@@ -35,7 +36,7 @@ function Sidebar2({ onClose }) {
     {
       text: "Vehicle Management",
       icon: VehicleLogo,
-      route: "vehicle-management"
+      route: "vehicle-management",
     },
     { text: "Device Management", icon: DeviceLogo, route: "device-management" },
     { text: "Driver Management", icon: DriverLogo, route: "driver-management" },
@@ -43,18 +44,31 @@ function Sidebar2({ onClose }) {
     {
       text: "Maintenance Scheduling",
       icon: MaintenanceLogo,
-      route: "maintenance-scheduling"
+      route: "maintenance-scheduling",
     },
     { text: "Fuel Management", icon: FuelLogo, route: "fuel-management" },
-    { text: "Setting", icon: SettingLogo, route: "setting" }
+    { text: "Setting", icon: SettingLogo, route: "setting" },
   ];
 
+  const customerlistitems = [
+    { text: "Dashboard", icon: DashboardLogo, route: "dashboardmain" },
+    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
+    { text: "Fuel Management", icon: FuelLogo, route: "customer-fuel-management" },
+    { text: "Setting", icon: SettingLogo, route: "customer-setting" }
+  ];
+
+  const { userRole } = useAuth();
+  console.log("user role is actually on sidebar ", userRole);
+  // Use the appropriate list based on userRole
+  const itemsToDisplay = userRole === "admin" ? listItems : customerlistitems;
+  console.log("user role in mobile side bar "  , userRole )
+
   useEffect(() => {
-    const currentItemIndex = listItems.findIndex(
-      (item) => item.route === location.pathname.split("/").pop()
+    const currentItemIndex = itemsToDisplay.findIndex(
+      (item) => item.route === location.pathname.split("/").pop(),
     );
     setSelectedItem(currentItemIndex !== -1 ? currentItemIndex : null);
-  }, [location.pathname]);
+  }, [location.pathname, itemsToDisplay]);
 
   const handleListItemClick = (index, route) => {
     setSelectedItem(index);
@@ -76,7 +90,7 @@ function Sidebar2({ onClose }) {
         padding: "clamp(0.5rem, 1vw, 1rem)",
         boxShadow: "2px 0 5px rgba(0,0,0,0.5)",
         overflowY: "auto",
-        overflowX: "hidden"
+        overflowX: "hidden",
       }}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
@@ -95,7 +109,7 @@ function Sidebar2({ onClose }) {
       <Divider sx={{ backgroundColor: "#F38712" }} />
 
       <List sx={{ flexGrow: 1 }}>
-        {listItems.map((item, index) => (
+        {itemsToDisplay.map((item, index) => (
           <ListItem
             button
             key={item.text}
@@ -105,7 +119,7 @@ function Sidebar2({ onClose }) {
                 selectedItem === index ? "#F38712" : "transparent",
               "&:hover": { backgroundColor: "#F38712" },
               fontSize: "clamp(0.7rem, 1.2vw, 0.9rem)",
-              padding: "clamp(0.4rem, 0.8vw, 0.8rem)"
+              padding: "clamp(0.4rem, 0.8vw, 0.8rem)",
             }}
           >
             <ListItemIcon>
@@ -114,7 +128,7 @@ function Sidebar2({ onClose }) {
                 alt={item.text}
                 style={{
                   width: "clamp(14px, 3vw, 22px)",
-                  height: "clamp(14px, 3vw, 22px)"
+                  height: "clamp(14px, 3vw, 22px)",
                 }}
               />
             </ListItemIcon>
@@ -134,7 +148,7 @@ function Sidebar2({ onClose }) {
               alt="logout"
               style={{
                 width: "clamp(10px, 1.5vw, 14px)",
-                height: "clamp(10px, 1.5vw, 14px)"
+                height: "clamp(10px, 1.5vw, 14px)",
               }}
             />
           }
@@ -144,7 +158,7 @@ function Sidebar2({ onClose }) {
             color: "black",
             "&:hover": { backgroundColor: "lightgray" },
             fontSize: "clamp(0.7rem, 1.2vw, 0.9rem)",
-            padding: "clamp(0.4rem, 0.8vw, 0.8rem)"
+            padding: "clamp(0.4rem, 0.8vw, 0.8rem)",
           }}
         >
           Logout

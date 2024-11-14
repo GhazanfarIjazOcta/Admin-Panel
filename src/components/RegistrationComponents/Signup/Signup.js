@@ -4,30 +4,57 @@ import {
   Checkbox,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { useRegisterUserMutation } from "../../../Api/apiSlice"; // Import the mutation hook
 import Ukeylogo from "../../../assets/UkeyLogo.png";
 import GoogleLogo from "../../../assets/Google.svg";
-import { useNavigate } from "react-router-dom";
 import { RegistrationStyles } from "../../UI/Styles";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import VisibilityOffOutlinedIcon from "@mui/icons-material/VisibilityOffOutlined";
 import { SignupStyles } from "./SignupStyles";
 
+import CustomAlert from "../../UI/CustomAlert";
+
 function Signup() {
   const navigate = useNavigate();
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
-  const [step, setStep] = useState(1); // Step state to handle pagination
+  const [userPasswordVisible, setuserPasswordVisible] = useState(false);
+  const [confirmuserPasswordVisible, setConfirmuserPasswordVisible] =
+    useState(false);
+  const [step, setStep] = useState(1);
 
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+  // Form fields
+  const [userName, setuserName] = useState("");
+  const [userEmail, setuserEmail] = useState("");
+  const [userPhone, setuserPhone] = useState("");
+  const [userPassword, setuserPassword] = useState("");
+  const [confirmuserPassword, setConfirmuserPassword] = useState("");
+  const [orgName, setOrgName] = useState("");
+  const [orgAddress, setOrgAddress] = useState("");
+
+
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: "success",
+    message: ""
+  });
+
+  const handleAlertClose = () => {
+    setAlert({ ...alert, open: false });
   };
 
-  const toggleConfirmPasswordVisibility = () => {
-    setConfirmPasswordVisible(!confirmPasswordVisible);
+  // Hook to call the register API mutation
+  const [registerUser, { isLoading, error, isSuccess }] =
+    useRegisterUserMutation();
+
+  const toggleuserPasswordVisibility = () => {
+    setuserPasswordVisible(!userPasswordVisible);
+  };
+
+  const toggleConfirmuserPasswordVisibility = () => {
+    setConfirmuserPasswordVisible(!confirmuserPasswordVisible);
   };
 
   const handleNext = () => {
@@ -35,17 +62,43 @@ function Signup() {
   };
 
   const handleBack = () => {
-    setStep(1);
+    setStep(1); // Go back to the first step
   };
 
-  const handleRegister = () => {
-    navigate("/dashboard/dashboardmain"); // Redirect after registration
+  const handleRegister = async () => {
+    // Collect user data for registration
+    const userData = {
+      orgName,
+      orgAddress,
+      userName,
+      userEmail,
+      userPassword,
+      userPhone,
+    };
+
+    console.log("here is the registeration data ", userData);
+
+    // Trigger the registration API call
+    try {
+      await registerUser(userData).unwrap();
+      navigate("/login"); // Navigate to the dashboard on success
+      setAlert({
+        open: true,
+        severity: "success",
+        message: "Registeration Successfull, now login your credentials"
+      });
+    } catch (err) {
+      console.error("Registration failed", err);
+      setAlert({
+        open: true,
+        severity: "error",
+        message: "Registration failed"
+      });
+    }
   };
 
   return (
-    <Box
-      sx={ SignupStyles.MainBox}
-    >
+    <Box sx={SignupStyles.MainBox}>
       <Box
         display="flex"
         flexDirection="column"
@@ -65,6 +118,7 @@ function Signup() {
           variant="h1"
           mt={{ xl: "1em", lg: "-1em", md: "0em", sm: "1em", xs: "0.8em" }}
           sx={SignupStyles.RegisterTypography}
+          
         >
           Register
         </Typography>
@@ -80,8 +134,8 @@ function Signup() {
                 lg: "0.8rem",
                 md: "0.7rem",
                 sm: "1rem",
-                xs: "1rem"
-              }
+                xs: "1rem",
+              },
             }}
           >
             Already have an account?
@@ -94,14 +148,12 @@ function Signup() {
                 lg: "0.8rem",
                 md: "0.7rem",
                 sm: "1rem",
-                xs: "1rem"
-              }
-            }}
-            style={{
+                xs: "1rem",
+              },
               fontWeight: 600,
               fontFamily: "Inter",
               cursor: "pointer",
-              textAlign: "center"
+              textAlign: "center",
             }}
             onClick={() => navigate("/login")}
           >
@@ -109,6 +161,7 @@ function Signup() {
           </Typography>
         </Stack>
 
+        {/* First Step (Personal Details) */}
         {step === 1 ? (
           <>
             <Box sx={{ width: { xs: "80%", sm: "60%" }, maxWidth: "370px" }}>
@@ -123,8 +176,11 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Enter your full name"
+                value={userName}
+                onChange={(e) => setuserName(e.target.value)}
               />
             </Box>
+
             <Box sx={{ width: { xs: "80%", sm: "60%" }, maxWidth: "370px" }}>
               <Typography
                 variant="subtitle1"
@@ -136,81 +192,93 @@ function Signup() {
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Enter your email"
+                placeholder="Enter your userEmail"
+                value={userEmail}
+                onChange={(e) => setuserEmail(e.target.value)}
               />
             </Box>
+
             <Box sx={{ width: { xs: "80%", sm: "60%" }, maxWidth: "370px" }}>
               <Typography
                 variant="subtitle1"
                 sx={SignupStyles.TextFieldTypography}
               >
-                Phone Number
+                userPhone Number
               </Typography>
               <TextField
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Enter your Phone number"
+                placeholder="Enter your userPhone number"
+                value={userPhone}
+                onChange={(e) => setuserPhone(e.target.value)}
               />
             </Box>
+
+            {/* userPassword Fields */}
             <Box
               sx={{
                 width: { xs: "80%", sm: "60%" },
                 maxWidth: "370px",
-                position: "relative"
+                position: "relative",
               }}
             >
               <Typography
                 variant="subtitle1"
                 sx={SignupStyles.TextFieldTypography}
               >
-                Password
+                userPassword
               </Typography>
-
               <TextField
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Enter your password"
-                type={passwordVisible ? "text" : "password"}
+                placeholder="Enter your userPassword"
+                type={userPasswordVisible ? "text" : "password"}
+                value={userPassword}
+                onChange={(e) => setuserPassword(e.target.value)}
               />
               <Box
                 sx={RegistrationStyles.passwordEyeBox}
-                onClick={togglePasswordVisibility}
+                onClick={toggleuserPasswordVisibility}
               >
-                {passwordVisible ? (
+                {userPasswordVisible ? (
                   <VisibilityOffOutlinedIcon />
                 ) : (
                   <VisibilityOutlinedIcon />
                 )}
               </Box>
             </Box>
+
+            
+
             <Box
               sx={{
                 width: { xs: "80%", sm: "60%" },
                 maxWidth: "370px",
-                position: "relative"
+                position: "relative",
               }}
             >
               <Typography
                 variant="subtitle1"
                 sx={SignupStyles.TextFieldTypography}
               >
-                Confirm Password
+                Confirm userPassword
               </Typography>
-
               <TextField
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Confirm your password"
-                type={confirmPasswordVisible ? "text" : "password"}
+                placeholder="Confirm your userPassword"
+                type={confirmuserPasswordVisible ? "text" : "password"}
+                value={confirmuserPassword}
+                onChange={(e) => setConfirmuserPassword(e.target.value)}
               />
               <Box
                 sx={RegistrationStyles.passwordEyeBox}
-                onClick={toggleConfirmPasswordVisibility}
+                onClick={toggleConfirmuserPasswordVisibility}
               >
-                {confirmPasswordVisible ? (
+                {confirmuserPasswordVisible ? (
                   <VisibilityOffOutlinedIcon />
                 ) : (
                   <VisibilityOutlinedIcon />
@@ -232,8 +300,11 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Enter organization name"
+                velue={orgName}
+                onChange={(e) => setOrgName(e.target.value)}
               />
             </Box>
+
             <Box sx={{ width: { xs: "80%", sm: "60%" }, maxWidth: "370px" }}>
               <Typography
                 variant="subtitle1"
@@ -246,6 +317,8 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Enter Organization address"
+                velue={orgAddress}
+                onChange={(e) => setOrgAddress(e.target.value)}
               />
             </Box>
           </>
@@ -255,9 +328,17 @@ function Signup() {
           variant="contained"
           sx={SignupStyles.MainButton}
           onClick={step === 1 ? handleNext : handleRegister}
+          disabled={isLoading} // Disable the button while the request is being processed
+          
         >
-          {step === 1 ? "Next" : "Register"}
+          {isLoading ? "Registering..." : step === 1 ? "Next" : "Register"}
         </Button>
+        <CustomAlert
+        open={alert.open}
+        onClose={handleAlertClose}
+        severity={alert.severity}
+        message={alert.message}
+      />
 
         {step === 1 ? (
           <>
@@ -269,27 +350,31 @@ function Signup() {
                 fontSize: "1rem",
                 fontFamily: "Poppins",
                 cursor: "pointer",
-                mt: { xl: "1em", sm: "1rem" }
+                mt: { xl: "1em", sm: "1rem" },
               }}
             >
               or continue with
             </Typography>
-
-            <Stack mt={{ xl: "1em", lg: "0em", sm: "0em" }}>
-              <img src={GoogleLogo} alt="Google logo" />
+            <Stack
+              mt={{ xl: "1em", lg: "0em", sm: "1em", xs: "0.5em" }}
+              gap="1em"
+              direction="row"
+              justifyContent="center"
+            >
+              <Box sx={{ width: "50px", cursor: "pointer" }}>
+                <img alt="google logo" src={GoogleLogo} />
+              </Box>
             </Stack>
           </>
         ) : (
           <>
             <Button
               variant="contained"
-              
-              sx={{...SignupStyles.MainButton,
-                mt:2
-              }}
+              sx={{...SignupStyles.MainButton,  mt:2}}
               onClick={handleBack}
+              
             >
-              {step === 2 ? "Back" : "Next"}
+              Back
             </Button>
           </>
         )}

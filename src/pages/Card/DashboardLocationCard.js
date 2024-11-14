@@ -66,10 +66,9 @@ export default function DashboardLocationCard({}) {
                     xl: "18px",
                   }}
                 >
-                  <img src={maintenanceLogo} height={"100%"} width={"100%"} /> 
+                  <img src={maintenanceLogo} height={"100%"} width={"100%"} />
                 </Box>
               </Box>
-              
             </Stack>
             <Stack width={"100%"} direction={"column"}>
               {/* {" "} */}

@@ -22,7 +22,13 @@ import {
   userInfoStyle,
   userNameStyle,
 } from "../../UI/Layout";
-import { Avatar, Drawer, InputAdornment, Paper, TextField } from "@mui/material";
+import {
+  Avatar,
+  Drawer,
+  InputAdornment,
+  Paper,
+  TextField,
+} from "@mui/material";
 import Chat from "../../../assets/Layout/Chat.png";
 import Sidebar from "../Sidebar/Sidebar";
 import SidebarMobile from "../SidebarMobile/SidebarMobile";
@@ -72,17 +78,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Navbar() {
   const [headerMessage, setHeaderMessage] = React.useState(
-    "Good morning, Admin"
+    "Good morning, Admin",
   );
 
   const [SidebarOpen, setSidebarOpen] = React.useState(false);
   const isSideBarOpen = Boolean(SidebarOpen);
 
-
-
   const handleSideBarOpen = () => setSidebarOpen(true);
-
-
 
   // const handleSideBar = (event) => {
   //   setSidebarOpen(event.currentTarget);
@@ -94,22 +96,20 @@ export default function Navbar() {
   // }
 
   const handleSideBar = () => {
-    setSidebarOpen(true);  // Simply open the sidebar
+    setSidebarOpen(true); // Simply open the sidebar
   };
 
   const handleSideBarClose = () => {
-    setSidebarOpen(false);  // Close the sidebar
+    setSidebarOpen(false); // Close the sidebar
   };
 
   const mobileMenuIds = "primary-search-account-menu-mobile";
   const renderSidebar = (
-    <Drawer open={SidebarOpen} onClose={handleSideBarClose} >
-      <Menu open={SidebarOpen} onClose={handleSideBarClose}
-      >
-        <SidebarMobile onClose={handleSideBarClose} />
-        /</Menu>
+    <Drawer open={SidebarOpen} onClose={handleSideBarClose}>
+      <Menu open={SidebarOpen} onClose={handleSideBarClose}>
+        <SidebarMobile onClose={handleSideBarClose} />/
+      </Menu>
     </Drawer>
-
   );
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -117,8 +117,6 @@ export default function Navbar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  ;
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -211,7 +209,7 @@ export default function Navbar() {
   );
 
   return (
-    <Paper position={"sticky"} minWidth={"320px"} sx={{ zIndex: 500  }}>
+    <Paper position={"sticky"} minWidth={"320px"} sx={{ zIndex: 500 }}>
       <AppBar
         sx={{
           backgroundColor: "white",
@@ -222,7 +220,6 @@ export default function Navbar() {
           display: "flex",
           justifyContent: "center",
           minWidth: "320px",
-
         }}
       >
         <Toolbar>

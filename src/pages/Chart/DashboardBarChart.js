@@ -12,7 +12,7 @@ function DashboardBarChart({ customWidth }) {
   return (
     <Paper
       sx={{
-        padding: {lg:"0.6em 3rem" , xs:"0.6em 1rem"},
+        padding: { lg: "0.6em 3rem", xs: "0.6em 1rem" },
         minWidth: "12rem",
       }}
     >
@@ -45,9 +45,9 @@ function DashboardBarChart({ customWidth }) {
           </Box>
           <Typography
             sx={{
-              fontSize: {lg:"0.8rem", xs:"0.7rem"},
+              fontSize: { lg: "0.8rem", xs: "0.7rem" },
               color: "#5A607F",
-              fontWeight: {lg:500 },
+              fontWeight: { lg: 500 },
               fontFamily: "Inter, sans-serif",
             }}
           >
@@ -71,7 +71,7 @@ function DashboardBarChart({ customWidth }) {
           </Box>
           <Typography
             sx={{
-              fontSize: {lg:"0.8rem", xs:"0.7rem"},
+              fontSize: { lg: "0.8rem", xs: "0.7rem" },
               color: "#5A607F",
               fontWeight: 500,
               fontFamily: "Inter, sans-serif",
@@ -81,7 +81,7 @@ function DashboardBarChart({ customWidth }) {
           </Typography>
           <Typography
             sx={{
-              fontSize: {lg:"1.5rem", xs:"0.7rem"},
+              fontSize: { lg: "1.5rem", xs: "0.7rem" },
               color: "#45464E",
               fontWeight: 500,
               fontFamily: "Poppins, sans-serif",

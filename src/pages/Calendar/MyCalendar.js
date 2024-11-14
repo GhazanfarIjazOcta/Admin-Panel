@@ -12,7 +12,7 @@ import {
   TextField,
   Typography,
   Modal,
-  PopoverPaper
+  PopoverPaper,
 } from "@mui/material";
 import Right from "../../assets/calander/right.png";
 import Left from "../../assets/calander/left.png";
@@ -38,14 +38,14 @@ function CustomToolbar(props) {
     justifyContent: "center",
     cursor: "pointer",
     borderRadius: "10px",
-    margin: "0 2px"
+    margin: "0 2px",
   });
 
   const getTextStyles = (view) => ({
     fontWeight: 500,
     fontSize: "12px",
     color: selectedView === view ? "#FFFFFF" : "#71717A",
-    fontFamily: "Inter"
+    fontFamily: "Inter",
   });
 
   return (
@@ -57,7 +57,7 @@ function CustomToolbar(props) {
         alignItems: "center",
         borderRadius: "20px",
         p: 2,
-        flexWrap: "wrap"
+        flexWrap: "wrap",
       }}
     >
       {/* Left Side: Today, Back, and Next buttons */}
@@ -68,7 +68,7 @@ function CustomToolbar(props) {
           justifyContent: "space-between",
           width: "100%",
           maxWidth: { lg: "250px", xs: "300px" },
-          marginBottom: { xs: 2, sm: 0 }
+          marginBottom: { xs: 2, sm: 0 },
         }}
       >
         <img
@@ -102,7 +102,7 @@ function CustomToolbar(props) {
           display: "flex",
           justifyContent: "center",
           width: { xs: "100%", sm: "auto" },
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         {["day", "week", "month"].map((view) => (
@@ -128,7 +128,7 @@ function CustomToolbar(props) {
           width: { xs: "100%", sm: "auto" },
           flexWrap: "wrap",
 
-          mt: { xs: 2, lg: 0 }
+          mt: { xs: 2, lg: 0 },
         }}
       >
         <TextField
@@ -142,14 +142,14 @@ function CustomToolbar(props) {
                   <SearchIcon />
                 </IconButton>
               </InputAdornment>
-            )
+            ),
           }}
           sx={{
             "& .MuiInputBase-root": {
               height: "44px",
               width: { xs: "100%", sm: "200px" },
-              justifyContent: "center"
-            }
+              justifyContent: "center",
+            },
           }}
         />
       </Box>
@@ -158,6 +158,8 @@ function CustomToolbar(props) {
 }
 
 function MyCalendar() {
+
+  
   const myEventsList = [
     {
       start: moment().day(1).startOf("day").add(8, "hours").toDate(),
@@ -165,7 +167,7 @@ function MyCalendar() {
       title: "Oil Change",
       eventType: "Scheduled",
       backgroundColor: "#FFB6C1", // Light pink
-      mainColor: "#D5006D" // Dark pink
+      mainColor: "#D5006D", // Dark pink
     },
     {
       start: moment().day(2).startOf("day").add(10, "hours").toDate(),
@@ -173,7 +175,7 @@ function MyCalendar() {
       title: "Team Meeting",
       eventType: "Meeting",
       backgroundColor: "#ADD8E6", // Light blue
-      mainColor: "#0000FF" // Blue
+      mainColor: "#0000FF", // Blue
     },
     {
       start: moment().day(3).startOf("day").add(12, "hours").toDate(),
@@ -181,7 +183,7 @@ function MyCalendar() {
       title: "Project Deadline",
       eventType: "Deadline",
       backgroundColor: "#90EE90", // Light green
-      mainColor: "#006400" // Dark green
+      mainColor: "#006400", // Dark green
     },
     {
       start: moment().day(4).startOf("day").add(14, "hours").toDate(),
@@ -189,7 +191,7 @@ function MyCalendar() {
       title: "Lunch with Client",
       eventType: "Meeting",
       backgroundColor: "#FFFFE0", // Light yellow
-      mainColor: "#FFD700" // Gold
+      mainColor: "#FFD700", // Gold
     },
     {
       start: moment().day(5).startOf("day").add(16, "hours").toDate(),
@@ -197,7 +199,7 @@ function MyCalendar() {
       title: "Conference Call",
       eventType: "Call",
       backgroundColor: "#E6E6FA", // Lavender
-      mainColor: "#6A5ACD" // Slate blue
+      mainColor: "#6A5ACD", // Slate blue
     },
     {
       start: moment().day(6).startOf("day").add(9, "hours").toDate(),
@@ -205,7 +207,7 @@ function MyCalendar() {
       title: "Website Launch",
       eventType: "Launch",
       backgroundColor: "#FFE4E1", // Misty rose
-      mainColor: "#FF69B4" // Hot pink
+      mainColor: "#FF69B4", // Hot pink
     },
     {
       start: moment().day(7).startOf("day").add(11, "hours").toDate(),
@@ -213,8 +215,8 @@ function MyCalendar() {
       title: "Team Outing",
       eventType: "Event",
       backgroundColor: "#FFDAB9", // Peach puff
-      mainColor: "#FF4500" // Orange red
-    }
+      mainColor: "#FF4500", // Orange red
+    },
   ];
 
   const [openModal, setOpenModal] = useState(false);
@@ -247,60 +249,55 @@ function MyCalendar() {
         border: "none",
         marginLeft: "5px",
         height: "40px",
-        cursor: "pointer"
-      }
+        cursor: "pointer",
+      },
     };
   }
-  
- function EventComponent({ event }) {
-  return (
-    <div
-      onClick={() => {
-        setSelectedEvent(event);
-        setOpenModal(true);
-      }}
-      style={{
-        backgroundColor: event.backgroundColor,
-        borderRadius: "5px",
-        height: "100%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center", // Center the content
-        padding: "5px",
-        marginLeft: "30px",
-        cursor: "pointer",
-        color: event.mainColor,
-        fontSize: "14px",
-        position: "relative" // Added for positioning the logo/icon
-      }}
-    >
-      <i
-        className="fas fa-clock" // Font Awesome clock icon
-        style={{
-          fontSize: "20px", // Size of the icon
-          position: "absolute",
-          left: "5px", // Position the icon
-          top: "50%",
-          transform: "translateY(-50%)", // Center the icon vertically
-          color: event.mainColor // Use the event's main color for the icon
+
+  function EventComponent({ event }) {
+    return (
+      <div
+        onClick={() => {
+          setSelectedEvent(event);
+          setOpenModal(true);
         }}
-      />
-      <Typography
-        sx={{
-          display: { xs: "block", sm: "none" }, // Show title only for mobile view
-          textAlign: "center" // Center text
+        style={{
+          backgroundColor: event.backgroundColor,
+          borderRadius: "5px",
+          height: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center", // Center the content
+          padding: "5px",
+          marginLeft: "30px",
+          cursor: "pointer",
+          color: event.mainColor,
+          fontSize: "14px",
+          position: "relative", // Added for positioning the logo/icon
         }}
       >
-        {event.title}
-      </Typography>
-    </div>
-  );
-}
-
-
-
-  
-  
+        <i
+          className="fas fa-clock" // Font Awesome clock icon
+          style={{
+            fontSize: "20px", // Size of the icon
+            position: "absolute",
+            left: "5px", // Position the icon
+            top: "50%",
+            transform: "translateY(-50%)", // Center the icon vertically
+            color: event.mainColor, // Use the event's main color for the icon
+          }}
+        />
+        <Typography
+          sx={{
+            display: { xs: "block", sm: "none" }, // Show title only for mobile view
+            textAlign: "center", // Center text
+          }}
+        >
+          {event.title}
+        </Typography>
+      </div>
+    );
+  }
 
   const handleClose = () => {
     setOpenModal(false);
@@ -317,11 +314,11 @@ function MyCalendar() {
         defaultView={Views.WEEK} // Set default view to week
         style={{
           height: isMobile ? "50vh" : "100vh",
-          minHeight: "400px" // Ensure minimum height
+          minHeight: "400px", // Ensure minimum height
         }}
         components={{
           toolbar: CustomToolbar,
-          event: EventComponent
+          event: EventComponent,
         }}
         onSelectEvent={(event) => {
           setSelectedEvent(event);
@@ -344,7 +341,7 @@ function MyCalendar() {
                 color: event.mainColor,
                 cursor: "pointer",
                 fontWeight: 600,
-                fontSize: "14px"
+                fontSize: "14px",
               }}
               onClick={() => {
                 setSelectedEvent(event);
@@ -369,7 +366,7 @@ function MyCalendar() {
               bgcolor: "background.paper",
               borderRadius: 2,
               boxShadow: 24,
-              p: 4
+              p: 4,
             }}
           >
             <Typography variant="h6" component="h2">

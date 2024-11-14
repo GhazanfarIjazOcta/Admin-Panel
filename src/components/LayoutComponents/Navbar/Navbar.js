@@ -23,10 +23,26 @@ import {
   userInfoStyle,
   userNameStyle,
 } from "../../UI/Layout";
-import { Avatar, Drawer, InputAdornment, Paper, TextField } from "@mui/material";
+import {
+  Avatar,
+  Drawer,
+  InputAdornment,
+  Paper,
+  TextField,
+} from "@mui/material";
 import Chat from "../../../assets/Layout/Chat.png";
 import Sidebar from "../Sidebar/Sidebar";
 import SidebarMobile from "../SidebarMobile/SidebarMobile";
+
+import { useAuth } from "../../../Authentication/AuthContext"
+
+import { useGetUserInfoQuery } from "../../../Api/apiSlice"
+import CircleIcon from '@mui/icons-material/Circle';
+
+import CustomAlert from '../../UI/CustomAlert';
+import { useState } from "react";
+
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -71,47 +87,77 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
+ const StatusIndicator = styled(Box)(({ status }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.25rem',
+  color: status === 'active' ? 'green' : 'red',
+}));
+
 export default function Navbar() {
+
+
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: "success",
+    message: "",
+  });
+
+  const handleAlertClose = () => {
+    setAlert({ ...alert, open: false });
+  };
+
+  const { userRole } = useAuth();
+  const { user_ID } = useAuth();
+
+  console.log("user role is actually on navbar " , userRole)
+  console.log("user ID actually on navbar " , user_ID)
+
+
+  const navigatefunction = () => {
+
+    if(userRole == "customer"){
+      // navigate("/dashboard/chat");
+      navigate("/dashboard/customerchat");
+    }
+    else if(userRole == "admin"){
+
+      navigate("/dashboard/chat");
+
+    }
+
+  }
+
+
+
+
   const navigate = useNavigate();
   const [headerMessage, setHeaderMessage] = React.useState(
-    "Good morning, Admin"
+    "Good morning, Admin",
   );
 
   const [SidebarOpen, setSidebarOpen] = React.useState(false);
   const isSideBarOpen = Boolean(SidebarOpen);
 
-
-
   const handleSideBarOpen = () => setSidebarOpen(true);
 
 
 
-  // const handleSideBar = (event) => {
-  //   setSidebarOpen(event.currentTarget);
-
-  // }
-
-  // const handleSideBarClose = () =>{
-  //   setSidebarOpen(null);
-  // }
-
   const handleSideBar = () => {
-    setSidebarOpen(true);  // Simply open the sidebar
+    setSidebarOpen(true); // Simply open the sidebar
   };
 
   const handleSideBarClose = () => {
-    setSidebarOpen(false);  // Close the sidebar
+    setSidebarOpen(false); // Close the sidebar
   };
 
   const mobileMenuIds = "primary-search-account-menu-mobile";
   const renderSidebar = (
-    <Drawer open={SidebarOpen} onClose={handleSideBarClose} >
-      <Menu open={SidebarOpen} onClose={handleSideBarClose}
-      >
-        <SidebarMobile onClose={handleSideBarClose} />
-        /</Menu>
+    <Drawer open={SidebarOpen} onClose={handleSideBarClose}>
+      <Menu open={SidebarOpen} onClose={handleSideBarClose}>
+        <SidebarMobile onClose={handleSideBarClose} />/
+      </Menu>
     </Drawer>
-
   );
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -119,8 +165,6 @@ export default function Navbar() {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  ;
-
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -136,6 +180,14 @@ export default function Navbar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleClickMessageCheck = () => {
+    setAlert({
+      open: true,
+      severity: "warning",
+      message: "Chat in Production",
+    });
   };
 
   const menuId = "primary-search-account-menu";
@@ -177,13 +229,17 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem     onClick={() => navigate("/dashboard/chat")}>
+      
+      {/* <MenuItem onClick={navigatefunction}> */}
+      <MenuItem onClick={handleClickMessageCheck}>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
           </Badge>
         </IconButton>
         <p>Messages</p>
+        <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
+             
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -212,6 +268,28 @@ export default function Navbar() {
     </Menu>
   );
 
+
+//]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+  const { data, error, isLoading } = useGetUserInfoQuery();
+
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
+
+  const { userInfo  } = data || {};
+  console.log("{{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}}" , data)
+
+console.log("users info }{}{}{}{{}{}{{}" , userInfo)
+
+
+//]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
+
+
+
+
   return (
     <Paper position={"sticky"} minWidth={"320px"} sx={{ zIndex: 4 }}>
       <AppBar
@@ -219,12 +297,15 @@ export default function Navbar() {
           backgroundColor: "white",
           color: "black",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          width: { xs: "100vw", lg: "81vw" },
+          width: { xs: "100vw", lg: "82%"  },
           minHeight: "5.4rem",
           display: "flex",
           justifyContent: "center",
           minWidth: "320px",
-
+           position: "fixed",  // Keeps the AppBar fixed at the top
+    top: 0,  // Positions it at the top of the viewport
+    zIndex: 1201,  // Ensures it is above other component
+    
         }}
       >
         <Toolbar>
@@ -240,21 +321,27 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography
-            variant="h6"
-            Wrap
-            component="div"
-            sx={{
-              display: { xs: "none", lg: "block" },
-              fontWeight: 600,
-              fontSize: "1.75rem",
-              color: "#14181F",
-            }}
-            mr={2}
-          >
-            {headerMessage}
-          </Typography>
+  variant="h6"
+  noWrap
+  component="div"
+  sx={{
+    display: { xs: "none", lg: "block" },
+    fontWeight: 600,
+    fontSize: "1.75rem",
+    color: "#14181F",
+    mr: 2,
+  }}
+>
+  Good Morning,  
+  {userInfo.role === "superAdmin" && " Super Admin"}
+  {userInfo.role === "admin" && " Admin"}
+  {userInfo.role === "customer" && " Customer"}
+  {userInfo.role === "driver" && " Driver"}
+  {/* {headerMessage} */}
+</Typography>
 
-          <TextField
+
+          {/* <TextField
             placeholder="Search"
             variant="outlined"
             size="small"
@@ -274,7 +361,7 @@ export default function Navbar() {
                 marginLeft: { xs: 0, sm: 1, md: 3 },
               },
             }}
-          />
+          /> */}
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" }, gap: "0.2em" }}>
@@ -288,9 +375,11 @@ export default function Navbar() {
                 justifyContent: "center",
                 gap: "12px",
                 marginRight: "0.4em",
-                 cursor: "pointer"
+                cursor: "pointer",
               }}
-              onClick={() => navigate("/dashboard/chat")}
+              // onClick={navigatefunction}
+              onClick={handleClickMessageCheck}
+              
             >
               <img alt="message" src={Chat} />
               {/* <Typography color={"white"}>messages</Typography> */}
@@ -303,11 +392,12 @@ export default function Navbar() {
                   fontWeight: 600,
                   fontSize: "0.9rem",
                   color: "white",
-                 
                 }}
               >
                 messages
               </Typography>
+              <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
+             
             </Box>
             <Box />
             <Box
@@ -315,16 +405,35 @@ export default function Navbar() {
             >
               <Avatar
                 sx={{ width: 40, height: 40 }}
-                src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                // src="https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104753/admin_logo_cbtn80.jpg"
+                src="https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1731416098/OIP_kxjlsd.jpg"
+             
               />
               <Box sx={userNameStyle}>
                 <Typography fontSize={"0.875rem"} fontWeight={"500"}>
-                  Chris Miguel
+                  {userInfo.name}
                 </Typography>
                 <Typography fontSize={"0.75rem"} fontWeight={"400"}>
-                  Admin
+                 {userInfo.role}
                 </Typography>
               </Box>
+               {/* <Box sx={userNameStyle}>
+
+      <Box>
+        <Typography fontSize="0.875rem" fontWeight="500">
+          {userInfo.name}
+        </Typography>
+        <Typography fontSize="0.75rem" fontWeight="400">
+          {userInfo.role}
+        </Typography>
+      </Box>
+      <StatusIndicator status={userInfo.status}>
+        <CircleIcon fontSize="small" />
+        <Typography variant="caption" fontWeight="500">
+          {userInfo.status === 'active' ? 'Active' : 'Inactive'}
+        </Typography>
+      </StatusIndicator>
+    </Box> */}
             </Box>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

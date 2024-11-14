@@ -20,7 +20,7 @@ function createData(
   Total_Trips_Completed,
   Status,
   Last_Active,
-  Action
+  Action,
 ) {
   return {
     DriverID,
@@ -44,7 +44,7 @@ const rows = [
     "Vehicle A",
     "23",
     "On Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
   createData(
     2,
@@ -54,7 +54,7 @@ const rows = [
     "Vehicle B",
     "45",
     "Off Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
   createData(
     3,
@@ -64,7 +64,7 @@ const rows = [
     "Vehicle C",
     "44",
     "On Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
   createData(
     4,
@@ -74,7 +74,7 @@ const rows = [
     "Vehicle D",
     "29",
     "On Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
 ];
 

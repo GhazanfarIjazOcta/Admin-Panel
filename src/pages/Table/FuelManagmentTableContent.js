@@ -22,7 +22,7 @@ function createData(
   Trip_Duration,
   Distance,
   Cost,
-  Status
+  Status,
 ) {
   return {
     Vehicle,
@@ -51,7 +51,7 @@ const rows = [
     "0:04:55",
     "120",
     "$4554",
-    "Active"
+    "Active",
   ),
   createData(
     "Vehicale Name B",
@@ -64,7 +64,7 @@ const rows = [
     "0:04:55",
     "34",
     "$4554",
-    "Inactive"
+    "Inactive",
   ),
   createData(
     "Vehicale Name C",
@@ -77,7 +77,7 @@ const rows = [
     "0:04:55",
     "233",
     "$4554",
-    "Active"
+    "Active",
   ),
 ];
 
@@ -358,8 +358,8 @@ export default function FuelManagmentTableContent() {
                         row.Signal_Strength == "Good"
                           ? "#28A745"
                           : row.Signal_Strength == "Poor"
-                          ? "#D12E34"
-                          : "black",
+                            ? "#D12E34"
+                            : "black",
                     }}
                     fontFamily={"Inter"}
                   >

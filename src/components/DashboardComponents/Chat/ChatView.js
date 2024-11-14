@@ -8,20 +8,20 @@ import {
   IconButton,
   CircularProgress,
   TextField,
-  Modal
+  Modal,
 } from "@mui/material";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import SendIcon from "@mui/icons-material/Send";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { headerStyle } from "./ChatStyles";
-import { format } from 'date-fns'; // Ensure you have date-fns installed for formatting
+import { format } from "date-fns"; // Ensure you have date-fns installed for formatting
 
 const ChatView = ({
   currentUser = {
     id: 2,
     image:
-      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104832/adminlogo2_ghz4jq.webp"
+      "https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104832/adminlogo2_ghz4jq.webp",
   },
   isLoadingChat,
   handleImageUpload,
@@ -34,7 +34,7 @@ const ChatView = ({
   message,
   setMessage,
   chatlist,
-  setchatlist
+  setchatlist,
 }) => {
   const [messages, setMessages] = useState([]);
   const [text, settext] = useState();
@@ -50,7 +50,6 @@ const ChatView = ({
       setMessages([]);
     }
   }, [chatId]);
-
 
   useEffect(() => {
     // Scroll to the bottom whenever messages change
@@ -77,11 +76,10 @@ const ChatView = ({
       content: messageContent,
       User: {
         id: currentUser.id,
-        image: currentUser.image
+        image: currentUser.image,
       },
       chatid: chatId,
-      timestamp: getCurrentTimestamp()
-
+      timestamp: getCurrentTimestamp(),
     };
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
@@ -92,7 +90,7 @@ const ChatView = ({
       direction={"column"}
       justifyContent={"flex-start"}
       height={{ lg: "85%", xs: "82%" }}
-      position={{ lg: "relative", xs: "fixed" }}
+      position={{ lg: "relative", md:"relative" , sm:"relative" , xs: "fixed" }}
     >
       <Stack justifyContent={"space-between"} direction={"row"}>
         <Box sx={headerStyle.head}>
@@ -102,7 +100,7 @@ const ChatView = ({
             sx={{
               fontFamily: "var(--main-font-family)",
               fontSize: { xl: "15px", lg: "12px", md: "15px", xs: "15px" },
-              fontWeight: 600
+              fontWeight: 600,
             }}
           >
             {/* {projectName ||  `${chatUser?.firstName} ${chatUser?.lastName}`} */}
@@ -118,13 +116,13 @@ const ChatView = ({
       </Stack>
       <Divider sx={{ marginBottom: "1px" }} />
       <Box
-      ref={messageBoxRef} // Attach the ref here
+        ref={messageBoxRef} // Attach the ref here
         sx={{
           height: "calc(72vh)",
           overflowY: "scroll",
           padding: 2,
           bgcolor: "#FAFAFA",
-          borderRadius: "8px"
+          borderRadius: "8px",
         }}
       >
         {isLoadingChat ? (
@@ -141,7 +139,7 @@ const ChatView = ({
               padding: 2,
               display: "flex",
               justifyContent: "center",
-              alignItems: "center"
+              alignItems: "center",
             }}
           >
             <IconButton onClick={handleCloseModal}>
@@ -155,88 +153,88 @@ const ChatView = ({
                 height: "400px",
                 objectFit: "contain",
                 boxShadow: "0px 2px 5px rgba(0, 0, 0, 0.2)",
-                filter: loading ? "blur(5px)" : ""
+                filter: loading ? "blur(5px)" : "",
               }}
             />
           </Box>
         ) : (
-<Box>
-  {messages.length > 0 ? (
-    messages.map((msg) => {
-      const isSender = msg?.User?.id === currentUser?.id;
+          <Box>
+            {messages.length > 0 ? (
+              messages.map((msg) => {
+                const isSender = msg?.User?.id === currentUser?.id;
 
-      // Format the timestamp
-      const messageTime = new Date(msg.timestamp);
-      const formattedTime = format(messageTime, 'hh:mm a'); // You can change this format as needed
+                // Format the timestamp
+                const messageTime = new Date(msg.timestamp);
+                const formattedTime = format(messageTime, "hh:mm a"); // You can change this format as needed
 
-      return (
-        <Box
-          key={msg?.id}
-          sx={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: isSender ? "flex-end" : "flex-start",
-            marginBottom: 2
-          }}
-        >
-          {!isSender && (
-            <Avatar
-              src={msg?.User?.image}
-              sx={{ width: 25, height: 25, marginRight: 1 }}
-            />
-          )}
-          <Box
-            sx={{
-              bgcolor: isSender ? "#15294E" : "#F2F2F2",
-              color: isSender ? "#FFFFFF" : "#000000",
-              borderRadius: isSender
-                ? "10px 10px 0 10px"
-                : "10px 10px 10px 0",
-              py: 1.5,
-              px: 3,
-              maxWidth: "35%",
-              wordWrap: "break-word",
-              display: 'flex',
-              flexDirection: 'column' // Stack message content and time
-            }}
-          >
-            <Typography sx={{ marginBottom: 0.5 }}>
-              {msg.content}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: '0.8rem', // Adjust font size as needed
-                color: isSender ? "#FFFFFF" : "#000000",
-                marginTop: '0.5rem', // Add some space above the time
-                
-                alignItems: "flex-end",
-              }}
-            >
-              {formattedTime}
-            </Typography>
+                return (
+                  <Box
+                    key={msg?.id}
+                    sx={{
+                      display: "flex",
+                      alignItems: "flex-end",
+                      justifyContent: isSender ? "flex-end" : "flex-start",
+                      marginBottom: 2,
+                    }}
+                  >
+                    {!isSender && (
+                      <Avatar
+                        src={msg?.User?.image}
+                        sx={{ width: 25, height: 25, marginRight: 1 }}
+                      />
+                    )}
+                    <Box
+                      sx={{
+                        bgcolor: isSender ? "#15294E" : "#F2F2F2",
+                        color: isSender ? "#FFFFFF" : "#000000",
+                        borderRadius: isSender
+                          ? "10px 10px 0 10px"
+                          : "10px 10px 10px 0",
+                        py: 1.5,
+                        px: 3,
+                        maxWidth: "35%",
+                        wordWrap: "break-word",
+                        display: "flex",
+                        flexDirection: "column", // Stack message content and time
+                      }}
+                    >
+                      <Typography sx={{ marginBottom: 0.5 }}>
+                        {msg.content}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: "0.8rem", // Adjust font size as needed
+                          color: isSender ? "#FFFFFF" : "#000000",
+                          marginTop: "0.5rem", // Add some space above the time
+
+                          alignItems: "flex-end",
+                        }}
+                      >
+                        {formattedTime}
+                      </Typography>
+                    </Box>
+                    {isSender && (
+                      <Avatar
+                        src={currentUser?.image}
+                        sx={{ width: 25, height: 25, marginLeft: 1 }}
+                      />
+                    )}
+                  </Box>
+                );
+              })
+            ) : (
+              <Typography
+                sx={{
+                  fontFamily: "var(--main-font-family)",
+                  marginLeft: "1rem",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                No chat available...
+              </Typography>
+            )}
           </Box>
-          {isSender && (
-            <Avatar
-              src={currentUser?.image}
-              sx={{ width: 25, height: 25, marginLeft: 1 }}
-            />
-          )}
-        </Box>
-      );
-    })
-  ) : (
-    <Typography
-      sx={{
-        fontFamily: "var(--main-font-family)",
-        marginLeft: "1rem",
-        justifyContent: "center",
-        display: "flex"
-      }}
-    >
-      No chat available...
-    </Typography>
-  )}
-</Box>
         )}
       </Box>
       <Box
@@ -253,7 +251,7 @@ const ChatView = ({
           mb: { lg: 0, xs: 1 },
           ml: 2,
           mr: 2,
-          mt: 1
+          mt: 1,
         }}
       >
         <label htmlFor="file-input">

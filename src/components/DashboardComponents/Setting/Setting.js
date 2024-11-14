@@ -8,6 +8,7 @@ import PrivacyPolicy from "./PrivacyPolicy";
 import TermsAndCondition from "./TermsAndCondition";
 import { settingStyles } from "../../UI/styles/Main";
 
+
 function Setting() {
   const [value, setValue] = React.useState("Profile");
 

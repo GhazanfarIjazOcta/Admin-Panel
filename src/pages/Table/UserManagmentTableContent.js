@@ -19,7 +19,7 @@ function createData(
   Role,
   Status,
   Last_Login,
-  Action
+  Action,
 ) {
   return {
     UserID,
@@ -42,7 +42,7 @@ const rows = [
     "Admin",
     "Active",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     2,
@@ -52,7 +52,7 @@ const rows = [
     "Admin",
     "Inactive",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     3,
@@ -62,7 +62,7 @@ const rows = [
     "Admin",
     "Active",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     4,
@@ -72,7 +72,7 @@ const rows = [
     "Admin",
     "Active",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     5,
@@ -82,7 +82,7 @@ const rows = [
     "Admin",
     "Inactive",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     6,
@@ -92,7 +92,7 @@ const rows = [
     "Admin",
     "Active",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     7,
@@ -102,7 +102,7 @@ const rows = [
     "Admin",
     "Inactive",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     8,
@@ -112,7 +112,7 @@ const rows = [
     "Admin",
     "Active",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     9,
@@ -122,7 +122,7 @@ const rows = [
     "Admin",
     "Active",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
   createData(
     10,
@@ -132,7 +132,7 @@ const rows = [
     "Admin",
     "Inactive",
     "2024-08-05 09:15 AM",
-    "Edit/Delete"
+    "Edit/Delete",
   ),
 ];
 
@@ -145,7 +145,8 @@ export default function TableContent() {
         elevation: 0,
         borderTop: "1px solid #EAECF0",
         height: "54vh",
-        width: "99%" , overflow: "none",
+        width: "99%",
+        overflow: "none",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">

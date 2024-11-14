@@ -12,8 +12,8 @@ export default function DashboardLocationCard() {
         sx={{
           border: "1px ",
           boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.6)",
-          height: {lg:"570px" , xs:"340px" , sm: "570px"},
-          mb: 1
+          height: { lg: "570px", xs: "340px", sm: "570px" },
+          mb: 1,
         }}
       >
         <React.Fragment>
@@ -23,7 +23,7 @@ export default function DashboardLocationCard() {
             width={"100%"}
             pl={1}
             pt={2}
-            height={"15%" }
+            height={"15%"}
             pr={1}
           >
             <Stack width={"20%"}>
@@ -68,9 +68,7 @@ export default function DashboardLocationCard() {
                 >
                   <img src={maintenanceLogo} height={"100%"} width={"100%"} />
                 </Box>
-                
               </Box>
-
             </Stack>
             <Stack width={"100%"} direction={"column"}>
               {/* {" "} */}
@@ -83,7 +81,7 @@ export default function DashboardLocationCard() {
                     lg: "15px", // Large screens
                     xl: "15px",
                   },
-                  mt:1,
+                  mt: 1,
                   color: "#3D4149",
                   fontWeight: 400,
                   fontFamily: "Inter, sans-serif",
@@ -234,9 +232,11 @@ export default function DashboardLocationCard() {
             </Stack> */}
           </Stack>
 
-
-          
-          <Box height={{ md: "450px", xs: "250px" , sm:"450px"}} pl={"7px"} pr={"7px"}>
+          <Box
+            height={{ md: "450px", xs: "250px", sm: "450px" }}
+            pl={"7px"}
+            pr={"7px"}
+          >
             <iframe
               width={"100%"}
               height={"100%"}

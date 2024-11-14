@@ -21,7 +21,7 @@ function createData(
   Distance,
   Fuel_Consumption,
   DateAndTime,
-  Status
+  Status,
 ) {
   return {
     TripID,
@@ -48,7 +48,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Active"
+    "Active",
   ),
   createData(
     "02",
@@ -60,7 +60,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Inactive"
+    "Inactive",
   ),
   createData(
     "03",
@@ -72,7 +72,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Upcomming"
+    "Upcomming",
   ),
   createData(
     "04",
@@ -84,7 +84,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Delayed"
+    "Delayed",
   ),
 ];
 

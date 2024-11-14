@@ -1,7 +1,7 @@
-import React from 'react'
-import Logo from "../../assets/UkeyLogo.png"
-import { Box } from '@mui/material'
-import { keyframes } from '@emotion/react';
+import React from "react";
+import Logo from "../../assets/UkeyLogo.png";
+import { Box } from "@mui/material";
+import { keyframes } from "@emotion/react";
 
 const growAnimation = keyframes`
   0% {
@@ -19,26 +19,25 @@ const growAnimation = keyframes`
 `;
 
 function Splash() {
-    return (
-        <Box
-            sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-
-            }}
-        >
-            <Box
-                component="img"
-                src={Logo}
-                sx={{
-                    animation: `${growAnimation} 2s ease-out`,
-                }}
-                alt="Logo"
-            />
-        </Box>
-    )
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <Box
+        component="img"
+        src={Logo}
+        sx={{
+          animation: `${growAnimation} 2s ease-out`,
+        }}
+        alt="Logo"
+      />
+    </Box>
+  );
 }
 
-export default Splash
+export default Splash;

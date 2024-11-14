@@ -14,6 +14,8 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  MenuItem,
+  Select
 } from "@mui/material";
 import User from "../../assets/Card/user.png";
 import SearchIcon from "@mui/icons-material/Search";
@@ -23,6 +25,7 @@ import CrossIcon from "../../assets/Table/CrossIcon.png";
 import cloudLogo from "../../assets/Table/cloudLogo.png";
 import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { useGetTripManagementDashboardQuery } from "../../Api/apiSlice";
 
 export default function TableHeader({
   text,
@@ -32,8 +35,29 @@ export default function TableHeader({
   exportIcon,
   icon,
   route,
+  setSearch,
+  search,
+  // serRole,
+  // role,
+  status,
+  setStatus
 }) {
   const navigate = useNavigate();
+
+  const { data, error, isLoading } = useGetTripManagementDashboardQuery();
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value); // Update the search state
+  };
+  const handleStatusChange = (event) => {
+    setStatus(event.target.value); // Update the status state
+  };
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error loading data</p>;
+
+  const { trips, activeTrips, delayedTrips, upcomingTrips } = data || {};
+  console.log("here is the trip data ", data);
 
   return (
     <Box sx={{ width: "99%", overflow: "hidden" }} mt={2}>
@@ -43,7 +67,7 @@ export default function TableHeader({
           border: "none",
           boxShadow: "none",
           padding: "24px",
-          height: "auto",
+          height: "auto"
         }}
       >
         <React.Fragment>
@@ -52,7 +76,13 @@ export default function TableHeader({
             direction={"row"}
             justifyContent={"space-between"}
             spacing={2}
-            display={{ xs: "none", sm: "none" , md:"none" , lg:"none" , xl:"flex" }}
+            display={{
+              xs: "none",
+              sm: "none",
+              md: "none",
+              lg: "none",
+              xl: "flex"
+            }}
           >
             <Stack
               direction={"row"}
@@ -68,7 +98,7 @@ export default function TableHeader({
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  borderRadius: "2px",
+                  borderRadius: "2px"
                 }}
               >
                 <img src={icon ? icon : User} height={"13px"} width={"20px"} />
@@ -79,7 +109,7 @@ export default function TableHeader({
                   fontSize: { lg: "14px", xs: "10px" },
                   color: "#5A607F",
                   fontWeight: 400,
-                  fontFamily: "Inter, sans-serif",
+                  fontFamily: "Inter, sans-serif"
                 }}
               >
                 {text}
@@ -95,9 +125,9 @@ export default function TableHeader({
                       display: "flex",
                       alignItems: "center",
                       width: { lg: 317, xs: 30 },
-                      height: { lg: 46, xs: 30 },
+                      height: { lg: "98%", xs: 30 },
                       boxShadow: "none",
-                      border: "1px solid #E0E0E0",
+                      border: "1px solid #E0E0E0"
                     }}
                   >
                     <Stack
@@ -111,7 +141,7 @@ export default function TableHeader({
                           fontSize: { lg: "16px", xs: "12px" },
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif",
+                          fontFamily: "Inter, sans-serif"
                         }}
                       >
                         Total Trips
@@ -121,10 +151,10 @@ export default function TableHeader({
                           fontSize: { lg: "24px", xs: "12px" },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif",
+                          fontFamily: "Poppins, sans-serif"
                         }}
                       >
-                        212
+                        {trips.count}
                       </Typography>
                     </Stack>
 
@@ -143,7 +173,7 @@ export default function TableHeader({
                           fontSize: { lg: "16px", xs: "12px" },
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif",
+                          fontFamily: "Inter, sans-serif"
                         }}
                       >
                         Active
@@ -153,12 +183,74 @@ export default function TableHeader({
                           fontSize: { lg: "24px", xs: "12px" },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif",
+                          fontFamily: "Poppins, sans-serif"
                         }}
                       >
-                        210
+                        {activeTrips.count}
                       </Typography>
                     </Stack>
+                    {/* <Divider
+                      sx={{ height: 28, m: 0.5 }}
+                      orientation="vertical"
+                    /> */}
+                    {/* <Stack
+                      direction={"row"}
+                      p={2}
+                      gap={2}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        sx={{
+                          fontSize: { lg: "16px", xs: "12px" },
+                          color: "#5A607F",
+                          fontWeight: 500,
+                          fontFamily: "Inter, sans-serif"
+                        }}
+                      >
+                        Upcoming
+                      </Box>
+                      <Typography
+                        sx={{
+                          fontSize: { lg: "24px", xs: "12px" },
+                          color: "#14181F",
+                          fontWeight: 500,
+                          fontFamily: "Poppins, sans-serif"
+                        }}
+                      >
+                        {upcomingTrips.count}
+                      </Typography>
+                    </Stack> */}
+                    {/* <Divider
+                      sx={{ height: 28, m: 0.5 }}
+                      orientation="vertical"
+                    /> */}
+                    {/* <Stack
+                      direction={"row"}
+                      p={2}
+                      gap={2}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        sx={{
+                          fontSize: { lg: "16px", xs: "12px" },
+                          color: "#5A607F",
+                          fontWeight: 500,
+                          fontFamily: "Inter, sans-serif"
+                        }}
+                      >
+                        Delayed
+                      </Box>
+                      <Typography
+                        sx={{
+                          fontSize: { lg: "24px", xs: "12px" },
+                          color: "#14181F",
+                          fontWeight: 500,
+                          fontFamily: "Poppins, sans-serif"
+                        }}
+                      >
+                        {delayedTrips.count}
+                      </Typography>
+                    </Stack> */}
                   </Paper>
                 </Box>
               </Stack>
@@ -169,6 +261,8 @@ export default function TableHeader({
                 placeholder={`Search ${searchText}, ID`}
                 variant="outlined"
                 size="small"
+                value={search} // Bind value to state
+                onChange={handleSearchChange} // Update state on change
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start" sx={{ marginRight: 0 }}>
@@ -176,16 +270,16 @@ export default function TableHeader({
                         <SearchIcon />
                       </IconButton>
                     </InputAdornment>
-                  ),
+                  )
                 }}
                 sx={{
                   "& .MuiInputBase-root": {
-                    height: "38px",
-                    width: { xs: "100%", sm: "200px" }, // Responsive width
-                  },
+                    height: "100%",
+                    width: { xs: "100%", sm: "200px", lg: "100%" } // Responsive width
+                  }
                 }}
               />
-              <TextField
+              {/* <TextField
                 placeholder="Role"
                 variant="outlined"
                 size="small"
@@ -200,31 +294,38 @@ export default function TableHeader({
                 }}
                 sx={{
                   "& .MuiInputBase-root": {
-                    height: "38px",
-                    width: { xs: "100%", sm: "110px" }, // Responsive width
+                    height: "100%",
+                    width: { xs: "100%", sm: "110px" , lg:"100%" }, // Responsive width
                   },
                 }}
-              />
-              <TextField
-                placeholder="Status"
+              /> */}
+              <Select
+                defaultValue=""
                 variant="outlined"
+                value={status}
+                onChange={handleStatusChange} // Update state on change
                 size="small"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end" sx={{ marginRight: 0 }}>
-                      <IconButton sx={{ padding: 0 }}>
-                        <img src={Arrowdown} height={"16px"} width={"20px"} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
+                displayEmpty
+                renderValue={(selected) => selected || "Status"} // Placeholder text
+                // endAdornment={
+                //   <InputAdornment position="end" sx={{ marginRight: 0 }}>
+                //     <IconButton sx={{ padding: 0 }}>
+                //       <img src={Arrowdown} height="16px" width="20px" />
+                //     </IconButton>
+                //   </InputAdornment>
+                // }
                 sx={{
                   "& .MuiInputBase-root": {
-                    height: "38px",
-                    width: { xs: "100%", sm: "110px" }, // Responsive width
-                  },
+                    height: "100%",
+                    width: { xs: "100%", sm: "110px", lg: "100%" }
+                  }
                 }}
-              />
+              >
+                <MenuItem value="active">Active</MenuItem>
+                <MenuItem value="upcoming">Upcoming</MenuItem>
+                <MenuItem value="delayed">Delayed</MenuItem>
+                <MenuItem value="">All trips</MenuItem>
+              </Select>
               <TextField
                 placeholder="7/6/2024 - 5/8-2024"
                 variant="outlined"
@@ -236,13 +337,13 @@ export default function TableHeader({
                         <img src={CrossIcon} height={"16px"} width={"16px"} />
                       </IconButton>
                     </InputAdornment>
-                  ),
+                  )
                 }}
                 sx={{
                   "& .MuiInputBase-root": {
-                    height: "38px",
-                    width: { xs: "100%", sm: "210px" }, // Responsive width
-                  },
+                    height: "100%",
+                    width: { xs: "100%", sm: "210px", lg: "100%" } // Responsive width
+                  }
                 }}
               />
               {!exportIcon ? (
@@ -250,9 +351,9 @@ export default function TableHeader({
                   variant="contained"
                   sx={{
                     marginRight: "15px",
-                    marginLeft: "30px",
+                    marginLeft: "15px",
                     width: "150px",
-                    height: "38px",
+                    height: "100%",
                     backgroundColor: "#15294E",
                     color: "white",
                     textTransform: "none",
@@ -262,8 +363,8 @@ export default function TableHeader({
                     paddingRight: "25px",
                     gap: "3px",
                     "&:hover": {
-                      backgroundColor: "#15294E",
-                    },
+                      backgroundColor: "#15294E"
+                    }
                   }}
                   onClick={() => navigate(route)}
                 >
@@ -287,8 +388,8 @@ export default function TableHeader({
                     paddingRight: "25px",
                     gap: "8px",
                     "&:hover": {
-                      backgroundColor: "white",
-                    },
+                      backgroundColor: "white"
+                    }
                   }}
                 >
                   <img src={cloudLogo} width={"20px"} height={"20px"} />
@@ -296,33 +397,46 @@ export default function TableHeader({
                 </Button>
               )}
             </Stack>
-
           </Stack>
 
           {/* Mobile Layout */}
-          <Accordion sx={{ display: { xs: "block", sm: "block" , md:"block" ,lg:"block" , xl:"none" } }}>
+          <Accordion
+            sx={{
+              display: {
+                xs: "block",
+                sm: "block",
+                md: "block",
+                lg: "block",
+                xl: "none"
+              }
+            }}
+          >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            <Stack
-              direction={"row"}
-              alignItems={"center"}
-              gap={2}
-              display={{ xs: "none", sm: "flex" }}
-            >
-              <Box
-                sx={{
-                  width: { lg: "70%", xs: "70%" },
-                  height: { lg: "90%", xs: "70%" },
-                  backgroundColor: "#FFF4F2",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: "2px",
-                }}
+              <Stack
+                direction={"row"}
+                alignItems={"center"}
+                gap={2}
+                display={{ xs: "none", sm: "flex" }}
               >
-                <img src={icon ? icon : User} height={"20px"} width={"20px"} />
-              </Box>
+                <Box
+                  sx={{
+                    width: { lg: "70%", xs: "70%" },
+                    height: { lg: "90%", xs: "70%" },
+                    backgroundColor: "#FFF4F2",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: "2px"
+                  }}
+                >
+                  <img
+                    src={icon ? icon : User}
+                    height={"20px"}
+                    width={"20px"}
+                  />
+                </Box>
 
-              {/* <Typography
+                {/* <Typography
                 sx={{
                   fontSize: { lg: "14px", xs: "10px" },
                   color: "#5A607F",
@@ -332,22 +446,21 @@ export default function TableHeader({
               >
                 {text}
               </Typography> */}
-            </Stack>
+              </Stack>
               <Typography
                 sx={{
                   fontSize: "14px",
                   color: "#5A607F",
                   fontWeight: 400,
                   fontFamily: "Inter, sans-serif",
-                  mt:0.6,
-                  ml:1.5
+                  mt: 0.6,
+                  ml: 1.5
                 }}
               >
                 {text}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-             
               <Stack direction="column" gap={1.5} sx={{ width: "100%" }}>
                 {trip && (
                   <Stack direction={"row"} gap={2}>
@@ -360,7 +473,7 @@ export default function TableHeader({
                           width: { lg: 317, xs: 300 },
                           height: { lg: 46, xs: 60 },
                           boxShadow: "none",
-                          border: "1px solid #E0E0E0",
+                          border: "1px solid #E0E0E0"
                         }}
                       >
                         <Stack
@@ -374,7 +487,7 @@ export default function TableHeader({
                               fontSize: { lg: "16px", xs: "12px" },
                               color: "#5A607F",
                               fontWeight: 500,
-                              fontFamily: "Inter, sans-serif",
+                              fontFamily: "Inter, sans-serif"
                             }}
                           >
                             Total Trips
@@ -384,10 +497,10 @@ export default function TableHeader({
                               fontSize: { lg: "24px", xs: "12px" },
                               color: "#14181F",
                               fontWeight: 500,
-                              fontFamily: "Poppins, sans-serif",
+                              fontFamily: "Poppins, sans-serif"
                             }}
                           >
-                            212
+                            {trips.count}
                           </Typography>
                         </Stack>
 
@@ -407,7 +520,7 @@ export default function TableHeader({
                               fontSize: { lg: "16px", xs: "12px" },
                               color: "#5A607F",
                               fontWeight: 500,
-                              fontFamily: "Inter, sans-serif",
+                              fontFamily: "Inter, sans-serif"
                             }}
                           >
                             Active
@@ -417,39 +530,116 @@ export default function TableHeader({
                               fontSize: { lg: "24px", xs: "12px" },
                               color: "#14181F",
                               fontWeight: 500,
-                              fontFamily: "Poppins, sans-serif",
+                              fontFamily: "Poppins, sans-serif"
                             }}
                           >
-                            210
+                            {activeTrips.count}
                           </Typography>
                         </Stack>
+                        {/* <Divider
+                          sx={{ height: 28, m: 0.5 }}
+                          orientation="vertical"
+                        /> */}
+                        {/* <Stack
+                          direction={"row"}
+                          p={2}
+                          gap={2}
+                          alignItems={"center"}
+                        >
+                          <Box
+                            sx={{
+                              fontSize: { lg: "16px", xs: "12px" },
+                              color: "#5A607F",
+                              fontWeight: 500,
+                              fontFamily: "Inter, sans-serif"
+                            }}
+                          >
+                            Upcoming
+                          </Box>
+                          <Typography
+                            sx={{
+                              fontSize: { lg: "24px", xs: "12px" },
+                              color: "#14181F",
+                              fontWeight: 500,
+                              fontFamily: "Poppins, sans-serif"
+                            }}
+                          >
+                            {upcomingTrips.count}
+                          </Typography>
+                        </Stack>
+                        <Divider
+                          sx={{ height: 28, m: 0.5 }}
+                          orientation="vertical"
+                        /> */}
+                        {/* <Stack
+                          direction={"row"}
+                          p={2}
+                          gap={2}
+                          alignItems={"center"}
+                        >
+                          <Box
+                            sx={{
+                              fontSize: { lg: "16px", xs: "12px" },
+                              color: "#5A607F",
+                              fontWeight: 500,
+                              fontFamily: "Inter, sans-serif"
+                            }}
+                          >
+                            Delayed
+                          </Box>
+                          <Typography
+                            sx={{
+                              fontSize: { lg: "24px", xs: "12px" },
+                              color: "#14181F",
+                              fontWeight: 500,
+                              fontFamily: "Poppins, sans-serif"
+                            }}
+                          >
+                            {delayedTrips.count}
+                          </Typography>
+                        </Stack> */}
                       </Paper>
                     </Box>
                   </Stack>
                 )}
-
-
-              
-
 
                 <TextField
                   placeholder={`Search ${searchText}, ID`}
                   variant="outlined"
                   size="small"
                   fullWidth // Make it full width
+                  value={search} // Bind value to state
+                  onChange={handleSearchChange} // Update state on change
                 />
-                <TextField
+                {/* <TextField
                   placeholder="Role"
                   variant="outlined"
                   size="small"
                   fullWidth // Make it full width
-                />
-                <TextField
+                /> */}
+                {/* <TextField
                   placeholder="Status"
                   variant="outlined"
                   size="small"
                   fullWidth // Make it full width
-                />
+                  value={status}
+                  onChange={handleStatusChange}  // Update state on change
+                  
+                /> */}
+                <Select
+                  displayEmpty
+                  fullWidth
+                  variant="outlined"
+                  size="small"
+                  value={status}
+                  onChange={handleStatusChange} // Update state on change
+                  renderValue={(selected) => selected || "Status"} // Placeholder text
+                >
+                  <MenuItem value="Active">Active</MenuItem>
+                  <MenuItem value="Upcoming">Upcoming</MenuItem>
+                  <MenuItem value="Delayed">Delayed</MenuItem>
+                  <MenuItem value="">All Trips</MenuItem>
+                </Select>
                 <TextField
                   placeholder="7/6/2024 - 5/8/2024"
                   variant="outlined"
@@ -465,13 +655,11 @@ export default function TableHeader({
                     backgroundColor: "#15294E",
                     color: "white"
                   }}
-
                   onClick={() => navigate(route)}
                 >
                   {buttonText}
                 </Button>
               </Stack>
-              
             </AccordionDetails>
           </Accordion>
         </React.Fragment>

@@ -50,13 +50,14 @@ export const addUserStyles = {
     // height: "86%",
     // width: "100%",
     // marginTop: "1%",
-    flexGrow: 1 , position: 'absolute',
-      width: "82%", 
-      mt: { xs: 13, sm:12 , md: 12 , lg: 12 },
-      // Adjust padding based on the screen size
-      px: { xs: 2, sm:  2 ,md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
-      ml: { xs: 0, sm: 0 ,md: 0 , lg: 0 , xl: 0 }, // Leave space for the sidebar on larger screens
-      overflow: "none", // Prevent overflowing horizontally and vertically
+    flexGrow: 1,
+    position: "absolute",
+    width: "82%",
+    mt: { xs: 13, sm: 12, md: 12, lg: 12 },
+    // Adjust padding based on the screen size
+    px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
+    ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
+    overflow: "none", // Prevent overflowing horizontally and vertically
   },
   container: {
     height: "95%",
@@ -242,7 +243,6 @@ export const maintenanceSchedulingStyles = {
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "2px",
-    
   },
   mainenanceText: {
     fontSize: "16px",
@@ -352,30 +352,30 @@ export const fuelManagmentStyles = {
   topContainer: {
     width: "100%",
     display: "flex",
-    flexDirection: {lg:"row" , sm:"row" , xs:"column"},
+    flexDirection: { lg: "row", sm: "row", xs: "column" },
     justifyContent: "space-between",
   },
   leftContainer: {
-    width: {lg:"29%", sm:"45%" , xs:"100%"}, 
+    width: { lg: "29%", sm: "45%", xs: "100%" },
     display: "flex",
     flexDirection: "column",
     gap: "16px",
-    marginRight: {lg:0 , sm:2 , xs: 0}
+    marginRight: { lg: 0, sm: 2, xs: 0 },
   },
-  rightContainer: { 
-    width: {lg:"70%", sm:"90%" , xs:"100%"},
-      border: "1px ",
-      flexDirection: "column",   
-      boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)" 
-    },
-    
+  rightContainer: {
+    width: { lg: "70%", sm: "90%", xs: "100%" },
+    border: "1px ",
+    flexDirection: "column",
+    boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+  },
+
   rightContainerPaper: { boxShadow: "none", elevation: "none" },
   arrow: { position: "relative", top: "20px", right: "30px" },
   arrowText: {
     fontSize: "12px",
     color: "#BEC0CA",
     fontWeight: 400,
-    fontFamily: "Inter, sans-serif",  
+    fontFamily: "Inter, sans-serif",
   },
 };
 export const settingStyles = {
