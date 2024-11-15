@@ -484,102 +484,102 @@ export default function VehicleManagmentTableContent({
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-      {/* Edit Modal */}
-      <Modal open={openEditModal} onClose={handleCloseEditModal}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            borderRadius: 2,
-            boxShadow: 24,
-            p: 4
-          }}
+{/* Edit Modal */}
+<Modal open={openEditModal} onClose={handleCloseEditModal}>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px otherwise
+      bgcolor: "background.paper",
+      borderRadius: 2,
+      boxShadow: 24,
+      p: { xs: 2, sm: 4 } // Adjust padding for smaller screens
+    }}
+  >
+    <Typography variant="h6" component="h2">
+      Edit vehicle
+    </Typography>
+    {selectedVehicle && (
+      <>
+        <TextField
+          fullWidth
+          label="VehicleType"
+          margin="normal"
+          value={editVehicleType}
+          onChange={(e) => setEditVehicleType(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="VehicleModel"
+          margin="normal"
+          value={editVehicleModel}
+          onChange={(e) => setEditVehicleModel(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Status"
+          margin="normal"
+          value={editStatus}
+          onChange={(e) => setEditStatus(e.target.value)}
+          select
         >
-          <Typography variant="h6" component="h2">
-            Edit vehicle
-          </Typography>
-          {selectedVehicle && (
-            <>
-              <TextField
-                fullWidth
-                label="VehicleType"
-                margin="normal"
-                value={editVehicleType}
-                onChange={(e) => setEditVehicleType(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                label="VehicleModel"
-                margin="normal"
-                value={editVehicleModel}
-                onChange={(e) => setEditVehicleModel(e.target.value)}
-              />
-
-              <TextField
-                fullWidth
-                label="Status"
-                margin="normal"
-                value={editStatus}
-                onChange={(e) => setEditStatus(e.target.value)}
-                select
-              >
-                <MenuItem value="active">Active</MenuItem>
-                <MenuItem value="inactive">Inactive</MenuItem>
-              </TextField>
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2 }}
-                onClick={handleSaveChanges}
-              >
-                Save Changes
-              </Button>
-            </>
-          )}
-        </Box>
-      </Modal>
-
-      {/* Delete Modal */}
-      <Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            borderRadius: 2,
-            boxShadow: 24,
-            p: 4
-          }}
+          <MenuItem value="active">Active</MenuItem>
+          <MenuItem value="inactive">Inactive</MenuItem>
+        </TextField>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+          onClick={handleSaveChanges}
         >
-          <Typography variant="h6" component="h2">
-            Confirm Delete
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            Are you sure you want to delete {selectedVehicle?.VehicleType}?
-          </Typography>
-          <Box
-            sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
-          >
-            <Button variant="outlined" onClick={handleCloseDeleteModal}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleDeleteConfirm}
-            >
-              Delete
-            </Button>
-          </Box>
-        </Box>
-      </Modal>
+          Save Changes
+        </Button>
+      </>
+    )}
+  </Box>
+</Modal>
+
+{/* Delete Modal */}
+<Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px otherwise
+      bgcolor: "background.paper",
+      borderRadius: 2,
+      boxShadow: 24,
+      p: { xs: 2, sm: 4 } // Adjust padding for smaller screens
+    }}
+  >
+    <Typography variant="h6" component="h2">
+      Confirm Delete
+    </Typography>
+    <Typography sx={{ mt: 2 }}>
+      Are you sure you want to delete {selectedVehicle?.VehicleType}?
+    </Typography>
+    <Box
+      sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
+    >
+      <Button variant="outlined" onClick={handleCloseDeleteModal}>
+        Cancel
+      </Button>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={handleDeleteConfirm}
+      >
+        Delete
+      </Button>
+    </Box>
+  </Box>
+</Modal>
+
 
       <CustomAlert
         open={alert.open}

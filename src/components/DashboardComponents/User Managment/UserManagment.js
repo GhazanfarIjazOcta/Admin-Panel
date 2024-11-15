@@ -213,7 +213,8 @@ export default function UserManagment() {
         onClose={handleAlertClose}
         severity={alert.severity}
         message={alert.message}
-        position= {"left"}
+        positionVerticle= {"top"}
+        positionHorizontal= {"center"}
         duration = {1500}
       />
         {/* <TablePagination /> */}

@@ -397,108 +397,109 @@ export default function TableContent({
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-      {/* Edit Modal */}
-      <Modal open={openEditModal} onClose={handleCloseEditModal}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            borderRadius: 2,
-            boxShadow: 24,
-            p: 4
-          }}
+{/* Edit Modal */}
+<Modal open={openEditModal} onClose={handleCloseEditModal}>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px on larger screens
+      bgcolor: "background.paper",
+      borderRadius: 2,
+      boxShadow: 24,
+      p: { xs: 2, sm: 4 } // Adjust padding for smaller screens
+    }}
+  >
+    <Typography variant="h6" component="h2">
+      Edit User
+    </Typography>
+    {selectedUser && (
+      <>
+        <TextField
+          fullWidth
+          label="Name"
+          margin="normal"
+          value={editName}
+          onChange={(e) => setEditName(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Email"
+          margin="normal"
+          value={editEmail}
+          onChange={(e) => setEditEmail(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Phone Number"
+          margin="normal"
+          value={editPhone}
+          onChange={(e) => setEditPhone(e.target.value)}
+        />
+        <TextField
+          fullWidth
+          label="Status"
+          margin="normal"
+          value={editStatus}
+          onChange={(e) => setEditStatus(e.target.value)}
+          select
         >
-          <Typography variant="h6" component="h2">
-            Edit User
-          </Typography>
-          {selectedUser && (
-            <>
-              <TextField
-                fullWidth
-                label="Name"
-                margin="normal"
-                value={editName}
-                onChange={(e) => setEditName(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                label="Email"
-                margin="normal"
-                value={editEmail}
-                onChange={(e) => setEditEmail(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                label="Phone Number"
-                margin="normal"
-                value={editPhone}
-                onChange={(e) => setEditPhone(e.target.value)}
-              />
-              <TextField
-                fullWidth
-                label="Status"
-                margin="normal"
-                value={editStatus}
-                onChange={(e) => setEditStatus(e.target.value)}
-                select
-              >
-                <MenuItem value="active">Active</MenuItem>
-                <MenuItem value="inactive">Inactive</MenuItem>
-              </TextField>
-              <Button
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2 }}
-                onClick={handleSaveChanges}
-              >
-                Save Changes
-              </Button>
-            </>
-          )}
-        </Box>
-      </Modal>
+          <MenuItem value="active">Active</MenuItem>
+          <MenuItem value="inactive">Inactive</MenuItem>
+        </TextField>
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ mt: 2 }}
+          onClick={handleSaveChanges}
+        >
+          Save Changes
+        </Button>
+      </>
+    )}
+  </Box>
+</Modal>
 
-      {/* Delete Modal */}
-      <Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 400,
-            bgcolor: "background.paper",
-            borderRadius: 2,
-            boxShadow: 24,
-            p: 4
-          }}
-        >
-          <Typography variant="h6" component="h2">
-            Confirm Delete
-          </Typography>
-          <Typography sx={{ mt: 2 }}>
-            Are you sure you want to delete {selectedUser?.name}?
-          </Typography>
-          <Box
-            sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
-          >
-            <Button variant="outlined" onClick={handleCloseDeleteModal}>
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              color="error"
-              onClick={handleDeleteConfirm}
-            >
-              Delete
-            </Button>
-          </Box>
-        </Box>
-      </Modal>
+{/* Delete Modal */}
+<Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: { xs: "90%", sm: 400 }, // Responsive width
+      bgcolor: "background.paper",
+      borderRadius: 2,
+      boxShadow: 24,
+      p: { xs: 2, sm: 4 } // Responsive padding
+    }}
+  >
+    <Typography variant="h6" component="h2">
+      Confirm Delete
+    </Typography>
+    <Typography sx={{ mt: 2 }}>
+      Are you sure you want to delete {selectedUser?.name}?
+    </Typography>
+    <Box
+      sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
+    >
+      <Button variant="outlined" onClick={handleCloseDeleteModal}>
+        Cancel
+      </Button>
+      <Button
+        variant="contained"
+        color="error"
+        onClick={handleDeleteConfirm}
+      >
+        Delete
+      </Button>
+    </Box>
+  </Box>
+</Modal>
+
 
       <CustomAlert
         open={alert.open}

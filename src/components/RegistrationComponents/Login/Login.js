@@ -133,7 +133,12 @@ function Login() {
     } else if (role === "customer" || role === "driver") {
       navigate("/dashboard/customerdashboardmain");
     } else {
-      alert("No role assigned");
+      
+      setAlert({
+        open: true,
+        severity: "warning",
+        message: "No role assigned"
+      });
     }
     
 
