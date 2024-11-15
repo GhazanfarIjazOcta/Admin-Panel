@@ -192,7 +192,7 @@ function Signup() {
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Enter your userEmail"
+                placeholder="Enter your email"
                 value={userEmail}
                 onChange={(e) => setuserEmail(e.target.value)}
               />
@@ -209,7 +209,7 @@ function Signup() {
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Enter your userPhone number"
+                placeholder="Enter your phone number"
                 value={userPhone}
                 onChange={(e) => setuserPhone(e.target.value)}
               />
@@ -233,7 +233,7 @@ function Signup() {
                 sx={RegistrationStyles.textField}
                 fullWidth
                 size="small"
-                placeholder="Enter your userPassword"
+                placeholder="Enter your password"
                 type={userPasswordVisible ? "text" : "password"}
                 value={userPassword}
                 onChange={(e) => setuserPassword(e.target.value)}

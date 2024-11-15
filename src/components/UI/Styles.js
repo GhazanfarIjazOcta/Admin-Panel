@@ -12,7 +12,7 @@ export const RegistrationStyles = {
         color: "#6F7C8E",
         opacity: 1,
         fontSize: "0.8rem",
-        paddingLeft: "1rem",
+        paddingLeft: "0rem",
       },
     },
   },

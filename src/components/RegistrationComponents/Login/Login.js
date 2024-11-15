@@ -301,7 +301,7 @@ function Login() {
               sx={RegistrationStyles.textField}
               fullWidth
               size="small"
-              placeholder="Enter your email or phone number"
+              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               InputProps={{ style: { fontSize: "0.8rem" } }}
