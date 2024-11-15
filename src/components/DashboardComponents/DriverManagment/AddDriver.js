@@ -85,7 +85,7 @@ function AddDriver() {
           email: "",
           userPhone: "",
           password: "",
-          status: "active",
+          status: "",
         }}
         validationSchema={validationSchema}
         onSubmit={handleRegister}
@@ -121,6 +121,25 @@ function AddDriver() {
                     mb={1}
                     style={addDriverStyles.label}
                   >
+                    Email
+                  </Typography>
+                  <Field
+                    as={TextField}
+                    name="email"
+                    sx={addDriverStyles.textField}
+                    label="Enter Email"
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={touched.email && errors.email}
+                    onChange={handleChange}
+                  />
+                </Box>
+                <Box sx={loginLeftContentContainerItemWidth}>
+                  <Typography
+                    variant="subtitle1"
+                    mt={3}
+                    mb={1}
+                    style={addDriverStyles.label}
+                  >
                     Password
                   </Typography>
                   <Field
@@ -134,25 +153,7 @@ function AddDriver() {
                     onChange={handleChange}
                   />
                 </Box>
-                <Box sx={loginLeftContentContainerItemWidth}>
-                  <Typography
-                    variant="subtitle1"
-                    mt={3}
-                    mb={1}
-                    style={addDriverStyles.label}
-                  >
-                    Email
-                  </Typography>
-                  <Field
-                    as={TextField}
-                    name="email"
-                    sx={addDriverStyles.textField}
-                    label="Enter Email"
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={touched.email && errors.email}
-                    onChange={handleChange}
-                  />
-                </Box>
+               
                 <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography
                     variant="subtitle1"
@@ -197,7 +198,7 @@ function AddDriver() {
                     Status
                   </Typography>
                   <FormControl fullWidth size="medium">
-                    {/* <InputLabel>Status</InputLabel> */}
+                    <InputLabel>Status</InputLabel>
                     <Field
                       as={Select}
                       name="status"

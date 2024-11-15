@@ -164,7 +164,7 @@ function AddVehicle() {
               </Box>
             </Box>
             <Box width={isMobile ? "100%" : "60%"} mb={isMobile ? 2 : 0}>
-              <Box sx={loginLeftContentContainerItemWidth}>
+              {/* <Box sx={loginLeftContentContainerItemWidth}>
                 <Typography
                   variant="subtitle1"
                   mt={3}
@@ -173,7 +173,7 @@ function AddVehicle() {
                 >
                   Last Location
                 </Typography>
-                {/* <TextField
+                <TextField
                   placeholder="Enter Status"
                   variant="outlined"
                   size="small"
@@ -198,7 +198,7 @@ function AddVehicle() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   fullWidth
-                /> */}
+                />
                 <TextField
                   placeholder="Enter Location"
                   variant="outlined"
@@ -228,7 +228,7 @@ function AddVehicle() {
                   onBlur={formik.handleBlur}
                   fullWidth
                 />
-              </Box>
+              </Box> */}
             </Box>
           </Stack>
           <Stack sx={{ gap: "24px" }} mt={6} ml={1}>
