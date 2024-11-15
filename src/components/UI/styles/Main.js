@@ -206,7 +206,7 @@ export const addDriverStyles = {
     px: { xs: 1, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 1, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: { lg: "82%", xs: "85%" }, // Ensure it takes full width
+    width: { lg: "82%", xs: "80%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {
