@@ -725,7 +725,7 @@ export default function DashboardTableHeader({
                   }
                 </>
                 <TextField
-                  placeholder={`Search ${searchText} ,ID`}
+                  placeholder={`Search ${searchText}`}
                   variant="outlined"
                   size="small"
                   value={search} // Bind value to state

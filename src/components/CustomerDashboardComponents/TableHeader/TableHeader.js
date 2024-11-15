@@ -156,7 +156,7 @@ export default function TableHeader({
             <Stack direction={"row"} gap={2}>
               <Box>
                 <TextField
-                  placeholder={`Search ${searchText} ,ID`}
+                  placeholder={`Search ${searchText}`}
                   variant="outlined"
                   size="small"
                   InputProps={{
@@ -337,7 +337,7 @@ export default function TableHeader({
                   {/* Search Field */}
                   <ListItem>
                     <TextField
-                      placeholder={`Search ${searchText} ,ID`}
+                      placeholder={`Search ${searchText}`}
                       variant="outlined"
                       size="small"
                       InputProps={{

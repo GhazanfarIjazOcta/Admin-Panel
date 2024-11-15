@@ -163,7 +163,7 @@ export default function DashboardTableHeader({
             >
               <Box>
                 <TextField
-                  placeholder={`Search ${searchText} ,ID`}
+                  placeholder={`Search ${searchText}`}
                   variant="outlined"
                   size="small"
                   InputProps={{

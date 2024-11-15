@@ -439,7 +439,7 @@ export default function TableHeader({
             <AccordionDetails>
               <Stack direction="column" gap={2}>
                 <TextField
-                  placeholder={`Search ${searchText} ,ID`}
+                  placeholder={`Search ${searchText}`}
                   variant="outlined"
                   size="small"
                   value={search}  // Bind value to state
