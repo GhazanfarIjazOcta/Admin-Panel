@@ -22,7 +22,7 @@ import { useState } from "react";
 
 // Define Yup validation schema
 const validationSchema = Yup.object({
-  deviceType: Yup.string().required("Device ID is required"),
+  deviceType: Yup.string().required("Device type is required"),
   deviceModel: Yup.string().required("Device Model is required"),
   passcode: Yup.string().required("Passcode is required"),
   assignedVehicle: Yup.string().required("Assigned Vehicle is required"),

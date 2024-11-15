@@ -2,8 +2,6 @@ import {
   Box,
   Button,
   FormControl,
-  IconButton,
-  InputAdornment,
   InputLabel,
   MenuItem,
   Paper,
@@ -14,7 +12,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import { loginLeftContentContainerItemWidth } from "../../UI/styles/Login";
-import Arrowdown from "../../../assets/Card/fi_chevron-down.png";
+
 import { addDriverStyles } from "../../UI/styles/Main";
 import { useAddDriverMutation } from "../../../Api/apiSlice";
 import { Formik, Form, Field } from "formik";
