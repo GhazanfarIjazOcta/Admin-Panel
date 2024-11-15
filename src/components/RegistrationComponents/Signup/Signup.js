@@ -300,7 +300,7 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Enter organization name"
-                velue={orgName}
+                value={orgName}
                 onChange={(e) => setOrgName(e.target.value)}
               />
             </Box>
@@ -317,7 +317,7 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Enter Organization address"
-                velue={orgAddress}
+                value={orgAddress}
                 onChange={(e) => setOrgAddress(e.target.value)}
               />
             </Box>

@@ -200,7 +200,7 @@ function AddVehicle() {
                   fullWidth
                 /> */}
                 <TextField
-                  placeholder="Enter Status"
+                  placeholder="Enter Location"
                   variant="outlined"
                   size="small"
                   InputProps={{

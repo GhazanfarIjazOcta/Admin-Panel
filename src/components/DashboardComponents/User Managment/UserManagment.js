@@ -44,11 +44,11 @@ export default function UserManagment() {
         if (data) {
           // Perform any state setting or data handling here
           console.log("Fetched data:", data);
-          setAlert({
-            open: true,
-            severity: "info",
-            message: "Updated User Data"
-          });
+          // setAlert({
+          //   open: true,
+          //   severity: "info",
+          //   message: "Updated User Data"
+          // });
           
           // Example: Set the role and status based on fetched data
           // setRole(data.defaultRole || ""); 
