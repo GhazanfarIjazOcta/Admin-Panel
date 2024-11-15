@@ -175,7 +175,7 @@ function AddUser() {
               </Box>
 
               {/* Role Field */}
-              <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
+              <Box sx={{ width: { xs: "92%", sm: "32%" , lg:"35.5%" } }}>
                 <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
                   Role
                 </Typography>
@@ -201,7 +201,7 @@ function AddUser() {
               </Box>
 
               {/* Status Field */}
-              <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
+              <Box sx={{ width: { xs: "92%", sm: "32%"  , lg:"35.5%"  } }}>
                 <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
                   Status
                 </Typography>
