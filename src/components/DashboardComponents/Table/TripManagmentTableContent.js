@@ -284,7 +284,9 @@ export default function TripManagmentTableContent({
                 </Typography>
               </Stack>
             </TableCell> */}
-            <TableCell align="start">
+
+            
+            {/* <TableCell align="start">
               <Stack
                 direction={"row"}
                 gap={1}
@@ -299,7 +301,7 @@ export default function TripManagmentTableContent({
                   trip
                 </Typography>
               </Stack>
-            </TableCell>
+            </TableCell> */}
             <TableCell align="start">
               <Stack
                 direction={"row"}
