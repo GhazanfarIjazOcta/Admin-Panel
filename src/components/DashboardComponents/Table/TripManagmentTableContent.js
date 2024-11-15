@@ -285,7 +285,7 @@ export default function TripManagmentTableContent({
               </Stack>
             </TableCell> */}
 
-            
+
             {/* <TableCell align="start">
               <Stack
                 direction={"row"}
@@ -475,16 +475,16 @@ export default function TripManagmentTableContent({
             .map((trip) => (
               // {trips?.map((trip) => (
               <TableRow key={trip.id}>
-                <TableCell align="center">{trip.id}</TableCell>
-                <TableCell align="center">dummy</TableCell>
-                <TableCell align="center">dummy</TableCell>
-                <TableCell align="center">{trip.startLocation}</TableCell>
-                <TableCell align="center">{trip.endLocation}</TableCell>
-                <TableCell align="center">dummy</TableCell>
-                <TableCell align="center">dummy</TableCell>
-                <TableCell align="center">dummy</TableCell>
-                <TableCell align="center">dummy</TableCell>
-                <TableCell align="center" fontWeight={500}>
+                {/* <TableCell align="center">{trip.id}</TableCell> */}
+                <TableCell align="start">dummy</TableCell>
+                <TableCell align="start">dummy</TableCell>
+                <TableCell align="start">{trip.startLocation}</TableCell>
+                <TableCell align="start">{trip.endLocation}</TableCell>
+                <TableCell align="start">dummy</TableCell>
+                <TableCell align="start">dummy</TableCell>
+                <TableCell align="start">dummy</TableCell>
+                <TableCell align="start">dummy</TableCell>
+                <TableCell align="start" fontWeight={500}>
                   <Stack
                     direction={"row"}
                     justifyContent={"center"}
