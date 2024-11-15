@@ -126,6 +126,7 @@ const apiSlice = createApi({
       refetchOnFocus: true,
       providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
+
     getUserManagementSearchDashboard: builder.query({
       query: ({ search = "", role = "", status = "" }) => {
         const params = new URLSearchParams();
@@ -314,6 +315,23 @@ const apiSlice = createApi({
       invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
     }),
 
+    
+    getMaintainanceDashboard: builder.query({
+      query: () => "/admin/in-maintenance",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
+    addMaintainance: builder.mutation({
+      query: (maintainanceData) => ({
+        url: "/register",
+        method: "POST",
+        body: maintainanceData,
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
   }),
 });
 
@@ -367,6 +385,12 @@ export const {
 
   useGetUserInfoQuery,
   useUpdateUserInfoMutation,
+
+
+  useAddMaintainanceMutation,
+  useGetMaintainanceDashboardQuery, 
+
+
 } = apiSlice;
 
 export default apiSlice;
