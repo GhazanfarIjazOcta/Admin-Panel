@@ -75,7 +75,7 @@ export const addUserStyles = {
   textFieldStyles: { width: { lg: "100%", xs: "90%" }, marginLeft: "0px" },
   buttonStyles: {
     marginRight: "opx",
-    marginLeft: {xs:"44px", sm:"0px" , lg:"0px"},
+    marginLeft: {xs:"0px", sm:"0px" , lg:"0px"},
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
@@ -137,7 +137,7 @@ export const addVehicleStyles = {
   label: { fontWeight: 500 },
   button: {
     marginRight: "opx",
-    marginLeft: {xs:"20px", sm:"0px" , lg:"0px" },
+    marginLeft: {xs:"0px", sm:"0px" , lg:"0px" },
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
@@ -166,7 +166,7 @@ export const addDeviceStyles = {
     px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: { lg: "82%", xs: "80%" }, // Ensure it takes full width
+    width: { lg: "82%", xs: "85%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {
@@ -177,7 +177,7 @@ export const addDeviceStyles = {
   textField: { width: { lg: "36%", xs: "90%" }, marginLeft: "5px" },
   button: {
     marginRight: "opx",
-    marginLeft:  {xs:"30px", sm:"0px" , lg:"0px" },
+    marginLeft:  {xs:"0px", sm:"0px" , lg:"0px" },
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
@@ -206,7 +206,7 @@ export const addDriverStyles = {
     px: { xs: 1, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 1, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: { lg: "82%", xs: "80%" }, // Ensure it takes full width
+    width: { lg: "82%", xs: "85%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },
   container: {

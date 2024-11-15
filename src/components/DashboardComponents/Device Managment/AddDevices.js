@@ -66,8 +66,8 @@ function AddDevices() {
   };
 
   return (
-    <Paper sx={addDeviceStyles.mainContainer}>
-      <Box sx={addDeviceStyles.container} pl={8} mt={0} mb={2}>
+    <Paper sx={addDeviceStyles.mainContainer} >
+      <Box sx={addDeviceStyles.container} ml={2} pl={3} mt={0} mb={2}>
         <Formik
           initialValues={{
             deviceType: "",

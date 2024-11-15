@@ -89,10 +89,11 @@ function AddDriver() {
         }}
         validationSchema={validationSchema}
         onSubmit={handleRegister}
+        
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
-            <Box sx={addDriverStyles.container} pl={8} mt={0} mb={2}>
+            <Box sx={addDriverStyles.container} ml={2} pl={3} mt={0} mb={2}>
               <Box>
                 <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography
