@@ -66,7 +66,11 @@ function AddDevices() {
   };
 
   return (
-    <Paper sx={addDeviceStyles.mainContainer} >
+    <Paper sx={{...addDeviceStyles.mainContainer,   
+
+
+      height: "86%"
+    }} >
       <Box sx={addDeviceStyles.container} ml={2} pl={3} mt={0} mb={2}>
         <Formik
           initialValues={{
@@ -98,18 +102,18 @@ function AddDevices() {
                 </Box>
                 <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
-                    Device Name/Model
+                    Device Model
                   </Typography>
                   <Field
                     as={TextField}
                     sx={addDeviceStyles.textField}
                     name="deviceModel"
-                    label="Device Name/Model"
+                    label="Device Model"
                     error={touched.deviceModel && Boolean(errors.deviceModel)}
                     helperText={touched.deviceModel && errors.deviceModel}
                   />
                 </Box>
-                <Box sx={loginLeftContentContainerItemWidth}>
+                {/* <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
                     Passcode
                   </Typography>
@@ -121,8 +125,8 @@ function AddDevices() {
                     error={touched.passcode && Boolean(errors.passcode)}
                     helperText={touched.passcode && errors.passcode}
                   />
-                </Box>
-                <Box sx={loginLeftContentContainerItemWidth}>
+                </Box> */}
+                {/* <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
                     Assigned Vehicle
                   </Typography>
@@ -134,8 +138,8 @@ function AddDevices() {
                     error={touched.assignedVehicle && Boolean(errors.assignedVehicle)}
                     helperText={touched.assignedVehicle && errors.assignedVehicle}
                   />
-                </Box>
-                <Box sx={loginLeftContentContainerItemWidth}>
+                </Box> */}
+                {/* <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
                     Location
                   </Typography>
@@ -147,7 +151,7 @@ function AddDevices() {
                     error={touched.location && Boolean(errors.location)}
                     helperText={touched.location && errors.location}
                   />
-                </Box>
+                </Box> */}
 
                 {/* <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>

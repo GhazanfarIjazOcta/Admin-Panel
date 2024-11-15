@@ -173,7 +173,7 @@ function AddDriver() {
                     onChange={handleChange}
                   />
                 </Box>
-                <Box sx={loginLeftContentContainerItemWidth}>
+                {/* <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography
                     variant="subtitle1"
                     mt={3}
@@ -186,7 +186,7 @@ function AddDriver() {
                     sx={addDriverStyles.textField}
                     label="Name of the Vehicle Assigned"
                   />
-                </Box>
+                </Box> */}
 
                 <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
                   <Typography
