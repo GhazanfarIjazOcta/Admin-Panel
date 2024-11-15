@@ -77,7 +77,7 @@ function AddVehicle() {
 
   return (
     <Paper sx={addVehicleStyles.mainContainer}>
-      <Box sx={addVehicleStyles.container} pl={1} mt={0} mb={2}>
+      <Box sx={addVehicleStyles.container} pl={3} mt={0} mb={2}>
         <form onSubmit={formik.handleSubmit}>
           <Stack
             direction={isMobile ? "column" : "row"}

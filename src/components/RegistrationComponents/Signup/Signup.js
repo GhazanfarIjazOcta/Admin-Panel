@@ -203,7 +203,7 @@ function Signup() {
                 variant="subtitle1"
                 sx={SignupStyles.TextFieldTypography}
               >
-                userPhone Number
+                Phone Number
               </Typography>
               <TextField
                 sx={RegistrationStyles.textField}
@@ -227,7 +227,7 @@ function Signup() {
                 variant="subtitle1"
                 sx={SignupStyles.TextFieldTypography}
               >
-                userPassword
+                Password
               </Typography>
               <TextField
                 sx={RegistrationStyles.textField}
@@ -263,7 +263,7 @@ function Signup() {
                 variant="subtitle1"
                 sx={SignupStyles.TextFieldTypography}
               >
-                Confirm userPassword
+                Confirm Password
               </Typography>
               <TextField
                 sx={RegistrationStyles.textField}
