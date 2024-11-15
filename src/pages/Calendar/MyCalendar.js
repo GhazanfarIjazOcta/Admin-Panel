@@ -204,20 +204,69 @@ function CustomToolbar(props) {
 }
 
 function MyCalendar() {
-  const { data, error, isLoading } = useGetMaintainanceDashboardQuery();
 
-  // Extract events from API data
-  const myEventsList = data?.vehicles
-    ?.flatMap((vehicle) =>
-      vehicle.Maintenances.map((maintenance) => ({
-        start: new Date(maintenance.startDate),
-        end: new Date(maintenance.endDate),
-        title: `${vehicle.vehicleType} - ${maintenance.maintenanceType}`,
-        eventType: "Maintenance",
-        backgroundColor: "#FFB6C1", // Example: Use different colors based on type
-        mainColor: "#D5006D", // Example: Use different colors based on type
-      }))
-    ) || [];
+  // const { data, error, isLoading } = useGetMaintainanceDashboardQuery();
+
+  // console.log("data on the coming " , data)
+  
+  const myEventsList = [
+    {
+      start: moment().day(1).startOf("day").add(8, "hours").toDate(),
+      end: moment().day(1).startOf("day").add(9, "hours").toDate(),
+      title: "Oil Change",
+      eventType: "Scheduled",
+      backgroundColor: "#FFB6C1", // Light pink
+      mainColor: "#D5006D", // Dark pink
+    },
+    {
+      start: moment().day(2).startOf("day").add(10, "hours").toDate(),
+      end: moment().day(2).startOf("day").add(11, "hours").toDate(),
+      title: "Team Meeting",
+      eventType: "Meeting",
+      backgroundColor: "#ADD8E6", // Light blue
+      mainColor: "#0000FF", // Blue
+    },
+    {
+      start: moment().day(3).startOf("day").add(12, "hours").toDate(),
+      end: moment().day(3).startOf("day").add(13, "hours").toDate(),
+      title: "Project Deadline",
+      eventType: "Deadline",
+      backgroundColor: "#90EE90", // Light green
+      mainColor: "#006400", // Dark green
+    },
+    {
+      start: moment().day(4).startOf("day").add(14, "hours").toDate(),
+      end: moment().day(4).startOf("day").add(15, "hours").toDate(),
+      title: "Lunch with Client",
+      eventType: "Meeting",
+      backgroundColor: "#FFFFE0", // Light yellow
+      mainColor: "#FFD700", // Gold
+    },
+    {
+      start: moment().day(5).startOf("day").add(16, "hours").toDate(),
+      end: moment().day(5).startOf("day").add(17, "hours").toDate(),
+      title: "Conference Call",
+      eventType: "Call",
+      backgroundColor: "#E6E6FA", // Lavender
+      mainColor: "#6A5ACD", // Slate blue
+    },
+    {
+      start: moment().day(6).startOf("day").add(9, "hours").toDate(),
+      end: moment().day(6).startOf("day").add(10, "hours").toDate(),
+      title: "Website Launch",
+      eventType: "Launch",
+      backgroundColor: "#FFE4E1", // Misty rose
+      mainColor: "#FF69B4", // Hot pink
+    },
+    {
+      start: moment().day(7).startOf("day").add(11, "hours").toDate(),
+      end: moment().day(7).startOf("day").add(12, "hours").toDate(),
+      title: "Team Outing",
+      eventType: "Event",
+      backgroundColor: "#FFDAB9", // Peach puff
+      mainColor: "#FF4500", // Orange red
+    },
+  ];
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -244,7 +293,7 @@ function MyCalendar() {
         color: "black",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "center", // Center content horizontally
         padding: "5px",
         border: "none",
         marginLeft: "5px",
@@ -267,30 +316,30 @@ function MyCalendar() {
           height: "100%",
           display: "flex",
           alignItems: "center",
-          justifyContent: "center",
+          justifyContent: "center", // Center the content
           padding: "5px",
           marginLeft: "30px",
           cursor: "pointer",
           color: event.mainColor,
           fontSize: "14px",
-          position: "relative",
+          position: "relative", // Added for positioning the logo/icon
         }}
       >
         <i
-          className="fas fa-clock"
+          className="fas fa-clock" // Font Awesome clock icon
           style={{
-            fontSize: "20px",
+            fontSize: "20px", // Size of the icon
             position: "absolute",
-            left: "5px",
+            left: "5px", // Position the icon
             top: "50%",
-            transform: "translateY(-50%)",
-            color: event.mainColor,
+            transform: "translateY(-50%)", // Center the icon vertically
+            color: event.mainColor, // Use the event's main color for the icon
           }}
         />
         <Typography
           sx={{
-            display: { xs: "block", sm: "none" },
-            textAlign: "center",
+            display: { xs: "block", sm: "none" }, // Show title only for mobile view
+            textAlign: "center", // Center text
           }}
         >
           {event.title}
@@ -304,9 +353,6 @@ function MyCalendar() {
     setSelectedEvent(null);
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error loading data</p>;
-
   return (
     <div className={styles.calendarContainer}>
       <Calendar
@@ -314,10 +360,10 @@ function MyCalendar() {
         events={myEventsList}
         startAccessor="start"
         endAccessor="end"
-        defaultView={Views.WEEK}
+        defaultView={Views.WEEK} // Set default view to week
         style={{
           height: isMobile ? "50vh" : "100vh",
-          minHeight: "400px",
+          minHeight: "400px", // Ensure minimum height
         }}
         components={{
           toolbar: CustomToolbar,
@@ -330,6 +376,7 @@ function MyCalendar() {
         eventPropGetter={eventStyleGetter}
       />
 
+      {/* List of Events */}
       {isMobile && (
         <Box sx={{ padding: 2, display: "flex", flexDirection: "column" }}>
           {myEventsList.map((event, index) => (
@@ -390,6 +437,5 @@ function MyCalendar() {
     </div>
   );
 }
-
 
 export default MyCalendar;
