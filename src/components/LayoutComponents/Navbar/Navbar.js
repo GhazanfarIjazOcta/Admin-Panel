@@ -21,43 +21,41 @@ import {
   rightContentStyle,
   textFieldContainerStyle,
   userInfoStyle,
-  userNameStyle,
+  userNameStyle
 } from "../../UI/Layout";
 import {
   Avatar,
   Drawer,
   InputAdornment,
   Paper,
-  TextField,
+  TextField
 } from "@mui/material";
 import Chat from "../../../assets/Layout/Chat.png";
 import Sidebar from "../Sidebar/Sidebar";
 import SidebarMobile from "../SidebarMobile/SidebarMobile";
 
-import { useAuth } from "../../../Authentication/AuthContext"
+import { useAuth } from "../../../Authentication/AuthContext";
 
-import { useGetUserInfoQuery } from "../../../Api/apiSlice"
-import CircleIcon from '@mui/icons-material/Circle';
+import { useGetUserInfoQuery } from "../../../Api/apiSlice";
+import CircleIcon from "@mui/icons-material/Circle";
 
-import CustomAlert from '../../UI/CustomAlert';
+import CustomAlert from "../../UI/CustomAlert";
 import { useState } from "react";
-
-
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.black, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    backgroundColor: alpha(theme.palette.common.black, 0.25)
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto",
-  },
+    width: "auto"
+  }
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -68,7 +66,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: theme.palette.common.black, // Set icon color to black
+  color: theme.palette.common.black // Set icon color to black
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -82,25 +80,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
+      width: "20ch"
+    }
+  }
 }));
 
- const StatusIndicator = styled(Box)(({ status }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.25rem',
-  color: status === 'active' ? 'green' : 'red',
+const StatusIndicator = styled(Box)(({ status }) => ({
+  display: "flex",
+  alignItems: "center",
+  gap: "0.25rem",
+  color: status === "active" ? "green" : "red"
 }));
 
 export default function Navbar() {
-
-
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: "",
+    message: ""
   });
 
   const handleAlertClose = () => {
@@ -110,38 +106,27 @@ export default function Navbar() {
   const { userRole } = useAuth();
   const { user_ID } = useAuth();
 
-  console.log("user role is actually on navbar " , userRole)
-  console.log("user ID actually on navbar " , user_ID)
-
+  console.log("user role is actually on navbar ", userRole);
+  console.log("user ID actually on navbar ", user_ID);
 
   const navigatefunction = () => {
-
-    if(userRole == "customer"){
+    if (userRole == "customer") {
       // navigate("/dashboard/chat");
       navigate("/dashboard/customerchat");
-    }
-    else if(userRole == "admin"){
-
+    } else if (userRole == "admin") {
       navigate("/dashboard/chat");
-
     }
-
-  }
-
-
-
+  };
 
   const navigate = useNavigate();
   const [headerMessage, setHeaderMessage] = React.useState(
-    "Good morning, Admin",
+    "Good morning, Admin"
   );
 
   const [SidebarOpen, setSidebarOpen] = React.useState(false);
   const isSideBarOpen = Boolean(SidebarOpen);
 
   const handleSideBarOpen = () => setSidebarOpen(true);
-
-
 
   const handleSideBar = () => {
     setSidebarOpen(true); // Simply open the sidebar
@@ -186,7 +171,7 @@ export default function Navbar() {
     setAlert({
       open: true,
       severity: "warning",
-      message: "Chat in Production",
+      message: "Chat in Production"
     });
   };
 
@@ -196,13 +181,13 @@ export default function Navbar() {
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -218,18 +203,17 @@ export default function Navbar() {
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right",
+        horizontal: "right"
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      
       {/* <MenuItem onClick={navigatefunction}> */}
       <MenuItem onClick={handleClickMessageCheck}>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -238,8 +222,12 @@ export default function Navbar() {
           </Badge>
         </IconButton>
         <p>Messages</p>
-        <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-             
+        <CustomAlert
+          open={alert.open}
+          onClose={handleAlertClose}
+          severity={alert.severity}
+          message={alert.message}
+        />
       </MenuItem>
       <MenuItem>
         <IconButton
@@ -268,27 +256,19 @@ export default function Navbar() {
     </Menu>
   );
 
-
-//]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-
-
+  //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
   const { data, error, isLoading } = useGetUserInfoQuery();
-
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading data</p>;
 
-  const { userInfo  } = data || {};
-  console.log("{{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}}" , data)
+  const { userInfo } = data || {};
+  console.log("{{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}}}", data);
 
-console.log("users info }{}{}{}{{}{}{{}" , userInfo)
+  console.log("users info }{}{}{}{{}{}{{}", userInfo);
 
-
-//]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
-
-
-
+  //]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]
 
   return (
     <Paper position={"sticky"} minWidth={"320px"} sx={{ zIndex: 4 }}>
@@ -297,15 +277,14 @@ console.log("users info }{}{}{}{{}{}{{}" , userInfo)
           backgroundColor: "white",
           color: "black",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          width: { xs: "100vw", lg: "82%"  },
+          width: { xs: "100vw", lg: "82%" },
           minHeight: "5.4rem",
           display: "flex",
           justifyContent: "center",
           minWidth: "320px",
-           position: "fixed",  // Keeps the AppBar fixed at the top
-    top: 0,  // Positions it at the top of the viewport
-    zIndex: 1201,  // Ensures it is above other component
-    
+          position: "fixed", // Keeps the AppBar fixed at the top
+          top: 0, // Positions it at the top of the viewport
+          zIndex: 1201 // Ensures it is above other component
         }}
       >
         <Toolbar>
@@ -321,25 +300,24 @@ console.log("users info }{}{}{}{{}{}{{}" , userInfo)
             <MenuIcon />
           </IconButton>
           <Typography
-  variant="h6"
-  noWrap
-  component="div"
-  sx={{
-    display: { xs: "none", lg: "block" },
-    fontWeight: 600,
-    fontSize: "1.75rem",
-    color: "#14181F",
-    mr: 2,
-  }}
->
-  Good Morning,  
-  {userInfo.role === "superAdmin" && " Super Admin"}
-  {userInfo.role === "admin" && " Admin"}
-  {userInfo.role === "customer" && " Customer"}
-  {userInfo.role === "driver" && " Driver"}
-  {/* {headerMessage} */}
-</Typography>
-
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{
+              display: { xs: "none", lg: "block" },
+              fontWeight: 600,
+              fontSize: "1.75rem",
+              color: "#14181F",
+              mr: 2
+            }}
+          >
+            Good Morning,
+            {userInfo.role === "superAdmin" && " Super Admin"}
+            {userInfo.role === "admin" && " Admin"}
+            {userInfo.role === "customer" && " Customer"}
+            {userInfo.role === "driver" && " Driver"}
+            {/* {headerMessage} */}
+          </Typography>
 
           {/* <TextField
             placeholder="Search"
@@ -375,11 +353,10 @@ console.log("users info }{}{}{}{{}{}{{}" , userInfo)
                 justifyContent: "center",
                 gap: "12px",
                 marginRight: "0.4em",
-                cursor: "pointer",
+                cursor: "pointer"
               }}
               // onClick={navigatefunction}
               onClick={handleClickMessageCheck}
-              
             >
               <img alt="message" src={Chat} />
               {/* <Typography color={"white"}>messages</Typography> */}
@@ -391,13 +368,17 @@ console.log("users info }{}{}{}{{}{}{{}" , userInfo)
                   display: { xs: "none", md: "block" },
                   fontWeight: 600,
                   fontSize: "0.9rem",
-                  color: "white",
+                  color: "white"
                 }}
               >
                 messages
               </Typography>
-              <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-             
+              <CustomAlert
+                open={alert.open}
+                onClose={handleAlertClose}
+                severity={alert.severity}
+                message={alert.message}
+              />
             </Box>
             <Box />
             <Box
@@ -407,17 +388,16 @@ console.log("users info }{}{}{}{{}{}{{}" , userInfo)
                 sx={{ width: 40, height: 40 }}
                 // src="https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1730104753/admin_logo_cbtn80.jpg"
                 src="https://res.cloudinary.com/dnfc9g33c/image/upload/t_Profile/v1731416098/OIP_kxjlsd.jpg"
-             
               />
               <Box sx={userNameStyle}>
                 <Typography fontSize={"0.875rem"} fontWeight={"500"}>
                   {userInfo.name}
                 </Typography>
                 <Typography fontSize={"0.75rem"} fontWeight={"400"}>
-                 {userInfo.role}
+                  {userInfo.role}
                 </Typography>
               </Box>
-               {/* <Box sx={userNameStyle}>
+              {/* <Box sx={userNameStyle}>
 
       <Box>
         <Typography fontSize="0.875rem" fontWeight="500">

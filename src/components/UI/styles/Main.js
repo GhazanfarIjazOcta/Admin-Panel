@@ -63,19 +63,19 @@ export const addUserStyles = {
     px: { xs: 0, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 2, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
     overflow: "none", // Prevent overflowing horizontally and vertically
-    width: { lg: "82%", xs: "80%" }, // Ensure it takes full width
+    width: { lg: "82%", xs: "88%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
     py: 1,
   },
   container: {
     height: "95%",
-    width: "90%",
+    width: "92%",
     padding: "2",
   },
-  textFieldStyles: { width: { lg: "100%", xs: "90%" }, marginLeft: "5px" },
+  textFieldStyles: { width: { lg: "100%", xs: "90%" }, marginLeft: "0px" },
   buttonStyles: {
     marginRight: "opx",
-    marginLeft: "0px",
+    marginLeft: {xs:"44px", sm:"0px" , lg:"0px"},
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
