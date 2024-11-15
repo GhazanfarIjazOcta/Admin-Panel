@@ -337,7 +337,7 @@ export default function TableHeader({
 </FormControl>
 
                 </Box>
-                <Box>
+                {/* <Box>
                   <TextField
                     placeholder="7/6/2024 - 5/8-2024"
                     variant="outlined"
@@ -362,7 +362,7 @@ export default function TableHeader({
                       },
                     }}
                   />
-                </Box>
+                </Box> */}
                 {!exportIcon && (
                   <Button
                     variant="contained"
@@ -511,11 +511,11 @@ export default function TableHeader({
         <MenuItem value="">All Users</MenuItem>
       </Select>
     </FormControl>
-                <TextField
+                {/* <TextField
                   placeholder="7/6/2024 - 5/8/2024"
                   variant="outlined"
                   size="small"
-                />
+                /> */}
                 <Button
                   variant="contained"
                   sx={{ backgroundColor: "#15294E" }}

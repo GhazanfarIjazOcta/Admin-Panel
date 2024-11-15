@@ -76,7 +76,10 @@ function AddVehicle() {
   });
 
   return (
-    <Paper sx={addVehicleStyles.mainContainer}>
+    <Paper sx={{...addVehicleStyles.mainContainer,
+
+      height: "86%"
+    }}>
       <Box sx={addVehicleStyles.container} pl={3} mt={0} mb={2}>
         <form onSubmit={formik.handleSubmit}>
           <Stack

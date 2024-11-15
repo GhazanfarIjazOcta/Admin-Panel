@@ -28,6 +28,7 @@ import cloudLogo from "../../../assets/Table/cloudLogo.png";
 import { useNavigate } from "react-router-dom";
 
 import { useGetTripManagementDashboardQuery } from "../../../Api/apiSlice";
+import { Height } from "@mui/icons-material";
 
 export default function DashboardTableHeader({
   text,
@@ -210,7 +211,7 @@ export default function DashboardTableHeader({
               >
                 <Box>
                   <TextField
-                    placeholder={`Search ${searchText} ,ID`}
+                    placeholder={`Search ${searchText}`}
                     variant="outlined"
                     size="small"
                     value={search} // Bind value to state
@@ -248,56 +249,7 @@ export default function DashboardTableHeader({
                   />
                 </Box>
 
-                {/* <Box>
-                  <TextField
-                    placeholder="Status"
-                    variant="outlined"
-                    size="small"
-                    value={status}
-                    onChange={handleStatusChange} // Update state on change
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end" sx={{ marginRight: 0 }}>
-                          <IconButton sx={{ padding: 0 }}>
-                            {
-                              <Box
-                                height={"14px"}
-                                width={"20px"}
-                                sx={{ display: "flex", alignItems: "center" }}
-                              >
-                                <img
-                                  src={Arrowdown}
-                                  width={"100%"}
-                                  height={"100%"}
-                                />
-                              </Box>
-                            }
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{
-                      "& .MuiInputBase-root": {
-                        height: {
-                          xs: "38px",
-                          sm: "38px",
-                          md: "32px",
-                          lg: "32px",
-                          xl: "38px",
-                        }, // Adjust the height as needed
-                        fontSize: "12px",
-                        width: {
-                          md: "80px",
-                          md: "100px",
-                          xs: "120px",
-                        }, // Responsive width
-                        fontSize: "12px",
-                        boxShadow: "none",
-                        // Responsive width
-                      },
-                    }}
-                  />
-                </Box> */}
+             
              
 
 <Box>
@@ -312,15 +264,17 @@ export default function DashboardTableHeader({
       "& .MuiInputBase-root": {
         height: {
           xs: "38px",
-          sm: "38px",
-          md: "32px",
-          lg: "32px",
-          xl: "38px",
+          sm: "32px",
+          md: "28px",
+          lg: "20px",
+          xl: "28px",
         },
-        fontSize: "12px",
+        lineHeight:"1em",
+        fontSize: "8px",
         width: {
-          md: "100px",
-          xs: "120px",
+          lg: "200px",
+          md: "180px",
+          xs: "180px",
         },
         boxShadow: "none",
       },

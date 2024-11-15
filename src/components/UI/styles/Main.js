@@ -94,10 +94,7 @@ export const addUserStyles = {
 
 export const addVehicleStyles = {
   mainContainer: {
-    // boxShadow: "none",
-    // height: "86%",
-    // width: "100%",
-    // marginTop: "1%",
+   
     position: "absolute",
     mt: { xs: 13, sm: 12, md: 12, lg: 12 },
     // Adjust padding based on the screen size
@@ -237,7 +234,7 @@ export const addDriverStyles = {
 export const addTripStyles = {
   mainContainer: {
     // boxShadow: "none",
-    // height: "86%",
+    height: "86%",
     // width: "100%",
     // marginTop: "7%",
     position: "absolute",
@@ -245,7 +242,7 @@ export const addTripStyles = {
     // Adjust padding based on the screen size
     px: { xs: 1, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
     ml: { xs: 1, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
-    overflow: "none", // Prevent overflowing horizontally and vertically
+    overflow: "hidden", // Prevent overflowing horizontally and vertically
     width: { lg: "82%", xs: "85%" }, // Ensure it takes full width
     // maxWidth: "1200px", // Set a max width as needed
   },

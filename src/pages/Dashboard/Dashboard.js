@@ -22,7 +22,8 @@ function Dashboard() {
       backgroundColor="#F4F7F7"
     >
       <Sidebar />
-      <Box flex={10}>
+      <Box flex={10} 
+      >
         <Navbar />
         <Outlet />
       </Box>
