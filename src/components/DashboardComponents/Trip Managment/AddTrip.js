@@ -97,7 +97,7 @@ function AddTrip() {
   return (
     <Paper sx={addTripStyles.mainContainer}>
       <Navbar2 />
-      <Box sx={addTripStyles.container} pl={8} mb={3} component="form" onSubmit={formik.handleSubmit}>
+      <Box sx={addTripStyles.container} pl={3} mb={3}  component="form" onSubmit={formik.handleSubmit}>
         <Box>
           {/* Trip ID Field */}
           {/* <Box sx={addTripStyles.containerItemWidth}>
@@ -180,9 +180,9 @@ function AddTrip() {
                   marginLeft: "5px",
                 },
                 width: {
-                   xs: "92%", 
-                   sm: "94%" ,
-                   lg: "35%"
+                   xs: "90%", 
+                   sm: "90%" ,
+                   lg: "36%"
                   },
               }}
             />
@@ -218,9 +218,9 @@ function AddTrip() {
                   marginLeft: "5px",
                 },
                 width: {
-                   xs: "92%", 
-                   sm: "94%" ,
-                   lg: "35%"
+                   xs: "90%", 
+                   sm: "90%" ,
+                   lg: "36%"
                   },
               }}
             />
@@ -281,9 +281,9 @@ function AddTrip() {
           marginLeft: "5px",
         },
         width: {
-           xs: "92%", 
-           sm: "94%" ,
-           lg: "35%"
+           xs: "90%", 
+           sm: "90%" ,
+           lg: "36%"
           },
       }}
     >
