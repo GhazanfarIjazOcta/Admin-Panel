@@ -124,7 +124,7 @@ export default function TableHeader({
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      width: { lg: 317, xs: 30 },
+                      width: { lg: 317, xs: 20 },
                       height: { lg: "98%", xs: 30 },
                       boxShadow: "none",
                       border: "1px solid #E0E0E0"
@@ -189,6 +189,38 @@ export default function TableHeader({
                         {activeTrips.count}
                       </Typography>
                     </Stack>
+                    <Divider
+                      sx={{ height: 28, m: 0.1 }}
+                      orientation="vertical"
+                    />
+                    <Stack
+                      direction={"row"}
+                      p={2}
+                      gap={2}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        sx={{
+                          fontSize: { lg: "16px", xs: "12px" },
+                          color: "#5A607F",
+                          fontWeight: 500,
+                          fontFamily: "Inter, sans-serif"
+                        }}
+                      >
+                        Delayed
+                      </Box>
+                      <Typography
+                        sx={{
+                          fontSize: { lg: "24px", xs: "12px" },
+                          color: "#14181F",
+                          fontWeight: 500,
+                          fontFamily: "Poppins, sans-serif"
+                        }}
+                      >
+                        {delayedTrips.count}
+                      </Typography>
+                    </Stack>
+
                     {/* <Divider
                       sx={{ height: 28, m: 0.5 }}
                       orientation="vertical"

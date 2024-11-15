@@ -117,7 +117,7 @@ function AddTrip() {
           </Box> */}
 
           {/* Vehicle Field */}
-          <Box sx={addTripStyles.containerItemWidth}>
+          {/* <Box sx={addTripStyles.containerItemWidth}>
             <Typography variant="subtitle1" mt={3} mb={1} style={addTripStyles.label}>
               Vehicle
             </Typography>
@@ -131,10 +131,10 @@ function AddTrip() {
               error={formik.touched.vehicle && Boolean(formik.errors.vehicle)}
               helperText={formik.touched.vehicle && formik.errors.vehicle}
             />
-          </Box>
+          </Box> */}
 
           {/* Driver's Name Field */}
-          <Box sx={addTripStyles.containerItemWidth}>
+          {/* <Box sx={addTripStyles.containerItemWidth}>
             <Typography variant="subtitle1" mt={3} mb={1} style={addTripStyles.label}>
               Driver's Name
             </Typography>
@@ -148,7 +148,7 @@ function AddTrip() {
               error={formik.touched.driverName && Boolean(formik.errors.driverName)}
               helperText={formik.touched.driverName && formik.errors.driverName}
             />
-          </Box>
+          </Box> */}
 
           {/* Start Location Field */}
           <Box sx={addTripStyles.containerItemWidth}>
