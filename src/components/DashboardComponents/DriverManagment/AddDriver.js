@@ -10,7 +10,7 @@ import {
   Select,
   Stack,
   TextField,
-  Typography,
+  Typography
 } from "@mui/material";
 import React from "react";
 import { loginLeftContentContainerItemWidth } from "../../UI/styles/Login";
@@ -20,16 +20,18 @@ import { useAddDriverMutation } from "../../../Api/apiSlice";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
-import CustomAlert from '../../UI/CustomAlert';
+import CustomAlert from "../../UI/CustomAlert";
 import { useState } from "react";
 
 // Validation schema
 const validationSchema = Yup.object({
   name: Yup.string().required("Driver name is required"),
-  email: Yup.string().email("Invalid email format").required("Email is required"),
+  email: Yup.string()
+    .email("Invalid email format")
+    .required("Email is required"),
   userPhone: Yup.string().required("Phone number is required"),
   password: Yup.string().required("Password is required"),
-  status: Yup.string().required("Status is required"),
+  status: Yup.string().required("Status is required")
 });
 
 function AddDriver() {
@@ -38,7 +40,7 @@ function AddDriver() {
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: "",
+    message: ""
   });
 
   const handleAlertClose = () => {
@@ -59,19 +61,18 @@ function AddDriver() {
 
     try {
       await addDriver(driverData).unwrap();
-      
+
       setAlert({
         open: true,
         severity: "success",
-        message: "Driver Added successfully",
+        message: "Driver Added successfully"
       });
       resetForm();
     } catch (err) {
-      
       setAlert({
         open: true,
         severity: "error",
-        message: "Driver is not Added",
+        message: "Driver is not Added"
       });
       console.error("Add Driver failed", err);
     }
@@ -85,11 +86,10 @@ function AddDriver() {
           email: "",
           userPhone: "",
           password: "",
-          status: "",
+          status: ""
         }}
         validationSchema={validationSchema}
         onSubmit={handleRegister}
-        
       >
         {({ errors, touched, values, handleChange }) => (
           <Form>
@@ -153,7 +153,7 @@ function AddDriver() {
                     onChange={handleChange}
                   />
                 </Box>
-               
+
                 <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography
                     variant="subtitle1"
@@ -193,7 +193,10 @@ function AddDriver() {
                     variant="subtitle1"
                     mt={3}
                     mb={1}
-                    style={{ fontWeight: 500, fontSize: { xs: "12px", sm: "14px" } }}
+                    style={{
+                      fontWeight: 500,
+                      fontSize: { xs: "12px", sm: "14px" }
+                    }}
                   >
                     Status
                   </Typography>
@@ -209,13 +212,13 @@ function AddDriver() {
                       sx={{
                         "& .MuiInputBase-root": {
                           height: "50px",
-                          marginLeft: "5px",
+                          marginLeft: "5px"
                         },
                         width: {
-                          xs: "74%",  // Wider on extra-small screens
-                          sm: "210%",  // Revert to 70% on small screens and up
+                          xs: "74%", // Wider on extra-small screens
+                          sm: "210%", // Revert to 70% on small screens and up
                           lg: "84%"
-                        },
+                        }
                       }}
                     >
                       <MenuItem value="active">Active</MenuItem>
@@ -248,9 +251,6 @@ function AddDriver() {
                     </Field>
                   </FormControl>
                 </Box> */}
-
-
-
               </Box>
 
               <Stack sx={{ gap: "24px" }} mt={6} ml={1}>
@@ -262,9 +262,12 @@ function AddDriver() {
                   Add
                 </Button>
 
-                <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-             
-
+                <CustomAlert
+                  open={alert.open}
+                  onClose={handleAlertClose}
+                  severity={alert.severity}
+                  message={alert.message}
+                />
               </Stack>
             </Box>
           </Form>
