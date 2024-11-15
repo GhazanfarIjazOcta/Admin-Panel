@@ -46,7 +46,7 @@ function MaintenanceScheduling() {
       }}
     >
       <Paper sx={maintenanceSchedulingStyles.headerMainContainer}>
-        <Stack p={3} mr={2} direction={"row"} height={"auto"} flexWrap="wrap">
+        <Stack p={0} mr={0} ml={2.5} direction={"row"} height={"auto"} flexWrap="wrap">
           {/* Card for mobile view */}
           <Card sx={{ display: { xs: "block", md: "none" }, width: "100%" }}>
             <CardContent>
@@ -55,7 +55,7 @@ function MaintenanceScheduling() {
                 justifyContent="space-between"
                 alignItems="center"
               >
-                <Typography variant="h6">Maintenance Scheduling</Typography>
+                <Typography variant="h6">Maintenance Schedulinggg</Typography>
                 <IconButton onClick={handleExpandClick}>
                   {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
