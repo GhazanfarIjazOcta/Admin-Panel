@@ -21,6 +21,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { AddAPhoto, AddIcCallOutlined, AddReaction, AddTask, ChevronRight, FormatListBulleted } from "@mui/icons-material";
 
 import {  useAddMaintainanceMutation , useGetMaintainanceDashboardQuery } from "../../Api/apiSlice"
+import { useNavigate } from "react-router-dom";
 
 
 const localizer = momentLocalizer(moment);
@@ -58,6 +59,14 @@ function CustomToolbar(props) {
     color: selectedView === view ? "#FFFFFF" : "#71717A",
     fontFamily: "Inter",
   });
+
+
+  const navigate = useNavigate();
+
+  const  handleNavigate = () =>{
+ 
+   navigate("add-maintenence")
+  }
 
   return (
     <Box
@@ -192,6 +201,7 @@ function CustomToolbar(props) {
       width: { xs: "100%", sm: "200px" }, // Adjust size responsively
     }}
     startIcon={<AddTask/>} // Add icon at the start of the button
+    onClick={handleNavigate}
   >
     Add Schedule
   </Button>
@@ -201,9 +211,13 @@ function CustomToolbar(props) {
       
     </Box>
   );
+
+ 
 }
 
 function MyCalendar() {
+
+
 
   // const { data, error, isLoading } = useGetMaintainanceDashboardQuery();
 

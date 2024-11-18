@@ -13,7 +13,7 @@ import MaintenanceScheduling from "./components/DashboardComponents/MaintenanceS
 import FuelManagment from "./components/DashboardComponents/FuelManagment/FuelManagment";
 import Setting from "./components/DashboardComponents/Setting/Setting";
 import History from "./components/DashboardComponents/MaintenanceScheduling/History";
-import Navbar from "./components/LayoutComponents/Navbar/Navbar";
+
 import DashboardMain from "./components/DashboardComponents/DashboardMain/DashboardMain";
 import TripManagment from "./components/DashboardComponents/Trip Managment/TripManagment";
 
@@ -22,6 +22,8 @@ import AddVehicle from "./components/DashboardComponents/Vehicle Managment/AddVe
 import AddDevices from "./components/DashboardComponents/Device Managment/AddDevices";
 import AddDriver from "./components/DashboardComponents/DriverManagment/AddDriver";
 import AddTrip from "./components/DashboardComponents/Trip Managment/AddTrip";
+import AddMaintenence from "./components/DashboardComponents/MaintenanceScheduling/AddMaintenance";
+
 
 import Chat from "./components/DashboardComponents/Chat/Chat";
 import { AuthProvider } from "./Authentication/AuthContext";
@@ -91,6 +93,13 @@ function App() {
                 path="driver-management/add-driver"
                 element={<AddDriver />}
               />
+
+              <Route
+                path="maintenance-scheduling/add-maintenence"
+                element={<AddMaintenence />}
+              />
+
+
               <Route path="trip-management/add-trip" element={<AddTrip />} />
 
               <Route path="chat" element={<Chat />} />
