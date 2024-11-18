@@ -7,7 +7,7 @@ export const RegistrationStyles = {
       fontSize: "0.8rem",
       color: "#14181F",
       fontFamily: "Inter",
-      margin: { lg: "0.5rem 0rem 1rem 0rem", xs: "0.5rem 0rem 0.5rem 0rem" },
+      margin: { lg: "0rem 0rem 1rem 0rem", xs: "0.5rem 0rem 0.5rem 0rem" },
       "& input::placeholder": {
         color: "#6F7C8E",
         opacity: 1,
@@ -20,8 +20,8 @@ export const RegistrationStyles = {
   passwordEyeBox: {
     position: "absolute",
     color: "#000",
-    top: 50,
-    right: "5%",
+    top: {lg:43, xs:50},
+    right: "3%",
     transform: "translateY(-50%)",
     cursor: "pointer",
     opacity: "50%",

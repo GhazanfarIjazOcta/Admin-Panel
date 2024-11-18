@@ -106,7 +106,7 @@ function Signup() {
         justifyContent="center"
         sx={SignupStyles.whiteBox}
       >
-        <Box sx={{ paddingBottom: { sm: "1rem", xs: "0.5rem" } }}>
+        <Box sx={{ paddingBottom: { sm: "0rem", xs: "0rem" , md: "0" , lg:"0" } }}>
           <img
             src={Ukeylogo}
             alt="Ukey Logo"
@@ -116,7 +116,7 @@ function Signup() {
 
         <Typography
           variant="h1"
-          mt={{ xl: "1em", lg: "-1em", md: "0em", sm: "1em", xs: "0.8em" }}
+          mt={{ xl: "1em", lg: "-1em", md: "-0.3em", sm: "-0.3em", xs: "-0.3em" }}
           sx={SignupStyles.RegisterTypography}
           
         >
@@ -234,7 +234,7 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Enter your password"
-                type={userPasswordVisible ? "text" : "password"}
+                type={userPasswordVisible ? "password" : "text"}
                 value={userPassword}
                 onChange={(e) => setuserPassword(e.target.value)}
               />
@@ -270,7 +270,7 @@ function Signup() {
                 fullWidth
                 size="small"
                 placeholder="Confirm your userPassword"
-                type={confirmuserPasswordVisible ? "text" : "password"}
+                type={confirmuserPasswordVisible ? "password" : "text"}
                 value={confirmuserPassword}
                 onChange={(e) => setConfirmuserPassword(e.target.value)}
               />
