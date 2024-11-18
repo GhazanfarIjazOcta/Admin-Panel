@@ -37,6 +37,7 @@ import store from "./Api/store";
 import CustomerChat from "./components/CustomerDashboardComponents/CustomerChat/Chat";
 import CustomerFuelManagment from "./components/CustomerDashboardComponents/FuelManagment/FuelManagment";
 import CustomerSetting from "./components/CustomerDashboardComponents/Setting/Setting";
+import AddFuel from "./components/DashboardComponents/FuelManagment/AddFuel";
 
 
 function App() {
@@ -96,7 +97,12 @@ function App() {
 
               <Route
                 path="maintenance-scheduling/add-maintenence"
-                element={<AddMaintenence />}
+                element={<AddFuel />}
+              />
+
+              <Route
+                path="fuel-management/add-fuel"
+                element={<AddFuel />}
               />
 
 

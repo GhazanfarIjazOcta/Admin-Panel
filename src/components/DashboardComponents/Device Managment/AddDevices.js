@@ -24,9 +24,7 @@ import { useState } from "react";
 const validationSchema = Yup.object({
   deviceType: Yup.string().required("Device type is required"),
   deviceModel: Yup.string().required("Device Model is required"),
-  passcode: Yup.string().required("Passcode is required"),
-  assignedVehicle: Yup.string().required("Assigned Vehicle is required"),
-  location: Yup.string().required("Location is required"),
+
   status: Yup.string().required("Status is required"),
 });
 
@@ -46,6 +44,7 @@ function AddDevices() {
   
 
   const handleRegister = async (values, { resetForm }) => {
+    console.log("here is the clicked of the device add")
     try {
       await addDevice(values).unwrap();
       resetForm(); // Reset form fields after successful submission
@@ -56,7 +55,7 @@ function AddDevices() {
         message: "Device Added successfully",
       });
     } catch (err) {
-      console.error("Add Device failed", err);
+      // console.error("Add Device failed", err);
       setAlert({
         open: true,
         severity: "error",
@@ -65,6 +64,9 @@ function AddDevices() {
     }
   };
 
+
+
+  
   return (
     <Paper sx={{...addDeviceStyles.mainContainer,   
 
@@ -82,10 +84,12 @@ function AddDevices() {
             status: "active",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleRegister}
+          onSubmit={handleRegister} // Ensure this is present and correctly linked
         >
-          {({ errors, touched }) => (
+          {({ errors, touched , values, handleChange  }) => (
+            
             <Form>
+              {console.log({ errors, touched })}
               <Box>
                 <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography variant="subtitle1" mt={4} mb={1} style={addDeviceStyles.label}>
@@ -98,6 +102,8 @@ function AddDevices() {
                     label="Enter Device Type"
                     error={touched.deviceType && Boolean(errors.deviceType)}
                     helperText={touched.deviceType && errors.deviceType}
+                    onChange={handleChange}
+                    
                   />
                 </Box>
                 <Box sx={loginLeftContentContainerItemWidth}>
@@ -111,109 +117,43 @@ function AddDevices() {
                     label="Device Model"
                     error={touched.deviceModel && Boolean(errors.deviceModel)}
                     helperText={touched.deviceModel && errors.deviceModel}
+                    onChange={handleChange}
                   />
                 </Box>
-                {/* <Box sx={loginLeftContentContainerItemWidth}>
-                  <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
-                    Passcode
-                  </Typography>
-                  <Field
-                    as={TextField}
-                    sx={addDeviceStyles.textField}
-                    name="passcode"
-                    label="Passcode"
-                    error={touched.passcode && Boolean(errors.passcode)}
-                    helperText={touched.passcode && errors.passcode}
-                  />
-                </Box> */}
-                {/* <Box sx={loginLeftContentContainerItemWidth}>
-                  <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
-                    Assigned Vehicle
-                  </Typography>
-                  <Field
-                    as={TextField}
-                    sx={addDeviceStyles.textField}
-                    name="assignedVehicle"
-                    label="Assigned Vehicle"
-                    error={touched.assignedVehicle && Boolean(errors.assignedVehicle)}
-                    helperText={touched.assignedVehicle && errors.assignedVehicle}
-                  />
-                </Box> */}
-                {/* <Box sx={loginLeftContentContainerItemWidth}>
-                  <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
-                    Location
-                  </Typography>
-                  <Field
-                    as={TextField}
-                    sx={addDeviceStyles.textField}
-                    name="location"
-                    label="Location"
-                    error={touched.location && Boolean(errors.location)}
-                    helperText={touched.location && errors.location}
-                  />
-                </Box> */}
+               
 
-                {/* <Box sx={loginLeftContentContainerItemWidth}>
-                  <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
-                    Status
-                  </Typography>
-                  <Field
-                    as={TextField}
-                    name="status"
-                    placeholder="Status"
-                    variant="outlined"
-                    size="small"
-                    error={touched.status && Boolean(errors.status)}
-                    helperText={touched.status && errors.status}
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position="end" sx={{ marginRight: 0 }}>
-                          <IconButton sx={{ padding: 0 }}>
-                            <img src={Arrowdown} height={"16px"} width={"20px"} alt="dropdown" />
-                          </IconButton>
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{
-                      "& .MuiInputBase-root": {
-                        height: "50px", // Adjust the height as needed
-                        marginLeft: "5px",
-                      },
-                      width: { lg: "35%", xs: "100%" },
-                    }}
-                  />
-                </Box> */}
+                  <Box sx={loginLeftContentContainerItemWidth}>
+                    <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
+                      Status
+                    </Typography>
+                    <Field
+                      as={TextField}
+                      select // Add this to make it a dropdown
+                      name="status"
+                      placeholder="Status"
+                      variant="outlined"
+                      size="small"
+                      value={values.status}
+                      onChange={handleChange}
+                      error={touched.status && Boolean(errors.status)}
+                      helperText={touched.status && errors.status}
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          height: "50px",
+                          marginLeft: "5px",
+                        },
+                        width: {
+                          xs: "90%",  // Wider on extra-small screens
+                          sm: "90%",  // Revert to 70% on small screens and up
+                          lg: "37%"
 
-<Box sx={loginLeftContentContainerItemWidth}>
-  <Typography variant="subtitle1" mt={3} mb={1} style={addDeviceStyles.label}>
-    Status
-  </Typography>
-  <Field
-    as={TextField}
-    select // Add this to make it a dropdown
-    name="status"
-    placeholder="Status"
-    variant="outlined"
-    size="small"
-    error={touched.status && Boolean(errors.status)}
-    helperText={touched.status && errors.status}
-    sx={{
-      "& .MuiInputBase-root": {
-        height: "50px",
-        marginLeft: "5px",
-      },
-      width: {
-        xs: "90%",  // Wider on extra-small screens
-        sm: "90%",  // Revert to 70% on small screens and up
-        lg: "37%"
-
-      },
-    }}
-  >
-    <MenuItem value="active">Active</MenuItem>
-    <MenuItem value="inactive">Inactive</MenuItem>
-  </Field>
-</Box>
+                        },
+                      }}
+                    >
+                      <MenuItem value="active">Active</MenuItem>
+                      <MenuItem value="inactive">Inactive</MenuItem>
+                    </Field>
+                  </Box>
 
 
 

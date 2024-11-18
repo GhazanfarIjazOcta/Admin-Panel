@@ -2,7 +2,7 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import OutlinedCard from "../Card/Card";
 import TableHeader from "../TableHeader/TableHeader";
-import { Paper, Stack, Typography } from "@mui/material";
+import { Alert, Paper, Snackbar, Stack, Typography } from "@mui/material";
 import fuelConsumptionLogo from "../../../assets/FuelConsumption/fuelConsumptionLogo.png";
 import FuelManagmentTableContent from "../Table/FuelManagmentTableContent";
 import TripLogo from "../../../assets/Card/TripLogo.png";
@@ -11,12 +11,82 @@ import ArrowDown from "../../../assets/Card/fi_chevron-down.png";
 import { fuelManagmentStyles } from "../../UI/Main";
 import { useState } from "react";
 
+import { useGetFuelManagementDashboardQuery } from "../../../Api/apiSlice";
+import Loader from "../../UI/Loader";
+// useGetFuelManagementDashboardQuery
+
 export default function FuelManagment() {
 
   const [search, setSearch] = useState(''); 
   const [status, setStatus] = useState('');  // State for storing the selected status
 
-  console.log("search data [][][][][][][ in ysermanagement" , search)
+  const { data , error, isLoading } = useGetFuelManagementDashboardQuery();
+
+  const { vehicles,summary } = data || {};
+  console.log("here the commmmpleteee" , data)
+
+console.log("here the summaryyyy" , summary)
+
+
+const [openSnackbar, setOpenSnackbar] = useState(false);
+
+// Trigger Snackbar when there’s an error
+React.useEffect(() => {
+  if (error) {
+    setOpenSnackbar(true);
+  }
+}, [error]);
+
+// Close the Snackbar when user interacts
+const handleCloseSnackbar = (event, reason) => {
+  if (reason === "clickaway") {
+    return;
+  }
+  setOpenSnackbar(false);
+};
+
+
+if (isLoading) {
+  return (
+    <>
+      <Loader />
+    </>
+  );
+}
+if (error) {
+  return (
+    <>
+      {/* Snackbar for error notification */}
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+          variant="filled"
+        >
+          Error loading data! Please try again later.
+        </Alert>
+      </Snackbar>
+
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        height="100vh"
+      >
+        <Typography variant="h6" color="error">
+          Something went wrong. Please refresh the page.
+        </Typography>
+      </Box>
+    </>
+  );
+}
+
 
   return (
     <Box
@@ -39,16 +109,21 @@ export default function FuelManagment() {
               <OutlinedCard
                 text={"Fuel Consumtion"}
                 icon={TripLogo}
-                secText={"9L"}
+                // secText={"9L"}
                 consumptionColor={"#D7DBEC"}
+                // secText={"9l"}
+                secText={`${summary.totalFuelConsumption} L`}
               />
             </Box>
             <Box>
               <OutlinedCard
                 text={"Total Fuel Cost"}
                 icon={TripLogo}
-                secText={"$49"}
+                // secText={"$49"}
                 costColor={"#F38712"}
+                // secText={"9l"}
+                secText={ `${summary.totalFuelCost} $`}
+
               />
             </Box>
           </Box>
@@ -76,13 +151,14 @@ export default function FuelManagment() {
         <TableHeader
           text={"Fuel Consumption"}
           searchText={"Vehicle name"}
-          buttonText={"Add Driver"}
-          exportIcon={true}
+          buttonText={"Add Fuel"}
+          // exportIcon={true}
           icon={fuelConsumptionLogo}
           setSearch = {setSearch}
           search = {search}
          status = {status}
          setStatus = {setStatus}
+         route={"add-fuel"}
         />
 
         <FuelManagmentTableContent />

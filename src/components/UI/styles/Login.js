@@ -30,6 +30,7 @@ export const loginLeftContentContainer = {
 };
 
 export const loginLeftContentContainerItemWidth = { width: "80%" };
+export const loginRightContentContainerItemWidth = { width: "100%" };
 export const LoginForgotPasswordStyles = {
   width: "80%",
   display: "flex",

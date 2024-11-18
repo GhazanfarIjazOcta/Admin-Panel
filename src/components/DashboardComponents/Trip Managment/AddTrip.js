@@ -26,8 +26,8 @@ import CustomAlert from '../../UI/CustomAlert';
 
 const validationSchema = Yup.object({
   // tripId: Yup.string().required("Trip ID is required"),
-  vehicle: Yup.string().required("Vehicle is required"),
-  driverName: Yup.string().required("Driver's Name is required"),
+  // vehicle: Yup.string().required("Vehicle is required"),
+  // driverName: Yup.string().required("Driver's Name is required"),
   startLocation: Yup.string().required("Start Location is required"),
   endLocation: Yup.string().required("End Location is required"),
   status: Yup.string().required("Status is required"),

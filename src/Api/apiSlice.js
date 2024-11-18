@@ -179,7 +179,7 @@ const apiSlice = createApi({
       providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
     getDeviceManagementSearchDashboard: builder.query({
-      query: ({ search = "h",  status = "" }) => {
+      query: ({ search = "",  status = "" }) => {
         const params = new URLSearchParams();
         
         // Append search parameter if provided
@@ -323,14 +323,49 @@ const apiSlice = createApi({
       providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
 
-    addMaintainance: builder.mutation({
-      query: (maintainanceData) => ({
-        url: "/register",
+    // addMaintainance: builder.mutation({
+    //   query: (maintainanceData) => ({
+    //     url: "/register",
+    //     method: "POST",
+    //     body: maintainanceData,
+    //   }),
+    //   invalidatesTags: ["AdminDashboard"],
+    // }),
+
+
+
+    getVehicleWithFeulRecordDashboard: builder.query({
+      query: () => "/admin/vehicles-with-fuel",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
+    addMaintenance: builder.mutation({
+      query: (maintenanceData) => ({
+        url: "/admin/addMaintainance",
         method: "POST",
-        body: maintainanceData,
+        body: maintenanceData,
       }),
       invalidatesTags: ["AdminDashboard"],
     }),
+
+    addFuel: builder.mutation({
+      query: (maintenanceData) => ({
+        url: "/admin/add-fuel",
+        method: "POST",
+        body: maintenanceData,
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
+    getFuelManagementDashboard: builder.query({
+      query: () => "/admin/fuel-dashboard",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
 
   }),
 });
@@ -387,9 +422,18 @@ export const {
   useUpdateUserInfoMutation,
 
 
-  useAddMaintainanceMutation,
+  // useAddMaintainanceMutation,
   useGetMaintainanceDashboardQuery, 
 
+
+  useGetVehicleWithFeulRecordDashboardQuery, 
+
+  useAddMaintenanceMutation,
+
+  useAddFuelMutation,
+   
+
+  useGetFuelManagementDashboardQuery,
 
 } = apiSlice;
 

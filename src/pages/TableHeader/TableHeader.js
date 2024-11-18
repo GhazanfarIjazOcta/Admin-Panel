@@ -66,9 +66,7 @@ export default function TableHeader({
         sx={{
           border: "none",
           boxShadow: "none",
-          padding: "15px",
-        
-          
+          padding: "15px"
         }}
       >
         <React.Fragment>
@@ -125,7 +123,7 @@ export default function TableHeader({
                     sx={{
                       display: "flex",
                       alignItems: "center",
-                      width: { lg: 270 , xs: 20 },
+                      width: { lg: 270, xs: 20 },
                       height: { lg: "70%", xs: 30 },
                       boxShadow: "none",
                       border: "1px solid #E0E0E0",
@@ -191,7 +189,6 @@ export default function TableHeader({
                         {activeTrips.count}
                       </Typography>
                     </Stack>
-                  
                   </Paper>
                 </Box>
               </Stack>
@@ -222,25 +219,21 @@ export default function TableHeader({
                 }}
               />
 
-<Stack sx={{ marginTop: 1}}>             
-<Select
-  defaultValue=""
-  variant="outlined"
-  value={status}
-  onChange={handleStatusChange}
-  displayEmpty
-  renderValue={(selected) => selected || "Status"}
- 
->
-  <MenuItem value="active">Active</MenuItem>
-  <MenuItem value="upcoming">Upcoming</MenuItem>
-  <MenuItem value="delayed">Delayed</MenuItem>
-  <MenuItem value="">All trips</MenuItem>
-</Select>
-
-</Stack>   
-
-
+              <Stack sx={{ marginTop: 1 }}>
+                <Select
+                  defaultValue=""
+                  variant="outlined"
+                  value={status}
+                  onChange={handleStatusChange}
+                  displayEmpty
+                  renderValue={(selected) => selected || "Status"}
+                >
+                  <MenuItem value="active">Active</MenuItem>
+                  <MenuItem value="upcoming">Upcoming</MenuItem>
+                  <MenuItem value="delayed">Delayed</MenuItem>
+                  <MenuItem value="">All trips</MenuItem>
+                </Select>
+              </Stack>
 
               <TextField
                 placeholder="7/6/2024 - 5/8-2024"
@@ -258,7 +251,7 @@ export default function TableHeader({
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "70%",
-                    width: { xs: "100%", sm: "210px", lg: "100%" } ,// Responsive width
+                    width: { xs: "100%", sm: "210px", lg: "100%" }, // Responsive width
                     marginTop: 1
                   }
                 }}
@@ -317,8 +310,6 @@ export default function TableHeader({
             </Stack>
           </Stack>
 
-
-
           {/* Mobile Layout */}
           <Accordion
             sx={{
@@ -355,8 +346,6 @@ export default function TableHeader({
                     width={"20px"}
                   />
                 </Box>
-
-               
               </Stack>
               <Typography
                 sx={{
@@ -447,7 +436,6 @@ export default function TableHeader({
                             {activeTrips.count}
                           </Typography>
                         </Stack>
-                       
                       </Paper>
                     </Box>
                   </Stack>
@@ -461,7 +449,7 @@ export default function TableHeader({
                   value={search} // Bind value to state
                   onChange={handleSearchChange} // Update state on change
                 />
-               
+
                 <Select
                   displayEmpty
                   fullWidth

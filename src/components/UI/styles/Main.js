@@ -172,6 +172,7 @@ export const addDeviceStyles = {
   },
   label: { fontWeight: 500 },
   textField: { width: { lg: "36%", xs: "90%" }, marginLeft: "5px" },
+  textField2: { width: { lg: "240px", xs: "90%" }, marginLeft: "5px" },
   button: {
     marginRight: "opx",
     marginLeft:  {xs:"0px", sm:"0px" , lg:"0px" },
