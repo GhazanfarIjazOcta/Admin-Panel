@@ -97,7 +97,7 @@ function App() {
 
               <Route
                 path="maintenance-scheduling/add-maintenence"
-                element={<AddFuel />}
+                element={<AddMaintenence />}
               />
 
               <Route
