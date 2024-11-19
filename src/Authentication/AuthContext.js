@@ -11,7 +11,7 @@
 //   // const login = () => setIsAuthenticated(true);
 //   // const logout = () => setIsAuthenticated(false);
 //   // const setRoleCustomer = (role) => setuserRole(role);
- 
+
 //    // Accept role as a parameter and set userRole
 //    const login = (role) => {
 //     setIsAuthenticated(true);
@@ -22,7 +22,6 @@
 //     setIsAuthenticated(false);
 //     setUserRole(null); // Reset userRole on logout
 //   };
-  
 
 //   return (
 //     <AuthContext.Provider
@@ -36,7 +35,6 @@
 // // Custom hook to use the AuthContext
 // export const useAuth = () => useContext(AuthContext);
 
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 // Create an AuthContext
@@ -46,14 +44,14 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   // Initialize state with values from localStorage (if they exist)
   const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("isAuthenticated") === "true" // Convert to boolean
+    localStorage.getItem("isAuthenticated") === "true", // Convert to boolean
   );
   const [userRole, setUserRole] = useState(localStorage.getItem("userRole"));
   const [user_ID, setUser_ID] = useState(localStorage.getItem("user_ID"));
   const [userName, setUserName] = useState(localStorage.getItem("userName"));
 
   // Login function with role parameter
-  const login = (role , user_ID , name) => {
+  const login = (role, user_ID, name) => {
     setIsAuthenticated(true);
     setUserRole(role);
     setUser_ID(user_ID);
@@ -77,7 +75,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("userRole");
     localStorage.removeItem("user_ID");
     localStorage.removeItem("userName");
-    
   };
 
   // This effect ensures that the state syncs with localStorage on component mount
@@ -96,7 +93,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, logout, userRole , user_ID , userName }}>
+    <AuthContext.Provider
+      value={{ isAuthenticated, login, logout, userRole, user_ID, userName }}
+    >
       {children}
     </AuthContext.Provider>
   );

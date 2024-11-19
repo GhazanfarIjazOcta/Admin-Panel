@@ -1,4 +1,4 @@
-import { Box, Typography, Badge, styled } from '@mui/material';
+import { Box, Typography, Badge, styled } from "@mui/material";
 
 export const firstContainer = {
   display: { xmd: "flex", xs: "none" },
@@ -109,4 +109,3 @@ export const userNameStyle = { display: "flex", flexDirection: "column" };
 // display: 'flex',
 //   alignItems: 'center',
 //   gap: '0.5rem',
-

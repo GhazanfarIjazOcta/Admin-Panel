@@ -22,7 +22,7 @@ import Navbar2 from "../../LayoutComponents/Navbar/Navbar2";
 import { useAddTripMutation } from "../../../Api/apiSlice";
 import { useState } from "react";
 
-import CustomAlert from '../../UI/CustomAlert';
+import CustomAlert from "../../UI/CustomAlert";
 
 const validationSchema = Yup.object({
   // tripId: Yup.string().required("Trip ID is required"),
@@ -33,11 +33,7 @@ const validationSchema = Yup.object({
   status: Yup.string().required("Status is required"),
 });
 
-
-
-
 function AddTrip() {
-
   const [addTrip] = useAddTripMutation();
 
   const [alert, setAlert] = useState({
@@ -50,16 +46,15 @@ function AddTrip() {
     setAlert({ ...alert, open: false });
   };
 
-
   const handleRegister = async (values, resetForm) => {
     console.log("Form Values: ", values);
     const { startLocation, endLocation, status } = values;
     const tripData = { startLocation, endLocation, status };
-  
-    console.log("here is the trip data " , tripData )
+
+    console.log("here is the trip data ", tripData);
     try {
       await addTrip(tripData).unwrap();
-      
+
       setAlert({
         open: true,
         severity: "success",
@@ -67,7 +62,6 @@ function AddTrip() {
       });
       resetForm();
     } catch (err) {
-      
       setAlert({
         open: true,
         severity: "error",
@@ -76,7 +70,6 @@ function AddTrip() {
       console.error("Add Trip failed", err);
     }
   };
-  
 
   const formik = useFormik({
     initialValues: {
@@ -93,11 +86,16 @@ function AddTrip() {
     },
   });
 
-
   return (
     <Paper sx={addTripStyles.mainContainer}>
       <Navbar2 />
-      <Box sx={addTripStyles.container} pl={3} mb={3}  component="form" onSubmit={formik.handleSubmit}>
+      <Box
+        sx={addTripStyles.container}
+        pl={3}
+        mb={3}
+        component="form"
+        onSubmit={formik.handleSubmit}
+      >
         <Box>
           {/* Trip ID Field */}
           {/* <Box sx={addTripStyles.containerItemWidth}>
@@ -152,7 +150,12 @@ function AddTrip() {
 
           {/* Start Location Field */}
           <Box sx={addTripStyles.containerItemWidth}>
-            <Typography variant="subtitle1" mt={3} mb={1} style={addTripStyles.label}>
+            <Typography
+              variant="subtitle1"
+              mt={3}
+              mb={1}
+              style={addTripStyles.label}
+            >
               Start Location
             </Typography>
             <TextField
@@ -163,13 +166,23 @@ function AddTrip() {
               value={formik.values.startLocation}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.startLocation && Boolean(formik.errors.startLocation)}
-              helperText={formik.touched.startLocation && formik.errors.startLocation}
+              error={
+                formik.touched.startLocation &&
+                Boolean(formik.errors.startLocation)
+              }
+              helperText={
+                formik.touched.startLocation && formik.errors.startLocation
+              }
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end" sx={{ marginRight: 0 }}>
                     <IconButton sx={{ padding: 0 }}>
-                      <img src={Arrowdown} height={"16px"} width={"20px"} alt="Arrow Icon" />
+                      <img
+                        src={Arrowdown}
+                        height={"16px"}
+                        width={"20px"}
+                        alt="Arrow Icon"
+                      />
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -180,17 +193,22 @@ function AddTrip() {
                   marginLeft: "5px",
                 },
                 width: {
-                   xs: "90%", 
-                   sm: "90%" ,
-                   lg: "36%"
-                  },
+                  xs: "90%",
+                  sm: "90%",
+                  lg: "36%",
+                },
               }}
             />
           </Box>
 
           {/* End Location Field */}
           <Box sx={addTripStyles.containerItemWidth}>
-            <Typography variant="subtitle1" mt={3} mb={1} style={addTripStyles.label}>
+            <Typography
+              variant="subtitle1"
+              mt={3}
+              mb={1}
+              style={addTripStyles.label}
+            >
               End Location
             </Typography>
             <TextField
@@ -201,13 +219,22 @@ function AddTrip() {
               value={formik.values.endLocation}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              error={formik.touched.endLocation && Boolean(formik.errors.endLocation)}
-              helperText={formik.touched.endLocation && formik.errors.endLocation}
+              error={
+                formik.touched.endLocation && Boolean(formik.errors.endLocation)
+              }
+              helperText={
+                formik.touched.endLocation && formik.errors.endLocation
+              }
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end" sx={{ marginRight: 0 }}>
                     <IconButton sx={{ padding: 0 }}>
-                      <img src={Arrowdown} height={"16px"} width={"20px"} alt="Arrow Icon" />
+                      <img
+                        src={Arrowdown}
+                        height={"16px"}
+                        width={"20px"}
+                        alt="Arrow Icon"
+                      />
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -218,10 +245,10 @@ function AddTrip() {
                   marginLeft: "5px",
                 },
                 width: {
-                   xs: "90%", 
-                   sm: "90%" ,
-                   lg: "36%"
-                  },
+                  xs: "90%",
+                  sm: "90%",
+                  lg: "36%",
+                },
               }}
             />
           </Box>
@@ -260,56 +287,62 @@ function AddTrip() {
             />
           </Box> */}
           {/* Status Field */}
-<Box sx={addTripStyles.containerItemWidth}>
-  <Typography variant="subtitle1" mt={3} mb={1} style={addTripStyles.label}>
-    Status
-  </Typography>
-  <FormControl fullWidth>
-    {/* <InputLabel>Select Status</InputLabel> */}
-    <Select
-      variant="outlined"
-      size="medium"
-      name="status"
-      value={formik.values.status}
-      onChange={formik.handleChange}
-      onBlur={formik.handleBlur}
-      error={formik.touched.status && Boolean(formik.errors.status)}
-      helperText={formik.touched.status && formik.errors.status}
-      sx={{
-        "& .MuiInputBase-root": {
-          height: "50px",
-          marginLeft: "5px",
-        },
-        width: {
-           xs: "90%", 
-           sm: "90%" ,
-           lg: "36%"
-          },
-      }}
-    >
-      <MenuItem value="upcoming">upcoming</MenuItem>
-      <MenuItem value="active">active</MenuItem>
-      <MenuItem value="delayed">delayed</MenuItem>
-    </Select>
-  </FormControl>
-</Box>
-
-
-        
-          
+          <Box sx={addTripStyles.containerItemWidth}>
+            <Typography
+              variant="subtitle1"
+              mt={3}
+              mb={1}
+              style={addTripStyles.label}
+            >
+              Status
+            </Typography>
+            <FormControl fullWidth>
+              {/* <InputLabel>Select Status</InputLabel> */}
+              <Select
+                variant="outlined"
+                size="medium"
+                name="status"
+                value={formik.values.status}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                error={formik.touched.status && Boolean(formik.errors.status)}
+                helperText={formik.touched.status && formik.errors.status}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    height: "50px",
+                    marginLeft: "5px",
+                  },
+                  width: {
+                    xs: "90%",
+                    sm: "90%",
+                    lg: "36%",
+                  },
+                }}
+              >
+                <MenuItem value="upcoming">upcoming</MenuItem>
+                <MenuItem value="active">active</MenuItem>
+                <MenuItem value="delayed">delayed</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Box>
 
         {/* Add Button */}
         <Stack sx={{ gap: "24px" }} mt={6} ml={1}>
-          <Button 
-          type="submit" variant="contained" 
-          sx={addTripStyles.button}
-          // onClick={handleRegister}
+          <Button
+            type="submit"
+            variant="contained"
+            sx={addTripStyles.button}
+            // onClick={handleRegister}
           >
             Add
           </Button>
-          <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-                    
+          <CustomAlert
+            open={alert.open}
+            onClose={handleAlertClose}
+            severity={alert.severity}
+            message={alert.message}
+          />
         </Stack>
       </Box>
     </Paper>

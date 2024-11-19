@@ -12,8 +12,8 @@ function Dashboard() {
   const isTablet = useMediaQuery("(max-width:960px)"); // Typical tablet breakpoint (960px)
   const { userRole } = useAuth();
 
-  console.log("user role is actually " , userRole)
-  
+  console.log("user role is actually ", userRole);
+
   return (
     <Box
       display={"flex"}
@@ -22,8 +22,7 @@ function Dashboard() {
       backgroundColor="#F4F7F7"
     >
       <Sidebar />
-      <Box flex={10.2} 
-      >
+      <Box flex={10.2}>
         <Navbar />
         <Outlet />
       </Box>

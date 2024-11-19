@@ -10,6 +10,7 @@ import ArrowDown from "../../../assets/Table/arrow-down.png";
 import { Box, Stack, Typography } from "@mui/material";
 
 import { useGetVehicleWithFeulRecordDashboardQuery } from "../../../Api/apiSlice";
+import Loader from "../../UI/Loader";
 
 // function createData(
 //   Vehicle,
@@ -82,13 +83,19 @@ import { useGetVehicleWithFeulRecordDashboardQuery } from "../../../Api/apiSlice
 // ];
 
 export default function FuelManagmentTableContent() {
-
-
   const { data, error, isLoading } =
     useGetVehicleWithFeulRecordDashboardQuery();
 
   const { vehicles } = data || {};
   console.log("here is the ~~~~~~~~~~~fuel vehicle data ", vehicles);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
 
   return (
     <TableContainer
@@ -101,7 +108,7 @@ export default function FuelManagmentTableContent() {
         border: "1px ",
         boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
         mb: 1,
-         width: "99%"
+        width: "99%",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -327,7 +334,7 @@ export default function FuelManagmentTableContent() {
                               display: "flex",
                               alignItems: "center",
                               justifyContent: "center",
-                              gap: "10px"
+                              gap: "10px",
                             }}
                           >
                             <Box
@@ -338,7 +345,7 @@ export default function FuelManagmentTableContent() {
                                 backgroundColor:
                                   vehicle.status === "active"
                                     ? "#28A745"
-                                    : "#6C757D"
+                                    : "#6C757D",
                               }}
                             />
                             <Typography
@@ -348,7 +355,7 @@ export default function FuelManagmentTableContent() {
                                 color:
                                   vehicle.status === "active"
                                     ? "#037847"
-                                    : "#364254"
+                                    : "#364254",
                               }}
                               fontFamily={"Inter"}
                             >
@@ -359,7 +366,7 @@ export default function FuelManagmentTableContent() {
                       </TableCell>
                     </TableRow>
                   ))
-                : null
+                : null,
             )
           ) : (
             <TableRow>

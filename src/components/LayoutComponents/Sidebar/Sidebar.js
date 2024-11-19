@@ -42,20 +42,36 @@ function Sidebar() {
   const listItems = [
     { text: "Dashboard", icon: DashboardLogo, route: "dashboardmain" },
     { text: "User Management", icon: UserLogo, route: "user-management" },
-    { text: "Vehicle Management", icon: VehicleLogo, route: "vehicle-management" },
+    {
+      text: "Vehicle Management",
+      icon: VehicleLogo,
+      route: "vehicle-management",
+    },
     { text: "Device Management", icon: DeviceLogo, route: "device-management" },
     { text: "Driver Management", icon: DriverLogo, route: "driver-management" },
     { text: "Trip Management", icon: TripLogo, route: "trip-management" },
-    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
+    {
+      text: "Maintenance Scheduling",
+      icon: MaintenanceLogo,
+      route: "maintenance-scheduling",
+    },
     { text: "Fuel Management", icon: FuelLogo, route: "fuel-management" },
     { text: "Setting", icon: SettingLogo, route: "setting" },
   ];
 
   const customerlistitems = [
     { text: "Dashboard", icon: DashboardLogo, route: "customerdashboardmain" },
-    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
-    { text: "Fuel Management", icon: FuelLogo, route: "customer-fuel-management" },
-    { text: "Setting", icon: SettingLogo, route: "customer-setting" }
+    {
+      text: "Maintenance Scheduling",
+      icon: MaintenanceLogo,
+      route: "maintenance-scheduling",
+    },
+    {
+      text: "Fuel Management",
+      icon: FuelLogo,
+      route: "customer-fuel-management",
+    },
+    { text: "Setting", icon: SettingLogo, route: "customer-setting" },
   ];
 
   // Conditionally set the list items based on the userRole

@@ -60,3 +60,23 @@
     display: none; /* Hide time on mobile */
   }
 }
+
+.colored-box {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  height: 40px; /* Maintain a fixed height */
+  border-radius: 5px;
+  padding: 5px;
+  margin-left: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+}
+
+
+
+
+
+

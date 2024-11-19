@@ -96,7 +96,7 @@ export default function DriverManagment() {
         px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
         ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
         overflow: "none", // Prevent overflowing horizontally and vertically
-        width: { lg: "82%", xs: "90%" } // Ensure it takes full width
+        width: { lg: "82%", xs: "90%" }, // Ensure it takes full width
       }}
       mt={12}
     >
@@ -106,7 +106,7 @@ export default function DriverManagment() {
         a
         sx={{
           flexGrow: 1,
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         <Grid item xs={13} sm={6} md={2.98} sx={{ flexShrink: 1 }}>

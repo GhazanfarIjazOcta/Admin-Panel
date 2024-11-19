@@ -13,7 +13,7 @@ import {
   Modal,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Edit from "../../../assets/Table/Edit.png";
 import Delete from "../../../assets/Table/Delete.png";
@@ -21,19 +21,20 @@ import Delete from "../../../assets/Table/Delete.png";
 import {
   useGetVehicleManagementSearchDashboardQuery,
   useDeleteVehicleMutation,
-  useUpdateVehicleMutation
+  useUpdateVehicleMutation,
 } from "../../../Api/apiSlice";
 import { useState } from "react";
 
 import CustomAlert from "../../UI/CustomAlert";
 
 import { TablePagination } from "@mui/material";
+import Loader from "../../UI/Loader";
 
 export default function VehicleManagmentTableContent({
   setSearch,
   search,
   status,
-  setStatus
+  setStatus,
 }) {
   const { data, error, isLoading } =
     useGetVehicleManagementSearchDashboardQuery({ search, status });
@@ -65,14 +66,20 @@ export default function VehicleManagmentTableContent({
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
     setAlert({ ...alert, open: false });
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) return <p>Error loading data</p>;
 
   const { vehicles } = data || {};
@@ -118,14 +125,14 @@ export default function VehicleManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Vehicle Deleted successfully!"
+        message: "Vehicle Deleted successfully!",
       });
     } catch (error) {
       console.error("Error deleting user:", error);
       setAlert({
         open: true,
         severity: "error",
-        message: "Vehicle not Deleted!"
+        message: "Vehicle not Deleted!",
       });
     } finally {
       handleCloseDeleteModal();
@@ -140,7 +147,7 @@ export default function VehicleManagmentTableContent({
         vehicleType: editVehicleType,
         vehicleModel: editVehicleModel,
 
-        status: editStatus
+        status: editStatus,
       };
 
       console.log(" updated data sent is vehicle data :::: ", vehicleData);
@@ -153,7 +160,7 @@ export default function VehicleManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Vehicle Updated successfully!"
+        message: "Vehicle Updated successfully!",
       });
       handleCloseEditModal();
     } catch (error) {
@@ -161,7 +168,7 @@ export default function VehicleManagmentTableContent({
       setAlert({
         open: true,
         severity: "error",
-        message: "Error updating vehicle:"
+        message: "Error updating vehicle:",
       });
     }
   };
@@ -190,13 +197,12 @@ export default function VehicleManagmentTableContent({
         elevation: 0,
         borderTop: "1px solid #EAECF0",
         height: "60%",
-        width: "99%"
+        width: "99%",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead sx={{ backgroundColor: "#FCFCFD" }}>
           <TableRow>
-
             <TableCell align="left">
               <Stack
                 direction={"row"}
@@ -213,8 +219,6 @@ export default function VehicleManagmentTableContent({
                 </Typography>
               </Stack>
             </TableCell>
-
-           
 
             <TableCell align="start">
               <Stack
@@ -412,7 +416,7 @@ export default function VehicleManagmentTableContent({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: "10px"
+                        gap: "10px",
                       }}
                     >
                       <Box
@@ -421,7 +425,7 @@ export default function VehicleManagmentTableContent({
                           height: 6, // Adjust size as needed
                           borderRadius: "50%",
                           backgroundColor:
-                            vehicle.status == "active" ? "#28A745" : "#6C757D"
+                            vehicle.status == "active" ? "#28A745" : "#6C757D",
                         }}
                       />
                       <Typography
@@ -429,7 +433,7 @@ export default function VehicleManagmentTableContent({
                         fontSize={"14px"}
                         sx={{
                           color:
-                            vehicle.status == "active" ? "#037847" : "#364254"
+                            vehicle.status == "active" ? "#037847" : "#364254",
                         }}
                         fontFamily={"Inter"}
                       >
@@ -438,7 +442,6 @@ export default function VehicleManagmentTableContent({
                     </Box>
                   </Stack>
                 </TableCell>
-               
 
                 {/* <TableCell align="center">
                 <Stack direction="row" spacing={2}>
@@ -484,102 +487,101 @@ export default function VehicleManagmentTableContent({
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-{/* Edit Modal */}
-<Modal open={openEditModal} onClose={handleCloseEditModal}>
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px otherwise
-      bgcolor: "background.paper",
-      borderRadius: 2,
-      boxShadow: 24,
-      p: { xs: 2, sm: 4 } // Adjust padding for smaller screens
-    }}
-  >
-    <Typography variant="h6" component="h2">
-      Edit vehicle
-    </Typography>
-    {selectedVehicle && (
-      <>
-        <TextField
-          fullWidth
-          label="VehicleType"
-          margin="normal"
-          value={editVehicleType}
-          onChange={(e) => setEditVehicleType(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="VehicleModel"
-          margin="normal"
-          value={editVehicleModel}
-          onChange={(e) => setEditVehicleModel(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Status"
-          margin="normal"
-          value={editStatus}
-          onChange={(e) => setEditStatus(e.target.value)}
-          select
+      {/* Edit Modal */}
+      <Modal open={openEditModal} onClose={handleCloseEditModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px otherwise
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: { xs: 2, sm: 4 }, // Adjust padding for smaller screens
+          }}
         >
-          <MenuItem value="active">Active</MenuItem>
-          <MenuItem value="inactive">Inactive</MenuItem>
-        </TextField>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2 }}
-          onClick={handleSaveChanges}
+          <Typography variant="h6" component="h2">
+            Edit vehicle
+          </Typography>
+          {selectedVehicle && (
+            <>
+              <TextField
+                fullWidth
+                label="VehicleType"
+                margin="normal"
+                value={editVehicleType}
+                onChange={(e) => setEditVehicleType(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="VehicleModel"
+                margin="normal"
+                value={editVehicleModel}
+                onChange={(e) => setEditVehicleModel(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Status"
+                margin="normal"
+                value={editStatus}
+                onChange={(e) => setEditStatus(e.target.value)}
+                select
+              >
+                <MenuItem value="active">Active</MenuItem>
+                <MenuItem value="inactive">Inactive</MenuItem>
+              </TextField>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+                onClick={handleSaveChanges}
+              >
+                Save Changes
+              </Button>
+            </>
+          )}
+        </Box>
+      </Modal>
+
+      {/* Delete Modal */}
+      <Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px otherwise
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: { xs: 2, sm: 4 }, // Adjust padding for smaller screens
+          }}
         >
-          Save Changes
-        </Button>
-      </>
-    )}
-  </Box>
-</Modal>
-
-{/* Delete Modal */}
-<Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px otherwise
-      bgcolor: "background.paper",
-      borderRadius: 2,
-      boxShadow: 24,
-      p: { xs: 2, sm: 4 } // Adjust padding for smaller screens
-    }}
-  >
-    <Typography variant="h6" component="h2">
-      Confirm Delete
-    </Typography>
-    <Typography sx={{ mt: 2 }}>
-      Are you sure you want to delete {selectedVehicle?.VehicleType}?
-    </Typography>
-    <Box
-      sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
-    >
-      <Button variant="outlined" onClick={handleCloseDeleteModal}>
-        Cancel
-      </Button>
-      <Button
-        variant="contained"
-        color="error"
-        onClick={handleDeleteConfirm}
-      >
-        Delete
-      </Button>
-    </Box>
-  </Box>
-</Modal>
-
+          <Typography variant="h6" component="h2">
+            Confirm Delete
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
+            Are you sure you want to delete {selectedVehicle?.VehicleType}?
+          </Typography>
+          <Box
+            sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
+          >
+            <Button variant="outlined" onClick={handleCloseDeleteModal}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleDeleteConfirm}
+            >
+              Delete
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <CustomAlert
         open={alert.open}

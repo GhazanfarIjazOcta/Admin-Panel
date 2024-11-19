@@ -363,10 +363,11 @@ export const fuelManagmentStyles = {
     marginRight: { lg: 0, sm: 2, xs: 0 },
   },
   rightContainer: {
-    width: { lg: "70%", sm: "90%", xs: "100%" },
+    width: { lg: "68%", sm: "100%", xs: "100%" },
     border: "1px ",
     flexDirection: "column",
     boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
+    mr: 2,
   },
 
   rightContainerPaper: { boxShadow: "none", elevation: "none" },

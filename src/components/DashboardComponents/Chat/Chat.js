@@ -312,7 +312,7 @@ const Chat = () => {
 
         {!matchesMdDown && (
           <Grid item xl={2.995} lg={2.995} xs={3}>
-            <ConversationList
+            {/* <ConversationList
               setChatId={setChatId}
               chatId={chatId}
               chatlist={chatlist}
@@ -329,7 +329,7 @@ const Chat = () => {
               handleChatUserChange={handleChatUserChange}
               setIsLoading={setIsLoading}
               onConversationSelect={handleSelectedConversation}
-            />
+            /> */}
           </Grid>
         )}
 

@@ -12,7 +12,6 @@ export default function OutlinedCard({
   secText,
   consumptionColor,
   costColor,
-  
 }) {
   return (
     <Paper

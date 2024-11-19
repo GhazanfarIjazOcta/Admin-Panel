@@ -42,12 +42,9 @@ export default function DashboardTableHeader({
   // serRole,
   // role,
   status,
-  setStatus
+  setStatus,
 }) {
-
-  
   const isMobile = useMediaQuery("(max-width:600px)");
-
 
   const { data, error, isLoading } = useGetTripManagementDashboardQuery();
 
@@ -58,15 +55,11 @@ export default function DashboardTableHeader({
     setStatus(event.target.value); // Update the status state
   };
 
-
-
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading data</p>;
 
   const { trips, activeTrips, delayedTrips, upcomingTrips } = data || {};
-  console.log("here is the trip data " , data)
-
-
+  console.log("here is the trip data ", data);
 
   return (
     <Box height={"100%"} width={"100%"}>
@@ -249,56 +242,53 @@ export default function DashboardTableHeader({
                   />
                 </Box>
 
-             
-             
-
-<Box>
-  <Select
-    displayEmpty
-    variant="outlined"
-    size="small"
-    value={status}
-    onChange={handleStatusChange}  // Update state on change
-    renderValue={(selected) => selected || "Status"} // Placeholder text
-    sx={{
-      "& .MuiInputBase-root": {
-        height: {
-          xs: "38px",
-          sm: "32px",
-          md: "28px",
-          lg: "20px",
-          xl: "28px",
-        },
-        lineHeight:"1em",
-        fontSize: "8px",
-        width: {
-          lg: "200px",
-          md: "180px",
-          xs: "180px",
-        },
-        boxShadow: "none",
-      },
-    }}
-    // endAdornment={
-    //   <InputAdornment position="end" sx={{ marginRight: 0 }}>
-    //     <IconButton sx={{ padding: 0 }}>
-    //       <Box
-    //         height="14px"
-    //         width="20px"
-    //         sx={{ display: "flex", alignItems: "center" }}
-    //       >
-    //         <img src={Arrowdown} width="100%" height="100%" />
-    //       </Box>
-    //     </IconButton>
-    //   </InputAdornment>
-    // }
-  >
-    <MenuItem value="active">Active</MenuItem>
-    <MenuItem value="delayed">Delayed</MenuItem>
-    <MenuItem value="upcoming">Upcoming</MenuItem>
-    <MenuItem value="">All Trips</MenuItem>
-  </Select>
-</Box>
+                <Box>
+                  <Select
+                    displayEmpty
+                    variant="outlined"
+                    size="small"
+                    value={status}
+                    onChange={handleStatusChange} // Update state on change
+                    renderValue={(selected) => selected || "Status"} // Placeholder text
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        height: {
+                          xs: "38px",
+                          sm: "32px",
+                          md: "28px",
+                          lg: "20px",
+                          xl: "28px",
+                        },
+                        lineHeight: "1em",
+                        fontSize: "8px",
+                        width: {
+                          lg: "200px",
+                          md: "180px",
+                          xs: "180px",
+                        },
+                        boxShadow: "none",
+                      },
+                    }}
+                    // endAdornment={
+                    //   <InputAdornment position="end" sx={{ marginRight: 0 }}>
+                    //     <IconButton sx={{ padding: 0 }}>
+                    //       <Box
+                    //         height="14px"
+                    //         width="20px"
+                    //         sx={{ display: "flex", alignItems: "center" }}
+                    //       >
+                    //         <img src={Arrowdown} width="100%" height="100%" />
+                    //       </Box>
+                    //     </IconButton>
+                    //   </InputAdornment>
+                    // }
+                  >
+                    <MenuItem value="active">Active</MenuItem>
+                    <MenuItem value="delayed">Delayed</MenuItem>
+                    <MenuItem value="upcoming">Upcoming</MenuItem>
+                    <MenuItem value="">All Trips</MenuItem>
+                  </Select>
+                </Box>
 
                 <Box>
                   <TextField
@@ -481,7 +471,7 @@ export default function DashboardTableHeader({
                           fontFamily: "Poppins, sans-serif",
                         }}
                       >
-                       {activeTrips.count}
+                        {activeTrips.count}
                       </Typography>
                     </Stack>
                     <Divider
@@ -651,7 +641,7 @@ export default function DashboardTableHeader({
                                 fontFamily: "Poppins, sans-serif",
                               }}
                             >
-                               {trips.count}
+                              {trips.count}
                             </Typography>
                           </Stack>
 

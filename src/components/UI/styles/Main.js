@@ -75,7 +75,7 @@ export const addUserStyles = {
   textFieldStyles: { width: { lg: "100%", xs: "90%" }, marginLeft: "0px" },
   buttonStyles: {
     marginRight: "opx",
-    marginLeft: {xs:"0px", sm:"0px" , lg:"0px"},
+    marginLeft: { xs: "0px", sm: "0px", lg: "0px" },
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
@@ -94,7 +94,6 @@ export const addUserStyles = {
 
 export const addVehicleStyles = {
   mainContainer: {
-   
     position: "absolute",
     mt: { xs: 13, sm: 12, md: 12, lg: 12 },
     // Adjust padding based on the screen size
@@ -134,7 +133,7 @@ export const addVehicleStyles = {
   label: { fontWeight: 500 },
   button: {
     marginRight: "opx",
-    marginLeft: {xs:"0px", sm:"0px" , lg:"0px" },
+    marginLeft: { xs: "0px", sm: "0px", lg: "0px" },
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
@@ -175,7 +174,7 @@ export const addDeviceStyles = {
   textField2: { width: { lg: "240px", xs: "90%" }, marginLeft: "5px" },
   button: {
     marginRight: "opx",
-    marginLeft:  {xs:"0px", sm:"0px" , lg:"0px" },
+    marginLeft: { xs: "0px", sm: "0px", lg: "0px" },
     width: "161px",
     height: "43px",
     backgroundColor: "#15294E",
@@ -696,5 +695,3 @@ export const settingStyles = {
     justifyContent: "space-between",
   },
 };
-
-

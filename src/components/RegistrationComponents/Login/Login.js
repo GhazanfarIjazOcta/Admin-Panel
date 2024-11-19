@@ -4,7 +4,7 @@ import {
   Checkbox,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import LoginImg from "../../../assets/Login.png";
@@ -43,11 +43,10 @@ function Login() {
 
   const [loginUser, { isLoading, error }] = useLoginUserMutation();
 
-
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -58,7 +57,7 @@ function Login() {
   //   e.preventDefault();
   //   try {
   //     const result = await loginUser({ email, password }).unwrap();
-     
+
   //     localStorage.setItem("authToken", result.token); // Assuming token is returned
   //     //   login();
   //     console.log("here is the result, ", result.user.role);
@@ -71,7 +70,6 @@ function Login() {
 
   //       console.log("hello in admin or super admin");
   //       navigate("/dashboard/dashboardmain");
-        
 
   //     } else if (result.user.role === "customer") {
 
@@ -90,70 +88,63 @@ function Login() {
 
   //     console.error("Login failed:", err);
   //     alert("Login failed. Please check your credentials.");
-      
+
   //   }
   // };
 
-
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const result = await loginUser({ email, password }).unwrap();
-    
-    const token = result.token;
-    const role = result.user.role;
-    const name = result.user.name;
-    const user_ID = result.user.id;
-    //hello
+    e.preventDefault();
+    try {
+      const result = await loginUser({ email, password }).unwrap();
 
-    if (!token) {
-      throw new Error("No token returned from login response");
-    }
-    setAlert({
-      open: true,
-      severity: "success",
-      message: "Login Successfull:"
-    });
+      const token = result.token;
+      const role = result.user.role;
+      const name = result.user.name;
+      const user_ID = result.user.id;
+      //hello
 
-    // Store the token and user information in localStorage
-    localStorage.setItem("authToken", token); 
-
-
-    if (role === "superAdmin" || role === "admin") {
-      const   Newrole = "admin"
-        login(Newrole, user_ID , name);  // Call login with role and user_ID to update auth context
-    }else{
-      const   Newrole = "customer"
-      login(Newrole, user_ID, name);  // Call login with role and user_ID to update auth context
-    }
-    
-
-    // Redirect based on role after everything is set
-    if (role === "superAdmin" || role === "admin") {
-      navigate("/dashboard/dashboardmain");
-    } else if (role === "customer" || role === "driver") {
-      navigate("/dashboard/customerdashboardmain");
-    } else {
-      
+      if (!token) {
+        throw new Error("No token returned from login response");
+      }
       setAlert({
         open: true,
-        severity: "warning",
-        message: "No role assigned"
+        severity: "success",
+        message: "Login Successfull:",
+      });
+
+      // Store the token and user information in localStorage
+      localStorage.setItem("authToken", token);
+
+      if (role === "superAdmin" || role === "admin") {
+        const Newrole = "admin";
+        login(Newrole, user_ID, name); // Call login with role and user_ID to update auth context
+      } else {
+        const Newrole = "customer";
+        login(Newrole, user_ID, name); // Call login with role and user_ID to update auth context
+      }
+
+      // Redirect based on role after everything is set
+      if (role === "superAdmin" || role === "admin") {
+        navigate("/dashboard/dashboardmain");
+      } else if (role === "customer" || role === "driver") {
+        navigate("/dashboard/customerdashboardmain");
+      } else {
+        setAlert({
+          open: true,
+          severity: "warning",
+          message: "No role assigned",
+        });
+      }
+    } catch (err) {
+      console.error("Login failed:", err);
+      // alert("Login failed. Please check your credentials.");
+      setAlert({
+        open: true,
+        severity: "error",
+        message: "Login failed. Please check your credentials.",
       });
     }
-    
-
-  } catch (err) {
-    console.error("Login failed:", err);
-    // alert("Login failed. Please check your credentials.");
-    setAlert({
-      open: true,
-      severity: "error",
-      message: "Login failed. Please check your credentials."
-    });
-  }
-};
-
+  };
 
   return (
     <Box
@@ -164,7 +155,7 @@ function Login() {
         backgroundRepeat: "no-repeat",
         height: "100vh",
         width: "100vw",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       <Box
@@ -178,7 +169,7 @@ function Login() {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         <Box
@@ -190,7 +181,7 @@ function Login() {
             width: "90%",
             maxHeight: "100%",
             overflow: "hidden",
-            padding: { xs: "2rem", sm: "2rem", md: "2rem" }
+            padding: { xs: "2rem", sm: "2rem", md: "2rem" },
           }}
         >
           <Box
@@ -201,8 +192,8 @@ function Login() {
                 lg: "2rem",
                 md: "4rem",
                 sm: "2rem",
-                xs: "3rem"
-              }
+                xs: "3rem",
+              },
             }}
           >
             <Box
@@ -214,15 +205,15 @@ function Login() {
                   lg: "50px",
                   md: "30px",
                   sm: "40px",
-                  xs: "30px"
+                  xs: "30px",
                 },
                 width: {
                   xl: "200px",
                   lg: "150px",
                   md: "100px",
                   sm: "100px",
-                  xs: "80px"
-                }
+                  xs: "80px",
+                },
               }}
               alt="Logo"
             />
@@ -235,7 +226,7 @@ function Login() {
               lg: "0rem",
               md: "0.2rem",
               sm: "0.1rem",
-              xs: "0.2rem"
+              xs: "0.2rem",
             }}
             sx={{
               fontWeight: 600,
@@ -244,10 +235,10 @@ function Login() {
                 lg: "1.6rem",
                 md: "1.2rem",
                 sm: "1.5rem",
-                xs: "1.25rem"
+                xs: "1.25rem",
               },
               fontFamily: "Inter",
-              color: "#14181F"
+              color: "#14181F",
             }}
           >
             Login
@@ -259,7 +250,7 @@ function Login() {
               fontSize: "0.6rem",
               fontFamily: "Inter",
               color: "#14181F",
-              textAlign: "center"
+              textAlign: "center",
             }}
           >
             If you don't have an account register
@@ -271,7 +262,7 @@ function Login() {
                 fontWeight: 600,
                 fontSize: "1rem",
                 fontFamily: "Inter",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
               onClick={signupNavigation}
             >
@@ -283,7 +274,7 @@ function Login() {
             sx={{
               width: { xs: "80%", sm: "60%" },
               maxWidth: "370px",
-              pt: "1.5rem"
+              pt: "1.5rem",
             }}
           >
             <Typography
@@ -292,7 +283,7 @@ function Login() {
                 fontWeight: 500,
                 fontSize: "0.8rem",
                 fontFamily: "Inter",
-                color: "#14181F"
+                color: "#14181F",
               }}
             >
               E-mail/Phone Number
@@ -312,7 +303,7 @@ function Login() {
             sx={{
               width: { xs: "80%", sm: "60%" },
               maxWidth: "370px",
-              position: "relative"
+              position: "relative",
             }}
           >
             <Typography
@@ -321,7 +312,7 @@ function Login() {
                 fontWeight: 500,
                 fontSize: "0.8rem",
                 fontFamily: "Inter",
-                color: "#14181F"
+                color: "#14181F",
               }}
             >
               Password
@@ -354,7 +345,7 @@ function Login() {
               maxWidth: "370px",
               alignItems: "center",
               display: "flex",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
             }}
           >
             <Stack direction={"row"} alignItems={"center"}>
@@ -364,7 +355,7 @@ function Login() {
                 style={{
                   fontWeight: 300,
                   fontFamily: "Poppins",
-                  fontSize: "0.75rem"
+                  fontSize: "0.75rem",
                 }}
               >
                 Remember me
@@ -375,7 +366,7 @@ function Login() {
               style={{
                 fontWeight: 300,
                 fontFamily: "Poppins",
-                fontSize: "0.75rem"
+                fontSize: "0.75rem",
               }}
             >
               Forgot Password?
@@ -393,9 +384,9 @@ function Login() {
               marginTop: "1.8em",
               textTransform: "none",
               "&:hover": {
-                backgroundColor: "#212122"
+                backgroundColor: "#212122",
               },
-              fontSize: { md: "0.9rem" }
+              fontSize: { md: "0.9rem" },
             }}
             onClick={handleSubmit}
           >
@@ -403,11 +394,11 @@ function Login() {
           </Button>
 
           <CustomAlert
-        open={alert.open}
-        onClose={handleAlertClose}
-        severity={alert.severity}
-        message={alert.message}
-      />
+            open={alert.open}
+            onClose={handleAlertClose}
+            severity={alert.severity}
+            message={alert.message}
+          />
 
           <Typography
             variant="body1"
@@ -419,7 +410,7 @@ function Login() {
               fontSize: "0.9rem",
               fontFamily: "Poppins",
               cursor: "pointer",
-              marginTop: "2rem"
+              marginTop: "2rem",
             }}
           >
             or continue with

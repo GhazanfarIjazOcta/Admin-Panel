@@ -13,7 +13,7 @@ import {
   Modal,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Edit from "../../../assets/Table/Edit.png";
 import Delete from "../../../assets/Table/Delete.png";
@@ -21,22 +21,23 @@ import Delete from "../../../assets/Table/Delete.png";
 import {
   useGetDeviceManagementSearchDashboardQuery,
   useDeleteDeviceMutation,
-  useUpdateDeviceMutation
+  useUpdateDeviceMutation,
 } from "../../../Api/apiSlice";
 import { useState } from "react";
 
 import CustomAlert from "../../UI/CustomAlert";
 import { TablePagination } from "@mui/material";
+import Loader from "../../UI/Loader";
 
 export default function DeviceManagmentTableContent({
   setSearch,
   search,
   status,
-  setStatus
+  setStatus,
 }) {
   // const { data, error, isLoading } = useGetDeviceManagementDashboardQuery();
   const { data, error, isLoading } = useGetDeviceManagementSearchDashboardQuery(
-    { search, status }
+    { search, status },
   );
   const [deleteDevice] = useDeleteDeviceMutation();
   const [updateDevice] = useUpdateDeviceMutation();
@@ -64,7 +65,7 @@ export default function DeviceManagmentTableContent({
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -73,7 +74,13 @@ export default function DeviceManagmentTableContent({
 
   //////////////////////////////////
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) return <p>Error loading data</p>;
 
   const { devices } = data || {};
@@ -119,14 +126,14 @@ export default function DeviceManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Device Data Deleted successfully!"
+        message: "Device Data Deleted successfully!",
       });
     } catch (error) {
       console.error("Error deleting device:", error);
       setAlert({
         open: true,
         severity: "error",
-        message: "Device Data not Deleted!"
+        message: "Device Data not Deleted!",
       });
     } finally {
       handleCloseDeleteModal();
@@ -140,7 +147,7 @@ export default function DeviceManagmentTableContent({
         deviceId: selecteddevice.id,
         deviceType: editdeviceType,
         status: editStatus,
-        deviceModel: editdeviceModel
+        deviceModel: editdeviceModel,
       };
 
       console.log(" updated data sent is device data :::: ", deviceData);
@@ -153,7 +160,7 @@ export default function DeviceManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Device updated successfully"
+        message: "Device updated successfully",
       });
       handleCloseEditModal();
     } catch (error) {
@@ -161,7 +168,7 @@ export default function DeviceManagmentTableContent({
       setAlert({
         open: true,
         severity: "error",
-        message: "Error updating Device:"
+        message: "Error updating Device:",
       });
     }
   };
@@ -190,7 +197,7 @@ export default function DeviceManagmentTableContent({
         elevation: 0,
         borderTop: "1px solid #EAECF0",
         height: "60%",
-        width: "99%"
+        width: "99%",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -391,7 +398,7 @@ export default function DeviceManagmentTableContent({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: "10px"
+                        gap: "10px",
                       }}
                     >
                       <Box
@@ -400,7 +407,7 @@ export default function DeviceManagmentTableContent({
                           height: 6, // Adjust size as needed
                           borderRadius: "50%",
                           backgroundColor:
-                            device.status == "active" ? "#28A745" : "#6C757D"
+                            device.status == "active" ? "#28A745" : "#6C757D",
                         }}
                       />
                       <Typography
@@ -408,7 +415,7 @@ export default function DeviceManagmentTableContent({
                         fontSize={"14px"}
                         sx={{
                           color:
-                            device.status == "active" ? "#037847" : "#364254"
+                            device.status == "active" ? "#037847" : "#364254",
                         }}
                         fontFamily={"Inter"}
                       >
@@ -474,7 +481,7 @@ export default function DeviceManagmentTableContent({
             bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
-            p: 4
+            p: 4,
           }}
         >
           <Typography variant="h6" component="h2">
@@ -533,7 +540,7 @@ export default function DeviceManagmentTableContent({
             bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
-            p: 4
+            p: 4,
           }}
         >
           <Typography variant="h6" component="h2">

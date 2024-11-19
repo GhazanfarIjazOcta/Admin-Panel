@@ -7,7 +7,7 @@ import {
   Paper,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { Formik, Form, Field } from "formik";
@@ -23,7 +23,7 @@ import { useAddMaintenanceMutation } from "../../../Api/apiSlice";
 
 import {
   useGetVehicleManagementSearchDashboardQuery,
-  useGetDeviceManagementSearchDashboardQuery
+  useGetDeviceManagementSearchDashboardQuery,
 } from "../../../Api/apiSlice";
 
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -35,7 +35,7 @@ const validationSchema = Yup.object({
   maintenanceType: Yup.string().required("Maintenance Type is required"),
   startDate: Yup.string().required("Start Date is required"),
   endDate: Yup.string().required("End Date is required"),
-  maintenanceFor: Yup.string().required("maintenanceFor is required")
+  maintenanceFor: Yup.string().required("maintenanceFor is required"),
   // vehicleId: Yup.string().required("ID is required")
   // Conditionally validate vehicleId or deviceId based on maintenanceFor
   // vehicleId: Yup.string().when('maintenanceFor', {
@@ -59,13 +59,13 @@ function AddMaintenence() {
   const {
     data: vehicleData,
     isLoading: isVehiclesLoading,
-    error: vehicleError
+    error: vehicleError,
   } = useGetVehicleManagementSearchDashboardQuery({ search, status });
 
   const {
     data: deviceData,
     isLoading: isDevicesLoading,
-    error: deviceError
+    error: deviceError,
   } = useGetDeviceManagementSearchDashboardQuery({ search, status });
 
   // Extract data
@@ -81,7 +81,7 @@ function AddMaintenence() {
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -97,14 +97,14 @@ function AddMaintenence() {
       setAlert({
         open: true,
         severity: "success",
-        message: "Maintenance Added successfully"
+        message: "Maintenance Added successfully",
       });
     } catch (err) {
       console.error("Add Device failed", err);
       setAlert({
         open: true,
         severity: "error",
-        message: "Maintenance is not Added"
+        message: "Maintenance is not Added",
       });
     }
   };
@@ -128,7 +128,7 @@ function AddMaintenence() {
       sx={{
         ...addDeviceStyles.mainContainer,
 
-        height: "120%"
+        height: "120%",
       }}
     >
       <Box sx={addDeviceStyles.container} ml={2} pl={3} mt={0} mb={2}>
@@ -140,15 +140,14 @@ function AddMaintenence() {
 
             maintenanceFor: "vehicle",
             vehicleId: "",
-            deviceId: ""
+            deviceId: "",
           }}
           validationSchema={validationSchema}
           onSubmit={handleRegister}
-          
         >
           {({ values, errors, touched }) => (
-            <Form >
-              <Box >
+            <Form>
+              <Box>
                 <Box sx={loginLeftContentContainerItemWidth}>
                   <Typography
                     variant="subtitle1"
@@ -172,13 +171,13 @@ function AddMaintenence() {
                     sx={{
                       "& .MuiInputBase-root": {
                         height: "50px",
-                        marginLeft: "5px"
+                        marginLeft: "5px",
                       },
                       width: {
                         xs: "90%",
                         sm: "240px",
-                        lg: "240px"
-                      }
+                        lg: "240px",
+                      },
                     }}
                   >
                     <MenuItem value="vehicle">Vehicle</MenuItem>
@@ -225,13 +224,13 @@ function AddMaintenence() {
                     sx={{
                       "& .MuiInputBase-root": {
                         height: "50px",
-                        marginLeft: "5px"
+                        marginLeft: "5px",
                       },
                       width: {
                         xs: "90%",
                         sm: "240px",
-                        lg: "240px"
-                      }
+                        lg: "240px",
+                      },
                     }}
                   >
                     {/* Conditionally render MenuItems based on maintenanceFor */}
@@ -272,7 +271,7 @@ function AddMaintenence() {
                   />
                 </Box>
 
-                <LocalizationProvider dateAdapter={AdapterDateFns} >
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <Box sx={loginLeftContentContainerItemWidth}>
                     <Typography
                       variant="subtitle1"
@@ -282,9 +281,8 @@ function AddMaintenence() {
                     >
                       Start Date
                     </Typography>
-                    
+
                     <Field
-                   
                       name="startDate"
                       render={({ field, form }) => (
                         <DatePicker
@@ -293,13 +291,12 @@ function AddMaintenence() {
                           onChange={(date) =>
                             form.setFieldValue(
                               "startDate",
-                              date ? date.toISOString() : ""
+                              date ? date.toISOString() : "",
                             )
                           }
                           renderInput={(params) => (
                             <TextField
                               {...params}
-                             
                               error={
                                 touched.startDate && Boolean(errors.startDate)
                               }
@@ -308,7 +305,6 @@ function AddMaintenence() {
                           )}
                         />
                       )}
-                      
                     />
                   </Box>
 
@@ -330,7 +326,7 @@ function AddMaintenence() {
                           onChange={(date) =>
                             form.setFieldValue(
                               "endDate",
-                              date ? date.toISOString() : ""
+                              date ? date.toISOString() : "",
                             )
                           }
                           renderInput={(params) => (

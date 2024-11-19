@@ -14,7 +14,7 @@ import {
   Modal,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Edit from "../../../assets/Table/Edit.png";
 import Delete from "../../../assets/Table/Delete.png";
@@ -22,12 +22,13 @@ import Delete from "../../../assets/Table/Delete.png";
 import {
   useGetTripManagementSearchDashboardQuery,
   useDeleteTripMutation,
-  useUpdateTripMutation
+  useUpdateTripMutation,
 } from "../../../Api/apiSlice";
 import { useState } from "react";
 
 import CustomAlert from "../../UI/CustomAlert";
 import { TablePagination } from "@mui/material";
+import Loader from "../../UI/Loader";
 
 // deleteTrip
 // updatetrip
@@ -36,12 +37,12 @@ export default function TripManagmentTableContent({
   setSearch,
   search,
   status,
-  setStatus
+  setStatus,
 }) {
   // const { data, error, isLoading } = useGetTripManagementDashboardQuery();
   const { data, error, isLoading } = useGetTripManagementSearchDashboardQuery({
     search,
-    status
+    status,
   });
 
   const [deleteTrip] = useDeleteTripMutation();
@@ -51,7 +52,7 @@ export default function TripManagmentTableContent({
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -79,7 +80,13 @@ export default function TripManagmentTableContent({
   ///////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) return <p>Error loading data</p>;
 
   // const { trips } = data || {};
@@ -123,14 +130,14 @@ export default function TripManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Trip Data Deleted successfully!"
+        message: "Trip Data Deleted successfully!",
       });
     } catch (error) {
       console.error("Error deleting user:", error);
       setAlert({
         open: true,
         severity: "error",
-        message: "Trip Data not Deleted!"
+        message: "Trip Data not Deleted!",
       });
     } finally {
       handleCloseDeleteModal();
@@ -145,7 +152,7 @@ export default function TripManagmentTableContent({
         startLocation: editStartLocation,
         endLocation: editEndLocation,
 
-        status: editStatus
+        status: editStatus,
       };
 
       console.log(" updated data sent is trip data :::: ", tripData);
@@ -158,7 +165,7 @@ export default function TripManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Trip updated successfully"
+        message: "Trip updated successfully",
       });
       handleCloseEditModal();
     } catch (error) {
@@ -166,7 +173,7 @@ export default function TripManagmentTableContent({
       setAlert({
         open: true,
         severity: "error",
-        message: "Error updating trip!!:"
+        message: "Error updating trip!!:",
       });
     }
   };
@@ -183,7 +190,7 @@ export default function TripManagmentTableContent({
     Distance,
     Fuel_Consumption,
     Cost,
-    Status
+    Status,
   ) {
     return {
       TripID,
@@ -195,7 +202,7 @@ export default function TripManagmentTableContent({
       Distance,
       Fuel_Consumption,
       Cost,
-      Status
+      Status,
     };
   }
 
@@ -210,7 +217,7 @@ export default function TripManagmentTableContent({
       "120",
       "4",
       "$4554",
-      "Active"
+      "Active",
     ),
     createData(
       "T002",
@@ -222,7 +229,7 @@ export default function TripManagmentTableContent({
       "34",
       "3",
       "$4554",
-      "Inactive"
+      "Inactive",
     ),
     createData(
       "T003",
@@ -234,8 +241,8 @@ export default function TripManagmentTableContent({
       "233",
       "5",
       "$4554",
-      "Active"
-    )
+      "Active",
+    ),
   ];
 
   ////////////////////////////////////////////////////////////
@@ -262,7 +269,7 @@ export default function TripManagmentTableContent({
         elevation: 0,
         borderTop: "1px solid #EAECF0",
         height: "60%",
-        width: "99%"
+        width: "99%",
       }}
     >
       <Table sx={{ minWidth: 640 }} aria-label="simple table">
@@ -284,7 +291,6 @@ export default function TripManagmentTableContent({
                 </Typography>
               </Stack>
             </TableCell> */}
-
 
             {/* <TableCell align="start">
               <Stack
@@ -500,7 +506,7 @@ export default function TripManagmentTableContent({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: "10px"
+                        gap: "10px",
                       }}
                     >
                       <Box
@@ -509,14 +515,15 @@ export default function TripManagmentTableContent({
                           height: 6, // Adjust size as needed
                           borderRadius: "50%",
                           backgroundColor:
-                            trip.status == "active" ? "#28A745" : "#6C757D"
+                            trip.status == "active" ? "#28A745" : "#6C757D",
                         }}
                       />
                       <Typography
                         fontWeight={500}
                         fontSize={"14px"}
                         sx={{
-                          color: trip.status == "active" ? "#037847" : "#364254"
+                          color:
+                            trip.status == "active" ? "#037847" : "#364254",
                         }}
                         fontFamily={"Inter"}
                       >
@@ -581,7 +588,7 @@ export default function TripManagmentTableContent({
             bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
-            p: 4
+            p: 4,
           }}
         >
           <Typography variant="h6" component="h2">
@@ -641,7 +648,7 @@ export default function TripManagmentTableContent({
             bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
-            p: 4
+            p: 4,
           }}
         >
           <Typography variant="h6" component="h2">

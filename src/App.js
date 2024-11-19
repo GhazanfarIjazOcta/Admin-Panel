@@ -24,7 +24,6 @@ import AddDriver from "./components/DashboardComponents/DriverManagment/AddDrive
 import AddTrip from "./components/DashboardComponents/Trip Managment/AddTrip";
 import AddMaintenence from "./components/DashboardComponents/MaintenanceScheduling/AddMaintenance";
 
-
 import Chat from "./components/DashboardComponents/Chat/Chat";
 import { AuthProvider } from "./Authentication/AuthContext";
 import ProtectedRoute from "./Authentication/ProtectedRoutes";
@@ -38,7 +37,6 @@ import CustomerChat from "./components/CustomerDashboardComponents/CustomerChat/
 import CustomerFuelManagment from "./components/CustomerDashboardComponents/FuelManagment/FuelManagment";
 import CustomerSetting from "./components/CustomerDashboardComponents/Setting/Setting";
 import AddFuel from "./components/DashboardComponents/FuelManagment/AddFuel";
-
 
 function App() {
   return (
@@ -77,7 +75,10 @@ function App() {
               <Route path="setting" element={<Setting />} />
               <Route path="history" element={<History />} />
 
-              <Route path="customer-fuel-management" element={<CustomerFuelManagment />} />
+              <Route
+                path="customer-fuel-management"
+                element={<CustomerFuelManagment />}
+              />
               <Route path="customer-setting" element={<CustomerSetting />} />
               {/* <Route path="add-user" element={<AddUser />} />  */}
 
@@ -100,25 +101,18 @@ function App() {
                 element={<AddMaintenence />}
               />
 
-              <Route
-                path="fuel-management/add-fuel"
-                element={<AddFuel />}
-              />
-
+              <Route path="fuel-management/add-fuel" element={<AddFuel />} />
 
               <Route path="trip-management/add-trip" element={<AddTrip />} />
 
               <Route path="chat" element={<Chat />} />
 
               <Route path="customerchat" element={<CustomerChat />} />
-              
 
               <Route
                 path="customerdashboardmain"
                 element={<CustomerDashboardMain />}
               />
-
-
             </Route>
 
             <Route

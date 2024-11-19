@@ -12,7 +12,7 @@ import {
   Typography,
   Modal,
   Button,
-  TextField
+  TextField,
 } from "@mui/material";
 import ArrowDown from "../../../assets/Table/arrow-down.png";
 import Edit from "../../../assets/Table/Edit.png";
@@ -23,7 +23,7 @@ import {
   useDeleteAdminMutation,
   useDeleteDriverMutation,
   useUpdateDriverMutation,
-  useGetUserManagementSearchDashboardQuery
+  useGetUserManagementSearchDashboardQuery,
 } from "../../../Api/apiSlice";
 
 import { Select, MenuItem } from "@mui/material";
@@ -34,6 +34,7 @@ import { useState } from "react";
 import { useAuth } from "../../../Authentication/AuthContext";
 
 import { TablePagination } from "@mui/material";
+import Loader from "../../UI/Loader";
 
 // deleteCustomer
 // deleteAdmin
@@ -45,7 +46,7 @@ export default function TableContent({
   serRole,
   role,
   status,
-  setStatus
+  setStatus,
 }) {
   const { isAuthenticated, userRole, user_ID, userName, login, logout } =
     useAuth();
@@ -59,7 +60,7 @@ export default function TableContent({
   const { data, error, isLoading } = useGetUserManagementSearchDashboardQuery({
     search,
     status,
-    role
+    role,
   });
   const [deleteCustomer] = useDeleteCustomerMutation();
   const [deleteAdmin] = useDeleteAdminMutation();
@@ -69,7 +70,7 @@ export default function TableContent({
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -97,7 +98,13 @@ export default function TableContent({
   ///////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) return <p>Error loading data</p>;
 
   const { users } = data || {};
@@ -136,7 +143,7 @@ export default function TableContent({
     setAlert({
       open: true,
       severity: "warning",
-      message: "Cant Do Actions On Super Admin"
+      message: "Cant Do Actions On Super Admin",
     });
   };
 
@@ -144,7 +151,7 @@ export default function TableContent({
     setAlert({
       open: true,
       severity: "warning",
-      message: "Cant Do Actions On Yourself as Admin"
+      message: "Cant Do Actions On Yourself as Admin",
     });
   };
 
@@ -162,13 +169,13 @@ export default function TableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "User Deleted successfully!"
+        message: "User Deleted successfully!",
       });
     } catch (error) {
       setAlert({
         open: true,
         severity: "error",
-        message: "User Not Deleted!"
+        message: "User Not Deleted!",
       });
 
       console.error("Error deleting user:", error);
@@ -185,7 +192,7 @@ export default function TableContent({
         userName: editName,
         userEmail: editEmail,
         userPhone: editPhone,
-        status: editStatus
+        status: editStatus,
       };
 
       console.log(" updated data sent is ", driverData);
@@ -203,7 +210,7 @@ export default function TableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "User updated successfully!"
+        message: "User updated successfully!",
       });
       handleCloseEditModal();
     } catch (error) {
@@ -211,7 +218,7 @@ export default function TableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Error updating user:"
+        message: "Error updating user:",
       });
     }
   };
@@ -240,7 +247,7 @@ export default function TableContent({
         borderTop: "1px solid #EAECF0",
         height: "54vh",
         width: "99%",
-        overflow: "none"
+        overflow: "none",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -278,12 +285,12 @@ export default function TableContent({
                         width: "80px",
                         height: "25px",
                         backgroundColor:
-                        user.status == "active" ? "#ECFDF3" : "#F2F4F7",
+                          user.status == "active" ? "#ECFDF3" : "#F2F4F7",
                         borderRadius: "40%",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: "10px"
+                        gap: "10px",
                       }}
                     >
                       <Box
@@ -292,7 +299,7 @@ export default function TableContent({
                           height: 6, // Adjust size as needed
                           borderRadius: "50%",
                           backgroundColor:
-                          user.status == "active" ? "#28A745" : "#6C757D"
+                            user.status == "active" ? "#28A745" : "#6C757D",
                         }}
                       />
                       <Typography
@@ -300,7 +307,7 @@ export default function TableContent({
                         fontSize={"14px"}
                         sx={{
                           color:
-                          user.status == "active" ? "#037847" : "#364254"
+                            user.status == "active" ? "#037847" : "#364254",
                         }}
                         fontFamily={"Inter"}
                       >
@@ -339,7 +346,7 @@ export default function TableContent({
                         color: "#0D47A1",
                         borderRadius: "8px",
                         fontWeight: "bold",
-                        fontSize: "14px"
+                        fontSize: "14px",
                       }}
                       onClick={handleSuperAdminAction}
                       style={{ cursor: "pointer" }}
@@ -354,7 +361,7 @@ export default function TableContent({
                         color: "#0D47A1",
                         borderRadius: "8px",
                         fontWeight: "bold",
-                        fontSize: "14px"
+                        fontSize: "14px",
                       }}
                       onClick={handleAdminAction}
                       style={{ cursor: "pointer" }}
@@ -397,109 +404,108 @@ export default function TableContent({
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
-{/* Edit Modal */}
-<Modal open={openEditModal} onClose={handleCloseEditModal}>
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px on larger screens
-      bgcolor: "background.paper",
-      borderRadius: 2,
-      boxShadow: 24,
-      p: { xs: 2, sm: 4 } // Adjust padding for smaller screens
-    }}
-  >
-    <Typography variant="h6" component="h2">
-      Edit User
-    </Typography>
-    {selectedUser && (
-      <>
-        <TextField
-          fullWidth
-          label="Name"
-          margin="normal"
-          value={editName}
-          onChange={(e) => setEditName(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Email"
-          margin="normal"
-          value={editEmail}
-          onChange={(e) => setEditEmail(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Phone Number"
-          margin="normal"
-          value={editPhone}
-          onChange={(e) => setEditPhone(e.target.value)}
-        />
-        <TextField
-          fullWidth
-          label="Status"
-          margin="normal"
-          value={editStatus}
-          onChange={(e) => setEditStatus(e.target.value)}
-          select
+      {/* Edit Modal */}
+      <Modal open={openEditModal} onClose={handleCloseEditModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: "90%", sm: 400 }, // 90% width on extra-small screens, 400px on larger screens
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: { xs: 2, sm: 4 }, // Adjust padding for smaller screens
+          }}
         >
-          <MenuItem value="active">Active</MenuItem>
-          <MenuItem value="inactive">Inactive</MenuItem>
-        </TextField>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2 }}
-          onClick={handleSaveChanges}
+          <Typography variant="h6" component="h2">
+            Edit User
+          </Typography>
+          {selectedUser && (
+            <>
+              <TextField
+                fullWidth
+                label="Name"
+                margin="normal"
+                value={editName}
+                onChange={(e) => setEditName(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Email"
+                margin="normal"
+                value={editEmail}
+                onChange={(e) => setEditEmail(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Phone Number"
+                margin="normal"
+                value={editPhone}
+                onChange={(e) => setEditPhone(e.target.value)}
+              />
+              <TextField
+                fullWidth
+                label="Status"
+                margin="normal"
+                value={editStatus}
+                onChange={(e) => setEditStatus(e.target.value)}
+                select
+              >
+                <MenuItem value="active">Active</MenuItem>
+                <MenuItem value="inactive">Inactive</MenuItem>
+              </TextField>
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+                onClick={handleSaveChanges}
+              >
+                Save Changes
+              </Button>
+            </>
+          )}
+        </Box>
+      </Modal>
+
+      {/* Delete Modal */}
+      <Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: { xs: "90%", sm: 400 }, // Responsive width
+            bgcolor: "background.paper",
+            borderRadius: 2,
+            boxShadow: 24,
+            p: { xs: 2, sm: 4 }, // Responsive padding
+          }}
         >
-          Save Changes
-        </Button>
-      </>
-    )}
-  </Box>
-</Modal>
-
-{/* Delete Modal */}
-<Modal open={openDeleteModal} onClose={handleCloseDeleteModal}>
-  <Box
-    sx={{
-      position: "absolute",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
-      width: { xs: "90%", sm: 400 }, // Responsive width
-      bgcolor: "background.paper",
-      borderRadius: 2,
-      boxShadow: 24,
-      p: { xs: 2, sm: 4 } // Responsive padding
-    }}
-  >
-    <Typography variant="h6" component="h2">
-      Confirm Delete
-    </Typography>
-    <Typography sx={{ mt: 2 }}>
-      Are you sure you want to delete {selectedUser?.name}?
-    </Typography>
-    <Box
-      sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
-    >
-      <Button variant="outlined" onClick={handleCloseDeleteModal}>
-        Cancel
-      </Button>
-      <Button
-        variant="contained"
-        color="error"
-        onClick={handleDeleteConfirm}
-      >
-        Delete
-      </Button>
-    </Box>
-  </Box>
-</Modal>
-
+          <Typography variant="h6" component="h2">
+            Confirm Delete
+          </Typography>
+          <Typography sx={{ mt: 2 }}>
+            Are you sure you want to delete {selectedUser?.name}?
+          </Typography>
+          <Box
+            sx={{ mt: 4, display: "flex", justifyContent: "flex-end", gap: 2 }}
+          >
+            <Button variant="outlined" onClick={handleCloseDeleteModal}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              color="error"
+              onClick={handleDeleteConfirm}
+            >
+              Delete
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
 
       <CustomAlert
         open={alert.open}
@@ -507,7 +513,6 @@ export default function TableContent({
         severity={alert.severity}
         message={alert.message}
       />
-      
     </TableContainer>
   );
 }

@@ -46,46 +46,20 @@ const apiSlice = createApi({
         }
       },
     }),
-    addAdmin: builder.mutation({
-      query: (userData) => ({
-        url: "/register",
-        method: "POST",
-        body: userData,
-      }),
-      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh getAdminDashboard query
+
+    //===================================================================
+    // ADMIN DASHBOARD ALL APIS //////////////
+
+    getAdminDashboard: builder.query({
+      query: () => "/admin/admin-dashboard",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
-    addUser: builder.mutation({
-      query: (userData) => ({
-        url: "/register",
-        method: "POST",
-        body: userData,
-      }),
-      invalidatesTags: ["AdminDashboard"], // Same here if addUser affects AdminDashboard data
-    }),
-    addVehicle: builder.mutation({
-      query: (vehicleData) => ({
-        url: "/admin/addVehicles",
-        method: "POST",
-        body: vehicleData,
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    addDevice: builder.mutation({
-      query: (deviceData) => ({
-        url: "/admin/devices",
-        method: "POST",
-        body: deviceData,
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    addDriver: builder.mutation({
-      query: (userData) => ({
-        url: "/register",
-        method: "POST",
-        body: userData,
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
+
+    //===================================================================
+    // TRIP ALL APIS //////////////////////////
+
     addTrip: builder.mutation({
       query: (tripData) => ({
         url: "/admin/create-trip",
@@ -94,196 +68,7 @@ const apiSlice = createApi({
       }),
       invalidatesTags: ["TripManagement"], // Refresh trip management data when a trip is added
     }),
-    getAdminDashboard: builder.query({
-      query: () => "/admin/admin-dashboard",
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    getTripManagementDashboard: builder.query({
-      query: () => "/admin/trip-management-dashboard",
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["TripManagement"], // Provide tag so it can be invalidated
-    }),
-    getTripManagementSearchDashboard: builder.query({
-      query: ({ search = "", status = "" }) => {
-        const params = new URLSearchParams();        
-        // Append search parameter if provided
-        if (search) params.append("search", search);           
-        // Append status parameter if provided
-        if (status) params.append("status", status);    
-        // Return the API endpoint with query parameters
-        return `/admin/get-trips?${params.toString()}`;
-      },
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["TripManagement"], // Provide tag so it can be invalidated
-    }),
-    getUserManagementDashboard: builder.query({
-      query: () => "/admin/user-management-dashboard",
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
 
-    getUserManagementSearchDashboard: builder.query({
-      query: ({ search = "", role = "", status = "" }) => {
-        const params = new URLSearchParams();
-        
-        // Append search parameter if provided
-        if (search) params.append("search", search);
-        
-        // Append role parameter if provided
-        if (role) params.append("role", role);
-        
-        // Append status parameter if provided
-        if (status) params.append("status", status);
-    
-        // Return the API endpoint with query parameters
-        return `/admin/usersByOrganization?${params.toString()}`;
-      },
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag for invalidation
-    }),
-    
-    getVehicleManagementDashboard: builder.query({
-      query: () => "/admin/vehicle-management-dashboard",
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    getVehicleManagementSearchDashboard: builder.query({
-      query: ({ search = "",  status = "" }) => {
-        const params = new URLSearchParams();
-        
-        // Append search parameter if provided
-        if (search) params.append("search", search);
-        
-         // Append status parameter if provided
-        if (status) params.append("status", status);
-    
-        // Return the API endpoint with query parameters
-        return `/admin/vehiclesByOrganization?${params.toString()}`;
-      },
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    
-    getDeviceManagementDashboard: builder.query({
-      query: () => "/admin/device-management-dashboard",
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    getDeviceManagementSearchDashboard: builder.query({
-      query: ({ search = "",  status = "" }) => {
-        const params = new URLSearchParams();
-        
-        // Append search parameter if provided
-        if (search) params.append("search", search);
-        
-         // Append status parameter if provided
-        if (status) params.append("status", status);
-    
-        // Return the API endpoint with query parameters
-        return `/admin/get-devices?${params.toString()}`;
-      },
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    getDriverManagementDashboard: builder.query({
-      query: () => "/admin/driver-management-dashboard",
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    getDriverManagementSearchDashboard: builder.query({
-      query: ({ search = "h",  status = "" }) => {
-        const params = new URLSearchParams();
-        
-        // Append search parameter if provided
-        if (search) params.append("search", search);
-        
-         // Append status parameter if provided
-        if (status) params.append("status", status);
-    
-        // Return the API endpoint with query parameters
-        return `/admin/get-drivers?${params.toString()}`;
-      },
-      refetchOnReconnect: true,
-      refetchOnFocus: true,
-      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
-    }),
-    deleteCustomer: builder.mutation({
-      query: (customerId) => ({
-        url: `/admin/deleteCustomer`,
-        method: "DELETE",
-        body: { customerId },
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    deleteAdmin: builder.mutation({
-      query: (adminId) => ({
-        url: `/admin/deleteAdmin`,
-        method: "DELETE",
-        body: { adminId },
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    deleteDriver: builder.mutation({
-      query: (driverId) => ({
-        url: `/admin/deleteDriver`,
-        method: "DELETE",
-        body: { driverId },
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    updateDriver: builder.mutation({
-      query: (driverData) => ({
-        url: `/updateUser`,
-        method: "PATCH",
-        body: driverData,
-      }),
-      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
-    }),
-    deleteVehicle: builder.mutation({
-      query: (vehicleId) => ({
-        url: `/admin/vehicles/deleteVehicle`,
-        method: "DELETE",
-        body: { vehicleId },
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    updateVehicle: builder.mutation({
-      query: (vehicleData) => ({
-        url: `/admin/vehicles/updateVehicle`,
-        method: "PUT",
-        body: vehicleData,
-      }),
-      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
-    }),
-    deleteDevice: builder.mutation({
-      query: (deviceId) => ({
-        url: `/admin/deleteDevice`,
-        method: "DELETE",
-        body: { deviceId },
-      }),
-      invalidatesTags: ["AdminDashboard"],
-    }),
-    updateDevice: builder.mutation({
-      query: (deviceData) => ({
-        url: `/admin/updateDevice`,
-        method: "PATCH",
-        body: deviceData,
-      }),
-      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
-    }),
-   
-    
     deleteTrip: builder.mutation({
       query: (tripId) => ({
         url: `/admin/deleteTrip`,
@@ -300,6 +85,66 @@ const apiSlice = createApi({
       }),
       invalidatesTags: ["TripManagement"], // Invalidate to refresh relevant data
     }),
+
+    getTripManagementDashboard: builder.query({
+      query: () => "/admin/trip-management-dashboard",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["TripManagement"], // Provide tag so it can be invalidated
+    }),
+    getTripManagementSearchDashboard: builder.query({
+      query: ({ search = "", status = "" }) => {
+        const params = new URLSearchParams();
+        // Append search parameter if provided
+        if (search) params.append("search", search);
+        // Append status parameter if provided
+        if (status) params.append("status", status);
+        // Return the API endpoint with query parameters
+        return `/admin/get-trips?${params.toString()}`;
+      },
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["TripManagement"], // Provide tag so it can be invalidated
+    }),
+
+    //===================================================================
+    // User All Apis /////////////////////
+
+    addAdmin: builder.mutation({
+      query: (userData) => ({
+        url: "/register",
+        method: "POST",
+        body: userData,
+      }),
+      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh getAdminDashboard query
+    }),
+    addUser: builder.mutation({
+      query: (userData) => ({
+        url: "/register",
+        method: "POST",
+        body: userData,
+      }),
+      invalidatesTags: ["AdminDashboard"], // Same here if addUser affects AdminDashboard data
+    }),
+
+    addDriver: builder.mutation({
+      query: (userData) => ({
+        url: "/register",
+        method: "POST",
+        body: userData,
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
+    deleteAdmin: builder.mutation({
+      query: (adminId) => ({
+        url: `/admin/deleteAdmin`,
+        method: "DELETE",
+        body: { adminId },
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
     getUserInfo: builder.query({
       query: () => "/userInfo",
       refetchOnReconnect: true,
@@ -315,31 +160,194 @@ const apiSlice = createApi({
       invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
     }),
 
-    
-    getMaintainanceDashboard: builder.query({
-      query: () => "/admin/in-maintenance",
+    getUserManagementDashboard: builder.query({
+      query: () => "/admin/user-management-dashboard",
       refetchOnReconnect: true,
       refetchOnFocus: true,
       providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
 
-    // addMaintainance: builder.mutation({
-    //   query: (maintainanceData) => ({
-    //     url: "/register",
-    //     method: "POST",
-    //     body: maintainanceData,
-    //   }),
-    //   invalidatesTags: ["AdminDashboard"],
-    // }),
+    getUserManagementSearchDashboard: builder.query({
+      query: ({ search = "", role = "", status = "" }) => {
+        const params = new URLSearchParams();
 
+        // Append search parameter if provided
+        if (search) params.append("search", search);
 
+        // Append role parameter if provided
+        if (role) params.append("role", role);
 
-    getVehicleWithFeulRecordDashboard: builder.query({
-      query: () => "/admin/vehicles-with-fuel",
+        // Append status parameter if provided
+        if (status) params.append("status", status);
+
+        // Return the API endpoint with query parameters
+        return `/admin/usersByOrganization?${params.toString()}`;
+      },
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag for invalidation
+    }),
+
+    //=========================================================
+    // Vehicle All Apis /////////////////////////
+
+    addVehicle: builder.mutation({
+      query: (vehicleData) => ({
+        url: "/admin/addVehicles",
+        method: "POST",
+        body: vehicleData,
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
+    deleteVehicle: builder.mutation({
+      query: (vehicleId) => ({
+        url: `/admin/vehicles/deleteVehicle`,
+        method: "DELETE",
+        body: { vehicleId },
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+    updateVehicle: builder.mutation({
+      query: (vehicleData) => ({
+        url: `/admin/vehicles/updateVehicle`,
+        method: "PUT",
+        body: vehicleData,
+      }),
+      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
+    }),
+
+    getVehicleManagementDashboard: builder.query({
+      query: () => "/admin/vehicle-management-dashboard",
       refetchOnReconnect: true,
       refetchOnFocus: true,
       providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
+    getVehicleManagementSearchDashboard: builder.query({
+      query: ({ search = "", status = "" }) => {
+        const params = new URLSearchParams();
+
+        // Append search parameter if provided
+        if (search) params.append("search", search);
+
+        // Append status parameter if provided
+        if (status) params.append("status", status);
+
+        // Return the API endpoint with query parameters
+        return `/admin/vehiclesByOrganization?${params.toString()}`;
+      },
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
+    //===================================================================
+    // DEVICE ALL APIS //////////////
+
+    addDevice: builder.mutation({
+      query: (deviceData) => ({
+        url: "/admin/devices",
+        method: "POST",
+        body: deviceData,
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
+    deleteDevice: builder.mutation({
+      query: (deviceId) => ({
+        url: `/admin/deleteDevice`,
+        method: "DELETE",
+        body: { deviceId },
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+    updateDevice: builder.mutation({
+      query: (deviceData) => ({
+        url: `/admin/updateDevice`,
+        method: "PATCH",
+        body: deviceData,
+      }),
+      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
+    }),
+
+    getDeviceManagementDashboard: builder.query({
+      query: () => "/admin/device-management-dashboard",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+    getDeviceManagementSearchDashboard: builder.query({
+      query: ({ search = "", status = "" }) => {
+        const params = new URLSearchParams();
+
+        // Append search parameter if provided
+        if (search) params.append("search", search);
+
+        // Append status parameter if provided
+        if (status) params.append("status", status);
+
+        // Return the API endpoint with query parameters
+        return `/admin/get-devices?${params.toString()}`;
+      },
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
+    //================================================================
+    // Driver ALL Apis ///////////
+
+    deleteDriver: builder.mutation({
+      query: (driverId) => ({
+        url: `/admin/deleteDriver`,
+        method: "DELETE",
+        body: { driverId },
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+    updateDriver: builder.mutation({
+      query: (driverData) => ({
+        url: `/updateUser`,
+        method: "PATCH",
+        body: driverData,
+      }),
+      invalidatesTags: ["AdminDashboard"], // Invalidate to refresh relevant data
+    }),
+
+    getDriverManagementDashboard: builder.query({
+      query: () => "/admin/driver-management-dashboard",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+    getDriverManagementSearchDashboard: builder.query({
+      query: ({ search = "h", status = "" }) => {
+        const params = new URLSearchParams();
+
+        // Append search parameter if provided
+        if (search) params.append("search", search);
+
+        // Append status parameter if provided
+        if (status) params.append("status", status);
+
+        // Return the API endpoint with query parameters
+        return `/admin/get-drivers?${params.toString()}`;
+      },
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+    deleteCustomer: builder.mutation({
+      query: (customerId) => ({
+        url: `/admin/deleteCustomer`,
+        method: "DELETE",
+        body: { customerId },
+      }),
+      invalidatesTags: ["AdminDashboard"],
+    }),
+
+    //==============================================
+    // MAINTENANCE APIS
 
     addMaintenance: builder.mutation({
       query: (maintenanceData) => ({
@@ -350,6 +358,17 @@ const apiSlice = createApi({
       invalidatesTags: ["AdminDashboard"],
     }),
 
+    getMaintainanceDashboard: builder.query({
+      query: () => "/admin/in-maintenance",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
+    //=====================================================
+    // FUEL API ///////////////////
+
+    //Add Fuel
     addFuel: builder.mutation({
       query: (maintenanceData) => ({
         url: "/admin/add-fuel",
@@ -359,82 +378,88 @@ const apiSlice = createApi({
       invalidatesTags: ["AdminDashboard"],
     }),
 
+    // Vehicl data with fuel, basically for fuel table data
+    getVehicleWithFeulRecordDashboard: builder.query({
+      query: () => "/admin/vehicles-with-fuel",
+      refetchOnReconnect: true,
+      refetchOnFocus: true,
+      providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
+    }),
+
+    //Fuel dashboard Data
     getFuelManagementDashboard: builder.query({
       query: () => "/admin/fuel-dashboard",
       refetchOnReconnect: true,
       refetchOnFocus: true,
       providesTags: ["AdminDashboard"], // Provide tag so it can be invalidated
     }),
-
-
   }),
 });
 
-
-
 // Export hooks
 export const {
+  // LOGIN REGESTRATION
   useRegisterUserMutation,
   useLoginUserMutation,
-  useAddAdminMutation,
-  useAddUserMutation,
-  useAddVehicleMutation,
-  useAddDeviceMutation,
-  useAddDriverMutation,
-  useAddTripMutation,
+
+  // ADMIN DASHBOARD
   useGetAdminDashboardQuery,
 
-  useGetTripManagementDashboardQuery,
-  useGetTripManagementSearchDashboardQuery,
-
-  useGetUserManagementDashboardQuery, 
-  useGetVehicleManagementDashboardQuery, 
-
-  useGetDeviceManagementDashboardQuery,
-  useGetDeviceManagementSearchDashboardQuery,
-
-  useGetDriverManagementDashboardQuery,
-  useGetDriverManagementSearchDashboardQuery,
-
-  useGetUserManagementSearchDashboardQuery,
-  useGetVehicleManagementSearchDashboardQuery,
-
+  // USER
+  useAddAdminMutation,
+  useAddUserMutation,
   useDeleteCustomerMutation,
   useDeleteAdminMutation,
-  
-  useDeleteDriverMutation,
-
-  useUpdateDriverMutation,
-
-  useDeleteVehicleMutation,
-  useUpdateVehicleMutation,
-
-  useDeleteDeviceMutation,
-  useUpdateDeviceMutation,
-
-  useDeleteTripMutation,
-  useUpdateTripMutation,
-
-
-
 
   useGetUserInfoQuery,
   useUpdateUserInfoMutation,
 
+  useGetUserManagementDashboardQuery,
 
-  // useAddMaintainanceMutation,
-  useGetMaintainanceDashboardQuery, 
+  useGetUserManagementSearchDashboardQuery,
+  useGetVehicleManagementSearchDashboardQuery,
 
+  // VEHICLE
+  useAddVehicleMutation,
+  useDeleteVehicleMutation,
+  useUpdateVehicleMutation,
 
-  useGetVehicleWithFeulRecordDashboardQuery, 
+  useGetVehicleManagementDashboardQuery,
 
+  // DRIVER
+  useAddDriverMutation,
+  useDeleteDriverMutation,
+  useUpdateDriverMutation,
+
+  useGetDriverManagementDashboardQuery,
+  useGetDriverManagementSearchDashboardQuery,
+
+  // DEVICE
+  useAddDeviceMutation,
+  useDeleteDeviceMutation,
+  useUpdateDeviceMutation,
+
+  useGetDeviceManagementDashboardQuery,
+  useGetDeviceManagementSearchDashboardQuery,
+
+  // TRIP
+  useAddTripMutation,
+  useDeleteTripMutation,
+  useUpdateTripMutation,
+
+  useGetTripManagementDashboardQuery,
+  useGetTripManagementSearchDashboardQuery,
+
+  // MAINTENANCE
   useAddMaintenanceMutation,
+  useGetMaintainanceDashboardQuery,
 
+  // FUEL
   useAddFuelMutation,
-   
-
+  // fuel dashboard data
   useGetFuelManagementDashboardQuery,
 
+  useGetVehicleWithFeulRecordDashboardQuery,
 } = apiSlice;
 
 export default apiSlice;

@@ -20,7 +20,7 @@ export const RegistrationStyles = {
   passwordEyeBox: {
     position: "absolute",
     color: "#000",
-    top: {lg:43, xs:50},
+    top: { lg: 43, xs: 50 },
     right: "3%",
     transform: "translateY(-50%)",
     cursor: "pointer",

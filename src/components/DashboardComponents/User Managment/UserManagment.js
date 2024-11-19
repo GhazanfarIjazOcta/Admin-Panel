@@ -31,7 +31,7 @@ export default function UserManagment() {
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -49,21 +49,19 @@ export default function UserManagment() {
           //   severity: "info",
           //   message: "Updated User Data"
           // });
-          
+
           // Example: Set the role and status based on fetched data
-          // setRole(data.defaultRole || ""); 
+          // setRole(data.defaultRole || "");
           // setStatus(data.defaultStatus || "");
         }
       } catch (error) {
         console.error("Error handling fetched data:", error);
       }
     };
-  
+
     handleData();
   }, [data]);
 
-
-  
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   // Trigger Snackbar when there’s an error
@@ -83,49 +81,49 @@ export default function UserManagment() {
 
   if (isLoading) {
     return (
-     
       <>
-      <Loader/>
+        <Loader />
       </>
     );
   }
-    if (error) {
-      return (
-        <>
-          {/* Snackbar for error notification */}
-          <Snackbar
-            open={openSnackbar}
-            autoHideDuration={6000}
+  if (error) {
+    return (
+      <>
+        {/* Snackbar for error notification */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
             onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            severity="error"
+            sx={{ width: "100%" }}
+            variant="filled"
           >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="error"
-              sx={{ width: "100%" }}
-              variant="filled"
-            >
-              Error loading data! Please try again later.
-            </Alert>
-          </Snackbar>
-  
-          <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-            <Typography variant="h6" color="error">
-              Something went wrong. Please refresh the page.
-            </Typography>
-          </Box>
-        </>
-      );
-    }
+            Error loading data! Please try again later.
+          </Alert>
+        </Snackbar>
 
-
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+        >
+          <Typography variant="h6" color="error">
+            Something went wrong. Please refresh the page.
+          </Typography>
+        </Box>
+      </>
+    );
+  }
 
   const { users, admins, drivers, customers } = data || {};
   console.log("here is the users data ", data);
 
   console.log("users }{}{}{}{", users);
-
-  
 
   return (
     <Box
@@ -136,7 +134,7 @@ export default function UserManagment() {
         px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
         ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
         overflow: "none", // Prevent overflowing horizontally and vertically
-        width: { lg: "82%", xs: "90%" } // Ensure it takes full width
+        width: { lg: "82%", xs: "90%" }, // Ensure it takes full width
         // maxWidth: "1200px", // Set a max width as needed
       }}
     >
@@ -146,7 +144,7 @@ export default function UserManagment() {
         a
         sx={{
           flexGrow: 1,
-          flexWrap: "wrap"
+          flexWrap: "wrap",
         }}
       >
         {/* Allow the cards to shrink when zoomed in */}
@@ -209,14 +207,14 @@ export default function UserManagment() {
         </Box>
 
         <CustomAlert
-        open={alert.open}
-        onClose={handleAlertClose}
-        severity={alert.severity}
-        message={alert.message}
-        positionVerticle= {"top"}
-        positionHorizontal= {"center"}
-        duration = {1500}
-      />
+          open={alert.open}
+          onClose={handleAlertClose}
+          severity={alert.severity}
+          message={alert.message}
+          positionVerticle={"top"}
+          positionHorizontal={"center"}
+          duration={1500}
+        />
         {/* <TablePagination /> */}
       </Box>
     </Box>

@@ -34,11 +34,10 @@ function Signup() {
   const [orgName, setOrgName] = useState("");
   const [orgAddress, setOrgAddress] = useState("");
 
-
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -85,14 +84,14 @@ function Signup() {
       setAlert({
         open: true,
         severity: "success",
-        message: "Registeration Successfull, now login your credentials"
+        message: "Registeration Successfull, now login your credentials",
       });
     } catch (err) {
       console.error("Registration failed", err);
       setAlert({
         open: true,
         severity: "error",
-        message: "Registration failed"
+        message: "Registration failed",
       });
     }
   };
@@ -106,7 +105,9 @@ function Signup() {
         justifyContent="center"
         sx={SignupStyles.whiteBox}
       >
-        <Box sx={{ paddingBottom: { sm: "0rem", xs: "0rem" , md: "0" , lg:"0" } }}>
+        <Box
+          sx={{ paddingBottom: { sm: "0rem", xs: "0rem", md: "0", lg: "0" } }}
+        >
           <img
             src={Ukeylogo}
             alt="Ukey Logo"
@@ -116,9 +117,14 @@ function Signup() {
 
         <Typography
           variant="h1"
-          mt={{ xl: "1em", lg: "-1em", md: "-0.3em", sm: "-0.3em", xs: "-0.3em" }}
+          mt={{
+            xl: "1em",
+            lg: "-1em",
+            md: "-0.3em",
+            sm: "-0.3em",
+            xs: "-0.3em",
+          }}
           sx={SignupStyles.RegisterTypography}
-          
         >
           Register
         </Typography>
@@ -250,8 +256,6 @@ function Signup() {
               </Box>
             </Box>
 
-            
-
             <Box
               sx={{
                 width: { xs: "80%", sm: "60%" },
@@ -329,16 +333,15 @@ function Signup() {
           sx={SignupStyles.MainButton}
           onClick={step === 1 ? handleNext : handleRegister}
           disabled={isLoading} // Disable the button while the request is being processed
-          
         >
           {isLoading ? "Registering..." : step === 1 ? "Next" : "Register"}
         </Button>
         <CustomAlert
-        open={alert.open}
-        onClose={handleAlertClose}
-        severity={alert.severity}
-        message={alert.message}
-      />
+          open={alert.open}
+          onClose={handleAlertClose}
+          severity={alert.severity}
+          message={alert.message}
+        />
 
         {step === 1 ? (
           <>
@@ -370,9 +373,8 @@ function Signup() {
           <>
             <Button
               variant="contained"
-              sx={{...SignupStyles.MainButton,  mt:2}}
+              sx={{ ...SignupStyles.MainButton, mt: 2 }}
               onClick={handleBack}
-              
             >
               Back
             </Button>

@@ -7,34 +7,33 @@ import {
   Paper,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import { loginLeftContentContainerItemWidth } from "../../UI/styles/Login";
 import { settingStyles } from "../../UI/styles/Main";
 import {
   useUpdateUserInfoMutation,
-  useGetUserInfoQuery
+  useGetUserInfoQuery,
 } from "../../../Api/apiSlice";
 
-import CustomAlert from '../../UI/CustomAlert';
+import CustomAlert from "../../UI/CustomAlert";
 
 function Profile() {
   const { data, error, isLoading } = useGetUserInfoQuery();
   const [updateUserInfo] = useUpdateUserInfoMutation();
 
+  // for alerts (notifications)
+  const [alert, setAlert] = useState({
+    open: false,
+    severity: "success",
+    message: "",
+  });
 
-       // for alerts (notifications)
-       const [alert, setAlert] = useState({
-        open: false,
-        severity: "success",
-        message: "",
-      });
-    
-      const handleAlertClose = () => {
-        setAlert({ ...alert, open: false });
-      };
-    
-      //////////////////////////////////
+  const handleAlertClose = () => {
+    setAlert({ ...alert, open: false });
+  };
+
+  //////////////////////////////////
 
   // State for edit fields
   const [editUserName, setEditUserName] = useState("");
@@ -58,7 +57,7 @@ function Profile() {
         userId: data.userInfo?.id,
         userName: editUserName,
         userEmail: editUserEmail,
-        userPhone: editUserPhone
+        userPhone: editUserPhone,
       };
       await updateUserInfo(UserData);
       console.log("User updated successfully");
@@ -82,7 +81,7 @@ function Profile() {
       <Box
         sx={{
           ...settingStyles.profileContainer,
-          paddingLeft: { xs: "0px", lg: "40px" }
+          paddingLeft: { xs: "0px", lg: "40px" },
         }}
       >
         <Box sx={{ paddingLeft: { xs: "40px", lg: "40px" } }}>
@@ -158,7 +157,7 @@ function Profile() {
                           style={{
                             fontWeight: 500,
                             color: "#F38712",
-                            fontSize: "14px"
+                            fontSize: "14px",
                           }}
                         >
                           Add Photo
@@ -166,20 +165,20 @@ function Profile() {
                       </Box>
                     </IconButton>
                   </InputAdornment>
-                )
+                ),
               }}
               sx={{
                 "& .MuiInputBase-root": {
                   height: {
                     xs: "56px", // Adjust height for mobile
-                    sm: "76px" // Adjust height for larger screens
-                  }
+                    sm: "76px", // Adjust height for larger screens
+                  },
                 },
                 width: {
                   xs: "100%", // Full width on mobile
-                  sm: "35%" // 35% width on larger screens
+                  sm: "35%", // 35% width on larger screens
                 },
-                marginLeft: "5px"
+                marginLeft: "5px",
               }}
             />
           </Box>
@@ -200,9 +199,12 @@ function Profile() {
           >
             Update
           </Button>
-          <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-       
-
+          <CustomAlert
+            open={alert.open}
+            onClose={handleAlertClose}
+            severity={alert.severity}
+            message={alert.message}
+          />
         </Stack>
       </Box>
     </Paper>

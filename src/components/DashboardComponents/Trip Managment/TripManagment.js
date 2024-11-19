@@ -17,13 +17,10 @@ import Loader from "../../UI/Loader";
 import { useEffect } from "react";
 
 export default function TripManagment() {
-
-
   const { data, error, isLoading } = useGetTripManagementDashboardQuery();
 
-  const [search, setSearch] = useState('');
-  const [status, setStatus] = useState('');  // State for storing the selected status
-
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState(""); // State for storing the selected status
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
@@ -44,46 +41,49 @@ export default function TripManagment() {
 
   if (isLoading) {
     return (
-     
       <>
-      <Loader/>
+        <Loader />
       </>
     );
   }
-    if (error) {
-      return (
-        <>
-          {/* Snackbar for error notification */}
-          <Snackbar
-            open={openSnackbar}
-            autoHideDuration={6000}
+  if (error) {
+    return (
+      <>
+        {/* Snackbar for error notification */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
             onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            severity="error"
+            sx={{ width: "100%" }}
+            variant="filled"
           >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="error"
-              sx={{ width: "100%" }}
-              variant="filled"
-            >
-              Error loading data! Please try again later.
-            </Alert>
-          </Snackbar>
-  
-          <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-            <Typography variant="h6" color="error">
-              Something went wrong. Please refresh the page.
-            </Typography>
-          </Box>
-        </>
-      );
-    }
+            Error loading data! Please try again later.
+          </Alert>
+        </Snackbar>
 
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+        >
+          <Typography variant="h6" color="error">
+            Something went wrong. Please refresh the page.
+          </Typography>
+        </Box>
+      </>
+    );
+  }
 
   const { trips, activeTrips, delayedTrips, upcomingTrips } = data || {};
-  console.log("here is the trip data " , data)
+  console.log("here is the trip data ", data);
 
-console.log("delayed trips }{}{}{}{" , delayedTrips)
+  console.log("delayed trips }{}{}{}{", delayedTrips);
 
   return (
     <Box
@@ -108,16 +108,32 @@ console.log("delayed trips }{}{}{}{" , delayedTrips)
         }}
       >
         <Grid item xs={13} sm={6} md={2.98} sx={{ flexShrink: 1 }}>
-          <OutlinedCard text={"Total Trips"} icon={TripLogo} secText={trips.count} />
+          <OutlinedCard
+            text={"Total Trips"}
+            icon={TripLogo}
+            secText={trips.count}
+          />
         </Grid>
         <Grid item xs={13} sm={6} md={2.98} sx={{ flexShrink: 1 }}>
-          <OutlinedCard text={"Active"} icon={ActiveLogo} secText={activeTrips.count} />
+          <OutlinedCard
+            text={"Active"}
+            icon={ActiveLogo}
+            secText={activeTrips.count}
+          />
         </Grid>
         <Grid item xs={13} sm={6} md={2.98} sx={{ flexShrink: 1 }}>
-          <OutlinedCard text={"Delayed"} icon={InActiveLogo} secText={delayedTrips.count} />
+          <OutlinedCard
+            text={"Delayed"}
+            icon={InActiveLogo}
+            secText={delayedTrips.count}
+          />
         </Grid>
         <Grid item xs={13} sm={6} md={2.98} sx={{ flexShrink: 1 }}>
-          <OutlinedCard text={"Upcomming"} icon={MalfunctioningLogo} secText={upcomingTrips.count} />
+          <OutlinedCard
+            text={"Upcomming"}
+            icon={MalfunctioningLogo}
+            secText={upcomingTrips.count}
+          />
         </Grid>
       </Grid>
       <TableHeader
@@ -127,18 +143,17 @@ console.log("delayed trips }{}{}{}{" , delayedTrips)
         trip={true}
         icon={TripLogo}
         route={"add-trip"}
-        setSearch = {setSearch}
-        search = {search}
-       status = {status}
-       setStatus = {setStatus}
+        setSearch={setSearch}
+        search={search}
+        status={status}
+        setStatus={setStatus}
       />
       <Box mb={0}>
         <TripManagmentTableContent
-         setSearch = {setSearch}
-         search = {search}
-        status = {status}
-        setStatus = {setStatus}
-        
+          setSearch={setSearch}
+          search={search}
+          status={status}
+          setStatus={setStatus}
         />
       </Box>
       {/* <TablePagination /> */}

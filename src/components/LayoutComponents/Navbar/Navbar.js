@@ -21,14 +21,14 @@ import {
   rightContentStyle,
   textFieldContainerStyle,
   userInfoStyle,
-  userNameStyle
+  userNameStyle,
 } from "../../UI/Layout";
 import {
   Avatar,
   Drawer,
   InputAdornment,
   Paper,
-  TextField
+  TextField,
 } from "@mui/material";
 import Chat from "../../../assets/Layout/Chat.png";
 import Sidebar from "../Sidebar/Sidebar";
@@ -47,15 +47,15 @@ const Search = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.black, 0.15),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25)
+    backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
   marginRight: theme.spacing(2),
   marginLeft: 0,
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(3),
-    width: "auto"
-  }
+    width: "auto",
+  },
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
@@ -66,7 +66,7 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  color: theme.palette.common.black // Set icon color to black
+  color: theme.palette.common.black, // Set icon color to black
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -80,23 +80,23 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch"
-    }
-  }
+      width: "20ch",
+    },
+  },
 }));
 
 const StatusIndicator = styled(Box)(({ status }) => ({
   display: "flex",
   alignItems: "center",
   gap: "0.25rem",
-  color: status === "active" ? "green" : "red"
+  color: status === "active" ? "green" : "red",
 }));
 
 export default function Navbar() {
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -120,7 +120,7 @@ export default function Navbar() {
 
   const navigate = useNavigate();
   const [headerMessage, setHeaderMessage] = React.useState(
-    "Good morning, Admin"
+    "Good morning, Admin",
   );
 
   const [SidebarOpen, setSidebarOpen] = React.useState(false);
@@ -171,7 +171,7 @@ export default function Navbar() {
     setAlert({
       open: true,
       severity: "warning",
-      message: "Chat in Production"
+      message: "Chat in Production",
     });
   };
 
@@ -181,13 +181,13 @@ export default function Navbar() {
       anchorEl={anchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
@@ -203,13 +203,13 @@ export default function Navbar() {
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
         vertical: "top",
-        horizontal: "right"
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -284,7 +284,7 @@ export default function Navbar() {
           minWidth: "320px",
           position: "fixed", // Keeps the AppBar fixed at the top
           top: 0, // Positions it at the top of the viewport
-          zIndex: 1201 // Ensures it is above other component
+          zIndex: 1201, // Ensures it is above other component
         }}
       >
         <Toolbar>
@@ -308,7 +308,7 @@ export default function Navbar() {
               fontWeight: 600,
               fontSize: "1.75rem",
               color: "#14181F",
-              mr: 2
+              mr: 2,
             }}
           >
             Good Morning,
@@ -353,7 +353,7 @@ export default function Navbar() {
                 justifyContent: "center",
                 gap: "12px",
                 marginRight: "0.4em",
-                cursor: "pointer"
+                cursor: "pointer",
               }}
               // onClick={navigatefunction}
               onClick={handleClickMessageCheck}
@@ -368,7 +368,7 @@ export default function Navbar() {
                   display: { xs: "none", md: "block" },
                   fontWeight: 600,
                   fontSize: "0.9rem",
-                  color: "white"
+                  color: "white",
                 }}
               >
                 messages

@@ -38,29 +38,26 @@ export default function TableHeader({
   icon,
   route,
   setSearch,
-  search, 
+  search,
   role,
   setRole,
   status,
   setStatus,
-  IsUser
+  IsUser,
 }) {
-
-
   const navigate = useNavigate();
 
   // Media query to detect mobile screen sizes
   const isMobile = useMediaQuery("(max-width:980px)");
 
-
   const handleSearchChange = (e) => {
-    setSearch(e.target.value);  // Update the search state
+    setSearch(e.target.value); // Update the search state
   };
   const handleRoleChange = (event) => {
-    setRole(event.target.value);  // Update the role state
+    setRole(event.target.value); // Update the role state
   };
   const handleStatusChange = (event) => {
-    setStatus(event.target.value);  // Update the status state
+    setStatus(event.target.value); // Update the status state
   };
 
   return (
@@ -70,11 +67,10 @@ export default function TableHeader({
         overflow: "hidden",
         border: "1px ",
         boxShadow: "2px 2px 5px rgba(0, 0, 0, 0.3)",
-        height: "auto"
+        height: "auto",
       }}
       mt={2}
       mr={1.8}
-
     >
       <Card
         variant="outlined"
@@ -198,81 +194,81 @@ export default function TableHeader({
               )}
               <Stack direction={"row"} gap={2}>
                 <Box>
-
-                <TextField
-                  placeholder={`Search ${searchText}`}
-                  variant="outlined"
-                  size="small"
-                  value={search}  // Bind value to state
-                  onChange={handleSearchChange}  // Update state on change
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start" sx={{ marginRight: 0 }}>
-                        <IconButton sx={{ padding: 0 }}>
-                          <SearchIcon />
-                        </IconButton>
-                      </InputAdornment>
+                  <TextField
+                    placeholder={`Search ${searchText}`}
+                    variant="outlined"
+                    size="small"
+                    value={search} // Bind value to state
+                    onChange={handleSearchChange} // Update state on change
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment
+                          position="start"
+                          sx={{ marginRight: 0 }}
+                        >
+                          <IconButton sx={{ padding: 0 }}>
+                            <SearchIcon />
+                          </IconButton>
+                        </InputAdornment>
                       ),
                     }}
                     sx={{
                       "& .MuiInputBase-root": {
                         height: "100%",
-                        width: { xs: "100%", sm: "200px", lg: "100%" } // Responsive width
-                      }
+                        width: { xs: "100%", sm: "200px", lg: "100%" }, // Responsive width
+                      },
                     }}
-                    
                   />
                 </Box>
                 <Box>
-                <FormControl
-  fullWidth
-  variant="outlined"
-  size="small"
-  sx={{
-    "& .MuiInputBase-root": {
-      height: "100%",
-      width: "auto", // Let width adjust based on selected content
-      maxWidth: { xs: "100%", sm: "200px", lg: "300px" }, // Responsive max width
-    },
-  }}
->
-  {IsUser === "IsUser" && (
-    <>
-      <InputLabel>Role</InputLabel>
-      <Select
-        value={role}
-        onChange={handleRoleChange} // Update state on change
-        label="Role"
-        IconComponent={() => (
-          <IconButton sx={{ padding: 0 }}>
-            <img
-              src={Arrowdown}
-              height={"16px"}
-              width={"20px"}
-              alt="arrow-down"
-            />
-          </IconButton>
-        )}
-        sx={{
-          "& .MuiSelect-select": {
-            display: "flex",
-            alignItems: "center",
-            paddingRight: "32px", // Ensure space for icon
-            minWidth: "auto", // Allow dynamic width based on content
-          },
-        }}
-      >
-        {/* Define the menu options */}
-        <MenuItem value="superAdmin">Super Admin</MenuItem>
-        <MenuItem value="admin">Admin</MenuItem>
-        <MenuItem value="customer">Customer</MenuItem>
-        <MenuItem value="driver">Driver</MenuItem>
-        <MenuItem value="">All Users</MenuItem>
-      </Select>
-    </>
-  )}
-</FormControl>
-
+                  <FormControl
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        height: "100%",
+                        width: "auto", // Let width adjust based on selected content
+                        maxWidth: { xs: "100%", sm: "200px", lg: "300px" }, // Responsive max width
+                      },
+                    }}
+                  >
+                    {IsUser === "IsUser" && (
+                      <>
+                        <InputLabel>Role</InputLabel>
+                        <Select
+                          value={role}
+                          onChange={handleRoleChange} // Update state on change
+                          label="Role"
+                          IconComponent={() => (
+                            <IconButton sx={{ padding: 0 }}>
+                              <img
+                                src={Arrowdown}
+                                height={"16px"}
+                                width={"20px"}
+                                alt="arrow-down"
+                              />
+                            </IconButton>
+                          )}
+                          sx={{
+                            "& .MuiSelect-select": {
+                              display: "flex",
+                              alignItems: "center",
+                              paddingRight: "32px", // Ensure space for icon
+                              minWidth: "auto", // Allow dynamic width based on content
+                            },
+                          }}
+                        >
+                          {/* Define the menu options */}
+                          <MenuItem value="superAdmin">Super Admin</MenuItem>
+                          <MenuItem value="admin">Admin</MenuItem>
+                          <MenuItem value="customer">Customer</MenuItem>
+                          <MenuItem value="driver">Driver</MenuItem>
+                          <MenuItem value="">All Users</MenuItem>
+                        </Select>
+                      </>
+                    )}
+                  </FormControl>
                 </Box>
                 <Box>
                   {/* <TextField
@@ -299,43 +295,47 @@ export default function TableHeader({
                       },
                     }}
                   /> */}
- <FormControl
-  fullWidth
-  variant="outlined"
-  size="small"
-  sx={{
-    "& .MuiInputBase-root": {
-      height: "100%",
-      width: "100px", // Let width adjust automatically
-      maxWidth: { xs: "100%", sm: "200px", lg: "300px" }, // Responsive max width to avoid overflow on larger screens
-    },
-  }}
->
-  <InputLabel>Status</InputLabel>
-  <Select
-    value={status}
-    onChange={handleStatusChange} // Update state on change
-    label="Status"
-    IconComponent={() => (
-      <IconButton sx={{ padding: 0 }}>
-        <img src={Arrowdown} height={"16px"} width={"20px"} alt="arrow-down" />
-      </IconButton>
-    )}
-    sx={{
-      "& .MuiSelect-select": {
-        display: "flex",
-        alignItems: "center",
-        paddingRight: "32px", // Ensure space for icon
-        minWidth: "auto", // Let width adjust based on content
-      },
-    }}
-  >
-    <MenuItem value="active">Active</MenuItem>
-    <MenuItem value="inactive">Inactive</MenuItem>
-    <MenuItem value="">All Users</MenuItem>
-  </Select>
-</FormControl>
-
+                  <FormControl
+                    fullWidth
+                    variant="outlined"
+                    size="small"
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        height: "100%",
+                        width: "100px", // Let width adjust automatically
+                        maxWidth: { xs: "100%", sm: "200px", lg: "300px" }, // Responsive max width to avoid overflow on larger screens
+                      },
+                    }}
+                  >
+                    <InputLabel>Status</InputLabel>
+                    <Select
+                      value={status}
+                      onChange={handleStatusChange} // Update state on change
+                      label="Status"
+                      IconComponent={() => (
+                        <IconButton sx={{ padding: 0 }}>
+                          <img
+                            src={Arrowdown}
+                            height={"16px"}
+                            width={"20px"}
+                            alt="arrow-down"
+                          />
+                        </IconButton>
+                      )}
+                      sx={{
+                        "& .MuiSelect-select": {
+                          display: "flex",
+                          alignItems: "center",
+                          paddingRight: "32px", // Ensure space for icon
+                          minWidth: "auto", // Let width adjust based on content
+                        },
+                      }}
+                    >
+                      <MenuItem value="active">Active</MenuItem>
+                      <MenuItem value="inactive">Inactive</MenuItem>
+                      <MenuItem value="">All Users</MenuItem>
+                    </Select>
+                  </FormControl>
                 </Box>
                 {/* <Box>
                   <TextField
@@ -442,75 +442,75 @@ export default function TableHeader({
                   placeholder={`Search ${searchText}`}
                   variant="outlined"
                   size="small"
-                  value={search}  // Bind value to state
-                  onChange={handleSearchChange}  // Update state on change
+                  value={search} // Bind value to state
+                  onChange={handleSearchChange} // Update state on change
                 />
                 {/* <TextField placeholder="Role" variant="outlined" size="small" /> */}
                 <FormControl fullWidth variant="outlined" size="small">
-      <InputLabel>Role</InputLabel>
-      <Select
-        value={role}
-        onChange={handleRoleChange}  // Update state on change
-        label="Role"
-        IconComponent={() => (
-          <IconButton sx={{ padding: 0 }}>
-            <img
-              src={Arrowdown}
-              height={"16px"}
-              width={"20px"}
-              alt="arrow-down"
-            />
-          </IconButton>
-        )}
-        sx={{
-          "& .MuiInputBase-root": {
-            height: "38px",
-            width: { xs: "100%", sm: "110px" },
-          },
-        }}
-      >
-        {/* Define the menu options */}
-        <MenuItem value="superAdmin">Super Admin</MenuItem>
-        <MenuItem value="admin">Admin</MenuItem>
-        <MenuItem value="customer">Customer</MenuItem>
-        <MenuItem value="driver">Driver</MenuItem>
-        <MenuItem value="">All Users</MenuItem>
-      </Select>
-    </FormControl>
+                  <InputLabel>Role</InputLabel>
+                  <Select
+                    value={role}
+                    onChange={handleRoleChange} // Update state on change
+                    label="Role"
+                    IconComponent={() => (
+                      <IconButton sx={{ padding: 0 }}>
+                        <img
+                          src={Arrowdown}
+                          height={"16px"}
+                          width={"20px"}
+                          alt="arrow-down"
+                        />
+                      </IconButton>
+                    )}
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        height: "38px",
+                        width: { xs: "100%", sm: "110px" },
+                      },
+                    }}
+                  >
+                    {/* Define the menu options */}
+                    <MenuItem value="superAdmin">Super Admin</MenuItem>
+                    <MenuItem value="admin">Admin</MenuItem>
+                    <MenuItem value="customer">Customer</MenuItem>
+                    <MenuItem value="driver">Driver</MenuItem>
+                    <MenuItem value="">All Users</MenuItem>
+                  </Select>
+                </FormControl>
                 {/* <TextField
                   placeholder="Status"
                   variant="outlined"
                   size="small"
                 /> */}
-                                  <FormControl fullWidth variant="outlined" size="small">
-      <InputLabel>Status</InputLabel>
-      <Select
-        value={status}
-        onChange={handleStatusChange}  // Update state on change
-        label="Status"
-        IconComponent={() => (
-          <IconButton sx={{ padding: 0 }}>
-            <img
-              src={Arrowdown}
-              height={"16px"}
-              width={"20px"}
-              alt="arrow-down"
-            />
-          </IconButton>
-        )}
-        sx={{
-          "& .MuiInputBase-root": {
-            height: "38px",
-            width: { xs: "100%", sm: "110px" },
-          },
-        }}
-      >
-        {/* Define the two options */}
-        <MenuItem value="active">Active</MenuItem>
-        <MenuItem value="inactive">Inactive</MenuItem>
-        <MenuItem value="">All Users</MenuItem>
-      </Select>
-    </FormControl>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <InputLabel>Status</InputLabel>
+                  <Select
+                    value={status}
+                    onChange={handleStatusChange} // Update state on change
+                    label="Status"
+                    IconComponent={() => (
+                      <IconButton sx={{ padding: 0 }}>
+                        <img
+                          src={Arrowdown}
+                          height={"16px"}
+                          width={"20px"}
+                          alt="arrow-down"
+                        />
+                      </IconButton>
+                    )}
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        height: "38px",
+                        width: { xs: "100%", sm: "110px" },
+                      },
+                    }}
+                  >
+                    {/* Define the two options */}
+                    <MenuItem value="active">Active</MenuItem>
+                    <MenuItem value="inactive">Inactive</MenuItem>
+                    <MenuItem value="">All Users</MenuItem>
+                  </Select>
+                </FormControl>
                 {/* <TextField
                   placeholder="7/6/2024 - 5/8/2024"
                   variant="outlined"

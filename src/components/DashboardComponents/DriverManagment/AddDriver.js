@@ -8,7 +8,7 @@ import {
   Select,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React from "react";
 import { loginLeftContentContainerItemWidth } from "../../UI/styles/Login";
@@ -29,7 +29,7 @@ const validationSchema = Yup.object({
     .required("Email is required"),
   userPhone: Yup.string().required("Phone number is required"),
   password: Yup.string().required("Password is required"),
-  status: Yup.string().required("Status is required")
+  status: Yup.string().required("Status is required"),
 });
 
 function AddDriver() {
@@ -38,7 +38,7 @@ function AddDriver() {
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -52,7 +52,7 @@ function AddDriver() {
       userPassword: values.password,
       userPhone: values.userPhone,
       status: values.status,
-      role: "driver"
+      role: "driver",
     };
 
     console.log("here is the Add User data ", driverData);
@@ -63,14 +63,14 @@ function AddDriver() {
       setAlert({
         open: true,
         severity: "success",
-        message: "Driver Added successfully"
+        message: "Driver Added successfully",
       });
       resetForm();
     } catch (err) {
       setAlert({
         open: true,
         severity: "error",
-        message: "Driver is not Added"
+        message: "Driver is not Added",
       });
       console.error("Add Driver failed", err);
     }
@@ -84,7 +84,7 @@ function AddDriver() {
           email: "",
           userPhone: "",
           password: "",
-          status: ""
+          status: "",
         }}
         validationSchema={validationSchema}
         onSubmit={handleRegister}
@@ -193,7 +193,7 @@ function AddDriver() {
                     mb={1}
                     style={{
                       fontWeight: 500,
-                      fontSize: { xs: "12px", sm: "14px" }
+                      fontSize: { xs: "12px", sm: "14px" },
                     }}
                   >
                     Status
@@ -210,13 +210,13 @@ function AddDriver() {
                       sx={{
                         "& .MuiInputBase-root": {
                           height: "50px",
-                          marginLeft: "5px"
+                          marginLeft: "5px",
                         },
                         width: {
                           xs: "74%", // Wider on extra-small screens
                           sm: "210%", // Revert to 70% on small screens and up
-                          lg: "84%"
-                        }
+                          lg: "84%",
+                        },
                       }}
                     >
                       <MenuItem value="active">Active</MenuItem>

@@ -20,7 +20,7 @@ function createData(
   Distance,
   Fuel_Consumption,
   DateAndTime,
-  Status
+  Status,
 ) {
   return {
     TripID,
@@ -32,7 +32,7 @@ function createData(
     Distance,
     Fuel_Consumption,
     DateAndTime,
-    Status
+    Status,
   };
 }
 
@@ -47,7 +47,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Active"
+    "Active",
   ),
   createData(
     "02",
@@ -59,7 +59,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Inactive"
+    "Inactive",
   ),
   createData(
     "03",
@@ -71,7 +71,7 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Upcomming"
+    "Upcomming",
   ),
   createData(
     "04",
@@ -83,8 +83,8 @@ const rows = [
     "120",
     "4",
     "12 Dec 8:00 - 18:00",
-    "Delayed"
-  )
+    "Delayed",
+  ),
 ];
 
 export default function DashboardTableContent() {
@@ -97,7 +97,7 @@ export default function DashboardTableContent() {
         borderTop: "1px solid #EAECF0",
         height: "100%",
         width: "100%",
-        boxShadow: "none"
+        boxShadow: "none",
         // backgroundColor: "yellow",
       }}
     >
@@ -265,7 +265,7 @@ export default function DashboardTableContent() {
             <TableRow
               key={row.TripID}
               sx={{
-                "&:last-child td, &:last-child th": { border: 0 }
+                "&:last-child td, &:last-child th": { border: 0 },
               }}
             >
               <TableCell
@@ -320,7 +320,7 @@ export default function DashboardTableContent() {
                   sx={{
                     width: "100%",
                     justifyContent: "start",
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   <Typography
@@ -345,13 +345,13 @@ export default function DashboardTableContent() {
                         sm: "40px",
                         md: "50px",
                         lg: "60px",
-                        xl: "80px"
+                        xl: "80px",
                       },
                       height: {
                         sm: "14px",
                         md: "16px",
                         lg: "18px",
-                        xl: "20px"
+                        xl: "20px",
                       },
                       backgroundColor:
                         row.Status == "Active"
@@ -367,7 +367,7 @@ export default function DashboardTableContent() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      gap: "5px"
+                      gap: "5px",
                     }}
                   >
                     {console.log("statuses", row.Status)}
@@ -385,7 +385,7 @@ export default function DashboardTableContent() {
                                 ? "#007BFF"
                                 : row.Status == "Delayed"
                                   ? "#F38712"
-                                  : "#F38712"
+                                  : "#F38712",
                       }}
                     />
                     <Typography
@@ -394,7 +394,7 @@ export default function DashboardTableContent() {
                         sm: "6px",
                         md: "6px",
                         lg: "8px",
-                        xl: "10px"
+                        xl: "10px",
                       }}
                       sx={{
                         color:
@@ -406,7 +406,7 @@ export default function DashboardTableContent() {
                                 ? "#007BFF"
                                 : row.Status == "Delayed"
                                   ? "#F38712"
-                                  : "#F38712"
+                                  : "#F38712",
                       }}
                       fontFamily={"Inter"}
                     >
@@ -422,7 +422,7 @@ export default function DashboardTableContent() {
                   sx={{
                     width: "100%",
                     justifyContent: "start",
-                    alignItems: "center"
+                    alignItems: "center",
                   }}
                 >
                   <Typography

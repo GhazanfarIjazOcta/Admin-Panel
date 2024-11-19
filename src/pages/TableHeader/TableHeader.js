@@ -15,7 +15,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   MenuItem,
-  Select
+  Select,
 } from "@mui/material";
 import User from "../../assets/Card/user.png";
 import SearchIcon from "@mui/icons-material/Search";
@@ -26,6 +26,7 @@ import cloudLogo from "../../assets/Table/cloudLogo.png";
 import { useNavigate } from "react-router-dom";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useGetTripManagementDashboardQuery } from "../../Api/apiSlice";
+import Loader from "../../components/UI/Loader";
 
 export default function TableHeader({
   text,
@@ -40,7 +41,7 @@ export default function TableHeader({
   // serRole,
   // role,
   status,
-  setStatus
+  setStatus,
 }) {
   const navigate = useNavigate();
 
@@ -53,7 +54,13 @@ export default function TableHeader({
     setStatus(event.target.value); // Update the status state
   };
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) return <p>Error loading data</p>;
 
   const { trips, activeTrips, delayedTrips, upcomingTrips } = data || {};
@@ -66,7 +73,7 @@ export default function TableHeader({
         sx={{
           border: "none",
           boxShadow: "none",
-          padding: "15px"
+          padding: "15px",
         }}
       >
         <React.Fragment>
@@ -80,7 +87,7 @@ export default function TableHeader({
               sm: "none",
               md: "none",
               lg: "flex",
-              xl: "flex"
+              xl: "flex",
             }}
           >
             <Stack
@@ -97,7 +104,7 @@ export default function TableHeader({
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  borderRadius: "2px"
+                  borderRadius: "2px",
                 }}
               >
                 <img src={icon ? icon : User} height={"13px"} width={"20px"} />
@@ -108,7 +115,7 @@ export default function TableHeader({
                   fontSize: { lg: "14px", xs: "10px" },
                   color: "#5A607F",
                   fontWeight: 400,
-                  fontFamily: "Inter, sans-serif"
+                  fontFamily: "Inter, sans-serif",
                 }}
               >
                 {text}
@@ -127,7 +134,7 @@ export default function TableHeader({
                       height: { lg: "70%", xs: 30 },
                       boxShadow: "none",
                       border: "1px solid #E0E0E0",
-                      marginTop: 1
+                      marginTop: 1,
                     }}
                   >
                     <Stack
@@ -141,7 +148,7 @@ export default function TableHeader({
                           fontSize: { lg: "16px", xs: "12px" },
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif"
+                          fontFamily: "Inter, sans-serif",
                         }}
                       >
                         Total Trips
@@ -151,7 +158,7 @@ export default function TableHeader({
                           fontSize: { lg: "24px", xs: "12px" },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif"
+                          fontFamily: "Poppins, sans-serif",
                         }}
                       >
                         {trips.count}
@@ -173,7 +180,7 @@ export default function TableHeader({
                           fontSize: { lg: "16px", xs: "12px" },
                           color: "#5A607F",
                           fontWeight: 500,
-                          fontFamily: "Inter, sans-serif"
+                          fontFamily: "Inter, sans-serif",
                         }}
                       >
                         Active
@@ -183,7 +190,7 @@ export default function TableHeader({
                           fontSize: { lg: "24px", xs: "12px" },
                           color: "#14181F",
                           fontWeight: 500,
-                          fontFamily: "Poppins, sans-serif"
+                          fontFamily: "Poppins, sans-serif",
                         }}
                       >
                         {activeTrips.count}
@@ -208,14 +215,14 @@ export default function TableHeader({
                         <SearchIcon />
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "70%",
                     width: { xs: "100%", sm: "200px", lg: "100%" }, // Responsive width
-                    marginTop: 1
-                  }
+                    marginTop: 1,
+                  },
                 }}
               />
 
@@ -246,14 +253,14 @@ export default function TableHeader({
                         <img src={CrossIcon} height={"16px"} width={"16px"} />
                       </IconButton>
                     </InputAdornment>
-                  )
+                  ),
                 }}
                 sx={{
                   "& .MuiInputBase-root": {
                     height: "70%",
                     width: { xs: "100%", sm: "210px", lg: "100%" }, // Responsive width
-                    marginTop: 1
-                  }
+                    marginTop: 1,
+                  },
                 }}
               />
               {!exportIcon ? (
@@ -274,8 +281,8 @@ export default function TableHeader({
                     gap: "3px",
                     marginTop: 1,
                     "&:hover": {
-                      backgroundColor: "#15294E"
-                    }
+                      backgroundColor: "#15294E",
+                    },
                   }}
                   onClick={() => navigate(route)}
                 >
@@ -299,8 +306,8 @@ export default function TableHeader({
                     paddingRight: "25px",
                     gap: "8px",
                     "&:hover": {
-                      backgroundColor: "white"
-                    }
+                      backgroundColor: "white",
+                    },
                   }}
                 >
                   <img src={cloudLogo} width={"20px"} height={"20px"} />
@@ -318,8 +325,8 @@ export default function TableHeader({
                 sm: "block",
                 md: "block",
                 lg: "none",
-                xl: "none"
-              }
+                xl: "none",
+              },
             }}
           >
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -337,7 +344,7 @@ export default function TableHeader({
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    borderRadius: "2px"
+                    borderRadius: "2px",
                   }}
                 >
                   <img
@@ -354,7 +361,7 @@ export default function TableHeader({
                   fontWeight: 400,
                   fontFamily: "Inter, sans-serif",
                   mt: 0.6,
-                  ml: 1.5
+                  ml: 1.5,
                 }}
               >
                 {text}
@@ -373,7 +380,7 @@ export default function TableHeader({
                           width: { lg: 317, xs: 300 },
                           height: { lg: 46, xs: 60 },
                           boxShadow: "none",
-                          border: "1px solid #E0E0E0"
+                          border: "1px solid #E0E0E0",
                         }}
                       >
                         <Stack
@@ -387,7 +394,7 @@ export default function TableHeader({
                               fontSize: { lg: "16px", xs: "12px" },
                               color: "#5A607F",
                               fontWeight: 500,
-                              fontFamily: "Inter, sans-serif"
+                              fontFamily: "Inter, sans-serif",
                             }}
                           >
                             Total Trips
@@ -397,7 +404,7 @@ export default function TableHeader({
                               fontSize: { lg: "24px", xs: "12px" },
                               color: "#14181F",
                               fontWeight: 500,
-                              fontFamily: "Poppins, sans-serif"
+                              fontFamily: "Poppins, sans-serif",
                             }}
                           >
                             {trips.count}
@@ -420,7 +427,7 @@ export default function TableHeader({
                               fontSize: { lg: "16px", xs: "12px" },
                               color: "#5A607F",
                               fontWeight: 500,
-                              fontFamily: "Inter, sans-serif"
+                              fontFamily: "Inter, sans-serif",
                             }}
                           >
                             Active
@@ -430,7 +437,7 @@ export default function TableHeader({
                               fontSize: { lg: "24px", xs: "12px" },
                               color: "#14181F",
                               fontWeight: 500,
-                              fontFamily: "Poppins, sans-serif"
+                              fontFamily: "Poppins, sans-serif",
                             }}
                           >
                             {activeTrips.count}
@@ -477,7 +484,7 @@ export default function TableHeader({
                     height: "38px",
                     marginTop: 1,
                     backgroundColor: "#15294E",
-                    color: "white"
+                    color: "white",
                   }}
                   onClick={() => navigate(route)}
                 >

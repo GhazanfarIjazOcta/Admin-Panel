@@ -90,7 +90,7 @@ const ChatView = ({
       direction={"column"}
       justifyContent={"flex-start"}
       height={{ lg: "85%", xs: "82%" }}
-      position={{ lg: "relative", md:"relative" , sm:"relative" , xs: "fixed" }}
+      position={{ lg: "relative", md: "relative", sm: "relative", xs: "fixed" }}
     >
       <Stack justifyContent={"space-between"} direction={"row"}>
         <Box sx={headerStyle.head}>

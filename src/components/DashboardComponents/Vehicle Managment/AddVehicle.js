@@ -8,7 +8,7 @@ import {
   Stack,
   TextField,
   Typography,
-  useMediaQuery
+  useMediaQuery,
 } from "@mui/material";
 import React from "react";
 import { useFormik } from "formik";
@@ -19,13 +19,12 @@ import uploadCloud from "../../../assets/VehicleManagment/upload-cloud.png";
 import { addVehicleStyles } from "../../UI/styles/Main";
 import { useAddVehicleMutation } from "../../../Api/apiSlice";
 
-import CustomAlert from '../../UI/CustomAlert';
+import CustomAlert from "../../UI/CustomAlert";
 import { useState } from "react";
 
 function AddVehicle() {
   const [addVehicle] = useAddVehicleMutation();
   const isMobile = useMediaQuery((theme) => theme.breakpoints.down("sm"));
-
 
   const [alert, setAlert] = useState({
     open: false,
@@ -41,7 +40,7 @@ function AddVehicle() {
   const validationSchema = Yup.object({
     vehicleType: Yup.string().required("Vehicle type is required"),
     vehicleModel: Yup.string().required("Vehicle model is required"),
-    status: Yup.string().required("Status is required")
+    status: Yup.string().required("Status is required"),
     // Define other fields validation as required
   });
 
@@ -50,7 +49,7 @@ function AddVehicle() {
     initialValues: {
       vehicleType: "",
       vehicleModel: "",
-      status: "active" // default status as Active
+      status: "active", // default status as Active
       // Add other fields with initial empty values as required
     },
     validationSchema,
@@ -58,7 +57,7 @@ function AddVehicle() {
       try {
         await addVehicle(values).unwrap(); // sending status in backend request
         resetForm(); // Clear the form on success
-       
+
         setAlert({
           open: true,
           severity: "success",
@@ -72,14 +71,17 @@ function AddVehicle() {
           message: "Vehicle added successfully",
         });
       }
-    }
+    },
   });
 
   return (
-    <Paper sx={{...addVehicleStyles.mainContainer,
+    <Paper
+      sx={{
+        ...addVehicleStyles.mainContainer,
 
-      height: "86%"
-    }}>
+        height: "86%",
+      }}
+    >
       <Box sx={addVehicleStyles.container} pl={3} mt={0} mb={2}>
         <form onSubmit={formik.handleSubmit}>
           <Stack
@@ -243,9 +245,12 @@ function AddVehicle() {
               Add
             </Button>
 
-            <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-             
-
+            <CustomAlert
+              open={alert.open}
+              onClose={handleAlertClose}
+              severity={alert.severity}
+              message={alert.message}
+            />
           </Stack>
         </form>
       </Box>

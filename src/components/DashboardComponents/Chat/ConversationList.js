@@ -1,10 +1,4 @@
-import {
-  Box,
-  Divider,
-  List,
-  Stack,
-  TextField,
-} from "@mui/material";
+import { Box, Divider, List, Stack, TextField } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import ConversationCard from "./ConversationCard";
 import TabPanel from "@mui/joy/TabPanel";
@@ -70,7 +64,7 @@ const ConversationList = ({
         <Divider sx={{ marginBottom: "1px" }} />
       </Stack>
       <Divider sx={{ marginBottom: "1px" }} />
-      
+
       <Tabs aria-label="Basic tabs" value={tabValue} onChange={handleTabChange}>
         <TabPanel style={{ padding: 0 }} value={tabValue}>
           <List
@@ -82,7 +76,7 @@ const ConversationList = ({
             }}
           >
             {Array.isArray(chatlist) && chatlist.length > 0 ? (
-              chatlist.map((conversation) => (
+              chatlist.map((conversation) =>
                 conversation.ChatConversation ? ( // Ensure this property exists
                   <ConversationCard
                     key={conversation.ChatConversation.id} // Ensure conversation.ChatConversation.id exists
@@ -93,8 +87,8 @@ const ConversationList = ({
                     chatlist={chatlist}
                     setchatlist={setchatlist}
                   />
-                ) : null
-              ))
+                ) : null,
+              )
             ) : (
               <div>No Conversations</div> // Display a message if chatlist is empty
             )}

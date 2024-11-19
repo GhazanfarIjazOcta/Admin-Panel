@@ -25,7 +25,8 @@ import LogoutLogo from "../../../assets/Layout/Left_icon.png";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../../Authentication/AuthContext";
 
-function Sidebar2({ onClose }) {  // Add userRole as a prop
+function Sidebar2({ onClose }) {
+  // Add userRole as a prop
   const navigate = useNavigate();
   const location = useLocation();
   const [selectedItem, setSelectedItem] = useState();
@@ -52,16 +53,24 @@ function Sidebar2({ onClose }) {  // Add userRole as a prop
 
   const customerlistitems = [
     { text: "Dashboard", icon: DashboardLogo, route: "dashboardmain" },
-    { text: "Maintenance Scheduling", icon: MaintenanceLogo, route: "maintenance-scheduling" },
-    { text: "Fuel Management", icon: FuelLogo, route: "customer-fuel-management" },
-    { text: "Setting", icon: SettingLogo, route: "customer-setting" }
+    {
+      text: "Maintenance Scheduling",
+      icon: MaintenanceLogo,
+      route: "maintenance-scheduling",
+    },
+    {
+      text: "Fuel Management",
+      icon: FuelLogo,
+      route: "customer-fuel-management",
+    },
+    { text: "Setting", icon: SettingLogo, route: "customer-setting" },
   ];
 
   const { userRole } = useAuth();
   console.log("user role is actually on sidebar ", userRole);
   // Use the appropriate list based on userRole
   const itemsToDisplay = userRole === "admin" ? listItems : customerlistitems;
-  console.log("user role in mobile side bar "  , userRole )
+  console.log("user role in mobile side bar ", userRole);
 
   useEffect(() => {
     const currentItemIndex = itemsToDisplay.findIndex(

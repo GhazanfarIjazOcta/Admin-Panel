@@ -14,7 +14,7 @@ import {
   Modal,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import Edit from "../../../assets/Table/Edit.png";
 import Delete from "../../../assets/Table/Delete.png";
@@ -22,12 +22,13 @@ import Delete from "../../../assets/Table/Delete.png";
 import {
   useGetDriverManagementSearchDashboardQuery,
   useDeleteDriverMutation,
-  useUpdateDriverMutation
+  useUpdateDriverMutation,
 } from "../../../Api/apiSlice";
 import { useState } from "react";
 
 import CustomAlert from "../../UI/CustomAlert";
 import { TablePagination } from "@mui/material";
+import Loader from "../../UI/Loader";
 
 function createData(
   DriverID,
@@ -38,7 +39,7 @@ function createData(
   Total_drivers_Completed,
   Status,
   Last_Active,
-  Action
+  Action,
 ) {
   return {
     DriverID,
@@ -49,7 +50,7 @@ function createData(
     Total_drivers_Completed,
     Status,
     Last_Active,
-    Action
+    Action,
   };
 }
 
@@ -62,7 +63,7 @@ const rows = [
     "Vehicle A",
     "23",
     "On Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
   createData(
     2,
@@ -72,7 +73,7 @@ const rows = [
     "Vehicle B",
     "45",
     "Off Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
   createData(
     3,
@@ -82,7 +83,7 @@ const rows = [
     "Vehicle C",
     "44",
     "On Duty",
-    "2024-08-05 09:15 AM"
+    "2024-08-05 09:15 AM",
   ),
   createData(
     4,
@@ -92,21 +93,21 @@ const rows = [
     "Vehicle D",
     "29",
     "On Duty",
-    "2024-08-05 09:15 AM"
-  )
+    "2024-08-05 09:15 AM",
+  ),
 ];
 
 export default function DriverManagmentTableContent({
   setSearch,
   search,
   status,
-  setStatus
+  setStatus,
 }) {
   // useGetDriverManagementSearchDashboardQuery
 
   // const { data, error, isLoading } = useGetdriverManagementDashboardQuery();
   const { data, error, isLoading } = useGetDriverManagementSearchDashboardQuery(
-    { search, status }
+    { search, status },
   );
   const [deletedriver] = useDeleteDriverMutation();
   const [updatedriver] = useUpdateDriverMutation();
@@ -115,7 +116,7 @@ export default function DriverManagmentTableContent({
   const [alert, setAlert] = useState({
     open: false,
     severity: "success",
-    message: ""
+    message: "",
   });
 
   const handleAlertClose = () => {
@@ -143,7 +144,13 @@ export default function DriverManagmentTableContent({
   ///////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) return <p>Error loading data</p>;
 
   const { drivers } = data || {};
@@ -189,14 +196,14 @@ export default function DriverManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Driver Data Deleted successfully!"
+        message: "Driver Data Deleted successfully!",
       });
     } catch (error) {
       console.error("Error deleting user:", error);
       setAlert({
         open: true,
         severity: "error",
-        message: "Driiver Data not Deleted!"
+        message: "Driiver Data not Deleted!",
       });
     } finally {
       handleCloseDeleteModal();
@@ -211,7 +218,7 @@ export default function DriverManagmentTableContent({
         userName: editdriverName,
         status: editStatus,
         userEmail: editdriverEmail,
-        userPhone: editdriverPhone
+        userPhone: editdriverPhone,
       };
 
       console.log(" updated data sent is driver data :::: ", driverData);
@@ -224,7 +231,7 @@ export default function DriverManagmentTableContent({
       setAlert({
         open: true,
         severity: "success",
-        message: "Driver updated successfully!!"
+        message: "Driver updated successfully!!",
       });
       handleCloseEditModal();
     } catch (error) {
@@ -232,7 +239,7 @@ export default function DriverManagmentTableContent({
       setAlert({
         open: true,
         severity: "error",
-        message: "Error updating user:!"
+        message: "Error updating user:!",
       });
     }
   };
@@ -261,13 +268,12 @@ export default function DriverManagmentTableContent({
         elevation: 0,
         borderTop: "1px solid #EAECF0",
         height: "60%",
-        width: "99%"
+        width: "99%",
       }}
     >
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead sx={{ backgroundColor: "#FCFCFD" }}>
           <TableRow>
-
             {/* <TableCell align="right">
               <Stack
                 direction={"row"}
@@ -452,7 +458,7 @@ export default function DriverManagmentTableContent({
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        gap: "10px"
+                        gap: "10px",
                       }}
                     >
                       <Box
@@ -461,7 +467,7 @@ export default function DriverManagmentTableContent({
                           height: 6, // Adjust size as needed
                           borderRadius: "50%",
                           backgroundColor:
-                            driver.status == "active" ? "#28A745" : "#6C757D"
+                            driver.status == "active" ? "#28A745" : "#6C757D",
                         }}
                       />
                       <Typography
@@ -469,7 +475,7 @@ export default function DriverManagmentTableContent({
                         fontSize={"14px"}
                         sx={{
                           color:
-                            driver.status == "active" ? "#037847" : "#364254"
+                            driver.status == "active" ? "#037847" : "#364254",
                         }}
                         fontFamily={"Inter"}
                       >
@@ -537,7 +543,7 @@ export default function DriverManagmentTableContent({
             bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
-            p: 4
+            p: 4,
           }}
         >
           <Typography variant="h6" component="h2">
@@ -603,7 +609,7 @@ export default function DriverManagmentTableContent({
             bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
-            p: 4
+            p: 4,
           }}
         >
           <Typography variant="h6" component="h2">

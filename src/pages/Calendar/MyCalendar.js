@@ -18,22 +18,25 @@ import {
 import Right from "../../assets/calander/right.png";
 import Left from "../../assets/calander/left.png";
 import SearchIcon from "@mui/icons-material/Search";
-import { AddAPhoto, AddIcCallOutlined, AddReaction, AddTask, ChevronRight, FormatListBulleted } from "@mui/icons-material";
+import {
+  AddAPhoto,
+  AddIcCallOutlined,
+  AddReaction,
+  AddTask,
+  ChevronRight,
+  FormatListBulleted,
+} from "@mui/icons-material";
 
-import {  useAddMaintainanceMutation , useGetMaintainanceDashboardQuery } from "../../Api/apiSlice"
+import {
+  useAddMaintainanceMutation,
+  useGetMaintainanceDashboardQuery,
+} from "../../Api/apiSlice";
 import { useNavigate } from "react-router-dom";
-
+import Loader from "../../components/UI/Loader";
 
 const localizer = momentLocalizer(moment);
 
-
-
-
 function CustomToolbar(props) {
-
-
-
-
   const [selectedView, setSelectedView] = useState("week");
 
   const handleViewChange = (view) => {
@@ -62,12 +65,9 @@ function CustomToolbar(props) {
 
   const navigate = useNavigate();
 
-  const  handleNavigate = () =>{
- 
-   navigate("add-maintenence")
-  }
-
-
+  const handleNavigate = () => {
+    navigate("add-maintenence");
+  };
 
   return (
     <Box
@@ -139,98 +139,88 @@ function CustomToolbar(props) {
         ))}
       </Box>
 
-      {/* Right Side: Search field */}
-
-      {/* <Box
+      <Box
         sx={{
           marginLeft: "10px",
           display: "flex",
           justifyContent: "center",
           width: { xs: "100%", sm: "auto" },
           flexWrap: "wrap",
-
           mt: { xs: 2, lg: 0 },
         }}
       >
-        <TextField
-          placeholder="Search"
-          variant="outlined"
-          size="small"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start" sx={{ marginRight: 0 }}>
-                <IconButton sx={{ padding: 0 }}>
-                  <SearchIcon />
-                </IconButton>
-              </InputAdornment>
-            ),
-          }}
+        <Button
+          variant="contained"
+          size="medium"
           sx={{
-            "& .MuiInputBase-root": {
-              height: "44px",
-              width: { xs: "100%", sm: "200px" },
-              justifyContent: "center",
+            backgroundColor: "#15294E", // Themed blue color
+            color: "#fff", // White text color
+            textTransform: "none", // Prevent uppercase transformation
+            "&:hover": {
+              backgroundColor: "#16383E", // Slightly darker blue on hover
             },
+            height: "44px",
+            width: { xs: "100%", sm: "200px" }, // Adjust size responsively
           }}
-        />
-      </Box> */}
-
-
-      {/* Right Side: Add Button */}
-
-
-
-<Box
-  sx={{
-    marginLeft: "10px",
-    display: "flex",
-    justifyContent: "center",
-    width: { xs: "100%", sm: "auto" },
-    flexWrap: "wrap",
-    mt: { xs: 2, lg: 0 },
-  }}
->
-  <Button
-    variant="contained"
-    size="medium"
-    sx={{
-      backgroundColor: "#15294E", // Themed blue color
-      color: "#fff",             // White text color
-      textTransform: "none",     // Prevent uppercase transformation
-      "&:hover": {
-        backgroundColor: "#16383E", // Slightly darker blue on hover
-      },
-      height: "44px",
-      width: { xs: "100%", sm: "200px" }, // Adjust size responsively
-    }}
-    onClick={handleNavigate}
-    startIcon={<AddTask/>} // Add icon at the start of the button
-  >
-    Add Schedule
-  </Button>
-</Box>
-
-
-      
+          onClick={handleNavigate}
+          startIcon={<AddTask />} // Add icon at the start of the button
+        >
+          Add Schedule
+        </Button>
+      </Box>
     </Box>
   );
 }
 
-function MyCalendar() {
+function MyCalendar(selectedOption, setSelectedOption) {
   const { data, error, isLoading } = useGetMaintainanceDashboardQuery();
 
-  // Extract events from API data
-  const myEventsList = data?.vehicles
-    ?.flatMap((vehicle) =>
-      vehicle.Maintenances.map((maintenance) => ({
-        start: new Date(maintenance.startDate),
-        end: new Date(maintenance.endDate),
-        title: `${vehicle.vehicleType} - ${maintenance.maintenanceType}`,
-        eventType: "Maintenance",
-        backgroundColor: "#FFB6C1", // Example: Use different colors based on type
-        mainColor: "#D5006D", // Example: Use different colors based on type
-      }))
-    ) || [];
+  console.log("select option for !!~~{{~~ ", selectedOption);
+  // Define a list of colors
+  const colors = [
+    "#FFB6C1",
+    "#ADD8E6",
+    "#90EE90",
+    "#FFD700",
+    "#FFA07A",
+    "#D8BFD8",
+    "#FF4500",
+    "#6495ED",
+    "#20B2AA",
+    "#7FFF00",
+  ];
+
+  // Helper function to get a unique color
+  const getColor = (index) => colors[index % colors.length];
+
+  // Dynamic selection
+  // const isSelected = "devices"; // Change to "vehicles" or "devices" as needed
+
+  const isSelected = selectedOption.selectedOption; // Change to "vehicles" or "devices" as needed
+
+  // Extract events from API data based on isSelected
+  const myEventsList =
+    isSelected === "vehicles"
+      ? data?.vehicles?.flatMap((vehicle, vehicleIndex) =>
+          vehicle.Maintenances.map((maintenance) => ({
+            start: new Date(maintenance.startDate),
+            end: new Date(maintenance.endDate),
+            title: `${vehicle.vehicleType} - ${maintenance.maintenanceType}`,
+            eventType: "Maintenance",
+            backgroundColor: getColor(vehicleIndex),
+            mainColor: getColor(vehicleIndex),
+          })),
+        ) || []
+      : data?.devices?.flatMap((device, deviceIndex) =>
+          device.DeviceMaintenances.map((maintenance) => ({
+            start: new Date(maintenance.startDate),
+            end: new Date(maintenance.endDate),
+            title: `${device.deviceType} - ${maintenance.maintenanceType}`,
+            eventType: "Device Maintenance",
+            backgroundColor: getColor(deviceIndex),
+            mainColor: getColor(deviceIndex),
+          })),
+        ) || [];
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -262,7 +252,12 @@ function MyCalendar() {
         border: "none",
         marginLeft: "5px",
         height: "40px",
+        width: "100%",
         cursor: "pointer",
+        fontSize: isMobile ? "12px" : "14px",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
       },
     };
   }
@@ -277,33 +272,28 @@ function MyCalendar() {
         style={{
           backgroundColor: event.backgroundColor,
           borderRadius: "5px",
-          height: "100%",
+          height: "40px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           padding: "5px",
-          marginLeft: "30px",
+          marginLeft: "5px",
           cursor: "pointer",
-          color: event.mainColor,
-          fontSize: "14px",
+          color: "black",
+          fontSize: isMobile ? "12px" : "14px",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
           position: "relative",
         }}
       >
-        <i
-          className="fas fa-clock"
-          style={{
-            fontSize: "20px",
-            position: "absolute",
-            left: "5px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            color: event.mainColor,
-          }}
-        />
         <Typography
           sx={{
-            display: { xs: "block", sm: "none" },
             textAlign: "center",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            width: "100%",
           }}
         >
           {event.title}
@@ -317,8 +307,9 @@ function MyCalendar() {
     setSelectedEvent(null);
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  // if (error) return <p>Error loading data</p>;
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.calendarContainer}>
@@ -344,26 +335,50 @@ function MyCalendar() {
       />
 
       {isMobile && (
-        <Box sx={{ padding: 2, display: "flex", flexDirection: "column" }}>
+        <Box
+          sx={{
+            padding: 2,
+            display: "flex",
+            flexDirection: "column",
+            gap: 1, // Add space between boxes
+          }}
+        >
           {myEventsList.map((event, index) => (
             <Box
               key={index}
               sx={{
                 backgroundColor: event.backgroundColor,
                 borderRadius: "5px",
-                marginBottom: 1,
-                padding: 2,
-                color: event.mainColor,
-                cursor: "pointer",
+                padding: 1,
+                color: "black",
                 fontWeight: 600,
-                fontSize: "14px",
+                fontSize: "12px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                cursor: "pointer",
+                textAlign: "center",
+                overflow: "hidden",
               }}
               onClick={() => {
                 setSelectedEvent(event);
                 setOpenModal(true);
               }}
             >
-              {event.title}
+              <Typography
+                variant="body2"
+                sx={{
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {event.title}
+              </Typography>
+              <Typography variant="caption" sx={{ fontSize: "10px" }}>
+                {moment(event.start).format("MMM DD")} -{" "}
+                {moment(event.end).format("MMM DD")}
+              </Typography>
             </Box>
           ))}
         </Box>
@@ -403,6 +418,5 @@ function MyCalendar() {
     </div>
   );
 }
-
 
 export default MyCalendar;

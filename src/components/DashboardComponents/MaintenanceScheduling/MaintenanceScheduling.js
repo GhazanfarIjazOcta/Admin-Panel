@@ -8,7 +8,7 @@ import {
   Paper,
   Stack,
   TextField,
-  Typography
+  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 import MaintenanceLogo from "../../../assets/Maintenance_Scheduling/Maintenance.png";
@@ -35,15 +35,11 @@ function MaintenanceScheduling() {
   };
   const navigate = useNavigate();
 
-
-
-  const [selectedOption, setSelectedOption] = useState("Vehicles"); // Default selected option
+  const [selectedOption, setSelectedOption] = useState("vehicles"); // Default selected option
 
   const handleSelection = (option) => {
     setSelectedOption(option);
   };
-
-
 
   return (
     <Box
@@ -55,7 +51,7 @@ function MaintenanceScheduling() {
         px: { xs: 2, sm: 2, md: 2, lg: 0 }, // Remove padding at larger screens where sidebar becomes toggle
         ml: { xs: 0, sm: 0, md: 0, lg: 0, xl: 0 }, // Leave space for the sidebar on larger screens
         overflow: "none", // Prevent overflowing horizontally and vertically
-        width: "82%" // Ensure it takes full width
+        width: "82%", // Ensure it takes full width
         // maxWidth: "1200px", // Set a max width as needed
       }}
     >
@@ -124,49 +120,59 @@ function MaintenanceScheduling() {
                     </Box>
                   </Stack> */}
 
-<Stack direction="column" spacing={2}>
-      {/* Vehicles Option */}
-      <Box
-        display="flex"
-        alignItems="center"
-        onClick={() => handleSelection("Vehicles")}
-        sx={{ cursor: "pointer" }}
-      >
-        {/* Radio Button */}
-        {selectedOption === "Vehicles" ? (
-          <RadioButtonCheckedIcon style={{ color: "orange" }} />
-        ) : (
-          <RadioButtonUncheckedIcon />
-        )}
-        {/* Image */}
-        <img src={Vehicle} alt="Vehicle Icon" height="24px" width="24px" />
-        {/* Text */}
-        <Typography sx={maintenanceSchedulingStyles.vehicalText}>
-          Vehicles
-        </Typography>
-      </Box>
+                  <Stack direction="column" spacing={2}>
+                    {/* Vehicles Option */}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => handleSelection("vehicles")}
+                      sx={{ cursor: "pointer" }}
+                    >
+                      {/* Radio Button */}
+                      {selectedOption === "vehicles" ? (
+                        <RadioButtonCheckedIcon style={{ color: "orange" }} />
+                      ) : (
+                        <RadioButtonUncheckedIcon />
+                      )}
+                      {/* Image */}
+                      <img
+                        src={Vehicle}
+                        alt="Vehicle Icon"
+                        height="24px"
+                        width="24px"
+                      />
+                      {/* Text */}
+                      <Typography sx={maintenanceSchedulingStyles.vehicalText}>
+                        Vehicles
+                      </Typography>
+                    </Box>
 
-      {/* Devices Option */}
-      <Box
-        display="flex"
-        alignItems="center"
-        onClick={() => handleSelection("Devices")}
-        sx={{ cursor: "pointer" }}
-      >
-        {/* Radio Button */}
-        {selectedOption === "Devices" ? (
-          <RadioButtonCheckedIcon style={{ color: "orange" }} />
-        ) : (
-          <RadioButtonUncheckedIcon />
-        )}
-        {/* Image */}
-        <img src={Hardware} alt="Device Icon" height="24px" width="24px" />
-        {/* Text */}
-        <Typography sx={maintenanceSchedulingStyles.vehicalText}>
-          Devices
-        </Typography>
-      </Box>
-    </Stack>
+                    {/* Devices Option */}
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      onClick={() => handleSelection("devices")}
+                      sx={{ cursor: "pointer" }}
+                    >
+                      {/* Radio Button */}
+                      {selectedOption === "devices" ? (
+                        <RadioButtonCheckedIcon style={{ color: "orange" }} />
+                      ) : (
+                        <RadioButtonUncheckedIcon />
+                      )}
+                      {/* Image */}
+                      <img
+                        src={Hardware}
+                        alt="Device Icon"
+                        height="24px"
+                        width="24px"
+                      />
+                      {/* Text */}
+                      <Typography sx={maintenanceSchedulingStyles.vehicalText}>
+                        Devices
+                      </Typography>
+                    </Box>
+                  </Stack>
 
                   <Stack direction="column" spacing={2} mt={2}>
                     <TextField
@@ -187,13 +193,13 @@ function MaintenanceScheduling() {
                               />
                             </IconButton>
                           </InputAdornment>
-                        )
+                        ),
                       }}
                       sx={{
                         "& .MuiInputBase-root": {
                           height: "44px",
-                          width: "100%" // Full width on mobile
-                        }
+                          width: "100%", // Full width on mobile
+                        },
                       }}
                     />
                     <TextField
@@ -214,13 +220,13 @@ function MaintenanceScheduling() {
                               />
                             </IconButton>
                           </InputAdornment>
-                        )
+                        ),
                       }}
                       sx={{
                         "& .MuiInputBase-root": {
                           height: "44px",
-                          width: "100%" // Full width on mobile
-                        }
+                          width: "100%", // Full width on mobile
+                        },
                       }}
                     />
                   </Stack>
@@ -229,7 +235,7 @@ function MaintenanceScheduling() {
                     sx={{
                       ...maintenanceSchedulingStyles.historyText,
                       cursor: "pointer",
-                      mt: 2
+                      mt: 2,
                     }}
                     onClick={() => navigate("/dashboard/history")}
                   >
@@ -345,122 +351,143 @@ function MaintenanceScheduling() {
             </Typography>
           </Stack> */}
 
-<Stack
-      sx={{ display: { xs: "none", md: "flex" } }}
-      width={{ xs: "100%", sm: "50%", md: "70%" }}
-      alignItems={{ xs: "flex-start", md: "center" }}
-      justifyContent={"flex-end"}
-      direction={"row"}
-      flexWrap={"wrap"}
-      gap={{ xs: 2, md: 6 }}
-    >
-      {/* Vehicles Option */}
-      <Stack
-        direction={"row"}
-        gap={1}
-        alignItems={"center"}
-        onClick={() => handleSelection("Vehicles")}
-        sx={{ cursor: "pointer" }}
-      >
-        {selectedOption === "Vehicles" ? (
-          <RadioButtonCheckedIcon style={{ color: "orange" }} />
-        ) : (
-          <RadioButtonUncheckedIcon />
-        )}
-        <img src={Vehicle} height={"24px"} width={"24px"} alt="Vehicle Icon" />
-        <Typography sx={maintenanceSchedulingStyles.vehicalText}>
-          Vehicles
-        </Typography>
-      </Stack>
+          <Stack
+            sx={{ display: { xs: "none", md: "flex" } }}
+            width={{ xs: "100%", sm: "50%", md: "70%" }}
+            alignItems={{ xs: "flex-start", md: "center" }}
+            justifyContent={"flex-end"}
+            direction={"row"}
+            flexWrap={"wrap"}
+            gap={{ xs: 2, md: 6 }}
+          >
+            {/* Vehicles Option */}
+            <Stack
+              direction={"row"}
+              gap={1}
+              alignItems={"center"}
+              onClick={() => handleSelection("vehicles")}
+              sx={{ cursor: "pointer" }}
+            >
+              {selectedOption === "vehicles" ? (
+                <RadioButtonCheckedIcon style={{ color: "orange" }} />
+              ) : (
+                <RadioButtonUncheckedIcon />
+              )}
+              <img
+                src={Vehicle}
+                height={"24px"}
+                width={"24px"}
+                alt="Vehicle Icon"
+              />
+              <Typography sx={maintenanceSchedulingStyles.vehicalText}>
+                Vehicles
+              </Typography>
+            </Stack>
 
-      {/* Devices Option */}
-      <Stack
-        direction={"row"}
-        gap={1}
-        alignItems={"center"}
-        onClick={() => handleSelection("Devices")}
-        sx={{ cursor: "pointer" }}
-      >
-        {selectedOption === "Devices" ? (
-          <RadioButtonCheckedIcon style={{ color: "orange" }} />
-        ) : (
-          <RadioButtonUncheckedIcon />
-        )}
-        <img src={Hardware} height={"24px"} width={"24px"} alt="Device Icon" />
-        <Typography sx={maintenanceSchedulingStyles.vehicalText}>
-          Devices
-        </Typography>
-      </Stack>
+            {/* Devices Option */}
+            <Stack
+              direction={"row"}
+              gap={1}
+              alignItems={"center"}
+              onClick={() => handleSelection("devices")}
+              sx={{ cursor: "pointer" }}
+            >
+              {selectedOption === "devices" ? (
+                <RadioButtonCheckedIcon style={{ color: "orange" }} />
+              ) : (
+                <RadioButtonUncheckedIcon />
+              )}
+              <img
+                src={Hardware}
+                height={"24px"}
+                width={"24px"}
+                alt="Device Icon"
+              />
+              <Typography sx={maintenanceSchedulingStyles.vehicalText}>
+                Devices
+              </Typography>
+            </Stack>
 
-      {/* TextField Options */}
-      <Stack direction={"row"} gap={2} ml={{ xs: 0, md: 3 }}>
-        <Box>
-          <TextField
-            placeholder="Status"
-            variant="outlined"
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end" sx={{ marginRight: 0 }}>
-                  <IconButton sx={{ padding: 0 }}>
-                    <img src={Arrowdown} height={"16px"} width={"20px"} alt="Arrow Down" />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            sx={{
-              "& .MuiInputBase-root": {
-                height: "44px",
-                width: { xs: "100%", sm: "140px" } // Responsive width
-              }
-            }}
-          />
-        </Box>
+            {/* TextField Options */}
+            <Stack direction={"row"} gap={2} ml={{ xs: 0, md: 3 }}>
+              <Box>
+                <TextField
+                  placeholder="Status"
+                  variant="outlined"
+                  size="small"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end" sx={{ marginRight: 0 }}>
+                        <IconButton sx={{ padding: 0 }}>
+                          <img
+                            src={Arrowdown}
+                            height={"16px"}
+                            width={"20px"}
+                            alt="Arrow Down"
+                          />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      height: "44px",
+                      width: { xs: "100%", sm: "140px" }, // Responsive width
+                    },
+                  }}
+                />
+              </Box>
 
-        <Box>
-          <TextField
-            placeholder="7/6/2024 - 5/8-2024"
-            variant="outlined"
-            size="small"
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end" sx={{ marginRight: 0 }}>
-                  <IconButton sx={{ padding: 0 }}>
-                    <img src={CrossIcon} height={"16px"} width={"16px"} alt="Cross Icon" />
-                  </IconButton>
-                </InputAdornment>
-              )
-            }}
-            sx={{
-              "& .MuiInputBase-root": {
-                height: "44px",
-                width: { xs: "100%", sm: "210px" } // Responsive width
-              }
-            }}
-          />
-        </Box>
-      </Stack>
+              <Box>
+                <TextField
+                  placeholder="7/6/2024 - 5/8-2024"
+                  variant="outlined"
+                  size="small"
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end" sx={{ marginRight: 0 }}>
+                        <IconButton sx={{ padding: 0 }}>
+                          <img
+                            src={CrossIcon}
+                            height={"16px"}
+                            width={"16px"}
+                            alt="Cross Icon"
+                          />
+                        </IconButton>
+                      </InputAdornment>
+                    ),
+                  }}
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      height: "44px",
+                      width: { xs: "100%", sm: "210px" }, // Responsive width
+                    },
+                  }}
+                />
+              </Box>
+            </Stack>
 
-      {/* History Link */}
-      <Typography
-        sx={{
-          ...maintenanceSchedulingStyles.historyText,
-          cursor: "pointer",
-          mt: { xs: 2, md: 0 } // Add margin-top for smaller screens
-        }}
-        onClick={() => navigate("/dashboard/history")}
-      >
-        Go to History
-      </Typography>
-    </Stack>
-
-
+            {/* History Link */}
+            <Typography
+              sx={{
+                ...maintenanceSchedulingStyles.historyText,
+                cursor: "pointer",
+                mt: { xs: 2, md: 0 }, // Add margin-top for smaller screens
+              }}
+              onClick={() => navigate("/dashboard/history")}
+            >
+              Go to History
+            </Typography>
+          </Stack>
         </Stack>
       </Paper>
 
       <Box mt={2}>
         <Paper sx={maintenanceSchedulingStyles.headerMainContainer}>
-          <MyCalendar />
+          <MyCalendar
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
+          />
         </Paper>
       </Box>
     </Box>

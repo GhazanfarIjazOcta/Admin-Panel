@@ -1,7 +1,7 @@
-import React from 'react';
-import Snackbar from '@mui/material/Snackbar';
-import Alert from '@mui/material/Alert';
-import useMediaQuery from '@mui/material/useMediaQuery';
+import React from "react";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const CustomAlert = ({
   open,
@@ -13,7 +13,7 @@ const CustomAlert = ({
   positionHorizontal = "right",
 }) => {
   // Check if the screen width is mobile-sized (600px or less)
-  const isMobile = useMediaQuery('(max-width:600px)');
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   return (
     <Snackbar
@@ -21,19 +21,24 @@ const CustomAlert = ({
       autoHideDuration={duration}
       onClose={onClose}
       anchorOrigin={{
-        vertical: isMobile ? 'top' : positionVertical,
-        horizontal: isMobile ? 'center' : positionHorizontal,
+        vertical: isMobile ? "top" : positionVertical,
+        horizontal: isMobile ? "center" : positionHorizontal,
       }}
       sx={{
-        top: isMobile ? '10px' : 'auto', // Adds spacing from the top on mobile
-        '& .MuiAlert-root': {
-          borderRadius: isMobile ? '10px' : '4px', // Rounded corners on mobile
-          boxShadow: isMobile ? '0px 4px 20px rgba(0, 0, 0, 0.3)' : 'none', // Shadow effect on mobile
-          width: isMobile ? '90%' : 'auto', // Makes alert width more adaptable on mobile
+        top: isMobile ? "10px" : "auto", // Adds spacing from the top on mobile
+        "& .MuiAlert-root": {
+          borderRadius: isMobile ? "10px" : "4px", // Rounded corners on mobile
+          boxShadow: isMobile ? "0px 4px 20px rgba(0, 0, 0, 0.3)" : "none", // Shadow effect on mobile
+          width: isMobile ? "90%" : "auto", // Makes alert width more adaptable on mobile
         },
       }}
     >
-      <Alert onClose={onClose} severity={severity} variant="filled" sx={{ width: '100%' }}>
+      <Alert
+        onClose={onClose}
+        severity={severity}
+        variant="filled"
+        sx={{ width: "100%" }}
+      >
         {message}
       </Alert>
     </Snackbar>

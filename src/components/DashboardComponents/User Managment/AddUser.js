@@ -21,7 +21,7 @@ import {
   useAddUserMutation,
   useAddDriverMutation,
 } from "../../../Api/apiSlice";
-import CustomAlert from '../../UI/CustomAlert';
+import CustomAlert from "../../UI/CustomAlert";
 
 const validationSchema = Yup.object({
   userName: Yup.string().required("Name is required"),
@@ -33,7 +33,9 @@ const validationSchema = Yup.object({
     .matches(/^\d+$/, "Phone number must be digits only")
     .min(10, "Phone number should be at least 10 digits")
     .required("Phone number is required"),
-  role: Yup.string().oneOf(["admin", "customer", "driver"], "Invalid role").required("Role is required"),
+  role: Yup.string()
+    .oneOf(["admin", "customer", "driver"], "Invalid role")
+    .required("Role is required"),
   status: Yup.string().required("Status is required"),
 });
 
@@ -53,9 +55,17 @@ function AddUser() {
   };
 
   const handleRegister = async (values, { resetForm }) => {
-    const { userName, userEmail, userPassword, userPhone, role, status } = values;
+    const { userName, userEmail, userPassword, userPhone, role, status } =
+      values;
 
-    if (!userName || !userEmail || !userPassword || !userPhone || !role || !status) {
+    if (
+      !userName ||
+      !userEmail ||
+      !userPassword ||
+      !userPhone ||
+      !role ||
+      !status
+    ) {
       setAlert({
         open: true,
         severity: "info",
@@ -64,7 +74,14 @@ function AddUser() {
       return;
     }
 
-    const userData = { userName, userEmail, userPassword, userPhone, role, status };
+    const userData = {
+      userName,
+      userEmail,
+      userPassword,
+      userPhone,
+      role,
+      status,
+    };
     console.log("User data: ", userData);
 
     try {
@@ -107,7 +124,12 @@ function AddUser() {
             <Box sx={addUserStyles.container} pl={{ xs: 2, sm: 8 }}>
               {/* Name Field */}
               <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
-                <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
+                <Typography
+                  variant="subtitle1"
+                  mt={3}
+                  mb={1}
+                  sx={{ fontWeight: 500 }}
+                >
                   Name
                 </Typography>
                 <Field
@@ -124,7 +146,12 @@ function AddUser() {
 
               {/* Email Field */}
               <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
-                <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
+                <Typography
+                  variant="subtitle1"
+                  mt={3}
+                  mb={1}
+                  sx={{ fontWeight: 500 }}
+                >
                   Email
                 </Typography>
                 <Field
@@ -141,7 +168,12 @@ function AddUser() {
 
               {/* Password Field */}
               <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
-                <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
+                <Typography
+                  variant="subtitle1"
+                  mt={3}
+                  mb={1}
+                  sx={{ fontWeight: 500 }}
+                >
                   Password
                 </Typography>
                 <Field
@@ -159,7 +191,12 @@ function AddUser() {
 
               {/* Phone Number Field */}
               <Box sx={{ width: { xs: "100%", sm: "35%" } }}>
-                <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
+                <Typography
+                  variant="subtitle1"
+                  mt={3}
+                  mb={1}
+                  sx={{ fontWeight: 500 }}
+                >
                   Phone Number
                 </Typography>
                 <Field
@@ -175,8 +212,13 @@ function AddUser() {
               </Box>
 
               {/* Role Field */}
-              <Box sx={{ width: { xs: "92%", sm: "32%" , lg:"35.5%" } }}>
-                <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
+              <Box sx={{ width: { xs: "92%", sm: "32%", lg: "35.5%" } }}>
+                <Typography
+                  variant="subtitle1"
+                  mt={3}
+                  mb={1}
+                  sx={{ fontWeight: 500 }}
+                >
                   Role
                 </Typography>
                 <FormControl fullWidth size="medium">
@@ -201,8 +243,13 @@ function AddUser() {
               </Box>
 
               {/* Status Field */}
-              <Box sx={{ width: { xs: "92%", sm: "32%"  , lg:"35.5%"  } }}>
-                <Typography variant="subtitle1" mt={3} mb={1} sx={{ fontWeight: 500 }}>
+              <Box sx={{ width: { xs: "92%", sm: "32%", lg: "35.5%" } }}>
+                <Typography
+                  variant="subtitle1"
+                  mt={3}
+                  mb={1}
+                  sx={{ fontWeight: 500 }}
+                >
                   Status
                 </Typography>
                 <FormControl fullWidth size="medium">
@@ -227,11 +274,19 @@ function AddUser() {
 
               {/* Add Button */}
               <Stack mt={6} sx={{ gap: { xs: "16px", sm: "24px" } }}>
-                <Button variant="contained" sx={addUserStyles.buttonStyles} type="submit">
+                <Button
+                  variant="contained"
+                  sx={addUserStyles.buttonStyles}
+                  type="submit"
+                >
                   Add
                 </Button>
-                <CustomAlert open={alert.open} onClose={handleAlertClose} severity={alert.severity} message={alert.message} />
-             
+                <CustomAlert
+                  open={alert.open}
+                  onClose={handleAlertClose}
+                  severity={alert.severity}
+                  message={alert.message}
+                />
               </Stack>
             </Box>
           </Form>

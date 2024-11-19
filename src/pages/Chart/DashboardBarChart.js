@@ -8,7 +8,25 @@ import BarChart from "./BarChart";
 import BarChartCom from "./BarChart";
 import Arrowdown from "../../assets/Card/fi_chevron-down.png";
 
+import { useGetFuelManagementDashboardQuery } from "../../Api/apiSlice";
+import Loader from "../../components/UI/Loader";
+
 function DashboardBarChart({ customWidth }) {
+  const { data, error, isLoading } = useGetFuelManagementDashboardQuery();
+
+  const { vehicles, summary } = data || {};
+  console.log("here the commmmpleteee", data);
+
+  console.log("here the summaryyyy", summary);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
+
   return (
     <Paper
       sx={{
@@ -53,6 +71,17 @@ function DashboardBarChart({ customWidth }) {
           >
             Fuel Consumption
           </Typography>
+          <Typography
+            sx={{
+              fontSize: { lg: "1.5rem", xs: "0.7rem" },
+              color: "#45464E",
+              fontWeight: 500,
+              fontFamily: "Poppins, sans-serif",
+              mx: { xs: "0.1em", sm: "1em" },
+            }}
+          >
+            {` ${summary.totalFuelConsumption} L`}
+          </Typography>
           <Box
             sx={{
               width: "2.75rem",
@@ -88,7 +117,7 @@ function DashboardBarChart({ customWidth }) {
               mx: { xs: "0.1em", sm: "1em" },
             }}
           >
-            $524
+            {`${summary.totalFuelCost} $`}
           </Typography>
         </Stack>
         <Stack direction={"row"} gap="0.3em" alignItems={"center"}>

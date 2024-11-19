@@ -25,7 +25,6 @@ export const ChatStyles = {
       xs: 33, // For mobile width around 320px
       sm: 44, // For mobile width around 375px
       md: 100, // For mobile width around 425px and larger
-      
     },
   },
 };

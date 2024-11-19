@@ -17,15 +17,12 @@ import Loader from "../../UI/Loader";
 import { useEffect } from "react";
 
 export default function DeviceManagment() {
-
-
   const { data, error, isLoading } = useGetDeviceManagementDashboardQuery();
 
-  const [search, setSearch] = useState(''); 
-  const [status, setStatus] = useState('');  // State for storing the selected status
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState(""); // State for storing the selected status
 
-  console.log("search data [][][][][][][ in ysermanagement" , search)
-
+  console.log("search data [][][][][][][ in ysermanagement", search);
 
   // if (isLoading) return <p>Loading...</p>;
   // if (error) return <p>Error loading data</p>;
@@ -49,56 +46,61 @@ export default function DeviceManagment() {
 
   if (isLoading) {
     return (
-     
       <>
-      <Loader/>
+        <Loader />
       </>
     );
   }
-    if (error) {
-      return (
-        <>
-          {/* Snackbar for error notification */}
-          <Snackbar
-            open={openSnackbar}
-            autoHideDuration={6000}
+  if (error) {
+    return (
+      <>
+        {/* Snackbar for error notification */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        >
+          <Alert
             onClose={handleCloseSnackbar}
-            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            severity="error"
+            sx={{ width: "100%" }}
+            variant="filled"
           >
-            <Alert
-              onClose={handleCloseSnackbar}
-              severity="error"
-              sx={{ width: "100%" }}
-              variant="filled"
-            >
-              Error loading data! Please try again later.
-            </Alert>
-          </Snackbar>
-  
-          <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-            <Typography variant="h6" color="error">
-              Something went wrong. Please refresh the page.
-            </Typography>
-          </Box>
-        </>
-      );
-    }
+            Error loading data! Please try again later.
+          </Alert>
+        </Snackbar>
 
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+        >
+          <Typography variant="h6" color="error">
+            Something went wrong. Please refresh the page.
+          </Typography>
+        </Box>
+      </>
+    );
+  }
 
-  const { devices , activeDevices, inActiveDevices, malfunctionedDevices } = data || {};
-  console.log("here is the devices data newwwww " , data)
+  const { devices, activeDevices, inActiveDevices, malfunctionedDevices } =
+    data || {};
+  console.log("here is the devices data newwwww ", data);
 
-console.log("devices }{}{}{}{" , devices)
-
-
-
+  console.log("devices }{}{}{}{", devices);
 
   // Define data for cards
   const cardData = [
-    { text: "All Devices", icon: DevicesLogo , secText: devices.count },
-    { text: "Active", icon: ActiveLogo , secText: activeDevices.count },
-    { text: "InActive", icon: InActiveLogo , secText: inActiveDevices.count },
-    { text: "Malfunctioning", icon: MalfunctioningLogo , secText: malfunctionedDevices.count },
+    { text: "All Devices", icon: DevicesLogo, secText: devices.count },
+    { text: "Active", icon: ActiveLogo, secText: activeDevices.count },
+    { text: "InActive", icon: InActiveLogo, secText: inActiveDevices.count },
+    {
+      text: "Malfunctioning",
+      icon: MalfunctioningLogo,
+      secText: malfunctionedDevices.count,
+    },
   ];
 
   return (
@@ -127,7 +129,11 @@ console.log("devices }{}{}{}{" , devices)
             md={2.98}
             sx={{ flexShrink: 1 }}
           >
-            <OutlinedCard text={card.text} icon={card.icon} secText={card.secText} />
+            <OutlinedCard
+              text={card.text}
+              icon={card.icon}
+              secText={card.secText}
+            />
           </Grid>
         ))}
       </Grid>
@@ -139,19 +145,18 @@ console.log("devices }{}{}{}{" , devices)
         buttonText={"Add Device"}
         icon={DevicesLogo}
         route={"add-device"}
-        setSearch = {setSearch}
-        search = {search}
-       status = {status}
-       setStatus = {setStatus}
+        setSearch={setSearch}
+        search={search}
+        status={status}
+        setStatus={setStatus}
       />
 
       {/* Table content for displaying device data */}
-      <DeviceManagmentTableContent 
-            setSearch = {setSearch}
-            search = {search}
-           status = {status}
-           setStatus = {setStatus}
-      
+      <DeviceManagmentTableContent
+        setSearch={setSearch}
+        search={search}
+        status={status}
+        setStatus={setStatus}
       />
 
       {/* Pagination component for navigating through table pages */}

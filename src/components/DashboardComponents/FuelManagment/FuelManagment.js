@@ -16,77 +16,73 @@ import Loader from "../../UI/Loader";
 // useGetFuelManagementDashboardQuery
 
 export default function FuelManagment() {
+  const [search, setSearch] = useState("");
+  const [status, setStatus] = useState(""); // State for storing the selected status
 
-  const [search, setSearch] = useState(''); 
-  const [status, setStatus] = useState('');  // State for storing the selected status
+  const { data, error, isLoading } = useGetFuelManagementDashboardQuery();
 
-  const { data , error, isLoading } = useGetFuelManagementDashboardQuery();
+  const { vehicles, summary } = data || {};
+  console.log("here the commmmpleteee", data);
 
-  const { vehicles,summary } = data || {};
-  console.log("here the commmmpleteee" , data)
+  console.log("here the summaryyyy", summary);
 
-console.log("here the summaryyyy" , summary)
+  const [openSnackbar, setOpenSnackbar] = useState(false);
 
+  // Trigger Snackbar when there’s an error
+  React.useEffect(() => {
+    if (error) {
+      setOpenSnackbar(true);
+    }
+  }, [error]);
 
-const [openSnackbar, setOpenSnackbar] = useState(false);
+  // Close the Snackbar when user interacts
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
 
-// Trigger Snackbar when there’s an error
-React.useEffect(() => {
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+      </>
+    );
+  }
   if (error) {
-    setOpenSnackbar(true);
-  }
-}, [error]);
-
-// Close the Snackbar when user interacts
-const handleCloseSnackbar = (event, reason) => {
-  if (reason === "clickaway") {
-    return;
-  }
-  setOpenSnackbar(false);
-};
-
-
-if (isLoading) {
-  return (
-    <>
-      <Loader />
-    </>
-  );
-}
-if (error) {
-  return (
-    <>
-      {/* Snackbar for error notification */}
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      >
-        <Alert
+    return (
+      <>
+        {/* Snackbar for error notification */}
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={6000}
           onClose={handleCloseSnackbar}
-          severity="error"
-          sx={{ width: "100%" }}
-          variant="filled"
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
-          Error loading data! Please try again later.
-        </Alert>
-      </Snackbar>
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="error"
+            sx={{ width: "100%" }}
+            variant="filled"
+          >
+            Error loading data! Please try again later.
+          </Alert>
+        </Snackbar>
 
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-      >
-        <Typography variant="h6" color="error">
-          Something went wrong. Please refresh the page.
-        </Typography>
-      </Box>
-    </>
-  );
-}
-
+        <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          height="100vh"
+        >
+          <Typography variant="h6" color="error">
+            Something went wrong. Please refresh the page.
+          </Typography>
+        </Box>
+      </>
+    );
+  }
 
   return (
     <Box
@@ -107,12 +103,13 @@ if (error) {
           <Box sx={fuelManagmentStyles.leftContainer}>
             <Box>
               <OutlinedCard
-                text={"Fuel Consumtion"}
+                text={"Fuel Consumption"}
                 icon={TripLogo}
                 // secText={"9L"}
                 consumptionColor={"#D7DBEC"}
                 // secText={"9l"}
-                secText={`${summary.totalFuelConsumption} L`}
+                secText={`${summary.totalFuelConsumption} (L)`}
+                sx={{ height: "200%" }}
               />
             </Box>
             <Box>
@@ -122,8 +119,7 @@ if (error) {
                 // secText={"$49"}
                 costColor={"#F38712"}
                 // secText={"9l"}
-                secText={ `${summary.totalFuelCost} $`}
-
+                secText={`${summary.totalFuelCost} $`}
               />
             </Box>
           </Box>
@@ -154,11 +150,11 @@ if (error) {
           buttonText={"Add Fuel"}
           // exportIcon={true}
           icon={fuelConsumptionLogo}
-          setSearch = {setSearch}
-          search = {search}
-         status = {status}
-         setStatus = {setStatus}
-         route={"add-fuel"}
+          setSearch={setSearch}
+          search={search}
+          status={status}
+          setStatus={setStatus}
+          route={"add-fuel"}
         />
 
         <FuelManagmentTableContent />
